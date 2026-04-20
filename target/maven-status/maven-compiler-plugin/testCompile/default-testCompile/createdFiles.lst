@@ -1,0 +1,4 @@
+com\itesm\application\security\AuthorizationServiceTest.class
+com\itesm\application\usecase\RegisterUserUseCaseTest.class
+com\itesm\interfaces\rest\AuthRbacResourceTest.class
+com\itesm\application\security\CurrentUserTest.class
