@@ -2,7 +2,6 @@ package com.itesm.interfaces.rest;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -12,14 +11,15 @@ import static org.hamcrest.Matchers.notNullValue;
 class AuthRbacResourceTest {
 
     @Test
-    void registerShouldAssignDefaultRoleAndReturnCreated() {
+    void registerShouldCreateUserWithInviteCode() {
         given()
                 .contentType(ContentType.JSON)
                 .body("""
                         {
                           "fullName": "Dr. Register",
-                          "email": "register@statusscope.local",
-                          "externalAuthId": "register-ext"
+                          "email": "register-test@statusscope.local",
+                          "password": "Password123!",
+                          "inviteCode": "INVITE-HGZ21"
                         }
                         """)
                 .when()
@@ -27,7 +27,7 @@ class AuthRbacResourceTest {
                 .then()
                 .statusCode(201)
                 .body("id", notNullValue())
-                .body("roles[0].code", org.hamcrest.Matchers.equalTo("DOCTOR"));
+                .body("email", org.hamcrest.Matchers.equalTo("register-test@statusscope.local"));
     }
 
     @Test
@@ -40,58 +40,35 @@ class AuthRbacResourceTest {
     }
 
     @Test
-    void shouldReturn403WithoutPrivilegeAnd200WithPrivilege() {
-        String doctorToken = given()
-                .contentType(ContentType.JSON)
-                .body("""
-                        {
-                          "email": "doctor@statusscope.local"
-                        }
-                        """)
-                .when()
-                .post("/auth/login")
-                .then()
-                .statusCode(200)
-                .extract()
-                .path("token");
-
+    void doctorShouldBeForbiddenFromAdminRoles() {
         given()
-                .header("Authorization", "Bearer " + doctorToken)
+                .header("X-Test-User", "doctor1@statusscope.local")
                 .when()
                 .get("/admin/roles")
                 .then()
                 .statusCode(403);
+    }
 
-        String adminToken = given()
-                .contentType(ContentType.JSON)
-                .body("""
-                        {
-                          "email": "admin@statusscope.local"
-                        }
-                        """)
-                .when()
-                .post("/auth/login")
-                .then()
-                .statusCode(200)
-                .extract()
-                .path("token");
-
+    @Test
+    void adminShouldAccessRolesEndpoint() {
         given()
-                .header("Authorization", "Bearer " + adminToken)
+                .header("X-Test-User", "admin@statusscope.local")
                 .when()
                 .get("/admin/roles")
                 .then()
                 .statusCode(200);
+    }
 
-        String roleCode = given()
-                .header("Authorization", "Bearer " + adminToken)
+    @Test
+    void meShouldReturnProfileForAuthenticatedUser() {
+        given()
+                .header("X-Test-User", "admin@statusscope.local")
                 .when()
                 .get("/auth/me")
                 .then()
                 .statusCode(200)
-                .extract()
-                .path("roles[0]");
-
-        Assertions.assertNotNull(roleCode);
+                .body("email", org.hamcrest.Matchers.equalTo("admin@statusscope.local"))
+                .body("roles", notNullValue());
     }
 }
+

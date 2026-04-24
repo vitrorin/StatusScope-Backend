@@ -1,0 +1,44 @@
+package com.itesm.infrastructure.persistence.repository;
+
+import com.itesm.domain.models.Hospital;
+import com.itesm.domain.repository.HospitalRepository;
+import com.itesm.infrastructure.mapper.HospitalMapper;
+import com.itesm.infrastructure.persistence.entity.HospitalEntity;
+import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+@ApplicationScoped
+public class HospitalRepositoryImpl implements HospitalRepository, PanacheRepositoryBase<HospitalEntity, UUID> {
+
+    @Override
+    public Optional<Hospital> findHospitalById(UUID id) {
+        return findByIdOptional(id).map(HospitalMapper::toDomain);
+    }
+
+    @Override
+    public Optional<Hospital> findByInviteCode(String inviteCode) {
+        return find("inviteCode", inviteCode).firstResultOptional().map(HospitalMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public Hospital create(Hospital hospital) {
+        HospitalEntity entity = HospitalMapper.toEntity(hospital);
+        entity.setCreatedAt(LocalDateTime.now());
+        entity.setUpdatedAt(LocalDateTime.now());
+        persist(entity);
+        return HospitalMapper.toDomain(entity);
+    }
+
+    @Override
+    public List<Hospital> listAllDomain() {
+        return listAll().stream().map(HospitalMapper::toDomain).collect(Collectors.toList());
+    }
+}

@@ -1,14 +1,10 @@
 package com.itesm.interfaces.rest;
 
-import com.itesm.application.dto.AuthResponseDto;
-import com.itesm.application.dto.LoginDto;
-import com.itesm.application.dto.MyProfileDto;
 import com.itesm.application.dto.RegisterUserDto;
+import com.itesm.application.dto.UserSummaryDto;
 import com.itesm.application.security.RequiresPrivilege;
 import com.itesm.application.usecase.GetMyProfileUseCase;
-import com.itesm.application.usecase.LoginUseCase;
 import com.itesm.application.usecase.RegisterUserUseCase;
-import com.itesm.domain.models.User;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
@@ -28,30 +24,21 @@ public class AuthResource {
     RegisterUserUseCase registerUserUseCase;
 
     @Inject
-    LoginUseCase loginUseCase;
-
-    @Inject
     GetMyProfileUseCase getMyProfileUseCase;
 
     @POST
     @Path("/register")
     public Response register(@Valid RegisterUserDto dto) {
-        User user = registerUserUseCase.execute(dto);
-        return Response.status(Response.Status.CREATED).entity(user).build();
-    }
-
-    @POST
-    @Path("/login")
-    public Response login(@Valid LoginDto dto) {
-        String token = loginUseCase.execute(dto);
-        return Response.ok(new AuthResponseDto(token)).build();
+        UserSummaryDto created = registerUserUseCase.execute(dto);
+        return Response.status(Response.Status.CREATED).entity(created).build();
     }
 
     @GET
     @Path("/me")
     @RequiresPrivilege("users.read")
     public Response me() {
-        MyProfileDto profile = getMyProfileUseCase.execute();
+        UserSummaryDto profile = getMyProfileUseCase.execute();
         return Response.ok(profile).build();
     }
 }
+

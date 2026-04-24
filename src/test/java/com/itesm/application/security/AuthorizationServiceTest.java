@@ -33,6 +33,7 @@ class AuthorizationServiceTest {
                 "ext-2",
                 "x@local",
                 "X",
+                null,
                 Set.of("DOCTOR"),
                 Set.of("alerts.read")
         ));
@@ -47,6 +48,7 @@ class AuthorizationServiceTest {
                 "ext-3",
                 "y@local",
                 "Y",
+                null,
                 Set.of("ADMIN"),
                 Set.of("roles.manage")
         ));

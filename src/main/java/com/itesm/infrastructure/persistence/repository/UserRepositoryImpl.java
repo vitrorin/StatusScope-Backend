@@ -3,14 +3,17 @@ package com.itesm.infrastructure.persistence.repository;
 import com.itesm.domain.models.User;
 import com.itesm.domain.repository.UserRepository;
 import com.itesm.infrastructure.mapper.UserMapper;
+import com.itesm.infrastructure.persistence.entity.HospitalEntity;
 import com.itesm.infrastructure.persistence.entity.UserEntity;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class UserRepositoryImpl implements UserRepository, PanacheRepositoryBase<UserEntity, UUID> {
@@ -31,11 +34,32 @@ public class UserRepositoryImpl implements UserRepository, PanacheRepositoryBase
     }
 
     @Override
+    public List<User> listAllDomain() {
+        return find("select distinct u from UserEntity u left join fetch u.roles r left join fetch r.privileges left join fetch u.hospital")
+                .list()
+                .stream()
+                .map(UserMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<User> findByHospitalId(UUID hospitalId) {
+        return find("select distinct u from UserEntity u left join fetch u.roles r left join fetch r.privileges left join fetch u.hospital where u.hospital.id = ?1", hospitalId)
+                .list()
+                .stream()
+                .map(UserMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     @Transactional
     public User create(User user) {
         UserEntity entity = UserMapper.toEntity(user);
         entity.setCreatedAt(LocalDateTime.now());
         entity.setUpdatedAt(LocalDateTime.now());
+        if (user.getHospitalId() != null) {
+            entity.setHospital(getEntityManager().getReference(HospitalEntity.class, user.getHospitalId()));
+        }
         persist(entity);
         getEntityManager().flush();
         getEntityManager().clear();
@@ -45,12 +69,14 @@ public class UserRepositoryImpl implements UserRepository, PanacheRepositoryBase
     @Override
     @Transactional
     public User update(User user) {
-        UserEntity managed = find("select distinct u from UserEntity u left join fetch u.roles r left join fetch r.privileges where u.id = ?1", user.getId())
+        UserEntity managed = find("select distinct u from UserEntity u left join fetch u.roles r left join fetch r.privileges left join fetch u.hospital where u.id = ?1", user.getId())
                 .firstResult();
         managed.setFullName(user.getFullName());
         managed.setEmail(user.getEmail());
         managed.setActive(user.isActive());
         managed.setExternalAuthId(user.getExternalAuthId());
+        managed.setStatus(user.getStatus());
+        managed.setLastLoginAt(user.getLastLoginAt());
         managed.setUpdatedAt(LocalDateTime.now());
 
         managed.getRoles().clear();
@@ -62,9 +88,17 @@ public class UserRepositoryImpl implements UserRepository, PanacheRepositoryBase
         return findUserById(managed.getId()).orElse(UserMapper.toDomain(managed));
     }
 
+    @Override
+    @Transactional
+    public void updateLastLoginAt(UUID userId, LocalDateTime lastLoginAt) {
+        update("lastLoginAt = ?1, updatedAt = ?2 where id = ?3",
+                lastLoginAt, LocalDateTime.now(), userId);
+    }
+
     private Optional<User> findWithRolesAndPrivileges(String field, Object value) {
-        return find("select distinct u from UserEntity u left join fetch u.roles r left join fetch r.privileges where u." + field + " = ?1", value)
+        return find("select distinct u from UserEntity u left join fetch u.roles r left join fetch r.privileges left join fetch u.hospital where u." + field + " = ?1", value)
                 .firstResultOptional()
                 .map(UserMapper::toDomain);
     }
 }
+

@@ -18,7 +18,11 @@ public final class UserMapper {
         user.setEmail(entity.getEmail());
         user.setActive(entity.isActive());
         user.setExternalAuthId(entity.getExternalAuthId());
-        user.setRoles(entity.getRoles().stream().map(RoleMapper::toDomain).collect(Collectors.toSet()));
+        user.setStatus(entity.getStatus());
+        user.setLastLoginAt(entity.getLastLoginAt());
+        user.setHospitalId(entity.getHospital() == null ? null : entity.getHospital().getId());
+        user.setRoles(entity.getRoles() == null ? new HashSet<>() :
+                entity.getRoles().stream().map(RoleMapper::toDomain).collect(Collectors.toSet()));
         return user;
     }
 
@@ -29,12 +33,17 @@ public final class UserMapper {
         entity.setEmail(user.getEmail());
         entity.setActive(user.isActive());
         entity.setExternalAuthId(user.getExternalAuthId());
+        entity.setStatus(user.getStatus());
+        entity.setLastLoginAt(user.getLastLoginAt());
         entity.setRoles(new HashSet<>());
-        for (com.itesm.domain.models.Role role : user.getRoles()) {
-            RoleEntity roleEntity = new RoleEntity();
-            roleEntity.setId(role.getId());
-            entity.getRoles().add(roleEntity);
+        if (user.getRoles() != null) {
+            for (com.itesm.domain.models.Role role : user.getRoles()) {
+                RoleEntity re = new RoleEntity();
+                re.setId(role.getId());
+                entity.getRoles().add(re);
+            }
         }
         return entity;
     }
 }
+

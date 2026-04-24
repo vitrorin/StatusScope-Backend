@@ -1,5 +1,6 @@
 package com.itesm.domain.models;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -10,6 +11,9 @@ public class User {
     private String email;
     private boolean active;
     private String externalAuthId;
+    private UUID hospitalId;
+    private UserStatus status;
+    private LocalDateTime lastLoginAt;
     private Set<Role> roles = new HashSet<>();
 
     public UUID getId() {
@@ -51,6 +55,15 @@ public class User {
     public void setExternalAuthId(String externalAuthId) {
         this.externalAuthId = externalAuthId;
     }
+
+    public UUID getHospitalId() { return hospitalId; }
+    public void setHospitalId(UUID hospitalId) { this.hospitalId = hospitalId; }
+
+    public UserStatus getStatus() { return status; }
+    public void setStatus(UserStatus status) { this.status = status; }
+
+    public LocalDateTime getLastLoginAt() { return lastLoginAt; }
+    public void setLastLoginAt(LocalDateTime lastLoginAt) { this.lastLoginAt = lastLoginAt; }
 
     public Set<Role> getRoles() {
         return roles;

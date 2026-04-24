@@ -15,6 +15,7 @@ class CurrentUserTest {
                 "ext-1",
                 "test@local",
                 "Test User",
+                null,
                 Set.of("ADMIN", "DOCTOR"),
                 Set.of("roles.manage", "users.read")
         );

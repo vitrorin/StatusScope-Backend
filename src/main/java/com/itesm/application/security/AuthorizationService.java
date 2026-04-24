@@ -5,6 +5,8 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.ForbiddenException;
 import jakarta.ws.rs.NotAuthorizedException;
 
+import java.util.UUID;
+
 @ApplicationScoped
 public class AuthorizationService {
 
@@ -20,4 +22,18 @@ public class AuthorizationService {
             throw new ForbiddenException("Missing required privilege: " + privilegeCode);
         }
     }
+
+    public void assertSameHospital(UUID targetHospitalId) {
+        CurrentUser currentUser = authenticatedUserContext.getCurrentUser();
+        if (currentUser == null) {
+            throw new NotAuthorizedException("Unauthorized");
+        }
+        if (currentUser.isSystemAdmin()) {
+            return;
+        }
+        if (targetHospitalId == null || !targetHospitalId.equals(currentUser.getHospitalId())) {
+            throw new ForbiddenException("Access denied: hospital scope mismatch");
+        }
+    }
 }
+

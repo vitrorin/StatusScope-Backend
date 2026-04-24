@@ -28,3 +28,14 @@ replay_pid*
 
 # Node
 node_modules/
+
+# Firebase credentials
+*-firebase-adminsdk-*.json
+firebase-service-account.json
+
+# Environment secrets
+.env
+.env.development
+.env.local
+.env.production
+

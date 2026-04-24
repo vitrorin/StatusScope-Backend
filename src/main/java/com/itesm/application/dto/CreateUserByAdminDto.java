@@ -4,7 +4,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class RegisterUserDto {
+import java.util.UUID;
+
+public class CreateUserByAdminDto {
     @NotBlank
     private String fullName;
 
@@ -17,7 +19,9 @@ public class RegisterUserDto {
     private String password;
 
     @NotBlank
-    private String inviteCode;
+    private String roleCode;
+
+    private UUID hospitalId;
 
     public String getFullName() { return fullName; }
     public void setFullName(String fullName) { this.fullName = fullName; }
@@ -28,7 +32,9 @@ public class RegisterUserDto {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public String getInviteCode() { return inviteCode; }
-    public void setInviteCode(String inviteCode) { this.inviteCode = inviteCode; }
-}
+    public String getRoleCode() { return roleCode; }
+    public void setRoleCode(String roleCode) { this.roleCode = roleCode; }
 
+    public UUID getHospitalId() { return hospitalId; }
+    public void setHospitalId(UUID hospitalId) { this.hospitalId = hospitalId; }
+}
