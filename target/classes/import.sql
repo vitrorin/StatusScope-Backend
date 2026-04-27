@@ -44,18 +44,7 @@ INSERT INTO role_privileges (role_id, privilege_id) VALUES
 ('00000000-0000-0000-0000-000000000003', '10000000-0000-0000-0000-000000000001'),
 ('00000000-0000-0000-0000-000000000003', '10000000-0000-0000-0000-000000000006');
 
--- Test/seed users (available in all profiles; DevSeeder supplements in dev)
-INSERT INTO users (id, full_name, email, external_auth_id, status, active, created_at, updated_at) VALUES
-('20000000-0000-0000-0000-000000000001', 'System Admin',     'admin@statusscope.local',            'seed-admin',    'ACTIVE', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('20000000-0000-0000-0000-000000000002', 'Hospital Admin 21','admin.hgz21@statusscope.local',       'seed-hadmin21', 'ACTIVE', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('20000000-0000-0000-0000-000000000003', 'Doctor HGZ21',     'doctor1@statusscope.local',           'seed-doc1',     'ACTIVE', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
--- Link hospital_admin and doctor to HGZ-21
-UPDATE users SET hospital_id = '30000000-0000-0000-0000-000000000001' WHERE id IN ('20000000-0000-0000-0000-000000000002', '20000000-0000-0000-0000-000000000003');
-
--- User roles
-INSERT INTO user_roles (user_id, role_id) VALUES
-('20000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001'),
-('20000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002'),
-('20000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000003');
+-- Users and user_roles are seeded by DevSeeder.java in dev profile (creates real Firebase
+-- identities with password "Password123!" and writes matching DB rows with the real UID).
+-- Do not insert users here or DevSeeder's idempotency guard will short-circuit.
 
