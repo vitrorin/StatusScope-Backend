@@ -2,7 +2,6 @@ package com.itesm.interfaces.rest;
 
 import com.itesm.application.dto.RegisterUserDto;
 import com.itesm.application.dto.UserSummaryDto;
-import com.itesm.application.security.RequiresPrivilege;
 import com.itesm.application.usecase.GetMyProfileUseCase;
 import com.itesm.application.usecase.RegisterUserUseCase;
 import jakarta.inject.Inject;
@@ -35,7 +34,6 @@ public class AuthResource {
 
     @GET
     @Path("/me")
-    @RequiresPrivilege("users.read")
     public Response me() {
         UserSummaryDto profile = getMyProfileUseCase.execute();
         return Response.ok(profile).build();
