@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
-Test set: com.itesm.interfaces.rest.AuthRbacResourceTest
+Test set: com.itesm.interfaces.rest.DiagnosisAssistantResourceTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 1, Skipped: 4, Time elapsed: 4.742 s <<< FAILURE! -- in com.itesm.interfaces.rest.AuthRbacResourceTest
-com.itesm.interfaces.rest.AuthRbacResourceTest.doctorShouldBeForbiddenFromAdminRoles -- Time elapsed: 0.013 s <<< ERROR!
+Tests run: 4, Failures: 0, Errors: 1, Skipped: 3, Time elapsed: 2.635 s <<< FAILURE! -- in com.itesm.interfaces.rest.DiagnosisAssistantResourceTest
+com.itesm.interfaces.rest.DiagnosisAssistantResourceTest.shouldReturn401WhenNoToken -- Time elapsed: 0.011 s <<< ERROR!
 java.lang.RuntimeException: java.lang.RuntimeException: Failed to start quarkus
 	at io.quarkus.test.junit.QuarkusTestExtension.throwBootFailureException(QuarkusTestExtension.java:665)
 	at io.quarkus.test.junit.QuarkusTestExtension.interceptTestClassConstructor(QuarkusTestExtension.java:760)

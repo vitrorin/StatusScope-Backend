@@ -38,4 +38,5 @@ firebase-service-account.json
 .env.development
 .env.local
 .env.production
+cloudrun.env
 

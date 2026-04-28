@@ -4,6 +4,7 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.itesm.application.usecase.exception.ConflictException;
 import com.itesm.application.usecase.exception.InvalidInviteException;
 import com.itesm.application.usecase.exception.NotFoundException;
+import com.itesm.application.usecase.exception.OpenAiException;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.ForbiddenException;
 import jakarta.ws.rs.NotAuthorizedException;
@@ -59,6 +60,12 @@ public class ApiExceptionMapper implements ExceptionMapper<Throwable> {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .type(MediaType.APPLICATION_JSON)
                     .entity(new ApiError(500, "FIREBASE_ERROR", "Firebase operation failed"))
+                    .build();
+        }
+        if (exception instanceof OpenAiException) {
+            return Response.status(502)
+                    .type(MediaType.APPLICATION_JSON)
+                    .entity(new ApiError(502, "ASSISTANT_UNAVAILABLE", exception.getMessage()))
                     .build();
         }
 
