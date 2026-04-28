@@ -14,6 +14,8 @@ public class User {
     private UUID hospitalId;
     private UserStatus status;
     private LocalDateTime lastLoginAt;
+    private String licenseNumber;
+    private UUID specialtyId;
     private Set<Role> roles = new HashSet<>();
 
     public UUID getId() {
@@ -64,6 +66,12 @@ public class User {
 
     public LocalDateTime getLastLoginAt() { return lastLoginAt; }
     public void setLastLoginAt(LocalDateTime lastLoginAt) { this.lastLoginAt = lastLoginAt; }
+
+    public String getLicenseNumber() { return licenseNumber; }
+    public void setLicenseNumber(String licenseNumber) { this.licenseNumber = licenseNumber; }
+
+    public UUID getSpecialtyId() { return specialtyId; }
+    public void setSpecialtyId(UUID specialtyId) { this.specialtyId = specialtyId; }
 
     public Set<Role> getRoles() {
         return roles;

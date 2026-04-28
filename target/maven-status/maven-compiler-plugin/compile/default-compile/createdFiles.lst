@@ -1,6 +1,7 @@
 com\itesm\infrastructure\mapper\UserMapper.class
 com\itesm\infrastructure\persistence\entity\UserEntity.class
 com\itesm\application\dto\CreateHospitalDto.class
+com\itesm\infrastructure\persistence\entity\PatientEntity.class
 com\itesm\domain\models\UserStatus.class
 com\itesm\application\usecase\CreateUserByAdminUseCase.class
 com\itesm\domain\repository\RoleRepository.class
@@ -18,6 +19,7 @@ com\itesm\infrastructure\mapper\HospitalMapper.class
 com\itesm\domain\models\Hospital.class
 com\itesm\interfaces\rest\ApiExceptionMapper.class
 com\itesm\application\usecase\RegisterUserUseCase.class
+com\itesm\infrastructure\persistence\entity\SpecialtyEntity.class
 com\itesm\application\dto\UserSummaryDto.class
 com\itesm\infrastructure\persistence\repository\RoleRepositoryImpl.class
 com\itesm\application\dto\CreateUserByAdminDto.class
@@ -25,6 +27,7 @@ com\itesm\application\usecase\GetMyProfileUseCase.class
 com\itesm\infrastructure\persistence\entity\HospitalEntity.class
 com\itesm\application\dto\AssignRoleDto.class
 com\itesm\infrastructure\firebase\FirebaseUserService.class
+com\itesm\infrastructure\persistence\entity\RegionEntity.class
 com\itesm\application\dto\MyProfileDto.class
 com\itesm\infrastructure\mapper\PrivilegeMapper.class
 com\itesm\domain\models\Role.class
@@ -34,14 +37,19 @@ com\itesm\domain\repository\HospitalRepository.class
 com\itesm\application\dto\RegisterUserDto.class
 com\itesm\application\security\CurrentUser.class
 com\itesm\application\usecase\exception\NotFoundException.class
+com\itesm\infrastructure\persistence\entity\AlertEntity.class
 com\itesm\application\security\AuthorizationService.class
 com\itesm\application\usecase\exception\InvalidInviteException.class
+com\itesm\infrastructure\persistence\entity\DiseaseEntity.class
 com\itesm\interfaces\rest\AdminUserResource.class
 com\itesm\infrastructure\mapper\RoleMapper.class
+com\itesm\infrastructure\persistence\entity\OutbreakEntity.class
 com\itesm\infrastructure\persistence\entity\RoleEntity.class
 com\itesm\infrastructure\security\AuthorizationInterceptor.class
 com\itesm\application\usecase\CreateHospitalUseCase.class
 com\itesm\infrastructure\security\FirebaseAuthFilter.class
+com\itesm\infrastructure\persistence\entity\DiagnosisEntity.class
+com\itesm\infrastructure\persistence\entity\EventEntity.class
 com\itesm\infrastructure\firebase\FirebaseConfig.class
 com\itesm\interfaces\rest\ApiError.class
 com\itesm\domain\models\User.class

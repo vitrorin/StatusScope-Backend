@@ -32,9 +32,17 @@ C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\it
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\mapper\PrivilegeMapper.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\mapper\RoleMapper.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\mapper\UserMapper.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\AlertEntity.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiagnosisEntity.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiseaseEntity.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\EventEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\HospitalEntity.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\OutbreakEntity.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\PatientEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\PrivilegeEntity.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\RegionEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\RoleEntity.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\SpecialtyEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\UserEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\repository\HospitalRepositoryImpl.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\repository\RoleRepositoryImpl.java

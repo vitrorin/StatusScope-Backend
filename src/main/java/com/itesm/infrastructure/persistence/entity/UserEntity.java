@@ -50,6 +50,13 @@ public class UserEntity {
     @Column(name = "last_login_at")
     private LocalDateTime lastLoginAt;
 
+    @Column(name = "license_number", length = 64)
+    private String licenseNumber;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "specialty_id")
+    private SpecialtyEntity specialty;
+
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
@@ -88,6 +95,12 @@ public class UserEntity {
     public LocalDateTime getLastLoginAt() { return lastLoginAt; }
     public void setLastLoginAt(LocalDateTime lastLoginAt) { this.lastLoginAt = lastLoginAt; }
 
+    public String getLicenseNumber() { return licenseNumber; }
+    public void setLicenseNumber(String licenseNumber) { this.licenseNumber = licenseNumber; }
+
+    public SpecialtyEntity getSpecialty() { return specialty; }
+    public void setSpecialty(SpecialtyEntity specialty) { this.specialty = specialty; }
+
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
@@ -97,4 +110,3 @@ public class UserEntity {
     public Set<RoleEntity> getRoles() { return roles; }
     public void setRoles(Set<RoleEntity> roles) { this.roles = roles; }
 }
-

@@ -20,6 +20,8 @@ public final class UserMapper {
         user.setExternalAuthId(entity.getExternalAuthId());
         user.setStatus(entity.getStatus());
         user.setLastLoginAt(entity.getLastLoginAt());
+        user.setLicenseNumber(entity.getLicenseNumber());
+        user.setSpecialtyId(entity.getSpecialty() == null ? null : entity.getSpecialty().getId());
         user.setHospitalId(entity.getHospital() == null ? null : entity.getHospital().getId());
         user.setRoles(entity.getRoles() == null ? new HashSet<>() :
                 entity.getRoles().stream().map(RoleMapper::toDomain).collect(Collectors.toSet()));
@@ -35,6 +37,7 @@ public final class UserMapper {
         entity.setExternalAuthId(user.getExternalAuthId());
         entity.setStatus(user.getStatus());
         entity.setLastLoginAt(user.getLastLoginAt());
+        entity.setLicenseNumber(user.getLicenseNumber());
         entity.setRoles(new HashSet<>());
         if (user.getRoles() != null) {
             for (com.itesm.domain.models.Role role : user.getRoles()) {
@@ -46,4 +49,3 @@ public final class UserMapper {
         return entity;
     }
 }
-

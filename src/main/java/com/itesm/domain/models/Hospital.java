@@ -11,6 +11,10 @@ public class Hospital {
     private String phone;
     private String inviteCode;
     private boolean active;
+    private String postalCode;
+    private Integer bedCount;
+    private Integer nurseCount;
+    private UUID regionId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -34,6 +38,18 @@ public class Hospital {
 
     public boolean isActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
+
+    public String getPostalCode() { return postalCode; }
+    public void setPostalCode(String postalCode) { this.postalCode = postalCode; }
+
+    public Integer getBedCount() { return bedCount; }
+    public void setBedCount(Integer bedCount) { this.bedCount = bedCount; }
+
+    public Integer getNurseCount() { return nurseCount; }
+    public void setNurseCount(Integer nurseCount) { this.nurseCount = nurseCount; }
+
+    public UUID getRegionId() { return regionId; }
+    public void setRegionId(UUID regionId) { this.regionId = regionId; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }

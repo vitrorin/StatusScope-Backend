@@ -4,6 +4,7 @@ import com.itesm.domain.models.User;
 import com.itesm.domain.repository.UserRepository;
 import com.itesm.infrastructure.mapper.UserMapper;
 import com.itesm.infrastructure.persistence.entity.HospitalEntity;
+import com.itesm.infrastructure.persistence.entity.SpecialtyEntity;
 import com.itesm.infrastructure.persistence.entity.UserEntity;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -60,6 +61,9 @@ public class UserRepositoryImpl implements UserRepository, PanacheRepositoryBase
         if (user.getHospitalId() != null) {
             entity.setHospital(getEntityManager().getReference(HospitalEntity.class, user.getHospitalId()));
         }
+        if (user.getSpecialtyId() != null) {
+            entity.setSpecialty(getEntityManager().getReference(SpecialtyEntity.class, user.getSpecialtyId()));
+        }
         persist(entity);
         getEntityManager().flush();
         getEntityManager().clear();
@@ -77,6 +81,12 @@ public class UserRepositoryImpl implements UserRepository, PanacheRepositoryBase
         managed.setExternalAuthId(user.getExternalAuthId());
         managed.setStatus(user.getStatus());
         managed.setLastLoginAt(user.getLastLoginAt());
+        managed.setLicenseNumber(user.getLicenseNumber());
+        if (user.getSpecialtyId() != null) {
+            managed.setSpecialty(getEntityManager().getReference(SpecialtyEntity.class, user.getSpecialtyId()));
+        } else {
+            managed.setSpecialty(null);
+        }
         managed.setUpdatedAt(LocalDateTime.now());
 
         managed.getRoles().clear();

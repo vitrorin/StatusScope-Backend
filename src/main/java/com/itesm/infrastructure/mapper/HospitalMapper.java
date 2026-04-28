@@ -15,6 +15,10 @@ public final class HospitalMapper {
         h.setPhone(e.getPhone());
         h.setInviteCode(e.getInviteCode());
         h.setActive(e.isActive());
+        h.setPostalCode(e.getPostalCode());
+        h.setBedCount(e.getBedCount());
+        h.setNurseCount(e.getNurseCount());
+        h.setRegionId(e.getRegion() == null ? null : e.getRegion().getId());
         h.setCreatedAt(e.getCreatedAt());
         h.setUpdatedAt(e.getUpdatedAt());
         return h;
@@ -29,6 +33,9 @@ public final class HospitalMapper {
         e.setPhone(h.getPhone());
         e.setInviteCode(h.getInviteCode());
         e.setActive(h.isActive());
+        e.setPostalCode(h.getPostalCode());
+        e.setBedCount(h.getBedCount());
+        e.setNurseCount(h.getNurseCount());
         e.setCreatedAt(h.getCreatedAt());
         e.setUpdatedAt(h.getUpdatedAt());
         return e;
