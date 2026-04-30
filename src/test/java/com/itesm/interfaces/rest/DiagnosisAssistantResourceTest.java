@@ -3,22 +3,25 @@ package com.itesm.interfaces.rest;
 import com.itesm.domain.models.Hospital;
 import com.itesm.domain.models.User;
 import com.itesm.domain.models.UserStatus;
-import com.itesm.domain.repository.HospitalRepository;
 import com.itesm.domain.repository.RoleRepository;
 import com.itesm.domain.repository.UserRepository;
 import com.itesm.infrastructure.llm.LlmChatClient;
+import com.itesm.infrastructure.persistence.entity.DiseaseEntity;
+import com.itesm.infrastructure.persistence.entity.OutbreakEntity;
+import com.itesm.infrastructure.persistence.entity.RegionEntity;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.time.LocalDateTime;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -30,6 +33,9 @@ class DiagnosisAssistantResourceTest {
     private static final String DOCTOR_EMAIL = "diagtest-doctor@statusscope.local";
     private static final String ADMIN_EMAIL = "diagtest-admin@statusscope.local";
     private static final UUID HOSPITAL_ID = UUID.fromString("30000000-0000-0000-0000-000000000001");
+    private static final UUID REGION_ID = UUID.fromString("40000000-0000-0000-0000-000000000001");
+    private static final UUID DISEASE_ID = UUID.fromString("60000000-0000-0000-0000-000000000004");
+    private static final UUID OUTBREAK_ID = UUID.fromString("81000000-0000-0000-0000-000000000001");
 
     @InjectMock
     LlmChatClient llmChatClient;
@@ -39,6 +45,9 @@ class DiagnosisAssistantResourceTest {
 
     @Inject
     RoleRepository roleRepository;
+
+    @Inject
+    EntityManager entityManager;
 
     @BeforeEach
     @Transactional
@@ -70,6 +79,22 @@ class DiagnosisAssistantResourceTest {
             admin.setHospitalId(HOSPITAL_ID);
             admin.setRoles(Set.of(adminRole));
             userRepository.create(admin);
+        }
+
+        if (entityManager.find(OutbreakEntity.class, OUTBREAK_ID) == null) {
+            DiseaseEntity disease = entityManager.getReference(DiseaseEntity.class, DISEASE_ID);
+            RegionEntity region = entityManager.getReference(RegionEntity.class, REGION_ID);
+
+            OutbreakEntity outbreak = new OutbreakEntity();
+            outbreak.setId(OUTBREAK_ID);
+            outbreak.setDisease(disease);
+            outbreak.setRegion(region);
+            outbreak.setCaseCount(12);
+            outbreak.setStatus("ACTIVE");
+            outbreak.setStartedAt(LocalDateTime.now().minusDays(3));
+            outbreak.setCreatedAt(LocalDateTime.now());
+            outbreak.setUpdatedAt(LocalDateTime.now());
+            entityManager.persist(outbreak);
         }
     }
 
@@ -122,7 +147,10 @@ class DiagnosisAssistantResourceTest {
                 .post("/diagnosis/assistant/messages")
                 .then()
                 .statusCode(200)
-                .body("contextUsed", notNullValue());
+                .body("contextUsed", notNullValue())
+                .body("contextUsed.regionName", notNullValue())
+                .body("contextUsed.outbreaks[0].diseaseName", equalTo("COVID-19"))
+                .body("contextUsed.outbreaks[0].caseCount", equalTo(12));
     }
 
     private String buildRequestBody(String content) {

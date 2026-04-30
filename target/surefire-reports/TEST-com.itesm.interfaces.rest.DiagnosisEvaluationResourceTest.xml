@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="8.729" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.itesm.interfaces.rest.DiagnosisEvaluationResourceTest" time="1.147" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -84,445 +84,8 @@
     <property name="io.netty.machineId" value="dd:7d:de:70:a5:78:66:dd"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="shouldReturn401WhenNoToken" classname="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="2.946">
-    <system-out><![CDATA[2026-04-29 16:56:47,832 INFO  [org.hibernate.orm.jpa] (main) HHH008540: Processing PersistenceUnitInfo [name: <default>]
-2026-04-29 16:56:48,082 INFO  [org.hibernate.orm.core] (main) HHH000001: Hibernate ORM core version 7.2.4.Final
-2026-04-29 16:56:48,487 INFO  [org.hibernate.orm.connections.pooling] (main) HHH10001005: Database info:
-	Database JDBC URL [undefined/unknown]
-	Database driver: undefined/unknown
-	Database dialect: H2Dialect
-	Database version: 2.4.240
-	Default catalog/schema: unknown/unknown
-	Autocommit mode: undefined/unknown
-	Isolation level: <unknown>
-	JDBC fetch size: undefined/unknown
-	Pool: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-04-29 16:56:48,880 INFO  [org.hibernate.validator.internal.util.Version] (main) HV000001: Hibernate Validator 9.1.0.Final
-2026-04-29 16:56:49,129 WARN  [org.hibernate.validator.internal.metadata.aggregated.CascadingMetaDataBuilder] (main) HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: messages
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m alerts &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m diagnoses &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m disease_specialties &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m diseases &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m evaluation_differential_diagnoses &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m evaluation_recommended_tests &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m events &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m hospitals &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m outbreaks &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m patient_evaluation_files &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m patient_evaluations &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m patients &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m privileges &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m regions &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m role_privileges &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m roles &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m specialties &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m user_roles &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m users &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m alerts (
-        acknowledged_at &amp#27;[34mtimestamp&amp#27;[0m(6),
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        severity &amp#27;[34mvarchar&amp#27;[0m(16) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        outbreak_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        message &amp#27;[34mvarchar&amp#27;[0m(512),
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m diagnoses (
-        confidence &amp#27;[34mnumeric&amp#27;[0m(5,2),
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        doctor_user_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        event_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        notes &amp#27;[34mclob&amp#27;[0m,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m disease_specialties (
-        disease_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        specialty_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (disease_id, specialty_id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m diseases (
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        code &amp#27;[34mvarchar&amp#27;[0m(32) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m &amp#27;[34munique&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        primary_specialty_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        name &amp#27;[34mvarchar&amp#27;[0m(128) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        symptoms &amp#27;[34mvarchar&amp#27;[0m(1024),
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m evaluation_differential_diagnoses (
-        confidence &amp#27;[34mnumeric&amp#27;[0m(5,2),
-        rank_order &amp#27;[34minteger&amp#27;[0m &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        locality_risk_level &amp#27;[34mvarchar&amp#27;[0m(16),
-        disease_id &amp#27;[34mvarchar&amp#27;[0m(36),
-        evaluation_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        display_name &amp#27;[34mvarchar&amp#27;[0m(255) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        rationale TEXT,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m evaluation_recommended_tests (
-        sort_order &amp#27;[34minteger&amp#27;[0m &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        source &amp#27;[34mvarchar&amp#27;[0m(16) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        evaluation_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        reason TEXT,
-        test_name &amp#27;[34mvarchar&amp#27;[0m(255) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m events (
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        resolved_at &amp#27;[34mtimestamp&amp#27;[0m(6),
-        started_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        status &amp#27;[34mvarchar&amp#27;[0m(16) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        disease_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        patient_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        primary_doctor_user_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m hospitals (
-        active &amp#27;[34mboolean&amp#27;[0m &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        bed_count &amp#27;[34minteger&amp#27;[0m,
-        nurse_count &amp#27;[34minteger&amp#27;[0m,
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        postal_code &amp#27;[34mvarchar&amp#27;[0m(16),
-        code &amp#27;[34mvarchar&amp#27;[0m(32) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m &amp#27;[34munique&amp#27;[0m,
-        phone &amp#27;[34mvarchar&amp#27;[0m(32),
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        region_id &amp#27;[34mvarchar&amp#27;[0m(36),
-        invite_code &amp#27;[34mvarchar&amp#27;[0m(64) &amp#27;[34munique&amp#27;[0m,
-        address &amp#27;[34mvarchar&amp#27;[0m(512),
-        name &amp#27;[34mvarchar&amp#27;[0m(255) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m outbreaks (
-        case_count &amp#27;[34minteger&amp#27;[0m &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        ended_at &amp#27;[34mtimestamp&amp#27;[0m(6),
-        started_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        status &amp#27;[34mvarchar&amp#27;[0m(16) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        disease_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        region_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m patient_evaluation_files (
-        file_size_bytes &amp#27;[34mbigint&amp#27;[0m,
-        uploaded_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        document_type &amp#27;[34mvarchar&amp#27;[0m(32),
-        evaluation_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        mime_type &amp#27;[34mvarchar&amp#27;[0m(128) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        storage_key &amp#27;[34mvarchar&amp#27;[0m(512) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        file_name &amp#27;[34mvarchar&amp#27;[0m(255) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m patient_evaluations (
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        finalized_at &amp#27;[34mtimestamp&amp#27;[0m(6),
-        updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        status &amp#27;[34mvarchar&amp#27;[0m(16) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        doctor_user_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        event_id &amp#27;[34mvarchar&amp#27;[0m(36),
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        patient_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        clinical_notes TEXT,
-        symptoms_text TEXT &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m patients (
-        birth_date &amp#27;[34mdate&amp#27;[0m &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        height_cm &amp#27;[34mnumeric&amp#27;[0m(5,2),
-        weight_kg &amp#27;[34mnumeric&amp#27;[0m(5,2),
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        postal_code &amp#27;[34mvarchar&amp#27;[0m(16),
-        sex &amp#27;[34mvarchar&amp#27;[0m(16) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        hospital_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m privileges (
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        code &amp#27;[34mvarchar&amp#27;[0m(128) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m &amp#27;[34munique&amp#27;[0m,
-        description &amp#27;[34mvarchar&amp#27;[0m(255),
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m regions (
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        code &amp#27;[34mvarchar&amp#27;[0m(32) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m &amp#27;[34munique&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        name &amp#27;[34mvarchar&amp#27;[0m(128) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        description &amp#27;[34mvarchar&amp#27;[0m(255),
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m role_privileges (
-        privilege_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        role_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (privilege_id, role_id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m roles (
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        code &amp#27;[34mvarchar&amp#27;[0m(64) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m &amp#27;[34munique&amp#27;[0m,
-        name &amp#27;[34mvarchar&amp#27;[0m(128) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        description &amp#27;[34mvarchar&amp#27;[0m(255),
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m specialties (
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        code &amp#27;[34mvarchar&amp#27;[0m(32) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m &amp#27;[34munique&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        name &amp#27;[34mvarchar&amp#27;[0m(128) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        description &amp#27;[34mvarchar&amp#27;[0m(255),
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m user_roles (
-        role_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        user_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (role_id, user_id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m users (
-        active &amp#27;[34mboolean&amp#27;[0m &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        last_login_at &amp#27;[34mtimestamp&amp#27;[0m(6),
-        updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        hospital_id &amp#27;[34mvarchar&amp#27;[0m(36),
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        specialty_id &amp#27;[34mvarchar&amp#27;[0m(36),
-        license_number &amp#27;[34mvarchar&amp#27;[0m(64),
-        external_auth_id &amp#27;[34mvarchar&amp#27;[0m(128) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m &amp#27;[34munique&amp#27;[0m,
-        email &amp#27;[34mvarchar&amp#27;[0m(255) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m &amp#27;[34munique&amp#27;[0m,
-        full_name &amp#27;[34mvarchar&amp#27;[0m(255) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        status enum (&amp#27;[36m'ACTIVE'&amp#27;[0m,&amp#27;[36m'DISABLED'&amp#27;[0m,&amp#27;[36m'PENDING'&amp#27;[0m) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m index idx_edd_evaluation 
-       &amp#27;[34mon&amp#27;[0m evaluation_differential_diagnoses (evaluation_id)
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m index idx_edd_disease 
-       &amp#27;[34mon&amp#27;[0m evaluation_differential_diagnoses (disease_id)
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m index idx_ert_evaluation 
-       &amp#27;[34mon&amp#27;[0m evaluation_recommended_tests (evaluation_id)
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m index idx_events_patient_disease_status 
-       &amp#27;[34mon&amp#27;[0m events (patient_id, disease_id, status)
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m index idx_pef_evaluation 
-       &amp#27;[34mon&amp#27;[0m patient_evaluation_files (evaluation_id)
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m index idx_pe_patient 
-       &amp#27;[34mon&amp#27;[0m patient_evaluations (patient_id)
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m index idx_pe_doctor 
-       &amp#27;[34mon&amp#27;[0m patient_evaluations (doctor_user_id)
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m index idx_pe_event 
-       &amp#27;[34mon&amp#27;[0m patient_evaluations (event_id)
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m index idx_pe_status 
-       &amp#27;[34mon&amp#27;[0m patient_evaluations (status)
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m alerts 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FK7j5k6p82ud37x3jet9nf1pkty 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (outbreak_id) 
-       &amp#27;[34mreferences&amp#27;[0m outbreaks
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m diagnoses 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FK6wylprd8tbc36t4pmyf1nhtcj 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (doctor_user_id) 
-       &amp#27;[34mreferences&amp#27;[0m users
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m diagnoses 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKadc5ojte947mfrhoj440ce0s3 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (event_id) 
-       &amp#27;[34mreferences&amp#27;[0m events
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m disease_specialties 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKjvqt7sl6inxw5bx3ols83893k 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (specialty_id) 
-       &amp#27;[34mreferences&amp#27;[0m specialties
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m disease_specialties 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKslg3onwcevws5n8mv9y6sh556 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (disease_id) 
-       &amp#27;[34mreferences&amp#27;[0m diseases
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m diseases 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FK7gof5uhpuem7iowje3e63qbl4 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (primary_specialty_id) 
-       &amp#27;[34mreferences&amp#27;[0m specialties
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m evaluation_differential_diagnoses 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKfhkvfjpc0284hf0v6xbrbtaid 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (disease_id) 
-       &amp#27;[34mreferences&amp#27;[0m diseases
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m evaluation_differential_diagnoses 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKoykmwmunsv2ay0oom43iurgr0 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (evaluation_id) 
-       &amp#27;[34mreferences&amp#27;[0m patient_evaluations
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m evaluation_recommended_tests 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKmakb4g0q8xc91gqiu3p86uiij 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (evaluation_id) 
-       &amp#27;[34mreferences&amp#27;[0m patient_evaluations
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m events 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKpy00t90k18hthynohyje20pd8 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (disease_id) 
-       &amp#27;[34mreferences&amp#27;[0m diseases
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m events 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKatseqnrbr7j6qoibdow55iyt3 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (patient_id) 
-       &amp#27;[34mreferences&amp#27;[0m patients
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m events 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKf2f25k8nipylt43v5afmq50g9 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (primary_doctor_user_id) 
-       &amp#27;[34mreferences&amp#27;[0m users
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m hospitals 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKetb0raqhv9rtpgbkr3qs2mvu9 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (region_id) 
-       &amp#27;[34mreferences&amp#27;[0m regions
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m outbreaks 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKmhs8btkfolbksy9bi7rgpxrry 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (disease_id) 
-       &amp#27;[34mreferences&amp#27;[0m diseases
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m outbreaks 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKa23sf4winmurrmgbmdas6lcx5 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (region_id) 
-       &amp#27;[34mreferences&amp#27;[0m regions
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m patient_evaluation_files 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKg23ncrm24exysilv6icfd49uu 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (evaluation_id) 
-       &amp#27;[34mreferences&amp#27;[0m patient_evaluations
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m patient_evaluations 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKrlpus6itexlipj362ru5abn99 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (doctor_user_id) 
-       &amp#27;[34mreferences&amp#27;[0m users
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m patient_evaluations 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKg4mjdl8n0crjm8bi7x4blwbt7 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (event_id) 
-       &amp#27;[34mreferences&amp#27;[0m events
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m patient_evaluations 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FK7uc0c7jgb7ah7ww400fn79x6t 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (patient_id) 
-       &amp#27;[34mreferences&amp#27;[0m patients
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m patients 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKavr69byb4acg3j289g1oq08pk 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (hospital_id) 
-       &amp#27;[34mreferences&amp#27;[0m hospitals
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m role_privileges 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKbosd0iqvr1efg44c01jcuvdxt 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (privilege_id) 
-       &amp#27;[34mreferences&amp#27;[0m privileges
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m role_privileges 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKddceebgln19s0c4tjwj01v1ou 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (role_id) 
-       &amp#27;[34mreferences&amp#27;[0m roles
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m user_roles 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKh8ciramu9cc9q3qcqiv4ue8a6 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (role_id) 
-       &amp#27;[34mreferences&amp#27;[0m roles
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m user_roles 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKhfh9dx7w3ubf1co1vdev94g3f 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (user_id) 
-       &amp#27;[34mreferences&amp#27;[0m users
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m users 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKpp87ghj920xhrlf63rdeaufe1 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (hospital_id) 
-       &amp#27;[34mreferences&amp#27;[0m hospitals
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m users 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKih74rpug03pac4o5mqt12j9cl 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (specialty_id) 
-       &amp#27;[34mreferences&amp#27;[0m specialties
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m regions (id, code, name, description, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'40000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'NORTE'&amp#27;[0m,  &amp#27;[36m'Región Norte'&amp#27;[0m,  &amp#27;[36m'Monterrey y zona metropolitana'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'CENTRO'&amp#27;[0m, &amp#27;[36m'Región Centro'&amp#27;[0m, &amp#27;[36m'Ciudad de México y zona metropolitana'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m hospitals (id, code, name, address, phone, invite_code, active, postal_code, bed_count, nurse_count, region_id, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'30000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'HGZ-21'&amp#27;[0m, &amp#27;[36m'Hospital General Zona 21'&amp#27;[0m, &amp#27;[36m'Av. Principal 100, Monterrey'&amp#27;[0m, &amp#27;[36m'+52 81 0000 0001'&amp#27;[0m, &amp#27;[36m'INVITE-HGZ21'&amp#27;[0m, &amp#27;[34mTRUE&amp#27;[0m, &amp#27;[36m'64000'&amp#27;[0m, 240, 180, &amp#27;[36m'40000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'30000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'HRE-05'&amp#27;[0m, &amp#27;[36m'Hospital Regional Este'&amp#27;[0m,   &amp#27;[36m'Calle 5 Ote 200, CDMX'&amp#27;[0m,       &amp#27;[36m'+52 55 0000 0002'&amp#27;[0m, &amp#27;[36m'INVITE-HRE05'&amp#27;[0m, &amp#27;[34mTRUE&amp#27;[0m, &amp#27;[36m'06800'&amp#27;[0m, 320, 240, &amp#27;[36m'40000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m specialties (id, code, name, description, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'50000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'GEN'&amp#27;[0m,  &amp#27;[36m'General Medicine'&amp#27;[0m,  &amp#27;[36m'&amp#27;[34mPrimary&amp#27;[0m care &amp#27;[34mand&amp#27;[0m general practice'&amp#27;[0m,         &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'50000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'CARD'&amp#27;[0m, &amp#27;[36m'Cardiology'&amp#27;[0m,        &amp#27;[36m'Heart &amp#27;[34mand&amp#27;[0m circulatory conditions'&amp#27;[0m,          &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'50000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'PULM'&amp#27;[0m, &amp#27;[36m'Pulmonology'&amp#27;[0m,       &amp#27;[36m'Respiratory &amp#27;[34msystem&amp#27;[0m'&amp#27;[0m,                        &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'50000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'INF'&amp#27;[0m,  &amp#27;[36m'Infectious Disease'&amp#27;[0m,&amp#27;[36m'Infectious &amp#27;[34mand&amp#27;[0m communicable diseases'&amp#27;[0m,      &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'50000000-0000-0000-0000-000000000005'&amp#27;[0m, &amp#27;[36m'PED'&amp#27;[0m,  &amp#27;[36m'Pediatrics'&amp#27;[0m,        &amp#27;[36m'Care &amp#27;[34mof&amp#27;[0m infants, children, &amp#27;[34mand&amp#27;[0m adolescents'&amp#27;[0m,&amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m diseases (id, code, name, symptoms, primary_specialty_id, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'60000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'FLU-A'&amp#27;[0m,  &amp#27;[36m'Influenza A'&amp#27;[0m,         &amp#27;[36m'Fever, cough, body aches, fatigue'&amp#27;[0m,           &amp#27;[36m'50000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'HTN'&amp#27;[0m,    &amp#27;[36m'Hypertension'&amp#27;[0m,        &amp#27;[36m'Often asymptomatic; headaches, dizziness'&amp#27;[0m,    &amp#27;[36m'50000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'ASTHMA'&amp#27;[0m, &amp#27;[36m'Asthma'&amp#27;[0m,              &amp#27;[36m'Wheezing, shortness &amp#27;[34mof&amp#27;[0m breath, chest tightness'&amp#27;[0m,&amp#27;[36m'50000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'COVID'&amp#27;[0m, &amp#27;[36m'COVID-19'&amp#27;[0m,             &amp#27;[36m'Fever, cough, loss &amp#27;[34mof&amp#27;[0m taste/smell, fatigue'&amp#27;[0m,  &amp#27;[36m'50000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m disease_specialties (disease_id, specialty_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'60000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000003'&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000005'&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000001'&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m disease_specialties (disease_id, specialty_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'60000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000001'&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m disease_specialties (disease_id, specialty_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'60000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000005'&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000001'&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m disease_specialties (disease_id, specialty_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'60000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000003'&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000005'&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000001'&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m roles (id, code, name, description, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'SYSTEM_ADMIN'&amp#27;[0m,   &amp#27;[36m'&amp#27;[34mSystem&amp#27;[0m Administrator'&amp#27;[0m,   &amp#27;[36m'Platform-wide administrative access'&amp#27;[0m,          &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'HOSPITAL_ADMIN'&amp#27;[0m, &amp#27;[36m'Hospital Administrator'&amp#27;[0m, &amp#27;[36m'Administrative access scoped &amp#27;[34mto&amp#27;[0m one hospital'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'DOCTOR'&amp#27;[0m,         &amp#27;[36m'Doctor'&amp#27;[0m,                 &amp#27;[36m'Clinical &amp#27;[34muser&amp#27;[0m scoped &amp#27;[34mto&amp#27;[0m one hospital'&amp#27;[0m,         &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m privileges (id, code, description, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'10000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'alerts.read'&amp#27;[0m,       &amp#27;[36m'Read alerts'&amp#27;[0m,                &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'alerts.manage'&amp#27;[0m,     &amp#27;[36m'Manage alerts'&amp#27;[0m,              &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'users.read'&amp#27;[0m,        &amp#27;[36m'Read users'&amp#27;[0m,                 &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'users.manage'&amp#27;[0m,      &amp#27;[36m'&amp#27;[34mCreate&amp#27;[0m/&amp#27;[34mupdate&amp#27;[0m users'&amp#27;[0m,        &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000005'&amp#27;[0m, &amp#27;[36m'roles.manage'&amp#27;[0m,      &amp#27;[36m'Manage RBAC roles'&amp#27;[0m,          &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000006'&amp#27;[0m, &amp#27;[36m'diagnosis.&amp#27;[34mcreate&amp#27;[0m'&amp#27;[0m,  &amp#27;[36m'&amp#27;[34mCreate&amp#27;[0m diagnosis entries'&amp#27;[0m,   &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000007'&amp#27;[0m, &amp#27;[36m'hospitals.read'&amp#27;[0m,    &amp#27;[36m'Read hospitals'&amp#27;[0m,             &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000008'&amp#27;[0m, &amp#27;[36m'hospitals.manage'&amp#27;[0m,  &amp#27;[36m'&amp#27;[34mCreate&amp#27;[0m/&amp#27;[34mupdate&amp#27;[0m hospitals'&amp#27;[0m,    &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000009'&amp#27;[0m, &amp#27;[36m'patients.read'&amp#27;[0m,     &amp#27;[36m'Read patients'&amp#27;[0m,              &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000010'&amp#27;[0m, &amp#27;[36m'patients.manage'&amp#27;[0m,   &amp#27;[36m'&amp#27;[34mCreate&amp#27;[0m/&amp#27;[34mupdate&amp#27;[0m patients'&amp#27;[0m,     &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000011'&amp#27;[0m, &amp#27;[36m'diseases.read'&amp#27;[0m,     &amp#27;[36m'Read diseases'&amp#27;[0m,              &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000012'&amp#27;[0m, &amp#27;[36m'diseases.manage'&amp#27;[0m,   &amp#27;[36m'Manage diseases catalog'&amp#27;[0m,    &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000013'&amp#27;[0m, &amp#27;[36m'specialties.read'&amp#27;[0m,  &amp#27;[36m'Read specialties'&amp#27;[0m,           &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000014'&amp#27;[0m, &amp#27;[36m'specialties.manage'&amp#27;[0m,&amp#27;[36m'Manage specialties catalog'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000015'&amp#27;[0m, &amp#27;[36m'outbreaks.read'&amp#27;[0m,    &amp#27;[36m'Read outbreaks'&amp#27;[0m,             &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000016'&amp#27;[0m, &amp#27;[36m'outbreaks.manage'&amp#27;[0m,  &amp#27;[36m'Manage outbreaks'&amp#27;[0m,           &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000017'&amp#27;[0m, &amp#27;[36m'regions.read'&amp#27;[0m,      &amp#27;[36m'Read regions'&amp#27;[0m,               &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000018'&amp#27;[0m, &amp#27;[36m'regions.manage'&amp#27;[0m,    &amp#27;[36m'Manage regions'&amp#27;[0m,             &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000019'&amp#27;[0m, &amp#27;[36m'diagnosis.assist'&amp#27;[0m,  &amp#27;[36m'Use the AI diagnosis assistant chat'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m role_privileges (role_id, privilege_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000001'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000002'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000003'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000004'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000005'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000006'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000007'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000008'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000009'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000010'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000011'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000012'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000013'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000014'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000015'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000016'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000017'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000018'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000019'&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m role_privileges (role_id, privilege_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000001'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000002'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000003'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000004'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000007'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000009'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000010'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000011'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000013'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000015'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000016'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000017'&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m role_privileges (role_id, privilege_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000001'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000006'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000009'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000010'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000011'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000013'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000015'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000019'&amp#27;[0m)
-2026-04-29 16:56:51,411 INFO  [io.quarkus] (main) statusscope-backend 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.31.3) started in 10.143s. Listening on: http://localhost:8081
-2026-04-29 16:56:51,411 INFO  [io.quarkus] (main) Profile test activated. 
-2026-04-29 16:56:51,411 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, compose, hibernate-orm, hibernate-orm-panache, hibernate-validator, jdbc-h2, jdbc-mysql, narayana-jta, rest, rest-client, rest-client-jackson, rest-jackson, smallrye-context-propagation, vertx]
-2026-04-29 16:56:53,230 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+  <testcase name="shouldReturn403WhenCallerCannotUseDiagnosisAssistant" classname="com.itesm.interfaces.rest.DiagnosisEvaluationResourceTest" time="0.253">
+    <system-out><![CDATA[2026-04-29 16:56:56,081 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -581,7 +144,7 @@
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-04-29 16:56:53,417 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-04-29 16:56:56,085 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m re1_0.id,
@@ -632,7 +195,7 @@
         (user_id, role_id) 
     &amp#27;[34mvalues&amp#27;[0m
         (?, ?)
-2026-04-29 16:56:53,523 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-04-29 16:56:56,101 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -691,7 +254,7 @@
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.id=?
-2026-04-29 16:56:53,535 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-04-29 16:56:56,111 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -750,7 +313,7 @@
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-04-29 16:56:53,539 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-04-29 16:56:56,120 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m re1_0.id,
@@ -801,7 +364,7 @@
         (user_id, role_id) 
     &amp#27;[34mvalues&amp#27;[0m
         (?, ?)
-2026-04-29 16:56:53,552 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-04-29 16:56:56,147 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -862,36 +425,135 @@
         ue1_0.id=?
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
-        oe1_0.id,
-        oe1_0.case_count,
-        oe1_0.created_at,
-        oe1_0.disease_id,
-        oe1_0.ended_at,
-        oe1_0.region_id,
-        oe1_0.started_at,
-        oe1_0.status,
-        oe1_0.updated_at 
+        pe1_0.id,
+        pe1_0.birth_date,
+        pe1_0.created_at,
+        pe1_0.height_cm,
+        pe1_0.hospital_id,
+        pe1_0.postal_code,
+        pe1_0.sex,
+        pe1_0.updated_at,
+        pe1_0.weight_kg 
     &amp#27;[34mfrom&amp#27;[0m
-        outbreaks oe1_0 
+        patients pe1_0 
     &amp#27;[34mwhere&amp#27;[0m
-        oe1_0.id=?
+        pe1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        ee1_0.id,
+        ee1_0.created_at,
+        ee1_0.disease_id,
+        ee1_0.patient_id,
+        ee1_0.primary_doctor_user_id,
+        ee1_0.resolved_at,
+        ee1_0.started_at,
+        ee1_0.status,
+        ee1_0.updated_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        events ee1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        ee1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        pee1_0.id,
+        pee1_0.clinical_notes,
+        pee1_0.created_at,
+        pee1_0.doctor_user_id,
+        pee1_0.event_id,
+        pee1_0.finalized_at,
+        pee1_0.patient_id,
+        pee1_0.status,
+        pee1_0.symptoms_text,
+        pee1_0.updated_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        patient_evaluations pee1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        pee1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        erte1_0.id,
+        erte1_0.created_at,
+        erte1_0.evaluation_id,
+        erte1_0.reason,
+        erte1_0.sort_order,
+        erte1_0.source,
+        erte1_0.test_name 
+    &amp#27;[34mfrom&amp#27;[0m
+        evaluation_recommended_tests erte1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        erte1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        edde1_0.id,
+        edde1_0.confidence,
+        edde1_0.created_at,
+        edde1_0.disease_id,
+        edde1_0.display_name,
+        edde1_0.evaluation_id,
+        edde1_0.locality_risk_level,
+        edde1_0.rank_order,
+        edde1_0.rationale 
+    &amp#27;[34mfrom&amp#27;[0m
+        evaluation_differential_diagnoses edde1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        edde1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        pefe1_0.id,
+        pefe1_0.document_type,
+        pefe1_0.evaluation_id,
+        pefe1_0.file_name,
+        pefe1_0.file_size_bytes,
+        pefe1_0.mime_type,
+        pefe1_0.storage_key,
+        pefe1_0.uploaded_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        patient_evaluation_files pefe1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        pefe1_0.id=?
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34minsert&amp#27;[0m 
     &amp#27;[34minto&amp#27;[0m
-        outbreaks
-        (case_count, created_at, disease_id, ended_at, region_id, started_at, status, updated_at, id) 
+        patients
+        (birth_date, created_at, height_cm, hospital_id, postal_code, sex, updated_at, weight_kg, id) 
     &amp#27;[34mvalues&amp#27;[0m
         (?, ?, ?, ?, ?, ?, ?, ?, ?)
-]]></system-out>
-    <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
-WARNING: A Java agent has been loaded dynamically (C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\.m2repo\net\bytebuddy\byte-buddy-agent\1.17.8\byte-buddy-agent-1.17.8.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
-  </testcase>
-  <testcase name="shouldReturnContextUsedInResponse" classname="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="0.864">
-    <system-out><![CDATA[2026-04-29 16:56:55,049 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34minsert&amp#27;[0m 
+    &amp#27;[34minto&amp#27;[0m
+        events
+        (created_at, disease_id, patient_id, primary_doctor_user_id, resolved_at, started_at, status, updated_at, id) 
+    &amp#27;[34mvalues&amp#27;[0m
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34minsert&amp#27;[0m 
+    &amp#27;[34minto&amp#27;[0m
+        patient_evaluations
+        (clinical_notes, created_at, doctor_user_id, event_id, finalized_at, patient_id, status, symptoms_text, updated_at, id) 
+    &amp#27;[34mvalues&amp#27;[0m
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34minsert&amp#27;[0m 
+    &amp#27;[34minto&amp#27;[0m
+        evaluation_recommended_tests
+        (created_at, evaluation_id, reason, sort_order, source, test_name, id) 
+    &amp#27;[34mvalues&amp#27;[0m
+        (?, ?, ?, ?, ?, ?, ?)
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34minsert&amp#27;[0m 
+    &amp#27;[34minto&amp#27;[0m
+        evaluation_differential_diagnoses
+        (confidence, created_at, disease_id, display_name, evaluation_id, locality_risk_level, rank_order, rationale, id) 
+    &amp#27;[34mvalues&amp#27;[0m
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34minsert&amp#27;[0m 
+    &amp#27;[34minto&amp#27;[0m
+        patient_evaluation_files
+        (document_type, evaluation_id, file_name, file_size_bytes, mime_type, storage_key, uploaded_at, id) 
+    &amp#27;[34mvalues&amp#27;[0m
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2026-04-29 16:56:56,318 WARN  [org.hibernate.orm.query] (executor-thread-1) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -950,185 +612,11 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-04-29 16:56:55,056 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mselect&amp#27;[0m
-        &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
-        ue1_0.active,
-        ue1_0.created_at,
-        ue1_0.email,
-        ue1_0.external_auth_id,
-        ue1_0.full_name,
-        h1_0.id,
-        h1_0.active,
-        h1_0.address,
-        h1_0.bed_count,
-        h1_0.code,
-        h1_0.created_at,
-        h1_0.invite_code,
-        h1_0.name,
-        h1_0.nurse_count,
-        h1_0.phone,
-        h1_0.postal_code,
-        h1_0.region_id,
-        h1_0.updated_at,
-        ue1_0.last_login_at,
-        ue1_0.license_number,
-        r1_0.user_id,
-        r1_1.id,
-        r1_1.code,
-        r1_1.created_at,
-        r1_1.description,
-        r1_1.name,
-        p1_0.role_id,
-        p1_1.id,
-        p1_1.code,
-        p1_1.created_at,
-        p1_1.description,
-        p1_1.updated_at,
-        r1_1.updated_at,
-        ue1_0.specialty_id,
-        ue1_0.status,
-        ue1_0.updated_at 
-    &amp#27;[34mfrom&amp#27;[0m
-        users ue1_0 
-    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
-        user_roles r1_0 
-            &amp#27;[34mon&amp#27;[0m ue1_0.id=r1_0.user_id 
-    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
-        roles r1_1 
-            &amp#27;[34mon&amp#27;[0m r1_1.id=r1_0.role_id 
-    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
-        role_privileges p1_0 
-            &amp#27;[34mon&amp#27;[0m r1_1.id=p1_0.role_id 
-    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
-        privileges p1_1 
-            &amp#27;[34mon&amp#27;[0m p1_1.id=p1_0.privilege_id 
-    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
-        hospitals h1_0 
-            &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
-    &amp#27;[34mwhere&amp#27;[0m
-        ue1_0.email=?
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mselect&amp#27;[0m
-        oe1_0.id,
-        oe1_0.case_count,
-        oe1_0.created_at,
-        oe1_0.disease_id,
-        oe1_0.ended_at,
-        oe1_0.region_id,
-        oe1_0.started_at,
-        oe1_0.status,
-        oe1_0.updated_at 
-    &amp#27;[34mfrom&amp#27;[0m
-        outbreaks oe1_0 
-    &amp#27;[34mwhere&amp#27;[0m
-        oe1_0.id=?
-2026-04-29 16:56:55,087 WARN  [org.hibernate.orm.query] (executor-thread-1) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mselect&amp#27;[0m
-        &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
-        ue1_0.active,
-        ue1_0.created_at,
-        ue1_0.email,
-        ue1_0.external_auth_id,
-        ue1_0.full_name,
-        h1_0.id,
-        h1_0.active,
-        h1_0.address,
-        h1_0.bed_count,
-        h1_0.code,
-        h1_0.created_at,
-        h1_0.invite_code,
-        h1_0.name,
-        h1_0.nurse_count,
-        h1_0.phone,
-        h1_0.postal_code,
-        h1_0.region_id,
-        h1_0.updated_at,
-        ue1_0.last_login_at,
-        ue1_0.license_number,
-        r1_0.user_id,
-        r1_1.id,
-        r1_1.code,
-        r1_1.created_at,
-        r1_1.description,
-        r1_1.name,
-        p1_0.role_id,
-        p1_1.id,
-        p1_1.code,
-        p1_1.created_at,
-        p1_1.description,
-        p1_1.updated_at,
-        r1_1.updated_at,
-        ue1_0.specialty_id,
-        ue1_0.status,
-        ue1_0.updated_at 
-    &amp#27;[34mfrom&amp#27;[0m
-        users ue1_0 
-    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
-        user_roles r1_0 
-            &amp#27;[34mon&amp#27;[0m ue1_0.id=r1_0.user_id 
-    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
-        roles r1_1 
-            &amp#27;[34mon&amp#27;[0m r1_1.id=r1_0.role_id 
-    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
-        role_privileges p1_0 
-            &amp#27;[34mon&amp#27;[0m r1_1.id=p1_0.role_id 
-    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
-        privileges p1_1 
-            &amp#27;[34mon&amp#27;[0m p1_1.id=p1_0.privilege_id 
-    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
-        hospitals h1_0 
-            &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
-    &amp#27;[34mwhere&amp#27;[0m
-        ue1_0.email=?
-2026-04-29 16:56:55,166 INFO  [com.itesm.infrastructure.security.AuthorizationInterceptor] (executor-thread-1) AUDIT userId=60756f3b-5a8b-4881-8dfd-b59b47d51894 endpoint=DiagnosisAssistantResource.sendMessage decision=ALLOW
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mselect&amp#27;[0m
-        oe1_0.id,
-        oe1_0.case_count,
-        oe1_0.created_at,
-        oe1_0.disease_id,
-        oe1_0.ended_at,
-        oe1_0.region_id,
-        oe1_0.started_at,
-        oe1_0.status,
-        oe1_0.updated_at 
-    &amp#27;[34mfrom&amp#27;[0m
-        outbreaks oe1_0 
-    &amp#27;[34mwhere&amp#27;[0m
-        oe1_0.status=? 
-        &amp#27;[34mand&amp#27;[0m oe1_0.region_id=?
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mselect&amp#27;[0m
-        de1_0.id,
-        de1_0.code,
-        de1_0.created_at,
-        de1_0.name,
-        de1_0.primary_specialty_id,
-        de1_0.symptoms,
-        de1_0.updated_at 
-    &amp#27;[34mfrom&amp#27;[0m
-        diseases de1_0 
-    &amp#27;[34mwhere&amp#27;[0m
-        de1_0.id=?
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mselect&amp#27;[0m
-        re1_0.id,
-        re1_0.code,
-        re1_0.created_at,
-        re1_0.description,
-        re1_0.name,
-        re1_0.updated_at 
-    &amp#27;[34mfrom&amp#27;[0m
-        regions re1_0 
-    &amp#27;[34mwhere&amp#27;[0m
-        re1_0.id=?
+2026-04-29 16:56:56,325 INFO  [com.itesm.infrastructure.security.AuthorizationInterceptor] (executor-thread-1) AUDIT userId=4210f4cd-b9dd-4201-8eba-b9db34e68c5a endpoint=DiagnosisEvaluationResource.current decision=DENY reason=missing_privilege:diagnosis.assist
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenCallerIsHospitalAdmin" classname="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="0.055">
-    <system-out><![CDATA[2026-04-29 16:56:55,917 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+  <testcase name="shouldReturnCurrentEvaluationWithDatabaseBackedDetails" classname="com.itesm.interfaces.rest.DiagnosisEvaluationResourceTest" time="0.625">
+    <system-out><![CDATA[2026-04-29 16:56:56,340 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1187,7 +675,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-04-29 16:56:55,921 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-04-29 16:56:56,346 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1248,20 +736,93 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
         ue1_0.email=?
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
-        oe1_0.id,
-        oe1_0.case_count,
-        oe1_0.created_at,
-        oe1_0.disease_id,
-        oe1_0.ended_at,
-        oe1_0.region_id,
-        oe1_0.started_at,
-        oe1_0.status,
-        oe1_0.updated_at 
+        pe1_0.id,
+        pe1_0.birth_date,
+        pe1_0.created_at,
+        pe1_0.height_cm,
+        pe1_0.hospital_id,
+        pe1_0.postal_code,
+        pe1_0.sex,
+        pe1_0.updated_at,
+        pe1_0.weight_kg 
     &amp#27;[34mfrom&amp#27;[0m
-        outbreaks oe1_0 
+        patients pe1_0 
     &amp#27;[34mwhere&amp#27;[0m
-        oe1_0.id=?
-2026-04-29 16:56:55,949 WARN  [org.hibernate.orm.query] (executor-thread-1) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+        pe1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        ee1_0.id,
+        ee1_0.created_at,
+        ee1_0.disease_id,
+        ee1_0.patient_id,
+        ee1_0.primary_doctor_user_id,
+        ee1_0.resolved_at,
+        ee1_0.started_at,
+        ee1_0.status,
+        ee1_0.updated_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        events ee1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        ee1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        pee1_0.id,
+        pee1_0.clinical_notes,
+        pee1_0.created_at,
+        pee1_0.doctor_user_id,
+        pee1_0.event_id,
+        pee1_0.finalized_at,
+        pee1_0.patient_id,
+        pee1_0.status,
+        pee1_0.symptoms_text,
+        pee1_0.updated_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        patient_evaluations pee1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        pee1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        erte1_0.id,
+        erte1_0.created_at,
+        erte1_0.evaluation_id,
+        erte1_0.reason,
+        erte1_0.sort_order,
+        erte1_0.source,
+        erte1_0.test_name 
+    &amp#27;[34mfrom&amp#27;[0m
+        evaluation_recommended_tests erte1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        erte1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        edde1_0.id,
+        edde1_0.confidence,
+        edde1_0.created_at,
+        edde1_0.disease_id,
+        edde1_0.display_name,
+        edde1_0.evaluation_id,
+        edde1_0.locality_risk_level,
+        edde1_0.rank_order,
+        edde1_0.rationale 
+    &amp#27;[34mfrom&amp#27;[0m
+        evaluation_differential_diagnoses edde1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        edde1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        pefe1_0.id,
+        pefe1_0.document_type,
+        pefe1_0.evaluation_id,
+        pefe1_0.file_name,
+        pefe1_0.file_size_bytes,
+        pefe1_0.mime_type,
+        pefe1_0.storage_key,
+        pefe1_0.uploaded_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        patient_evaluation_files pefe1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        pefe1_0.id=?
+2026-04-29 16:56:56,397 WARN  [org.hibernate.orm.query] (executor-thread-1) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1320,11 +881,121 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-04-29 16:56:55,953 INFO  [com.itesm.infrastructure.security.AuthorizationInterceptor] (executor-thread-1) AUDIT userId=23db31f8-961b-45f2-89f0-3adf2e3104be endpoint=DiagnosisAssistantResource.sendMessage decision=DENY reason=missing_privilege:diagnosis.assist
+2026-04-29 16:56:56,404 INFO  [com.itesm.infrastructure.security.AuthorizationInterceptor] (executor-thread-1) AUDIT userId=e90e42f8-9eda-4c52-ba7e-a291fbb8f9d1 endpoint=DiagnosisEvaluationResource.current decision=ALLOW
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        pee1_0.id,
+        pee1_0.clinical_notes,
+        pee1_0.created_at,
+        pee1_0.doctor_user_id,
+        e1_0.id,
+        e1_0.created_at,
+        e1_0.disease_id,
+        d1_0.id,
+        d1_0.code,
+        d1_0.created_at,
+        d1_0.name,
+        d1_0.primary_specialty_id,
+        d1_0.symptoms,
+        d1_0.updated_at,
+        e1_0.patient_id,
+        e1_0.primary_doctor_user_id,
+        e1_0.resolved_at,
+        e1_0.started_at,
+        e1_0.status,
+        e1_0.updated_at,
+        pee1_0.finalized_at,
+        pee1_0.patient_id,
+        p1_0.id,
+        p1_0.birth_date,
+        p1_0.created_at,
+        p1_0.height_cm,
+        p1_0.hospital_id,
+        p1_0.postal_code,
+        p1_0.sex,
+        p1_0.updated_at,
+        p1_0.weight_kg,
+        pee1_0.status,
+        pee1_0.symptoms_text,
+        pee1_0.updated_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        patient_evaluations pee1_0 
+    &amp#27;[34mjoin&amp#27;[0m
+        patients p1_0 
+            &amp#27;[34mon&amp#27;[0m p1_0.id=pee1_0.patient_id 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        events e1_0 
+            &amp#27;[34mon&amp#27;[0m e1_0.id=pee1_0.event_id 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        diseases d1_0 
+            &amp#27;[34mon&amp#27;[0m d1_0.id=e1_0.disease_id 
+    &amp#27;[34mwhere&amp#27;[0m
+        pee1_0.doctor_user_id=? 
+    &amp#27;[34morder&amp#27;[0m &amp#27;[34mby&amp#27;[0m
+        pee1_0.created_at desc 
+    &amp#27;[34mfetch&amp#27;[0m
+        &amp#27;[34mfirst&amp#27;[0m ? &amp#27;[34mrows&amp#27;[0m &amp#27;[34monly&amp#27;[0m
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        edde1_0.id,
+        edde1_0.confidence,
+        edde1_0.created_at,
+        d1_0.id,
+        d1_0.code,
+        d1_0.created_at,
+        d1_0.name,
+        d1_0.primary_specialty_id,
+        d1_0.symptoms,
+        d1_0.updated_at,
+        edde1_0.display_name,
+        edde1_0.evaluation_id,
+        edde1_0.locality_risk_level,
+        edde1_0.rank_order,
+        edde1_0.rationale 
+    &amp#27;[34mfrom&amp#27;[0m
+        evaluation_differential_diagnoses edde1_0 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        diseases d1_0 
+            &amp#27;[34mon&amp#27;[0m d1_0.id=edde1_0.disease_id 
+    &amp#27;[34mwhere&amp#27;[0m
+        edde1_0.evaluation_id=? 
+    &amp#27;[34morder&amp#27;[0m &amp#27;[34mby&amp#27;[0m
+        edde1_0.rank_order
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        erte1_0.id,
+        erte1_0.created_at,
+        erte1_0.evaluation_id,
+        erte1_0.reason,
+        erte1_0.sort_order,
+        erte1_0.source,
+        erte1_0.test_name 
+    &amp#27;[34mfrom&amp#27;[0m
+        evaluation_recommended_tests erte1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        erte1_0.evaluation_id=? 
+    &amp#27;[34morder&amp#27;[0m &amp#27;[34mby&amp#27;[0m
+        erte1_0.sort_order
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        pefe1_0.id,
+        pefe1_0.document_type,
+        pefe1_0.evaluation_id,
+        pefe1_0.file_name,
+        pefe1_0.file_size_bytes,
+        pefe1_0.mime_type,
+        pefe1_0.storage_key,
+        pefe1_0.uploaded_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        patient_evaluation_files pefe1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        pefe1_0.evaluation_id=? 
+    &amp#27;[34morder&amp#27;[0m &amp#27;[34mby&amp#27;[0m
+        pefe1_0.uploaded_at desc
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn200WithReplyWhenCallerIsDoctor" classname="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="0.08">
-    <system-out><![CDATA[2026-04-29 16:56:55,978 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+  <testcase name="shouldReturnEvaluationById" classname="com.itesm.interfaces.rest.DiagnosisEvaluationResourceTest" time="0.179">
+    <system-out><![CDATA[2026-04-29 16:56:56,978 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1383,7 +1054,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-04-29 16:56:55,985 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-04-29 16:56:56,978 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1444,20 +1115,93 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
         ue1_0.email=?
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
-        oe1_0.id,
-        oe1_0.case_count,
-        oe1_0.created_at,
-        oe1_0.disease_id,
-        oe1_0.ended_at,
-        oe1_0.region_id,
-        oe1_0.started_at,
-        oe1_0.status,
-        oe1_0.updated_at 
+        pe1_0.id,
+        pe1_0.birth_date,
+        pe1_0.created_at,
+        pe1_0.height_cm,
+        pe1_0.hospital_id,
+        pe1_0.postal_code,
+        pe1_0.sex,
+        pe1_0.updated_at,
+        pe1_0.weight_kg 
     &amp#27;[34mfrom&amp#27;[0m
-        outbreaks oe1_0 
+        patients pe1_0 
     &amp#27;[34mwhere&amp#27;[0m
-        oe1_0.id=?
-2026-04-29 16:56:56,015 WARN  [org.hibernate.orm.query] (executor-thread-1) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+        pe1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        ee1_0.id,
+        ee1_0.created_at,
+        ee1_0.disease_id,
+        ee1_0.patient_id,
+        ee1_0.primary_doctor_user_id,
+        ee1_0.resolved_at,
+        ee1_0.started_at,
+        ee1_0.status,
+        ee1_0.updated_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        events ee1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        ee1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        pee1_0.id,
+        pee1_0.clinical_notes,
+        pee1_0.created_at,
+        pee1_0.doctor_user_id,
+        pee1_0.event_id,
+        pee1_0.finalized_at,
+        pee1_0.patient_id,
+        pee1_0.status,
+        pee1_0.symptoms_text,
+        pee1_0.updated_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        patient_evaluations pee1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        pee1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        erte1_0.id,
+        erte1_0.created_at,
+        erte1_0.evaluation_id,
+        erte1_0.reason,
+        erte1_0.sort_order,
+        erte1_0.source,
+        erte1_0.test_name 
+    &amp#27;[34mfrom&amp#27;[0m
+        evaluation_recommended_tests erte1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        erte1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        edde1_0.id,
+        edde1_0.confidence,
+        edde1_0.created_at,
+        edde1_0.disease_id,
+        edde1_0.display_name,
+        edde1_0.evaluation_id,
+        edde1_0.locality_risk_level,
+        edde1_0.rank_order,
+        edde1_0.rationale 
+    &amp#27;[34mfrom&amp#27;[0m
+        evaluation_differential_diagnoses edde1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        edde1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        pefe1_0.id,
+        pefe1_0.document_type,
+        pefe1_0.evaluation_id,
+        pefe1_0.file_name,
+        pefe1_0.file_size_bytes,
+        pefe1_0.mime_type,
+        pefe1_0.storage_key,
+        pefe1_0.uploaded_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        patient_evaluation_files pefe1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        pefe1_0.id=?
+2026-04-29 16:56:57,052 WARN  [org.hibernate.orm.query] (executor-thread-1) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1516,48 +1260,323 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-04-29 16:56:56,021 INFO  [com.itesm.infrastructure.security.AuthorizationInterceptor] (executor-thread-1) AUDIT userId=60756f3b-5a8b-4881-8dfd-b59b47d51894 endpoint=DiagnosisAssistantResource.sendMessage decision=ALLOW
+2026-04-29 16:56:57,059 INFO  [com.itesm.infrastructure.security.AuthorizationInterceptor] (executor-thread-1) AUDIT userId=e90e42f8-9eda-4c52-ba7e-a291fbb8f9d1 endpoint=DiagnosisEvaluationResource.byId decision=ALLOW
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
-        oe1_0.id,
-        oe1_0.case_count,
-        oe1_0.created_at,
-        oe1_0.disease_id,
-        oe1_0.ended_at,
-        oe1_0.region_id,
-        oe1_0.started_at,
-        oe1_0.status,
-        oe1_0.updated_at 
+        pee1_0.id,
+        pee1_0.clinical_notes,
+        pee1_0.created_at,
+        pee1_0.doctor_user_id,
+        e1_0.id,
+        e1_0.created_at,
+        e1_0.disease_id,
+        d1_0.id,
+        d1_0.code,
+        d1_0.created_at,
+        d1_0.name,
+        d1_0.primary_specialty_id,
+        d1_0.symptoms,
+        d1_0.updated_at,
+        e1_0.patient_id,
+        e1_0.primary_doctor_user_id,
+        e1_0.resolved_at,
+        e1_0.started_at,
+        e1_0.status,
+        e1_0.updated_at,
+        pee1_0.finalized_at,
+        pee1_0.patient_id,
+        p1_0.id,
+        p1_0.birth_date,
+        p1_0.created_at,
+        p1_0.height_cm,
+        p1_0.hospital_id,
+        p1_0.postal_code,
+        p1_0.sex,
+        p1_0.updated_at,
+        p1_0.weight_kg,
+        pee1_0.status,
+        pee1_0.symptoms_text,
+        pee1_0.updated_at 
     &amp#27;[34mfrom&amp#27;[0m
-        outbreaks oe1_0 
+        patient_evaluations pee1_0 
+    &amp#27;[34mjoin&amp#27;[0m
+        patients p1_0 
+            &amp#27;[34mon&amp#27;[0m p1_0.id=pee1_0.patient_id 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        events e1_0 
+            &amp#27;[34mon&amp#27;[0m e1_0.id=pee1_0.event_id 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        diseases d1_0 
+            &amp#27;[34mon&amp#27;[0m d1_0.id=e1_0.disease_id 
     &amp#27;[34mwhere&amp#27;[0m
-        oe1_0.status=? 
-        &amp#27;[34mand&amp#27;[0m oe1_0.region_id=?
+        pee1_0.id=? 
+        &amp#27;[34mand&amp#27;[0m pee1_0.doctor_user_id=?
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
-        de1_0.id,
-        de1_0.code,
-        de1_0.created_at,
-        de1_0.name,
-        de1_0.primary_specialty_id,
-        de1_0.symptoms,
-        de1_0.updated_at 
+        edde1_0.id,
+        edde1_0.confidence,
+        edde1_0.created_at,
+        d1_0.id,
+        d1_0.code,
+        d1_0.created_at,
+        d1_0.name,
+        d1_0.primary_specialty_id,
+        d1_0.symptoms,
+        d1_0.updated_at,
+        edde1_0.display_name,
+        edde1_0.evaluation_id,
+        edde1_0.locality_risk_level,
+        edde1_0.rank_order,
+        edde1_0.rationale 
     &amp#27;[34mfrom&amp#27;[0m
-        diseases de1_0 
+        evaluation_differential_diagnoses edde1_0 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        diseases d1_0 
+            &amp#27;[34mon&amp#27;[0m d1_0.id=edde1_0.disease_id 
     &amp#27;[34mwhere&amp#27;[0m
-        de1_0.id=?
+        edde1_0.evaluation_id=? 
+    &amp#27;[34morder&amp#27;[0m &amp#27;[34mby&amp#27;[0m
+        edde1_0.rank_order
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
-        re1_0.id,
-        re1_0.code,
-        re1_0.created_at,
-        re1_0.description,
-        re1_0.name,
-        re1_0.updated_at 
+        erte1_0.id,
+        erte1_0.created_at,
+        erte1_0.evaluation_id,
+        erte1_0.reason,
+        erte1_0.sort_order,
+        erte1_0.source,
+        erte1_0.test_name 
     &amp#27;[34mfrom&amp#27;[0m
-        regions re1_0 
+        evaluation_recommended_tests erte1_0 
     &amp#27;[34mwhere&amp#27;[0m
-        re1_0.id=?
+        erte1_0.evaluation_id=? 
+    &amp#27;[34morder&amp#27;[0m &amp#27;[34mby&amp#27;[0m
+        erte1_0.sort_order
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        pefe1_0.id,
+        pefe1_0.document_type,
+        pefe1_0.evaluation_id,
+        pefe1_0.file_name,
+        pefe1_0.file_size_bytes,
+        pefe1_0.mime_type,
+        pefe1_0.storage_key,
+        pefe1_0.uploaded_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        patient_evaluation_files pefe1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        pefe1_0.evaluation_id=? 
+    &amp#27;[34morder&amp#27;[0m &amp#27;[34mby&amp#27;[0m
+        pefe1_0.uploaded_at desc
+]]></system-out>
+  </testcase>
+  <testcase name="shouldReturn401WhenNoToken" classname="com.itesm.interfaces.rest.DiagnosisEvaluationResourceTest" time="0.054">
+    <system-out><![CDATA[2026-04-29 16:56:57,164 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
+        ue1_0.active,
+        ue1_0.created_at,
+        ue1_0.email,
+        ue1_0.external_auth_id,
+        ue1_0.full_name,
+        h1_0.id,
+        h1_0.active,
+        h1_0.address,
+        h1_0.bed_count,
+        h1_0.code,
+        h1_0.created_at,
+        h1_0.invite_code,
+        h1_0.name,
+        h1_0.nurse_count,
+        h1_0.phone,
+        h1_0.postal_code,
+        h1_0.region_id,
+        h1_0.updated_at,
+        ue1_0.last_login_at,
+        ue1_0.license_number,
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.code,
+        r1_1.created_at,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.code,
+        p1_1.created_at,
+        p1_1.description,
+        p1_1.updated_at,
+        r1_1.updated_at,
+        ue1_0.specialty_id,
+        ue1_0.status,
+        ue1_0.updated_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        users ue1_0 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        user_roles r1_0 
+            &amp#27;[34mon&amp#27;[0m ue1_0.id=r1_0.user_id 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        roles r1_1 
+            &amp#27;[34mon&amp#27;[0m r1_1.id=r1_0.role_id 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        role_privileges p1_0 
+            &amp#27;[34mon&amp#27;[0m r1_1.id=p1_0.role_id 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        privileges p1_1 
+            &amp#27;[34mon&amp#27;[0m p1_1.id=p1_0.privilege_id 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        hospitals h1_0 
+            &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
+    &amp#27;[34mwhere&amp#27;[0m
+        ue1_0.email=?
+2026-04-29 16:56:57,164 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
+        ue1_0.active,
+        ue1_0.created_at,
+        ue1_0.email,
+        ue1_0.external_auth_id,
+        ue1_0.full_name,
+        h1_0.id,
+        h1_0.active,
+        h1_0.address,
+        h1_0.bed_count,
+        h1_0.code,
+        h1_0.created_at,
+        h1_0.invite_code,
+        h1_0.name,
+        h1_0.nurse_count,
+        h1_0.phone,
+        h1_0.postal_code,
+        h1_0.region_id,
+        h1_0.updated_at,
+        ue1_0.last_login_at,
+        ue1_0.license_number,
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.code,
+        r1_1.created_at,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.code,
+        p1_1.created_at,
+        p1_1.description,
+        p1_1.updated_at,
+        r1_1.updated_at,
+        ue1_0.specialty_id,
+        ue1_0.status,
+        ue1_0.updated_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        users ue1_0 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        user_roles r1_0 
+            &amp#27;[34mon&amp#27;[0m ue1_0.id=r1_0.user_id 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        roles r1_1 
+            &amp#27;[34mon&amp#27;[0m r1_1.id=r1_0.role_id 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        role_privileges p1_0 
+            &amp#27;[34mon&amp#27;[0m r1_1.id=p1_0.role_id 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        privileges p1_1 
+            &amp#27;[34mon&amp#27;[0m p1_1.id=p1_0.privilege_id 
+    &amp#27;[34mleft&amp#27;[0m &amp#27;[34mjoin&amp#27;[0m
+        hospitals h1_0 
+            &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
+    &amp#27;[34mwhere&amp#27;[0m
+        ue1_0.email=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        pe1_0.id,
+        pe1_0.birth_date,
+        pe1_0.created_at,
+        pe1_0.height_cm,
+        pe1_0.hospital_id,
+        pe1_0.postal_code,
+        pe1_0.sex,
+        pe1_0.updated_at,
+        pe1_0.weight_kg 
+    &amp#27;[34mfrom&amp#27;[0m
+        patients pe1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        pe1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        ee1_0.id,
+        ee1_0.created_at,
+        ee1_0.disease_id,
+        ee1_0.patient_id,
+        ee1_0.primary_doctor_user_id,
+        ee1_0.resolved_at,
+        ee1_0.started_at,
+        ee1_0.status,
+        ee1_0.updated_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        events ee1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        ee1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        pee1_0.id,
+        pee1_0.clinical_notes,
+        pee1_0.created_at,
+        pee1_0.doctor_user_id,
+        pee1_0.event_id,
+        pee1_0.finalized_at,
+        pee1_0.patient_id,
+        pee1_0.status,
+        pee1_0.symptoms_text,
+        pee1_0.updated_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        patient_evaluations pee1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        pee1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        erte1_0.id,
+        erte1_0.created_at,
+        erte1_0.evaluation_id,
+        erte1_0.reason,
+        erte1_0.sort_order,
+        erte1_0.source,
+        erte1_0.test_name 
+    &amp#27;[34mfrom&amp#27;[0m
+        evaluation_recommended_tests erte1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        erte1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        edde1_0.id,
+        edde1_0.confidence,
+        edde1_0.created_at,
+        edde1_0.disease_id,
+        edde1_0.display_name,
+        edde1_0.evaluation_id,
+        edde1_0.locality_risk_level,
+        edde1_0.rank_order,
+        edde1_0.rationale 
+    &amp#27;[34mfrom&amp#27;[0m
+        evaluation_differential_diagnoses edde1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        edde1_0.id=?
+&amp#27;[35m[Hibernate]&amp#27;[0m 
+    &amp#27;[34mselect&amp#27;[0m
+        pefe1_0.id,
+        pefe1_0.document_type,
+        pefe1_0.evaluation_id,
+        pefe1_0.file_name,
+        pefe1_0.file_size_bytes,
+        pefe1_0.mime_type,
+        pefe1_0.storage_key,
+        pefe1_0.uploaded_at 
+    &amp#27;[34mfrom&amp#27;[0m
+        patient_evaluation_files pefe1_0 
+    &amp#27;[34mwhere&amp#27;[0m
+        pefe1_0.id=?
 ]]></system-out>
   </testcase>
 </testsuite>

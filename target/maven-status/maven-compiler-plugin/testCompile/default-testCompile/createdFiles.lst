@@ -3,6 +3,7 @@ com\itesm\application\usecase\AssistantPromptBuilderTest.class
 com\itesm\infrastructure\firebase\MockFirebaseUserService.class
 com\itesm\interfaces\rest\AuthRbacResourceTest.class
 com\itesm\application\security\AuthorizationServiceTest.class
+com\itesm\interfaces\rest\DiagnosisEvaluationResourceTest.class
 com\itesm\application\usecase\RegisterUserUseCaseTest.class
 com\itesm\interfaces\rest\DiagnosisAssistantResourceTest.class
 com\itesm\infrastructure\security\MockFirebaseAuthFilter.class
