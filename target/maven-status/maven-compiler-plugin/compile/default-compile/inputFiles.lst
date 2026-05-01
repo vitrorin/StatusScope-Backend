@@ -15,6 +15,9 @@ C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\it
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\OutbreakSummaryDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\PatientContextDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\RegisterUserDto.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\UpdateDiagnosisEvaluationDto.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\UpdateDiagnosisEvaluationStatusDto.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\UploadDiagnosisEvaluationFileDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\UserSummaryDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\security\AuthenticatedUserContext.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\security\AuthorizationService.java
@@ -23,6 +26,7 @@ C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\it
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\AskDiagnosisAssistantUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\AssignRoleToUserUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\AssistantPromptBuilder.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\CreateDiagnosisEvaluationUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\CreateHospitalUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\CreateUserByAdminUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\DisableUserUseCase.java
@@ -33,6 +37,7 @@ C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\it
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\GetDiagnosisEvaluationUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\GetMyProfileUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\RegisterUserUseCase.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\UpdateDiagnosisEvaluationUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\domain\models\Disease.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\domain\models\Hospital.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\domain\models\Outbreak.java

@@ -38,9 +38,6 @@ public class AssistantPromptBuilder {
             if (patientContext.getSex() != null && !patientContext.getSex().isBlank()) {
                 sb.append("  - Sex: ").append(patientContext.getSex()).append("\n");
             }
-            if (patientContext.getPostalCode() != null && !patientContext.getPostalCode().isBlank()) {
-                sb.append("  - Postal code: ").append(patientContext.getPostalCode()).append("\n");
-            }
             if (patientContext.getSymptoms() != null && !patientContext.getSymptoms().isBlank()) {
                 sb.append("  - Reported symptoms: ").append(patientContext.getSymptoms()).append("\n");
             }

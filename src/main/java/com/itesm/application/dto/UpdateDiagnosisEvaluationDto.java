@@ -13,8 +13,6 @@ public class UpdateDiagnosisEvaluationDto {
     @NotBlank
     private String sex;
 
-    private String postalCode;
-
     @NotBlank
     private String symptomsText;
 
@@ -26,9 +24,6 @@ public class UpdateDiagnosisEvaluationDto {
 
     public String getSex() { return sex; }
     public void setSex(String sex) { this.sex = sex; }
-
-    public String getPostalCode() { return postalCode; }
-    public void setPostalCode(String postalCode) { this.postalCode = postalCode; }
 
     public String getSymptomsText() { return symptomsText; }
     public void setSymptomsText(String symptomsText) { this.symptomsText = symptomsText; }

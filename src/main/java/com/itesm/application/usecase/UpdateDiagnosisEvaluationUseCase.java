@@ -44,7 +44,6 @@ public class UpdateDiagnosisEvaluationUseCase {
         patient.setFullName(dto.getPatientFullName().trim());
         patient.setSex(normalizeSex(dto.getSex()));
         patient.setBirthDate(parseBirthDate(dto.getBirthDate()));
-        patient.setPostalCode(normalizeNullable(dto.getPostalCode()));
         patient.setUpdatedAt(now);
 
         evaluation.setSymptomsText(dto.getSymptomsText().trim());
@@ -78,7 +77,10 @@ public class UpdateDiagnosisEvaluationUseCase {
         file.setFileName(dto.getFileName().trim());
         file.setMimeType(dto.getMimeType().trim());
         file.setFileSizeBytes(dto.getFileSizeBytes());
-        file.setDocumentType(normalizeNullable(dto.getDocumentType()) == null ? "LAB_RESULT" : dto.getDocumentType().trim());
+        String documentType = dto.getDocumentType() == null || dto.getDocumentType().trim().isEmpty()
+                ? "LAB_RESULT"
+                : dto.getDocumentType().trim();
+        file.setDocumentType(documentType);
         file.setContentBase64(dto.getContentBase64().trim());
         file.setStorageKey("db:" + file.getId());
         file.setUploadedAt(LocalDateTime.now());
@@ -134,13 +136,5 @@ public class UpdateDiagnosisEvaluationUseCase {
             }
             throw new IllegalArgumentException("Birth date must use YYYY-MM-DD format");
         }
-    }
-
-    private String normalizeNullable(String value) {
-        if (value == null) {
-            return null;
-        }
-        String trimmed = value.trim();
-        return trimmed.isEmpty() ? null : trimmed;
     }
 }

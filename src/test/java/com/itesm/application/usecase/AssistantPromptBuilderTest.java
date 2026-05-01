@@ -64,13 +64,11 @@ class AssistantPromptBuilderTest {
         PatientContextDto pc = new PatientContextDto();
         pc.setAgeYears(35);
         pc.setSex("female");
-        pc.setPostalCode("64000");
         pc.setSymptoms("fever, rash");
 
         String prompt = builder.build(region("Región Norte"), List.of(), pc);
         Assertions.assertTrue(prompt.contains("35"));
         Assertions.assertTrue(prompt.contains("female"));
-        Assertions.assertTrue(prompt.contains("64000"));
         Assertions.assertTrue(prompt.contains("fever, rash"));
     }
 

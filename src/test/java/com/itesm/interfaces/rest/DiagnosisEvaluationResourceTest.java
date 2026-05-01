@@ -86,18 +86,22 @@ class DiagnosisEvaluationResourceTest {
         DiseaseEntity disease = entityManager.getReference(DiseaseEntity.class, DISEASE_ID);
 
         PatientEntity patient = entityManager.find(PatientEntity.class, PATIENT_ID);
+        boolean newPatient = false;
         if (patient == null) {
             patient = new PatientEntity();
             patient.setId(PATIENT_ID);
-            patient.setHospital(hospital);
-            patient.setFullName("Lucia Herrera");
-            patient.setSex("female");
-            patient.setBirthDate(LocalDate.now().minusYears(9));
-            patient.setWeightKg(new BigDecimal("29.10"));
-            patient.setHeightCm(new BigDecimal("132.00"));
-            patient.setPostalCode("64000");
             patient.setCreatedAt(LocalDateTime.now());
-            patient.setUpdatedAt(LocalDateTime.now());
+            newPatient = true;
+        }
+        patient.setHospital(hospital);
+        patient.setFullName("Lucia Herrera");
+        patient.setSex("female");
+        patient.setBirthDate(LocalDate.now().minusYears(9));
+        patient.setWeightKg(new BigDecimal("29.10"));
+        patient.setHeightCm(new BigDecimal("132.00"));
+        patient.setPostalCode("64000");
+        patient.setUpdatedAt(LocalDateTime.now());
+        if (newPatient) {
             entityManager.persist(patient);
         }
 
@@ -117,18 +121,22 @@ class DiagnosisEvaluationResourceTest {
         }
 
         PatientEvaluationEntity evaluation = entityManager.find(PatientEvaluationEntity.class, EVALUATION_ID);
+        boolean newEvaluation = false;
         if (evaluation == null) {
             evaluation = new PatientEvaluationEntity();
             evaluation.setId(EVALUATION_ID);
-            evaluation.setPatient(patient);
-            evaluation.setDoctor(entityManager.getReference(
-                    com.itesm.infrastructure.persistence.entity.UserEntity.class, doctor.getId()));
-            evaluation.setEvent(event);
-            evaluation.setStatus("IN_PROGRESS");
-            evaluation.setSymptomsText("High fever, cough, fatigue, and loss of smell.");
-            evaluation.setClinicalNotes("Resource test evaluation.");
             evaluation.setCreatedAt(LocalDateTime.now());
-            evaluation.setUpdatedAt(LocalDateTime.now());
+            newEvaluation = true;
+        }
+        evaluation.setPatient(patient);
+        evaluation.setDoctor(entityManager.getReference(
+                com.itesm.infrastructure.persistence.entity.UserEntity.class, doctor.getId()));
+        evaluation.setEvent(event);
+        evaluation.setStatus("IN_PROGRESS");
+        evaluation.setSymptomsText("High fever, cough, fatigue, and loss of smell.");
+        evaluation.setClinicalNotes("Resource test evaluation.");
+        evaluation.setUpdatedAt(LocalDateTime.now());
+        if (newEvaluation) {
             entityManager.persist(evaluation);
         }
 
@@ -201,7 +209,6 @@ class DiagnosisEvaluationResourceTest {
                   "patientFullName": "New Patient",
                   "birthDate": "2014-05-20",
                   "sex": "female",
-                  "postalCode": "64010",
                   "symptomsText": "Fever and sore throat."
                 }
                 """;
@@ -235,7 +242,6 @@ class DiagnosisEvaluationResourceTest {
                 .body("id", equalTo(EVALUATION_ID.toString()))
                 .body("patient.fullName", equalTo("Lucia Herrera"))
                 .body("patient.ageYears", equalTo(9))
-                .body("patient.postalCode", equalTo("64000"))
                 .body("event.diseaseName", equalTo("COVID-19"))
                 .body("differentialDiagnoses[0].displayName", equalTo("COVID-19"))
                 .body("differentialDiagnoses[0].localityRiskLevel", equalTo("HIGH"))
@@ -264,7 +270,6 @@ class DiagnosisEvaluationResourceTest {
                   "patientFullName": "Camila Herrera",
                   "birthDate": "2015-04-20",
                   "sex": "female",
-                  "postalCode": "64120",
                   "symptomsText": "Persistent fever and body ache."
                 }
                 """;
@@ -280,7 +285,6 @@ class DiagnosisEvaluationResourceTest {
                 .statusCode(200)
                 .body("patient.fullName", equalTo("Camila Herrera"))
                 .body("patient.birthDate", equalTo("2015-04-20"))
-                .body("patient.postalCode", equalTo("64120"))
                 .body("symptomsText", equalTo("Persistent fever and body ache."));
     }
 

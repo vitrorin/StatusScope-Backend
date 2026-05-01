@@ -51,7 +51,6 @@ public class CreateDiagnosisEvaluationUseCase {
         patient.setFullName(dto.getPatientFullName().trim());
         patient.setSex(normalizeSex(dto.getSex()));
         patient.setBirthDate(parseBirthDate(dto.getBirthDate()));
-        patient.setPostalCode(normalizeNullable(dto.getPostalCode()));
         patient.setCreatedAt(now);
         patient.setUpdatedAt(now);
         entityManager.persist(patient);
@@ -91,13 +90,5 @@ public class CreateDiagnosisEvaluationUseCase {
             }
             throw new IllegalArgumentException("Birth date must use YYYY-MM-DD format");
         }
-    }
-
-    private String normalizeNullable(String value) {
-        if (value == null) {
-            return null;
-        }
-        String trimmed = value.trim();
-        return trimmed.isEmpty() ? null : trimmed;
     }
 }
