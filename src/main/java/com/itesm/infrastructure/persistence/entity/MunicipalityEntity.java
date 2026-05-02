@@ -29,8 +29,8 @@ public class MunicipalityEntity {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "city_id", nullable = false)
-    private CityEntity city;
+    @JoinColumn(name = "state_id", nullable = false)
+    private StateEntity state;
 
     @Column(precision = 10, scale = 7)
     private BigDecimal latitude;
@@ -53,8 +53,8 @@ public class MunicipalityEntity {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public CityEntity getCity() { return city; }
-    public void setCity(CityEntity city) { this.city = city; }
+    public StateEntity getState() { return state; }
+    public void setState(StateEntity state) { this.state = state; }
 
     public BigDecimal getLatitude() { return latitude; }
     public void setLatitude(BigDecimal latitude) { this.latitude = latitude; }

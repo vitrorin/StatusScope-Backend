@@ -23,13 +23,9 @@ public final class HospitalMapper {
         if (e.getMunicipality() != null) {
             h.setMunicipalityId(e.getMunicipality().getId());
             h.setMunicipalityName(e.getMunicipality().getName());
-            if (e.getMunicipality().getCity() != null) {
-                h.setCityId(e.getMunicipality().getCity().getId());
-                h.setCityName(e.getMunicipality().getCity().getName());
-                if (e.getMunicipality().getCity().getState() != null) {
-                    h.setStateId(e.getMunicipality().getCity().getState().getId());
-                    h.setStateName(e.getMunicipality().getCity().getState().getName());
-                }
+            if (e.getMunicipality().getState() != null) {
+                h.setStateId(e.getMunicipality().getState().getId());
+                h.setStateName(e.getMunicipality().getState().getName());
             }
         }
         h.setCreatedAt(e.getCreatedAt());

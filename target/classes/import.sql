@@ -1,22 +1,45 @@
--- states represent states / federal entities.
+-- States represent Mexican federal entities.
 INSERT INTO states (id, code, name, description, created_at, updated_at) VALUES
-('40000000-0000-0000-0000-000000000001', 'NL',   'Nuevo Leon',       'Estado de Nuevo Leon', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('40000000-0000-0000-0000-000000000002', 'CDMX', 'Ciudad de Mexico', 'Entidad federativa Ciudad de Mexico', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('40000000-0000-0000-0000-000000000003', 'MOR',  'Morelos',          'Estado de Morelos', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+('40000000-0000-0000-0000-000000000001', 'AGS',  'Aguascalientes',   'Estado de Aguascalientes', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000002', 'BC',   'Baja California',  'Estado de Baja California', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000003', 'BCS',  'Baja California Sur', 'Estado de Baja California Sur', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000004', 'CAM',  'Campeche',         'Estado de Campeche', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000005', 'COA',  'Coahuila de Zaragoza', 'Estado de Coahuila de Zaragoza', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000006', 'COL',  'Colima',           'Estado de Colima', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000007', 'CHP',  'Chiapas',          'Estado de Chiapas', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000008', 'CHH',  'Chihuahua',        'Estado de Chihuahua', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000009', 'CDMX', 'Ciudad de Mexico', 'Entidad federativa Ciudad de Mexico', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000010', 'DUR',  'Durango',          'Estado de Durango', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000011', 'GUA',  'Guanajuato',       'Estado de Guanajuato', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000012', 'GRO',  'Guerrero',         'Estado de Guerrero', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000013', 'HID',  'Hidalgo',          'Estado de Hidalgo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000014', 'JAL',  'Jalisco',          'Estado de Jalisco', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000015', 'MEX',  'Mexico',           'Estado de Mexico', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000016', 'MIC',  'Michoacan de Ocampo', 'Estado de Michoacan de Ocampo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000017', 'MOR',  'Morelos',          'Estado de Morelos', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000018', 'NAY',  'Nayarit',          'Estado de Nayarit', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000019', 'NL',   'Nuevo Leon',       'Estado de Nuevo Leon', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000020', 'OAX',  'Oaxaca',           'Estado de Oaxaca', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000021', 'PUE',  'Puebla',           'Estado de Puebla', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000022', 'QRO',  'Queretaro',        'Estado de Queretaro', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000023', 'ROO',  'Quintana Roo',     'Estado de Quintana Roo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000024', 'SLP',  'San Luis Potosi',  'Estado de San Luis Potosi', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000025', 'SIN',  'Sinaloa',          'Estado de Sinaloa', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000026', 'SON',  'Sonora',           'Estado de Sonora', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000027', 'TAB',  'Tabasco',          'Estado de Tabasco', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000028', 'TAM',  'Tamaulipas',       'Estado de Tamaulipas', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000029', 'TLA',  'Tlaxcala',         'Estado de Tlaxcala', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000030', 'VER',  'Veracruz de Ignacio de la Llave', 'Estado de Veracruz de Ignacio de la Llave', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000031', 'YUC',  'Yucatan',          'Estado de Yucatan', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000032', 'ZAC',  'Zacatecas',        'Estado de Zacatecas', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- Cities belong to a state.
-INSERT INTO cities (id, code, name, state_id, created_at, updated_at) VALUES
-('43000000-0000-0000-0000-000000000001', 'MTY',  'Monterrey',        '40000000-0000-0000-0000-000000000001', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('43000000-0000-0000-0000-000000000002', 'CDMX', 'Ciudad de Mexico', '40000000-0000-0000-0000-000000000002', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('43000000-0000-0000-0000-000000000003', 'CUE',  'Cuernavaca',       '40000000-0000-0000-0000-000000000003', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+-- Municipalities belong directly to a state.
+INSERT INTO municipalities (id, code, name, state_id, latitude, longitude, created_at, updated_at) VALUES
+('42000000-0000-0000-0000-000000000001', 'MTY', 'Monterrey',   '40000000-0000-0000-0000-000000000019', 25.6866142, -100.3161126, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('42000000-0000-0000-0000-000000000002', 'XOC', 'Xochimilco',  '40000000-0000-0000-0000-000000000009', 19.2572310,  -99.1037420, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('42000000-0000-0000-0000-000000000003', 'CUE', 'Cuernavaca',  '40000000-0000-0000-0000-000000000017', 18.9242095,  -99.2215659, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- Municipalities belong to a city.
-INSERT INTO municipalities (id, code, name, city_id, latitude, longitude, created_at, updated_at) VALUES
-('42000000-0000-0000-0000-000000000001', 'MTY', 'Monterrey',   '43000000-0000-0000-0000-000000000001', 25.6866142, -100.3161126, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('42000000-0000-0000-0000-000000000002', 'XOC', 'Xochimilco',  '43000000-0000-0000-0000-000000000002', 19.2572310,  -99.1037420, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('42000000-0000-0000-0000-000000000003', 'CUE', 'Cuernavaca',  '43000000-0000-0000-0000-000000000003', 18.9242095,  -99.2215659, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
--- Hospitals store their municipality and coordinates. State and metropolitan area are derived.
+-- Hospitals store their municipality and coordinates. State is derived.
 INSERT INTO hospitals (id, code, name, address, phone, invite_code, active, postal_code, bed_count, nurse_count, municipality_id, latitude, longitude, created_at, updated_at) VALUES
 ('30000000-0000-0000-0000-000000000001', 'HGZ-21', 'Hospital General Zona 21', 'Av. Principal 100, Monterrey', '+52 81 0000 0001', 'INVITE-HGZ21', TRUE, '64000', 240, 180, '42000000-0000-0000-0000-000000000001', 25.6866142, -100.3161126, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('30000000-0000-0000-0000-000000000002', 'HRE-05', 'Hospital Regional Este',   'Calle 5 Ote 200, Xochimilco', '+52 55 0000 0002', 'INVITE-HRE05', TRUE, '16000', 320, 240, '42000000-0000-0000-0000-000000000002', 19.2572310,  -99.1037420, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
@@ -34,22 +57,18 @@ INSERT INTO diseases (id, code, name, symptoms, primary_specialty_id, created_at
 ('60000000-0000-0000-0000-000000000001', 'FLU-A',  'Influenza A',         'Fever, cough, body aches, fatigue',           '50000000-0000-0000-0000-000000000004', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('60000000-0000-0000-0000-000000000002', 'HTN',    'Hypertension',        'Often asymptomatic; headaches, dizziness',    '50000000-0000-0000-0000-000000000002', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('60000000-0000-0000-0000-000000000003', 'ASTHMA', 'Asthma',              'Wheezing, shortness of breath, chest tightness','50000000-0000-0000-0000-000000000003', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('60000000-0000-0000-0000-000000000004', 'COVID', 'COVID-19',             'Fever, cough, loss of taste/smell, fatigue',  '50000000-0000-0000-0000-000000000004', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+('60000000-0000-0000-0000-000000000004', 'COVID',  'COVID-19',            'Fever, cough, loss of taste/smell, fatigue',  '50000000-0000-0000-0000-000000000004', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Disease additional specialties (M:N - primary specialty stays on diseases.primary_specialty_id)
--- Influenza A: also treatable by Pulmonology, Pediatrics, General Medicine
 INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
 ('60000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000003'),
 ('60000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000005'),
 ('60000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000001');
--- Hypertension: also treatable by General Medicine
 INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
 ('60000000-0000-0000-0000-000000000002', '50000000-0000-0000-0000-000000000001');
--- Asthma: also treatable by Pediatrics, General Medicine
 INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
 ('60000000-0000-0000-0000-000000000003', '50000000-0000-0000-0000-000000000005'),
 ('60000000-0000-0000-0000-000000000003', '50000000-0000-0000-0000-000000000001');
--- COVID-19: also treatable by Pulmonology, Pediatrics, General Medicine
 INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
 ('60000000-0000-0000-0000-000000000004', '50000000-0000-0000-0000-000000000003'),
 ('60000000-0000-0000-0000-000000000004', '50000000-0000-0000-0000-000000000005'),
@@ -79,8 +98,8 @@ INSERT INTO privileges (id, code, description, created_at, updated_at) VALUES
 ('10000000-0000-0000-0000-000000000014', 'specialties.manage','Manage specialties catalog', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000015', 'outbreaks.read',    'Read outbreaks',             CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000016', 'outbreaks.manage',  'Manage outbreaks',           CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('10000000-0000-0000-0000-000000000017', 'states.read',      'Read states',               CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('10000000-0000-0000-0000-000000000018', 'states.manage',    'Manage states',             CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('10000000-0000-0000-0000-000000000017', 'states.read',       'Read states',                CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('10000000-0000-0000-0000-000000000018', 'states.manage',     'Manage states',              CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000019', 'diagnosis.assist',  'Use the AI diagnosis assistant chat', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- SYSTEM_ADMIN: everything

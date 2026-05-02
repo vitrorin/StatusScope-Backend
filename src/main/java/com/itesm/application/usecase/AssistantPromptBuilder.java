@@ -34,9 +34,6 @@ public class AssistantPromptBuilder {
                   .append(" active cases since ").append(o.getStartedAt()).append(".\n");
                 if (o.getMunicipality() != null) {
                     sb.append("    Location: ").append(o.getMunicipality().getName());
-                    if (o.getMunicipality().getCityName() != null) {
-                        sb.append(", ").append(o.getMunicipality().getCityName());
-                    }
                     if (o.getState() != null && o.getState().getName() != null) {
                         sb.append(", ").append(o.getState().getName());
                     }

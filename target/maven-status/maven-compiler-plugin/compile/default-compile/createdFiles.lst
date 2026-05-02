@@ -17,7 +17,6 @@ com\itesm\domain\models\Outbreak.class
 com\itesm\application\dto\AssistantMessageDto.class
 com\itesm\application\usecase\exception\ConflictException.class
 com\itesm\application\usecase\AssignRoleToUserUseCase.class
-com\itesm\infrastructure\persistence\entity\CityEntity.class
 com\itesm\interfaces\rest\AdminHospitalResource.class
 com\itesm\infrastructure\mapper\HospitalMapper.class
 com\itesm\domain\models\Hospital.class

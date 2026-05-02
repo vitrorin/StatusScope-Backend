@@ -17,8 +17,6 @@ public class Hospital {
     private Integer nurseCount;
     private UUID municipalityId;
     private String municipalityName;
-    private UUID cityId;
-    private String cityName;
     private UUID stateId;
     private String stateName;
     private BigDecimal latitude;
@@ -61,12 +59,6 @@ public class Hospital {
 
     public String getMunicipalityName() { return municipalityName; }
     public void setMunicipalityName(String municipalityName) { this.municipalityName = municipalityName; }
-
-    public UUID getCityId() { return cityId; }
-    public void setCityId(UUID cityId) { this.cityId = cityId; }
-
-    public String getCityName() { return cityName; }
-    public void setCityName(String cityName) { this.cityName = cityName; }
 
     public UUID getStateId() { return stateId; }
     public void setStateId(UUID stateId) { this.stateId = stateId; }

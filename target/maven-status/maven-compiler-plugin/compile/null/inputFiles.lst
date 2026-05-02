@@ -78,7 +78,6 @@ D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\openai\OpenAiChatClient.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\openai\OpenAiHttpClient.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\AlertEntity.java
-D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\CityEntity.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiagnosisEntity.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiseaseEntity.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\EvaluationDifferentialDiagnosisEntity.java

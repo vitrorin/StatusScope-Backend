@@ -31,8 +31,6 @@ public class HospitalGeoContextService {
         context.setHospitalId(hospital.getId());
         context.setMunicipalityId(hospital.getMunicipalityId());
         context.setMunicipalityName(hospital.getMunicipalityName());
-        context.setCityId(hospital.getCityId());
-        context.setCityName(hospital.getCityName());
         context.setStateId(hospital.getStateId());
         context.setStateName(hospital.getStateName());
         context.setLatitude(hospital.getLatitude());

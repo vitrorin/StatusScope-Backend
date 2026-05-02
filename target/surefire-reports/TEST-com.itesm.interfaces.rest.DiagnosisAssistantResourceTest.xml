@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="5.965" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="5.665" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -20,7 +20,7 @@
     <property name="user.country" value="MX"/>
     <property name="groovy.use.classvalue" value="false"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-25.0.3\bin"/>
-    <property name="sun.java.command" value="C:\Users\Alan2\AppData\Local\Temp\surefire5611312184598766510\surefirebooter-20260501174916020_3.jar C:\Users\Alan2\AppData\Local\Temp\surefire5611312184598766510 2026-05-01T17-49-15_930-jvmRun1 surefire-20260501174916020_1tmp surefire_0-20260501174916020_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Alan2\AppData\Local\Temp\surefire3845672074668998095\surefirebooter-20260501212603325_3.jar C:\Users\Alan2\AppData\Local\Temp\surefire3845672074668998095 2026-05-01T21-26-03_240-jvmRun1 surefire-20260501212603325_1tmp surefire_0-20260501212603325_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="maven.home" value="C:\Users\Alan2\.m2\wrapper\dists\apache-maven-3.9.12\59fe215c0ad6947fea90184bf7add084544567b927287592651fda3782e0e798"/>
     <property name="test" value="DiagnosisAssistantResourceTest"/>
@@ -40,7 +40,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="io.netty.allocator.disableCacheFinalizersForFastThreadLocalThreads" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\Alan2\AppData\Local\Temp\surefire5611312184598766510\surefirebooter-20260501174916020_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Alan2\AppData\Local\Temp\surefire3845672074668998095\surefirebooter-20260501212603325_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.3+9-LTS-195"/>
@@ -74,13 +74,13 @@
     <property name="stdin.encoding" value="Cp1252"/>
     <property name="vertx.logger-delegate-factory-class-name" value="io.quarkus.vertx.core.runtime.VertxLogDelegateFactory"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="io.netty.machineId" value="c5:6e:3f:3a:f9:df:51:9b"/>
+    <property name="io.netty.machineId" value="d4:48:56:8c:a1:46:e8:c8"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="shouldReturn401WhenNoToken" classname="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="2.036">
-    <system-out><![CDATA[2026-05-01 17:49:21,824 INFO  [org.hibernate.orm.jpa] (main) HHH008540: Processing PersistenceUnitInfo [name: <default>]
-2026-05-01 17:49:21,989 INFO  [org.hibernate.orm.core] (main) HHH000001: Hibernate ORM core version 7.2.4.Final
-2026-05-01 17:49:22,242 INFO  [org.hibernate.orm.connections.pooling] (main) HHH10001005: Database info:
+  <testcase name="shouldReturn401WhenNoToken" classname="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="1.867">
+    <system-out><![CDATA[2026-05-01 21:26:09,195 INFO  [org.hibernate.orm.jpa] (main) HHH008540: Processing PersistenceUnitInfo [name: <default>]
+2026-05-01 21:26:09,367 INFO  [org.hibernate.orm.core] (main) HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-05-01 21:26:09,593 INFO  [org.hibernate.orm.connections.pooling] (main) HHH10001005: Database info:
 	Database JDBC URL [undefined/unknown]
 	Database driver: undefined/unknown
 	Database dialect: H2Dialect
@@ -92,12 +92,10 @@
 	Pool: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-05-01 17:49:22,490 INFO  [org.hibernate.validator.internal.util.Version] (main) HV000001: Hibernate Validator 9.1.0.Final
-2026-05-01 17:49:22,624 WARN  [org.hibernate.validator.internal.metadata.aggregated.CascadingMetaDataBuilder] (main) HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: messages
+2026-05-01 21:26:09,812 INFO  [org.hibernate.validator.internal.util.Version] (main) HV000001: Hibernate Validator 9.1.0.Final
+2026-05-01 21:26:09,890 WARN  [org.hibernate.validator.internal.metadata.aggregated.CascadingMetaDataBuilder] (main) HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: messages
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m alerts &amp#27;[34mcascade&amp#27;[0m 
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m cities &amp#27;[34mcascade&amp#27;[0m 
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mdrop&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m diagnoses &amp#27;[34mcascade&amp#27;[0m 
 &amp#27;[35m[Hibernate]&amp#27;[0m 
@@ -144,16 +142,6 @@
         id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
         outbreak_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
         message &amp#27;[34mvarchar&amp#27;[0m(512),
-        &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
-    )
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mcreate&amp#27;[0m &amp#27;[34mtable&amp#27;[0m cities (
-        created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        code &amp#27;[34mvarchar&amp#27;[0m(32) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        state_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        name &amp#27;[34mvarchar&amp#27;[0m(128) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
         &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
     )
 &amp#27;[35m[Hibernate]&amp#27;[0m 
@@ -246,8 +234,8 @@
         created_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
         updated_at &amp#27;[34mtimestamp&amp#27;[0m(6) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
         code &amp#27;[34mvarchar&amp#27;[0m(32) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
-        city_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
         id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
+        state_id &amp#27;[34mvarchar&amp#27;[0m(36) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
         name &amp#27;[34mvarchar&amp#27;[0m(128) &amp#27;[34mnot&amp#27;[0m &amp#27;[34mnull&amp#27;[0m,
         &amp#27;[34mprimary&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (id)
     )
@@ -405,11 +393,6 @@
        &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (outbreak_id) 
        &amp#27;[34mreferences&amp#27;[0m outbreaks
 &amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m cities 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKsu54e1tlhaof4oklvv7uphsli 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (state_id) 
-       &amp#27;[34mreferences&amp#27;[0m states
-&amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m diagnoses 
        &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FK6wylprd8tbc36t4pmyf1nhtcj 
        &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (doctor_user_id) 
@@ -471,9 +454,9 @@
        &amp#27;[34mreferences&amp#27;[0m municipalities
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m municipalities 
-       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FK1ee5s60s9hhlvf36j0m464xb 
-       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (city_id) 
-       &amp#27;[34mreferences&amp#27;[0m cities
+       &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FK539bqc43gn4d8uk9dwrph81q0 
+       &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (state_id) 
+       &amp#27;[34mreferences&amp#27;[0m states
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34malter&amp#27;[0m &amp#27;[34mtable&amp#27;[0m &amp#27;[34mif&amp#27;[0m &amp#27;[34mexists&amp#27;[0m outbreaks 
        &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKmhs8btkfolbksy9bi7rgpxrry 
@@ -539,25 +522,24 @@
        &amp#27;[34madd&amp#27;[0m &amp#27;[34mconstraint&amp#27;[0m FKih74rpug03pac4o5mqt12j9cl 
        &amp#27;[34mforeign&amp#27;[0m &amp#27;[34mkey&amp#27;[0m (specialty_id) 
        &amp#27;[34mreferences&amp#27;[0m specialties
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m states (id, code, name, description, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'40000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'NL'&amp#27;[0m,   &amp#27;[36m'Nuevo Leon'&amp#27;[0m,       &amp#27;[36m'Estado de Nuevo Leon'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'CDMX'&amp#27;[0m, &amp#27;[36m'Ciudad de Mexico'&amp#27;[0m, &amp#27;[36m'Entidad federativa Ciudad de Mexico'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'MOR'&amp#27;[0m,  &amp#27;[36m'Morelos'&amp#27;[0m,          &amp#27;[36m'Estado de Morelos'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m cities (id, code, name, state_id, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'43000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'MTY'&amp#27;[0m,  &amp#27;[36m'Monterrey'&amp#27;[0m,        &amp#27;[36m'40000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'43000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'CDMX'&amp#27;[0m, &amp#27;[36m'Ciudad de Mexico'&amp#27;[0m, &amp#27;[36m'40000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'43000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'CUE'&amp#27;[0m,  &amp#27;[36m'Cuernavaca'&amp#27;[0m,       &amp#27;[36m'40000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m municipalities (id, code, name, city_id, latitude, longitude, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'42000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'MTY'&amp#27;[0m, &amp#27;[36m'Monterrey'&amp#27;[0m,   &amp#27;[36m'43000000-0000-0000-0000-000000000001'&amp#27;[0m, 25.6866142, -100.3161126, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'42000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'XOC'&amp#27;[0m, &amp#27;[36m'Xochimilco'&amp#27;[0m,  &amp#27;[36m'43000000-0000-0000-0000-000000000002'&amp#27;[0m, 19.2572310,  -99.1037420, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'42000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'CUE'&amp#27;[0m, &amp#27;[36m'Cuernavaca'&amp#27;[0m,  &amp#27;[36m'43000000-0000-0000-0000-000000000003'&amp#27;[0m, 18.9242095,  -99.2215659, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
+&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m states (id, code, name, description, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'40000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'AGS'&amp#27;[0m,  &amp#27;[36m'Aguascalientes'&amp#27;[0m,   &amp#27;[36m'Estado de Aguascalientes'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'BC'&amp#27;[0m,   &amp#27;[36m'Baja California'&amp#27;[0m,  &amp#27;[36m'Estado de Baja California'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'BCS'&amp#27;[0m,  &amp#27;[36m'Baja California Sur'&amp#27;[0m, &amp#27;[36m'Estado de Baja California Sur'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'CAM'&amp#27;[0m,  &amp#27;[36m'Campeche'&amp#27;[0m,         &amp#27;[36m'Estado de Campeche'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000005'&amp#27;[0m, &amp#27;[36m'COA'&amp#27;[0m,  &amp#27;[36m'Coahuila de Zaragoza'&amp#27;[0m, &amp#27;[36m'Estado de Coahuila de Zaragoza'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000006'&amp#27;[0m, &amp#27;[36m'COL'&amp#27;[0m,  &amp#27;[36m'Colima'&amp#27;[0m,           &amp#27;[36m'Estado de Colima'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000007'&amp#27;[0m, &amp#27;[36m'CHP'&amp#27;[0m,  &amp#27;[36m'Chiapas'&amp#27;[0m,          &amp#27;[36m'Estado de Chiapas'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000008'&amp#27;[0m, &amp#27;[36m'CHH'&amp#27;[0m,  &amp#27;[36m'Chihuahua'&amp#27;[0m,        &amp#27;[36m'Estado de Chihuahua'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000009'&amp#27;[0m, &amp#27;[36m'CDMX'&amp#27;[0m, &amp#27;[36m'Ciudad de Mexico'&amp#27;[0m, &amp#27;[36m'Entidad federativa Ciudad de Mexico'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000010'&amp#27;[0m, &amp#27;[36m'DUR'&amp#27;[0m,  &amp#27;[36m'Durango'&amp#27;[0m,          &amp#27;[36m'Estado de Durango'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000011'&amp#27;[0m, &amp#27;[36m'GUA'&amp#27;[0m,  &amp#27;[36m'Guanajuato'&amp#27;[0m,       &amp#27;[36m'Estado de Guanajuato'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000012'&amp#27;[0m, &amp#27;[36m'GRO'&amp#27;[0m,  &amp#27;[36m'Guerrero'&amp#27;[0m,         &amp#27;[36m'Estado de Guerrero'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000013'&amp#27;[0m, &amp#27;[36m'HID'&amp#27;[0m,  &amp#27;[36m'Hidalgo'&amp#27;[0m,          &amp#27;[36m'Estado de Hidalgo'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000014'&amp#27;[0m, &amp#27;[36m'JAL'&amp#27;[0m,  &amp#27;[36m'Jalisco'&amp#27;[0m,          &amp#27;[36m'Estado de Jalisco'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000015'&amp#27;[0m, &amp#27;[36m'MEX'&amp#27;[0m,  &amp#27;[36m'Mexico'&amp#27;[0m,           &amp#27;[36m'Estado de Mexico'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000016'&amp#27;[0m, &amp#27;[36m'MIC'&amp#27;[0m,  &amp#27;[36m'Michoacan de Ocampo'&amp#27;[0m, &amp#27;[36m'Estado de Michoacan de Ocampo'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000017'&amp#27;[0m, &amp#27;[36m'MOR'&amp#27;[0m,  &amp#27;[36m'Morelos'&amp#27;[0m,          &amp#27;[36m'Estado de Morelos'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000018'&amp#27;[0m, &amp#27;[36m'NAY'&amp#27;[0m,  &amp#27;[36m'Nayarit'&amp#27;[0m,          &amp#27;[36m'Estado de Nayarit'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000019'&amp#27;[0m, &amp#27;[36m'NL'&amp#27;[0m,   &amp#27;[36m'Nuevo Leon'&amp#27;[0m,       &amp#27;[36m'Estado de Nuevo Leon'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000020'&amp#27;[0m, &amp#27;[36m'OAX'&amp#27;[0m,  &amp#27;[36m'Oaxaca'&amp#27;[0m,           &amp#27;[36m'Estado de Oaxaca'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000021'&amp#27;[0m, &amp#27;[36m'PUE'&amp#27;[0m,  &amp#27;[36m'Puebla'&amp#27;[0m,           &amp#27;[36m'Estado de Puebla'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000022'&amp#27;[0m, &amp#27;[36m'QRO'&amp#27;[0m,  &amp#27;[36m'Queretaro'&amp#27;[0m,        &amp#27;[36m'Estado de Queretaro'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000023'&amp#27;[0m, &amp#27;[36m'ROO'&amp#27;[0m,  &amp#27;[36m'Quintana Roo'&amp#27;[0m,     &amp#27;[36m'Estado de Quintana Roo'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000024'&amp#27;[0m, &amp#27;[36m'SLP'&amp#27;[0m,  &amp#27;[36m'San Luis Potosi'&amp#27;[0m,  &amp#27;[36m'Estado de San Luis Potosi'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000025'&amp#27;[0m, &amp#27;[36m'SIN'&amp#27;[0m,  &amp#27;[36m'Sinaloa'&amp#27;[0m,          &amp#27;[36m'Estado de Sinaloa'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000026'&amp#27;[0m, &amp#27;[36m'SON'&amp#27;[0m,  &amp#27;[36m'Sonora'&amp#27;[0m,           &amp#27;[36m'Estado de Sonora'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000027'&amp#27;[0m, &amp#27;[36m'TAB'&amp#27;[0m,  &amp#27;[36m'Tabasco'&amp#27;[0m,          &amp#27;[36m'Estado de Tabasco'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000028'&amp#27;[0m, &amp#27;[36m'TAM'&amp#27;[0m,  &amp#27;[36m'Tamaulipas'&amp#27;[0m,       &amp#27;[36m'Estado de Tamaulipas'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000029'&amp#27;[0m, &amp#27;[36m'TLA'&amp#27;[0m,  &amp#27;[36m'Tlaxcala'&amp#27;[0m,         &amp#27;[36m'Estado de Tlaxcala'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000030'&amp#27;[0m, &amp#27;[36m'VER'&amp#27;[0m,  &amp#27;[36m'Veracruz de Ignacio de la Llave'&amp#27;[0m, &amp#27;[36m'Estado de Veracruz de Ignacio de la Llave'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000031'&amp#27;[0m, &amp#27;[36m'YUC'&amp#27;[0m,  &amp#27;[36m'Yucatan'&amp#27;[0m,          &amp#27;[36m'Estado de Yucatan'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'40000000-0000-0000-0000-000000000032'&amp#27;[0m, &amp#27;[36m'ZAC'&amp#27;[0m,  &amp#27;[36m'Zacatecas'&amp#27;[0m,        &amp#27;[36m'Estado de Zacatecas'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
+&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m municipalities (id, code, name, state_id, latitude, longitude, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'42000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'MTY'&amp#27;[0m, &amp#27;[36m'Monterrey'&amp#27;[0m,   &amp#27;[36m'40000000-0000-0000-0000-000000000019'&amp#27;[0m, 25.6866142, -100.3161126, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'42000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'XOC'&amp#27;[0m, &amp#27;[36m'Xochimilco'&amp#27;[0m,  &amp#27;[36m'40000000-0000-0000-0000-000000000009'&amp#27;[0m, 19.2572310,  -99.1037420, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'42000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'CUE'&amp#27;[0m, &amp#27;[36m'Cuernavaca'&amp#27;[0m,  &amp#27;[36m'40000000-0000-0000-0000-000000000017'&amp#27;[0m, 18.9242095,  -99.2215659, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
 &amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m hospitals (id, code, name, address, phone, invite_code, active, postal_code, bed_count, nurse_count, municipality_id, latitude, longitude, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'30000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'HGZ-21'&amp#27;[0m, &amp#27;[36m'Hospital General Zona 21'&amp#27;[0m, &amp#27;[36m'Av. Principal 100, Monterrey'&amp#27;[0m, &amp#27;[36m'+52 81 0000 0001'&amp#27;[0m, &amp#27;[36m'INVITE-HGZ21'&amp#27;[0m, &amp#27;[34mTRUE&amp#27;[0m, &amp#27;[36m'64000'&amp#27;[0m, 240, 180, &amp#27;[36m'42000000-0000-0000-0000-000000000001'&amp#27;[0m, 25.6866142, -100.3161126, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'30000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'HRE-05'&amp#27;[0m, &amp#27;[36m'Hospital Regional Este'&amp#27;[0m,   &amp#27;[36m'Calle 5 Ote 200, Xochimilco'&amp#27;[0m, &amp#27;[36m'+52 55 0000 0002'&amp#27;[0m, &amp#27;[36m'INVITE-HRE05'&amp#27;[0m, &amp#27;[34mTRUE&amp#27;[0m, &amp#27;[36m'16000'&amp#27;[0m, 320, 240, &amp#27;[36m'42000000-0000-0000-0000-000000000002'&amp#27;[0m, 19.2572310,  -99.1037420, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
 &amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m specialties (id, code, name, description, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'50000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'GEN'&amp#27;[0m,  &amp#27;[36m'General Medicine'&amp#27;[0m,  &amp#27;[36m'&amp#27;[34mPrimary&amp#27;[0m care &amp#27;[34mand&amp#27;[0m general practice'&amp#27;[0m,         &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'50000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'CARD'&amp#27;[0m, &amp#27;[36m'Cardiology'&amp#27;[0m,        &amp#27;[36m'Heart &amp#27;[34mand&amp#27;[0m circulatory conditions'&amp#27;[0m,          &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'50000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'PULM'&amp#27;[0m, &amp#27;[36m'Pulmonology'&amp#27;[0m,       &amp#27;[36m'Respiratory &amp#27;[34msystem&amp#27;[0m'&amp#27;[0m,                        &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'50000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'INF'&amp#27;[0m,  &amp#27;[36m'Infectious Disease'&amp#27;[0m,&amp#27;[36m'Infectious &amp#27;[34mand&amp#27;[0m communicable diseases'&amp#27;[0m,      &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'50000000-0000-0000-0000-000000000005'&amp#27;[0m, &amp#27;[36m'PED'&amp#27;[0m,  &amp#27;[36m'Pediatrics'&amp#27;[0m,        &amp#27;[36m'Care &amp#27;[34mof&amp#27;[0m infants, children, &amp#27;[34mand&amp#27;[0m adolescents'&amp#27;[0m,&amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m diseases (id, code, name, symptoms, primary_specialty_id, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'60000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'FLU-A'&amp#27;[0m,  &amp#27;[36m'Influenza A'&amp#27;[0m,         &amp#27;[36m'Fever, cough, body aches, fatigue'&amp#27;[0m,           &amp#27;[36m'50000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'HTN'&amp#27;[0m,    &amp#27;[36m'Hypertension'&amp#27;[0m,        &amp#27;[36m'Often asymptomatic; headaches, dizziness'&amp#27;[0m,    &amp#27;[36m'50000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'ASTHMA'&amp#27;[0m, &amp#27;[36m'Asthma'&amp#27;[0m,              &amp#27;[36m'Wheezing, shortness &amp#27;[34mof&amp#27;[0m breath, chest tightness'&amp#27;[0m,&amp#27;[36m'50000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'COVID'&amp#27;[0m, &amp#27;[36m'COVID-19'&amp#27;[0m,             &amp#27;[36m'Fever, cough, loss &amp#27;[34mof&amp#27;[0m taste/smell, fatigue'&amp#27;[0m,  &amp#27;[36m'50000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
+&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m diseases (id, code, name, symptoms, primary_specialty_id, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'60000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'FLU-A'&amp#27;[0m,  &amp#27;[36m'Influenza A'&amp#27;[0m,         &amp#27;[36m'Fever, cough, body aches, fatigue'&amp#27;[0m,           &amp#27;[36m'50000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'HTN'&amp#27;[0m,    &amp#27;[36m'Hypertension'&amp#27;[0m,        &amp#27;[36m'Often asymptomatic; headaches, dizziness'&amp#27;[0m,    &amp#27;[36m'50000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'ASTHMA'&amp#27;[0m, &amp#27;[36m'Asthma'&amp#27;[0m,              &amp#27;[36m'Wheezing, shortness &amp#27;[34mof&amp#27;[0m breath, chest tightness'&amp#27;[0m,&amp#27;[36m'50000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'COVID'&amp#27;[0m,  &amp#27;[36m'COVID-19'&amp#27;[0m,            &amp#27;[36m'Fever, cough, loss &amp#27;[34mof&amp#27;[0m taste/smell, fatigue'&amp#27;[0m,  &amp#27;[36m'50000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
 &amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m disease_specialties (disease_id, specialty_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'60000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000003'&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000005'&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000001'&amp#27;[0m)
 &amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m disease_specialties (disease_id, specialty_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'60000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000001'&amp#27;[0m)
 &amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m disease_specialties (disease_id, specialty_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'60000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000005'&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000001'&amp#27;[0m)
 &amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m disease_specialties (disease_id, specialty_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'60000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000003'&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000005'&amp#27;[0m), (&amp#27;[36m'60000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'50000000-0000-0000-0000-000000000001'&amp#27;[0m)
 &amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m roles (id, code, name, description, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'SYSTEM_ADMIN'&amp#27;[0m,   &amp#27;[36m'&amp#27;[34mSystem&amp#27;[0m Administrator'&amp#27;[0m,   &amp#27;[36m'Platform-wide administrative access'&amp#27;[0m,          &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'HOSPITAL_ADMIN'&amp#27;[0m, &amp#27;[36m'Hospital Administrator'&amp#27;[0m, &amp#27;[36m'Administrative access scoped &amp#27;[34mto&amp#27;[0m one hospital'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'DOCTOR'&amp#27;[0m,         &amp#27;[36m'Doctor'&amp#27;[0m,                 &amp#27;[36m'Clinical &amp#27;[34muser&amp#27;[0m scoped &amp#27;[34mto&amp#27;[0m one hospital'&amp#27;[0m,         &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
-&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m privileges (id, code, description, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'10000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'alerts.read'&amp#27;[0m,       &amp#27;[36m'Read alerts'&amp#27;[0m,                &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'alerts.manage'&amp#27;[0m,     &amp#27;[36m'Manage alerts'&amp#27;[0m,              &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'users.read'&amp#27;[0m,        &amp#27;[36m'Read users'&amp#27;[0m,                 &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'users.manage'&amp#27;[0m,      &amp#27;[36m'&amp#27;[34mCreate&amp#27;[0m/&amp#27;[34mupdate&amp#27;[0m users'&amp#27;[0m,        &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000005'&amp#27;[0m, &amp#27;[36m'roles.manage'&amp#27;[0m,      &amp#27;[36m'Manage RBAC roles'&amp#27;[0m,          &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000006'&amp#27;[0m, &amp#27;[36m'diagnosis.&amp#27;[34mcreate&amp#27;[0m'&amp#27;[0m,  &amp#27;[36m'&amp#27;[34mCreate&amp#27;[0m diagnosis entries'&amp#27;[0m,   &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000007'&amp#27;[0m, &amp#27;[36m'hospitals.read'&amp#27;[0m,    &amp#27;[36m'Read hospitals'&amp#27;[0m,             &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000008'&amp#27;[0m, &amp#27;[36m'hospitals.manage'&amp#27;[0m,  &amp#27;[36m'&amp#27;[34mCreate&amp#27;[0m/&amp#27;[34mupdate&amp#27;[0m hospitals'&amp#27;[0m,    &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000009'&amp#27;[0m, &amp#27;[36m'patients.read'&amp#27;[0m,     &amp#27;[36m'Read patients'&amp#27;[0m,              &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000010'&amp#27;[0m, &amp#27;[36m'patients.manage'&amp#27;[0m,   &amp#27;[36m'&amp#27;[34mCreate&amp#27;[0m/&amp#27;[34mupdate&amp#27;[0m patients'&amp#27;[0m,     &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000011'&amp#27;[0m, &amp#27;[36m'diseases.read'&amp#27;[0m,     &amp#27;[36m'Read diseases'&amp#27;[0m,              &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000012'&amp#27;[0m, &amp#27;[36m'diseases.manage'&amp#27;[0m,   &amp#27;[36m'Manage diseases catalog'&amp#27;[0m,    &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000013'&amp#27;[0m, &amp#27;[36m'specialties.read'&amp#27;[0m,  &amp#27;[36m'Read specialties'&amp#27;[0m,           &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000014'&amp#27;[0m, &amp#27;[36m'specialties.manage'&amp#27;[0m,&amp#27;[36m'Manage specialties catalog'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000015'&amp#27;[0m, &amp#27;[36m'outbreaks.read'&amp#27;[0m,    &amp#27;[36m'Read outbreaks'&amp#27;[0m,             &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000016'&amp#27;[0m, &amp#27;[36m'outbreaks.manage'&amp#27;[0m,  &amp#27;[36m'Manage outbreaks'&amp#27;[0m,           &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000017'&amp#27;[0m, &amp#27;[36m'states.read'&amp#27;[0m,      &amp#27;[36m'Read states'&amp#27;[0m,               &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000018'&amp#27;[0m, &amp#27;[36m'states.manage'&amp#27;[0m,    &amp#27;[36m'Manage states'&amp#27;[0m,             &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000019'&amp#27;[0m, &amp#27;[36m'diagnosis.assist'&amp#27;[0m,  &amp#27;[36m'Use the AI diagnosis assistant chat'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
+&amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m privileges (id, code, description, created_at, updated_at) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'10000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'alerts.read'&amp#27;[0m,       &amp#27;[36m'Read alerts'&amp#27;[0m,                &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'alerts.manage'&amp#27;[0m,     &amp#27;[36m'Manage alerts'&amp#27;[0m,              &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'users.read'&amp#27;[0m,        &amp#27;[36m'Read users'&amp#27;[0m,                 &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000004'&amp#27;[0m, &amp#27;[36m'users.manage'&amp#27;[0m,      &amp#27;[36m'&amp#27;[34mCreate&amp#27;[0m/&amp#27;[34mupdate&amp#27;[0m users'&amp#27;[0m,        &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000005'&amp#27;[0m, &amp#27;[36m'roles.manage'&amp#27;[0m,      &amp#27;[36m'Manage RBAC roles'&amp#27;[0m,          &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000006'&amp#27;[0m, &amp#27;[36m'diagnosis.&amp#27;[34mcreate&amp#27;[0m'&amp#27;[0m,  &amp#27;[36m'&amp#27;[34mCreate&amp#27;[0m diagnosis entries'&amp#27;[0m,   &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000007'&amp#27;[0m, &amp#27;[36m'hospitals.read'&amp#27;[0m,    &amp#27;[36m'Read hospitals'&amp#27;[0m,             &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000008'&amp#27;[0m, &amp#27;[36m'hospitals.manage'&amp#27;[0m,  &amp#27;[36m'&amp#27;[34mCreate&amp#27;[0m/&amp#27;[34mupdate&amp#27;[0m hospitals'&amp#27;[0m,    &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000009'&amp#27;[0m, &amp#27;[36m'patients.read'&amp#27;[0m,     &amp#27;[36m'Read patients'&amp#27;[0m,              &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000010'&amp#27;[0m, &amp#27;[36m'patients.manage'&amp#27;[0m,   &amp#27;[36m'&amp#27;[34mCreate&amp#27;[0m/&amp#27;[34mupdate&amp#27;[0m patients'&amp#27;[0m,     &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000011'&amp#27;[0m, &amp#27;[36m'diseases.read'&amp#27;[0m,     &amp#27;[36m'Read diseases'&amp#27;[0m,              &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000012'&amp#27;[0m, &amp#27;[36m'diseases.manage'&amp#27;[0m,   &amp#27;[36m'Manage diseases catalog'&amp#27;[0m,    &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000013'&amp#27;[0m, &amp#27;[36m'specialties.read'&amp#27;[0m,  &amp#27;[36m'Read specialties'&amp#27;[0m,           &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000014'&amp#27;[0m, &amp#27;[36m'specialties.manage'&amp#27;[0m,&amp#27;[36m'Manage specialties catalog'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000015'&amp#27;[0m, &amp#27;[36m'outbreaks.read'&amp#27;[0m,    &amp#27;[36m'Read outbreaks'&amp#27;[0m,             &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000016'&amp#27;[0m, &amp#27;[36m'outbreaks.manage'&amp#27;[0m,  &amp#27;[36m'Manage outbreaks'&amp#27;[0m,           &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000017'&amp#27;[0m, &amp#27;[36m'states.read'&amp#27;[0m,       &amp#27;[36m'Read states'&amp#27;[0m,                &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000018'&amp#27;[0m, &amp#27;[36m'states.manage'&amp#27;[0m,     &amp#27;[36m'Manage states'&amp#27;[0m,              &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m), (&amp#27;[36m'10000000-0000-0000-0000-000000000019'&amp#27;[0m, &amp#27;[36m'diagnosis.assist'&amp#27;[0m,  &amp#27;[36m'Use the AI diagnosis assistant chat'&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m, &amp#27;[34mCURRENT_TIMESTAMP&amp#27;[0m)
 &amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m role_privileges (role_id, privilege_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000001'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000002'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000003'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000004'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000005'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000006'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000007'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000008'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000009'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000010'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000011'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000012'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000013'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000014'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000015'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000016'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000017'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000018'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000001'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000019'&amp#27;[0m)
 &amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m role_privileges (role_id, privilege_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000001'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000002'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000003'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000004'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000007'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000009'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000010'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000011'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000013'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000015'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000016'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000002'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000017'&amp#27;[0m)
 &amp#27;[35m[Hibernate]&amp#27;[0m &amp#27;[34mINSERT&amp#27;[0m &amp#27;[34mINTO&amp#27;[0m role_privileges (role_id, privilege_id) &amp#27;[34mVALUES&amp#27;[0m (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000001'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000006'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000009'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000010'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000011'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000013'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000015'&amp#27;[0m), (&amp#27;[36m'00000000-0000-0000-0000-000000000003'&amp#27;[0m, &amp#27;[36m'10000000-0000-0000-0000-000000000019'&amp#27;[0m)
-2026-05-01 17:49:24,310 INFO  [io.quarkus] (main) statusscope-backend 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.31.3) started in 6.343s. Listening on: http://localhost:8081
-2026-05-01 17:49:24,310 INFO  [io.quarkus] (main) Profile test activated. 
-2026-05-01 17:49:24,310 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, compose, hibernate-orm, hibernate-orm-panache, hibernate-validator, jdbc-h2, jdbc-mysql, narayana-jta, rest, rest-client, rest-client-jackson, rest-jackson, smallrye-context-propagation, vertx]
-2026-05-01 17:49:25,425 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-01 21:26:11,554 INFO  [io.quarkus] (main) statusscope-backend 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.31.3) started in 6.199s. Listening on: http://localhost:8081
+2026-05-01 21:26:11,554 INFO  [io.quarkus] (main) Profile test activated. 
+2026-05-01 21:26:11,554 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, compose, hibernate-orm, hibernate-orm-panache, hibernate-validator, jdbc-h2, jdbc-mysql, narayana-jta, rest, rest-client, rest-client-jackson, rest-jackson, smallrye-context-propagation, vertx]
+2026-05-01 21:26:12,674 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -618,7 +600,7 @@
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-05-01 17:49:25,559 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-01 21:26:12,790 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m re1_0.id,
@@ -669,7 +651,7 @@
         (user_id, role_id) 
     &amp#27;[34mvalues&amp#27;[0m
         (?, ?)
-2026-05-01 17:49:25,631 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-01 21:26:12,860 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -730,7 +712,7 @@
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.id=?
-2026-05-01 17:49:25,641 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-01 21:26:12,871 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -791,7 +773,7 @@
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-05-01 17:49:25,644 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-01 21:26:12,875 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m re1_0.id,
@@ -842,7 +824,7 @@
         (user_id, role_id) 
     &amp#27;[34mvalues&amp#27;[0m
         (?, ?)
-2026-05-01 17:49:25,655 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-01 21:26:12,887 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -933,8 +915,8 @@ WARNING: If a serviceability tool is not in use, please run with -Djdk.instrumen
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
 ]]></system-err>
   </testcase>
-  <testcase name="shouldReturnContextUsedInResponse" classname="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="0.638">
-    <system-out><![CDATA[2026-05-01 17:49:26,770 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+  <testcase name="shouldReturnContextUsedInResponse" classname="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="0.628">
+    <system-out><![CDATA[2026-05-01 21:26:13,848 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -995,7 +977,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-05-01 17:49:26,775 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-01 21:26:13,854 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1071,7 +1053,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
         outbreaks oe1_0 
     &amp#27;[34mwhere&amp#27;[0m
         oe1_0.id=?
-2026-05-01 17:49:26,802 WARN  [org.hibernate.orm.query] (executor-thread-1) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-01 21:26:13,881 WARN  [org.hibernate.orm.query] (executor-thread-1) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1132,16 +1114,16 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-05-01 17:49:26,858 INFO  [com.itesm.infrastructure.security.AuthorizationInterceptor] (executor-thread-1) AUDIT userId=8686c11a-07dc-4276-8ab8-a133981a1bd8 endpoint=DiagnosisAssistantResource.sendMessage decision=ALLOW
+2026-05-01 21:26:13,941 INFO  [com.itesm.infrastructure.security.AuthorizationInterceptor] (executor-thread-1) AUDIT userId=c1f69c5a-97c6-472c-bc55-df81f154ec0e endpoint=DiagnosisAssistantResource.sendMessage decision=ALLOW
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         me1_0.id,
-        me1_0.city_id,
         me1_0.code,
         me1_0.created_at,
         me1_0.latitude,
         me1_0.longitude,
         me1_0.name,
+        me1_0.state_id,
         me1_0.updated_at 
     &amp#27;[34mfrom&amp#27;[0m
         municipalities me1_0 
@@ -1149,18 +1131,6 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
         me1_0.id=?
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
-        ce1_0.id,
-        ce1_0.code,
-        ce1_0.created_at,
-        ce1_0.name,
-        ce1_0.state_id,
-        ce1_0.updated_at 
-    &amp#27;[34mfrom&amp#27;[0m
-        cities ce1_0 
-    &amp#27;[34mwhere&amp#27;[0m
-        ce1_0.id=?
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mselect&amp#27;[0m
         se1_0.id,
         se1_0.code,
         se1_0.created_at,
@@ -1174,27 +1144,15 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         me1_0.id,
-        me1_0.city_id,
         me1_0.code,
         me1_0.created_at,
         me1_0.latitude,
         me1_0.longitude,
         me1_0.name,
+        me1_0.state_id,
         me1_0.updated_at 
     &amp#27;[34mfrom&amp#27;[0m
         municipalities me1_0
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mselect&amp#27;[0m
-        ce1_0.id,
-        ce1_0.code,
-        ce1_0.created_at,
-        ce1_0.name,
-        ce1_0.state_id,
-        ce1_0.updated_at 
-    &amp#27;[34mfrom&amp#27;[0m
-        cities ce1_0 
-    &amp#27;[34mwhere&amp#27;[0m
-        ce1_0.id=?
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         se1_0.id,
@@ -1207,18 +1165,6 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
         states se1_0 
     &amp#27;[34mwhere&amp#27;[0m
         se1_0.id=?
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mselect&amp#27;[0m
-        ce1_0.id,
-        ce1_0.code,
-        ce1_0.created_at,
-        ce1_0.name,
-        ce1_0.state_id,
-        ce1_0.updated_at 
-    &amp#27;[34mfrom&amp#27;[0m
-        cities ce1_0 
-    &amp#27;[34mwhere&amp#27;[0m
-        ce1_0.id=?
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         se1_0.id,
@@ -1262,8 +1208,8 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
         de1_0.id=?
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenCallerIsHospitalAdmin" classname="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="0.034">
-    <system-out><![CDATA[2026-05-01 17:49:27,409 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+  <testcase name="shouldReturn403WhenCallerIsHospitalAdmin" classname="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="0.037">
+    <system-out><![CDATA[2026-05-01 21:26:14,478 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1324,7 +1270,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-05-01 17:49:27,412 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-01 21:26:14,482 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1400,7 +1346,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
         outbreaks oe1_0 
     &amp#27;[34mwhere&amp#27;[0m
         oe1_0.id=?
-2026-05-01 17:49:27,431 WARN  [org.hibernate.orm.query] (executor-thread-1) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-01 21:26:14,502 WARN  [org.hibernate.orm.query] (executor-thread-1) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1461,11 +1407,11 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-05-01 17:49:27,434 INFO  [com.itesm.infrastructure.security.AuthorizationInterceptor] (executor-thread-1) AUDIT userId=52f0364c-ed11-498b-a9f2-e9bad288c6ab endpoint=DiagnosisAssistantResource.sendMessage decision=DENY reason=missing_privilege:diagnosis.assist
+2026-05-01 21:26:14,506 INFO  [com.itesm.infrastructure.security.AuthorizationInterceptor] (executor-thread-1) AUDIT userId=1d73f91b-139c-4ae6-8bce-5ff8932843a0 endpoint=DiagnosisAssistantResource.sendMessage decision=DENY reason=missing_privilege:diagnosis.assist
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn200WithReplyWhenCallerIsDoctor" classname="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="0.049">
-    <system-out><![CDATA[2026-05-01 17:49:27,445 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+  <testcase name="shouldReturn200WithReplyWhenCallerIsDoctor" classname="com.itesm.interfaces.rest.DiagnosisAssistantResourceTest" time="0.053">
+    <system-out><![CDATA[2026-05-01 21:26:14,518 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1526,7 +1472,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-05-01 17:49:27,449 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-01 21:26:14,523 WARN  [org.hibernate.orm.query] (main) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1602,7 +1548,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
         outbreaks oe1_0 
     &amp#27;[34mwhere&amp#27;[0m
         oe1_0.id=?
-2026-05-01 17:49:27,465 WARN  [org.hibernate.orm.query] (executor-thread-1) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-01 21:26:14,543 WARN  [org.hibernate.orm.query] (executor-thread-1) HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         &amp#27;[34mdistinct&amp#27;[0m ue1_0.id,
@@ -1663,16 +1609,16 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
             &amp#27;[34mon&amp#27;[0m h1_0.id=ue1_0.hospital_id 
     &amp#27;[34mwhere&amp#27;[0m
         ue1_0.email=?
-2026-05-01 17:49:27,468 INFO  [com.itesm.infrastructure.security.AuthorizationInterceptor] (executor-thread-1) AUDIT userId=8686c11a-07dc-4276-8ab8-a133981a1bd8 endpoint=DiagnosisAssistantResource.sendMessage decision=ALLOW
+2026-05-01 21:26:14,547 INFO  [com.itesm.infrastructure.security.AuthorizationInterceptor] (executor-thread-1) AUDIT userId=c1f69c5a-97c6-472c-bc55-df81f154ec0e endpoint=DiagnosisAssistantResource.sendMessage decision=ALLOW
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         me1_0.id,
-        me1_0.city_id,
         me1_0.code,
         me1_0.created_at,
         me1_0.latitude,
         me1_0.longitude,
         me1_0.name,
+        me1_0.state_id,
         me1_0.updated_at 
     &amp#27;[34mfrom&amp#27;[0m
         municipalities me1_0 
@@ -1680,18 +1626,6 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
         me1_0.id=?
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
-        ce1_0.id,
-        ce1_0.code,
-        ce1_0.created_at,
-        ce1_0.name,
-        ce1_0.state_id,
-        ce1_0.updated_at 
-    &amp#27;[34mfrom&amp#27;[0m
-        cities ce1_0 
-    &amp#27;[34mwhere&amp#27;[0m
-        ce1_0.id=?
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mselect&amp#27;[0m
         se1_0.id,
         se1_0.code,
         se1_0.created_at,
@@ -1705,27 +1639,15 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         me1_0.id,
-        me1_0.city_id,
         me1_0.code,
         me1_0.created_at,
         me1_0.latitude,
         me1_0.longitude,
         me1_0.name,
+        me1_0.state_id,
         me1_0.updated_at 
     &amp#27;[34mfrom&amp#27;[0m
         municipalities me1_0
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mselect&amp#27;[0m
-        ce1_0.id,
-        ce1_0.code,
-        ce1_0.created_at,
-        ce1_0.name,
-        ce1_0.state_id,
-        ce1_0.updated_at 
-    &amp#27;[34mfrom&amp#27;[0m
-        cities ce1_0 
-    &amp#27;[34mwhere&amp#27;[0m
-        ce1_0.id=?
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         se1_0.id,
@@ -1738,18 +1660,6 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
         states se1_0 
     &amp#27;[34mwhere&amp#27;[0m
         se1_0.id=?
-&amp#27;[35m[Hibernate]&amp#27;[0m 
-    &amp#27;[34mselect&amp#27;[0m
-        ce1_0.id,
-        ce1_0.code,
-        ce1_0.created_at,
-        ce1_0.name,
-        ce1_0.state_id,
-        ce1_0.updated_at 
-    &amp#27;[34mfrom&amp#27;[0m
-        cities ce1_0 
-    &amp#27;[34mwhere&amp#27;[0m
-        ce1_0.id=?
 &amp#27;[35m[Hibernate]&amp#27;[0m 
     &amp#27;[34mselect&amp#27;[0m
         se1_0.id,

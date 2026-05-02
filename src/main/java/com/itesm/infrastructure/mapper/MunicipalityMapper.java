@@ -13,13 +13,9 @@ public final class MunicipalityMapper {
         municipality.setName(entity.getName());
         municipality.setLatitude(entity.getLatitude());
         municipality.setLongitude(entity.getLongitude());
-        if (entity.getCity() != null) {
-            municipality.setCityId(entity.getCity().getId());
-            municipality.setCityName(entity.getCity().getName());
-            if (entity.getCity().getState() != null) {
-                municipality.setStateId(entity.getCity().getState().getId());
-                municipality.setStateName(entity.getCity().getState().getName());
-            }
+        if (entity.getState() != null) {
+            municipality.setStateId(entity.getState().getId());
+            municipality.setStateName(entity.getState().getName());
         }
         return municipality;
     }

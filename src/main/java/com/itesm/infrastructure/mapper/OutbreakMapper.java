@@ -31,14 +31,12 @@ public final class OutbreakMapper {
             o.setMunicipality(municipality);
         }
 
-        if (e.getMunicipality() != null
-                && e.getMunicipality().getCity() != null
-                && e.getMunicipality().getCity().getState() != null) {
+        if (e.getMunicipality() != null && e.getMunicipality().getState() != null) {
             State state = new State();
-            state.setId(e.getMunicipality().getCity().getState().getId());
-            state.setCode(e.getMunicipality().getCity().getState().getCode());
-            state.setName(e.getMunicipality().getCity().getState().getName());
-            state.setDescription(e.getMunicipality().getCity().getState().getDescription());
+            state.setId(e.getMunicipality().getState().getId());
+            state.setCode(e.getMunicipality().getState().getCode());
+            state.setName(e.getMunicipality().getState().getName());
+            state.setDescription(e.getMunicipality().getState().getDescription());
             o.setState(state);
         }
 

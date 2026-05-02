@@ -88,7 +88,6 @@ public class AskDiagnosisAssistantUseCase {
                 .map(o -> new OutbreakSummaryDto(
                         o.getDisease().getName(),
                         o.getMunicipality() == null ? null : o.getMunicipality().getName(),
-                        o.getMunicipality() == null ? null : o.getMunicipality().getCityName(),
                         o.getState() == null ? null : o.getState().getName(),
                         o.getCaseCount(),
                         o.getStartedAt()))
@@ -105,8 +104,6 @@ public class AskDiagnosisAssistantUseCase {
         geoContext.setHospitalId(hospital.getId());
         geoContext.setMunicipalityId(hospital.getMunicipalityId());
         geoContext.setMunicipalityName(hospital.getMunicipalityName());
-        geoContext.setCityId(hospital.getCityId());
-        geoContext.setCityName(hospital.getCityName());
         geoContext.setStateId(hospital.getStateId());
         geoContext.setStateName(hospital.getStateName());
         geoContext.setLatitude(hospital.getLatitude());

@@ -137,7 +137,7 @@ class AskDiagnosisAssistantUseCaseTest {
 
         State state = new State();
         state.setId(stateId);
-        state.setName("Region Norte");
+        state.setName("Nuevo Leon");
 
         Outbreak outbreak = new Outbreak();
         outbreak.setId(UUID.randomUUID());
