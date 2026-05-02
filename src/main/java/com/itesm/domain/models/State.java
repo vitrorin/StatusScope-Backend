@@ -2,7 +2,7 @@ package com.itesm.domain.models;
 
 import java.util.UUID;
 
-public class Region {
+public class State {
     private UUID id;
     private String code;
     private String name;
@@ -19,4 +19,5 @@ public class Region {
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+
 }

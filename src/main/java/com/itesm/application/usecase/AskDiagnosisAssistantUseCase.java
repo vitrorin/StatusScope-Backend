@@ -4,13 +4,14 @@ import com.itesm.application.dto.AssistantContextDto;
 import com.itesm.application.dto.AssistantMessageDto;
 import com.itesm.application.dto.AssistantRequestDto;
 import com.itesm.application.dto.AssistantResponseDto;
+import com.itesm.application.dto.HospitalGeoContextDto;
 import com.itesm.application.dto.OutbreakSummaryDto;
 import com.itesm.application.security.AuthenticatedUserContext;
 import com.itesm.application.security.CurrentUser;
 import com.itesm.application.usecase.exception.NotFoundException;
 import com.itesm.domain.models.Hospital;
 import com.itesm.domain.models.Outbreak;
-import com.itesm.domain.models.Region;
+import com.itesm.domain.models.State;
 import com.itesm.domain.repository.HospitalRepository;
 import com.itesm.domain.repository.OutbreakRepository;
 import com.itesm.infrastructure.llm.LlmChatClient;
@@ -41,6 +42,9 @@ public class AskDiagnosisAssistantUseCase {
     @Inject
     AssistantPromptBuilder promptBuilder;
 
+    @Inject
+    HospitalGeoContextService hospitalGeoContextService;
+
     public AssistantResponseDto execute(AssistantRequestDto request) {
         CurrentUser currentUser = authenticatedUserContext.getCurrentUser();
 
@@ -52,18 +56,24 @@ public class AskDiagnosisAssistantUseCase {
         Hospital hospital = hospitalRepository.findHospitalById(hospitalId)
                 .orElseThrow(() -> new NotFoundException("Hospital not found for id: " + hospitalId));
 
-        UUID regionId = hospital.getRegionId();
+        HospitalGeoContextDto geoContext = hospitalGeoContextService != null
+                ? hospitalGeoContextService.resolve(hospital)
+                : fallbackGeoContext(hospital);
         List<Outbreak> outbreaks = new ArrayList<>();
-        Region region = null;
+        State state = null;
 
-        if (regionId != null) {
-            outbreaks = outbreakRepository.findActiveByRegionId(regionId);
-            if (!outbreaks.isEmpty() && outbreaks.get(0).getRegion() != null) {
-                region = outbreaks.get(0).getRegion();
+        if (geoContext.getIncludedMunicipalityIds() != null && !geoContext.getIncludedMunicipalityIds().isEmpty()) {
+            outbreaks = outbreakRepository.findActiveByMunicipalityIds(geoContext.getIncludedMunicipalityIds());
+            if (!outbreaks.isEmpty() && outbreaks.get(0).getState() != null) {
+                state = outbreaks.get(0).getState();
+            } else {
+                state = new State();
+                state.setId(geoContext.getStateId());
+                state.setName(geoContext.getStateName());
             }
         }
 
-        String systemPrompt = promptBuilder.build(region, outbreaks, request.getPatientContext());
+        String systemPrompt = promptBuilder.build(state, outbreaks, request.getPatientContext(), geoContext.getRadiusKm());
 
         List<ChatMessage> chatMessages = new ArrayList<>();
         chatMessages.add(new ChatMessage("system", systemPrompt));
@@ -77,13 +87,33 @@ public class AskDiagnosisAssistantUseCase {
                 .filter(o -> o.getDisease() != null)
                 .map(o -> new OutbreakSummaryDto(
                         o.getDisease().getName(),
+                        o.getMunicipality() == null ? null : o.getMunicipality().getName(),
+                        o.getMunicipality() == null ? null : o.getMunicipality().getCityName(),
+                        o.getState() == null ? null : o.getState().getName(),
                         o.getCaseCount(),
                         o.getStartedAt()))
                 .collect(Collectors.toList());
 
-        String regionName = region != null ? region.getName() : null;
-        AssistantContextDto contextUsed = new AssistantContextDto(regionName, outbreakSummaries);
+        String stateName = state != null ? state.getName() : null;
+        AssistantContextDto contextUsed = new AssistantContextDto(stateName, outbreakSummaries);
 
         return new AssistantResponseDto(reply, contextUsed);
+    }
+
+    private HospitalGeoContextDto fallbackGeoContext(Hospital hospital) {
+        HospitalGeoContextDto geoContext = new HospitalGeoContextDto();
+        geoContext.setHospitalId(hospital.getId());
+        geoContext.setMunicipalityId(hospital.getMunicipalityId());
+        geoContext.setMunicipalityName(hospital.getMunicipalityName());
+        geoContext.setCityId(hospital.getCityId());
+        geoContext.setCityName(hospital.getCityName());
+        geoContext.setStateId(hospital.getStateId());
+        geoContext.setStateName(hospital.getStateName());
+        geoContext.setLatitude(hospital.getLatitude());
+        geoContext.setLongitude(hospital.getLongitude());
+        geoContext.setRadiusKm(75);
+        geoContext.setIncludedMunicipalityIds(hospital.getMunicipalityId() == null ? List.of() : List.of(hospital.getMunicipalityId()));
+        geoContext.setNearbyStates(List.of());
+        return geoContext;
     }
 }

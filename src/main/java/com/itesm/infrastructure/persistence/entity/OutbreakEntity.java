@@ -26,8 +26,8 @@ public class OutbreakEntity {
     private DiseaseEntity disease;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "region_id", nullable = false)
-    private RegionEntity region;
+    @JoinColumn(name = "municipality_id", nullable = false)
+    private MunicipalityEntity municipality;
 
     @Column(name = "case_count", nullable = false)
     private int caseCount;
@@ -53,8 +53,8 @@ public class OutbreakEntity {
     public DiseaseEntity getDisease() { return disease; }
     public void setDisease(DiseaseEntity disease) { this.disease = disease; }
 
-    public RegionEntity getRegion() { return region; }
-    public void setRegion(RegionEntity region) { this.region = region; }
+    public MunicipalityEntity getMunicipality() { return municipality; }
+    public void setMunicipality(MunicipalityEntity municipality) { this.municipality = municipality; }
 
     public int getCaseCount() { return caseCount; }
     public void setCaseCount(int caseCount) { this.caseCount = caseCount; }

@@ -18,7 +18,20 @@ public final class HospitalMapper {
         h.setPostalCode(e.getPostalCode());
         h.setBedCount(e.getBedCount());
         h.setNurseCount(e.getNurseCount());
-        h.setRegionId(e.getRegion() == null ? null : e.getRegion().getId());
+        h.setLatitude(e.getLatitude());
+        h.setLongitude(e.getLongitude());
+        if (e.getMunicipality() != null) {
+            h.setMunicipalityId(e.getMunicipality().getId());
+            h.setMunicipalityName(e.getMunicipality().getName());
+            if (e.getMunicipality().getCity() != null) {
+                h.setCityId(e.getMunicipality().getCity().getId());
+                h.setCityName(e.getMunicipality().getCity().getName());
+                if (e.getMunicipality().getCity().getState() != null) {
+                    h.setStateId(e.getMunicipality().getCity().getState().getId());
+                    h.setStateName(e.getMunicipality().getCity().getState().getName());
+                }
+            }
+        }
         h.setCreatedAt(e.getCreatedAt());
         h.setUpdatedAt(e.getUpdatedAt());
         return h;
@@ -36,6 +49,8 @@ public final class HospitalMapper {
         e.setPostalCode(h.getPostalCode());
         e.setBedCount(h.getBedCount());
         e.setNurseCount(h.getNurseCount());
+        e.setLatitude(h.getLatitude());
+        e.setLongitude(h.getLongitude());
         e.setCreatedAt(h.getCreatedAt());
         e.setUpdatedAt(h.getUpdatedAt());
         return e;

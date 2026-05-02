@@ -6,7 +6,8 @@ import java.util.UUID;
 public class Outbreak {
     private UUID id;
     private Disease disease;
-    private Region region;
+    private State state;
+    private Municipality municipality;
     private int caseCount;
     private String status;
     private LocalDateTime startedAt;
@@ -18,8 +19,11 @@ public class Outbreak {
     public Disease getDisease() { return disease; }
     public void setDisease(Disease disease) { this.disease = disease; }
 
-    public Region getRegion() { return region; }
-    public void setRegion(Region region) { this.region = region; }
+    public State getState() { return state; }
+    public void setState(State state) { this.state = state; }
+
+    public Municipality getMunicipality() { return municipality; }
+    public void setMunicipality(Municipality municipality) { this.municipality = municipality; }
 
     public int getCaseCount() { return caseCount; }
     public void setCaseCount(int caseCount) { this.caseCount = caseCount; }

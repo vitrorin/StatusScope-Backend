@@ -37,7 +37,6 @@ com\itesm\infrastructure\persistence\entity\HospitalEntity.class
 com\itesm\infrastructure\gemini\dto\GeminiGenerateResponse.class
 com\itesm\application\dto\DiagnosisEvaluationDto.class
 com\itesm\infrastructure\firebase\FirebaseUserService.class
-com\itesm\infrastructure\persistence\entity\RegionEntity.class
 com\itesm\application\dto\AssistantResponseDto.class
 com\itesm\infrastructure\gemini\GeminiHttpClient.class
 com\itesm\infrastructure\persistence\repository\OutbreakRepositoryImpl.class
@@ -75,7 +74,6 @@ com\itesm\application\dto\AssistantRequestDto.class
 com\itesm\application\dto\AssignRoleDto.class
 com\itesm\infrastructure\gemini\GeminiChatStrategy.class
 com\itesm\application\dto\DiagnosisEvaluationEventDto.class
-com\itesm\domain\models\Region.class
 com\itesm\application\dto\UpdateDiagnosisEvaluationStatusDto.class
 com\itesm\infrastructure\mapper\PrivilegeMapper.class
 com\itesm\domain\models\Role.class

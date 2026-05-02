@@ -13,11 +13,11 @@ import com.itesm.infrastructure.persistence.entity.EvaluationDifferentialDiagnos
 import com.itesm.infrastructure.persistence.entity.EvaluationRecommendedTestEntity;
 import com.itesm.infrastructure.persistence.entity.EventEntity;
 import com.itesm.infrastructure.persistence.entity.HospitalEntity;
+import com.itesm.infrastructure.persistence.entity.MunicipalityEntity;
 import com.itesm.infrastructure.persistence.entity.OutbreakEntity;
 import com.itesm.infrastructure.persistence.entity.PatientEntity;
 import com.itesm.infrastructure.persistence.entity.PatientEvaluationEntity;
 import com.itesm.infrastructure.persistence.entity.PatientEvaluationFileEntity;
-import com.itesm.infrastructure.persistence.entity.RegionEntity;
 import com.itesm.infrastructure.persistence.entity.UserEntity;
 import io.quarkus.runtime.StartupEvent;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -117,7 +117,7 @@ public class DevSeeder {
 
     private void seedDiagnosisAssistantFixtures() {
         UUID hospitalId = UUID.fromString("30000000-0000-0000-0000-000000000001");
-        UUID regionId = UUID.fromString("40000000-0000-0000-0000-000000000001");
+        UUID municipalityId = UUID.fromString("42000000-0000-0000-0000-000000000001");
         UUID covidId = UUID.fromString("60000000-0000-0000-0000-000000000004");
         UUID patientId = UUID.fromString("71000000-0000-0000-0000-000000000001");
         UUID evaluationId = UUID.fromString("71000000-0000-0000-0000-000000000101");
@@ -134,7 +134,7 @@ public class DevSeeder {
         }
 
         HospitalEntity hospital = entityManager.getReference(HospitalEntity.class, hospitalId);
-        RegionEntity region = entityManager.getReference(RegionEntity.class, regionId);
+        MunicipalityEntity municipality = entityManager.getReference(MunicipalityEntity.class, municipalityId);
         DiseaseEntity covid = entityManager.getReference(DiseaseEntity.class, covidId);
         UserEntity doctorEntity = entityManager.getReference(UserEntity.class, doctor.getId());
 
@@ -158,7 +158,7 @@ public class DevSeeder {
             OutbreakEntity outbreak = new OutbreakEntity();
             outbreak.setId(outbreakId);
             outbreak.setDisease(covid);
-            outbreak.setRegion(region);
+            outbreak.setMunicipality(municipality);
             outbreak.setCaseCount(12);
             outbreak.setStatus("ACTIVE");
             outbreak.setStartedAt(LocalDateTime.now().minusDays(2));

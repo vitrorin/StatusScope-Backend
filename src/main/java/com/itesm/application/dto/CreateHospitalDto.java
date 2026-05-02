@@ -2,6 +2,9 @@ package com.itesm.application.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
+import java.math.BigDecimal;
+import java.util.UUID;
+
 public class CreateHospitalDto {
     @NotBlank
     private String code;
@@ -12,6 +15,12 @@ public class CreateHospitalDto {
     private String address;
     private String phone;
     private String inviteCode;
+    private String postalCode;
+    private Integer bedCount;
+    private Integer nurseCount;
+    private UUID municipalityId;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
 
     public String getCode() { return code; }
     public void setCode(String code) { this.code = code; }
@@ -27,4 +36,22 @@ public class CreateHospitalDto {
 
     public String getInviteCode() { return inviteCode; }
     public void setInviteCode(String inviteCode) { this.inviteCode = inviteCode; }
+
+    public String getPostalCode() { return postalCode; }
+    public void setPostalCode(String postalCode) { this.postalCode = postalCode; }
+
+    public Integer getBedCount() { return bedCount; }
+    public void setBedCount(Integer bedCount) { this.bedCount = bedCount; }
+
+    public Integer getNurseCount() { return nurseCount; }
+    public void setNurseCount(Integer nurseCount) { this.nurseCount = nurseCount; }
+
+    public UUID getMunicipalityId() { return municipalityId; }
+    public void setMunicipalityId(UUID municipalityId) { this.municipalityId = municipalityId; }
+
+    public BigDecimal getLatitude() { return latitude; }
+    public void setLatitude(BigDecimal latitude) { this.latitude = latitude; }
+
+    public BigDecimal getLongitude() { return longitude; }
+    public void setLongitude(BigDecimal longitude) { this.longitude = longitude; }
 }

@@ -15,8 +15,11 @@ import java.util.stream.Collectors;
 public class OutbreakRepositoryImpl implements OutbreakRepository, PanacheRepositoryBase<OutbreakEntity, UUID> {
 
     @Override
-    public List<Outbreak> findActiveByRegionId(UUID regionId) {
-        return find("status = ?1 and region.id = ?2", "ACTIVE", regionId)
+    public List<Outbreak> findActiveByMunicipalityIds(List<UUID> municipalityIds) {
+        if (municipalityIds == null || municipalityIds.isEmpty()) {
+            return List.of();
+        }
+        return find("status = ?1 and municipality.id in ?2", "ACTIVE", municipalityIds)
                 .stream()
                 .map(OutbreakMapper::toDomain)
                 .collect(Collectors.toList());

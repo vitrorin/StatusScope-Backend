@@ -1,8 +1,9 @@
 package com.itesm.infrastructure.mapper;
 
 import com.itesm.domain.models.Disease;
+import com.itesm.domain.models.Municipality;
 import com.itesm.domain.models.Outbreak;
-import com.itesm.domain.models.Region;
+import com.itesm.domain.models.State;
 import com.itesm.infrastructure.persistence.entity.OutbreakEntity;
 
 public final class OutbreakMapper {
@@ -25,13 +26,20 @@ public final class OutbreakMapper {
             o.setDisease(d);
         }
 
-        if (e.getRegion() != null) {
-            Region r = new Region();
-            r.setId(e.getRegion().getId());
-            r.setCode(e.getRegion().getCode());
-            r.setName(e.getRegion().getName());
-            r.setDescription(e.getRegion().getDescription());
-            o.setRegion(r);
+        if (e.getMunicipality() != null) {
+            Municipality municipality = MunicipalityMapper.toDomain(e.getMunicipality());
+            o.setMunicipality(municipality);
+        }
+
+        if (e.getMunicipality() != null
+                && e.getMunicipality().getCity() != null
+                && e.getMunicipality().getCity().getState() != null) {
+            State state = new State();
+            state.setId(e.getMunicipality().getCity().getState().getId());
+            state.setCode(e.getMunicipality().getCity().getState().getCode());
+            state.setName(e.getMunicipality().getCity().getState().getName());
+            state.setDescription(e.getMunicipality().getCity().getState().getDescription());
+            o.setState(state);
         }
 
         return o;

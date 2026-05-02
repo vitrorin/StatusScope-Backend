@@ -7,8 +7,8 @@ import com.itesm.domain.repository.RoleRepository;
 import com.itesm.domain.repository.UserRepository;
 import com.itesm.infrastructure.llm.LlmChatClient;
 import com.itesm.infrastructure.persistence.entity.DiseaseEntity;
+import com.itesm.infrastructure.persistence.entity.MunicipalityEntity;
 import com.itesm.infrastructure.persistence.entity.OutbreakEntity;
-import com.itesm.infrastructure.persistence.entity.RegionEntity;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
@@ -33,7 +33,7 @@ class DiagnosisAssistantResourceTest {
     private static final String DOCTOR_EMAIL = "diagtest-doctor@statusscope.local";
     private static final String ADMIN_EMAIL = "diagtest-admin@statusscope.local";
     private static final UUID HOSPITAL_ID = UUID.fromString("30000000-0000-0000-0000-000000000001");
-    private static final UUID REGION_ID = UUID.fromString("40000000-0000-0000-0000-000000000001");
+    private static final UUID MUNICIPALITY_ID = UUID.fromString("42000000-0000-0000-0000-000000000001");
     private static final UUID DISEASE_ID = UUID.fromString("60000000-0000-0000-0000-000000000004");
     private static final UUID OUTBREAK_ID = UUID.fromString("81000000-0000-0000-0000-000000000001");
 
@@ -83,12 +83,12 @@ class DiagnosisAssistantResourceTest {
 
         if (entityManager.find(OutbreakEntity.class, OUTBREAK_ID) == null) {
             DiseaseEntity disease = entityManager.getReference(DiseaseEntity.class, DISEASE_ID);
-            RegionEntity region = entityManager.getReference(RegionEntity.class, REGION_ID);
+            MunicipalityEntity municipality = entityManager.getReference(MunicipalityEntity.class, MUNICIPALITY_ID);
 
             OutbreakEntity outbreak = new OutbreakEntity();
             outbreak.setId(OUTBREAK_ID);
             outbreak.setDisease(disease);
-            outbreak.setRegion(region);
+            outbreak.setMunicipality(municipality);
             outbreak.setCaseCount(12);
             outbreak.setStatus("ACTIVE");
             outbreak.setStartedAt(LocalDateTime.now().minusDays(3));
@@ -148,7 +148,7 @@ class DiagnosisAssistantResourceTest {
                 .then()
                 .statusCode(200)
                 .body("contextUsed", notNullValue())
-                .body("contextUsed.regionName", notNullValue())
+                .body("contextUsed.stateName", notNullValue())
                 .body("contextUsed.outbreaks[0].diseaseName", equalTo("COVID-19"))
                 .body("contextUsed.outbreaks[0].caseCount", equalTo(12));
     }

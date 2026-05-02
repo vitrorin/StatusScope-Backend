@@ -1,12 +1,25 @@
--- Regions
-INSERT INTO regions (id, code, name, description, created_at, updated_at) VALUES
-('40000000-0000-0000-0000-000000000001', 'NORTE',  'Región Norte',  'Monterrey y zona metropolitana', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('40000000-0000-0000-0000-000000000002', 'CENTRO', 'Región Centro', 'Ciudad de México y zona metropolitana', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+-- states represent states / federal entities.
+INSERT INTO states (id, code, name, description, created_at, updated_at) VALUES
+('40000000-0000-0000-0000-000000000001', 'NL',   'Nuevo Leon',       'Estado de Nuevo Leon', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000002', 'CDMX', 'Ciudad de Mexico', 'Entidad federativa Ciudad de Mexico', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000003', 'MOR',  'Morelos',          'Estado de Morelos', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- Hospitals
-INSERT INTO hospitals (id, code, name, address, phone, invite_code, active, postal_code, bed_count, nurse_count, region_id, created_at, updated_at) VALUES
-('30000000-0000-0000-0000-000000000001', 'HGZ-21', 'Hospital General Zona 21', 'Av. Principal 100, Monterrey', '+52 81 0000 0001', 'INVITE-HGZ21', TRUE, '64000', 240, 180, '40000000-0000-0000-0000-000000000001', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('30000000-0000-0000-0000-000000000002', 'HRE-05', 'Hospital Regional Este',   'Calle 5 Ote 200, CDMX',       '+52 55 0000 0002', 'INVITE-HRE05', TRUE, '06800', 320, 240, '40000000-0000-0000-0000-000000000002', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+-- Cities belong to a state.
+INSERT INTO cities (id, code, name, state_id, created_at, updated_at) VALUES
+('43000000-0000-0000-0000-000000000001', 'MTY',  'Monterrey',        '40000000-0000-0000-0000-000000000001', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('43000000-0000-0000-0000-000000000002', 'CDMX', 'Ciudad de Mexico', '40000000-0000-0000-0000-000000000002', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('43000000-0000-0000-0000-000000000003', 'CUE',  'Cuernavaca',       '40000000-0000-0000-0000-000000000003', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- Municipalities belong to a city.
+INSERT INTO municipalities (id, code, name, city_id, latitude, longitude, created_at, updated_at) VALUES
+('42000000-0000-0000-0000-000000000001', 'MTY', 'Monterrey',   '43000000-0000-0000-0000-000000000001', 25.6866142, -100.3161126, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('42000000-0000-0000-0000-000000000002', 'XOC', 'Xochimilco',  '43000000-0000-0000-0000-000000000002', 19.2572310,  -99.1037420, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('42000000-0000-0000-0000-000000000003', 'CUE', 'Cuernavaca',  '43000000-0000-0000-0000-000000000003', 18.9242095,  -99.2215659, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- Hospitals store their municipality and coordinates. State and metropolitan area are derived.
+INSERT INTO hospitals (id, code, name, address, phone, invite_code, active, postal_code, bed_count, nurse_count, municipality_id, latitude, longitude, created_at, updated_at) VALUES
+('30000000-0000-0000-0000-000000000001', 'HGZ-21', 'Hospital General Zona 21', 'Av. Principal 100, Monterrey', '+52 81 0000 0001', 'INVITE-HGZ21', TRUE, '64000', 240, 180, '42000000-0000-0000-0000-000000000001', 25.6866142, -100.3161126, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('30000000-0000-0000-0000-000000000002', 'HRE-05', 'Hospital Regional Este',   'Calle 5 Ote 200, Xochimilco', '+52 55 0000 0002', 'INVITE-HRE05', TRUE, '16000', 320, 240, '42000000-0000-0000-0000-000000000002', 19.2572310,  -99.1037420, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Specialties
 INSERT INTO specialties (id, code, name, description, created_at, updated_at) VALUES
@@ -23,7 +36,7 @@ INSERT INTO diseases (id, code, name, symptoms, primary_specialty_id, created_at
 ('60000000-0000-0000-0000-000000000003', 'ASTHMA', 'Asthma',              'Wheezing, shortness of breath, chest tightness','50000000-0000-0000-0000-000000000003', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('60000000-0000-0000-0000-000000000004', 'COVID', 'COVID-19',             'Fever, cough, loss of taste/smell, fatigue',  '50000000-0000-0000-0000-000000000004', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- Disease ↔ additional specialties (M:N — primary specialty stays on diseases.primary_specialty_id)
+-- Disease additional specialties (M:N - primary specialty stays on diseases.primary_specialty_id)
 -- Influenza A: also treatable by Pulmonology, Pediatrics, General Medicine
 INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
 ('60000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000003'),
@@ -66,8 +79,8 @@ INSERT INTO privileges (id, code, description, created_at, updated_at) VALUES
 ('10000000-0000-0000-0000-000000000014', 'specialties.manage','Manage specialties catalog', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000015', 'outbreaks.read',    'Read outbreaks',             CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000016', 'outbreaks.manage',  'Manage outbreaks',           CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('10000000-0000-0000-0000-000000000017', 'regions.read',      'Read regions',               CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('10000000-0000-0000-0000-000000000018', 'regions.manage',    'Manage regions',             CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('10000000-0000-0000-0000-000000000017', 'states.read',      'Read states',               CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('10000000-0000-0000-0000-000000000018', 'states.manage',    'Manage states',             CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000019', 'diagnosis.assist',  'Use the AI diagnosis assistant chat', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- SYSTEM_ADMIN: everything
@@ -92,8 +105,7 @@ INSERT INTO role_privileges (role_id, privilege_id) VALUES
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000018'),
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000019');
 
--- HOSPITAL_ADMIN: hospital-scoped clinical + admin (no roles.manage, no hospitals.manage,
---                 no diseases/specialties/regions catalog management)
+-- HOSPITAL_ADMIN: hospital-scoped clinical + admin.
 INSERT INTO role_privileges (role_id, privilege_id) VALUES
 ('00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000001'),
 ('00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000002'),
