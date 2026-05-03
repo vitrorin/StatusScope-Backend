@@ -26,6 +26,7 @@ public class CreateHospitalUseCase {
         hospital.setInviteCode(dto.getInviteCode());
         hospital.setPostalCode(dto.getPostalCode());
         hospital.setBedCount(dto.getBedCount());
+        hospital.setDoctorCount(dto.getDoctorCount());
         hospital.setNurseCount(dto.getNurseCount());
         hospital.setMunicipalityId(dto.getMunicipalityId());
         hospital.setLatitude(dto.getLatitude());

@@ -38,8 +38,8 @@ class AskDiagnosisAssistantUseCaseTest {
     private LlmChatClient llmChatClient;
 
     private final UUID hospitalId = UUID.fromString("30000000-0000-0000-0000-000000000001");
-    private final UUID stateId = UUID.fromString("40000000-0000-0000-0000-000000000001");
-    private final UUID municipalityId = UUID.fromString("42000000-0000-0000-0000-000000000001");
+    private final UUID stateId = UUID.fromString("40000000-0000-0000-0000-000000000019");
+    private final UUID municipalityId = UUID.fromString("42000000-0000-0000-0000-000000001003");
 
     @BeforeEach
     void setUp() {

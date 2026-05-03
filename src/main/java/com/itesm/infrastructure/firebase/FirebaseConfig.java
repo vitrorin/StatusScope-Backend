@@ -23,6 +23,10 @@ public class FirebaseConfig {
 
     @PostConstruct
     void init() {
+        ensureInitialized();
+    }
+
+    public synchronized void ensureInitialized() {
         try {
             if (FirebaseApp.getApps().isEmpty()) {
                 InputStream serviceAccount;

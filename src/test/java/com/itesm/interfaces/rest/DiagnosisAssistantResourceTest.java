@@ -33,7 +33,7 @@ class DiagnosisAssistantResourceTest {
     private static final String DOCTOR_EMAIL = "diagtest-doctor@statusscope.local";
     private static final String ADMIN_EMAIL = "diagtest-admin@statusscope.local";
     private static final UUID HOSPITAL_ID = UUID.fromString("30000000-0000-0000-0000-000000000001");
-    private static final UUID MUNICIPALITY_ID = UUID.fromString("42000000-0000-0000-0000-000000000001");
+    private static final UUID MUNICIPALITY_ID = UUID.fromString("42000000-0000-0000-0000-000000001003");
     private static final UUID DISEASE_ID = UUID.fromString("60000000-0000-0000-0000-000000000004");
     private static final UUID OUTBREAK_ID = UUID.fromString("81000000-0000-0000-0000-000000000001");
 

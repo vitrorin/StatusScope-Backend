@@ -33,17 +33,6 @@ INSERT INTO states (id, code, name, description, created_at, updated_at) VALUES
 ('40000000-0000-0000-0000-000000000031', 'YUC',  'Yucatan',          'Estado de Yucatan', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('40000000-0000-0000-0000-000000000032', 'ZAC',  'Zacatecas',        'Estado de Zacatecas', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- Municipalities belong directly to a state.
-INSERT INTO municipalities (id, code, name, state_id, latitude, longitude, created_at, updated_at) VALUES
-('42000000-0000-0000-0000-000000000001', 'MTY', 'Monterrey',   '40000000-0000-0000-0000-000000000019', 25.6866142, -100.3161126, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('42000000-0000-0000-0000-000000000002', 'XOC', 'Xochimilco',  '40000000-0000-0000-0000-000000000009', 19.2572310,  -99.1037420, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('42000000-0000-0000-0000-000000000003', 'CUE', 'Cuernavaca',  '40000000-0000-0000-0000-000000000017', 18.9242095,  -99.2215659, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
--- Hospitals store their municipality and coordinates. State is derived.
-INSERT INTO hospitals (id, code, name, address, phone, invite_code, active, postal_code, bed_count, nurse_count, municipality_id, latitude, longitude, created_at, updated_at) VALUES
-('30000000-0000-0000-0000-000000000001', 'HGZ-21', 'Hospital General Zona 21', 'Av. Principal 100, Monterrey', '+52 81 0000 0001', 'INVITE-HGZ21', TRUE, '64000', 240, 180, '42000000-0000-0000-0000-000000000001', 25.6866142, -100.3161126, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('30000000-0000-0000-0000-000000000002', 'HRE-05', 'Hospital Regional Este',   'Calle 5 Ote 200, Xochimilco', '+52 55 0000 0002', 'INVITE-HRE05', TRUE, '16000', 320, 240, '42000000-0000-0000-0000-000000000002', 19.2572310,  -99.1037420, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
 -- Specialties
 INSERT INTO specialties (id, code, name, description, created_at, updated_at) VALUES
 ('50000000-0000-0000-0000-000000000001', 'GEN',  'General Medicine',  'Primary care and general practice',         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),

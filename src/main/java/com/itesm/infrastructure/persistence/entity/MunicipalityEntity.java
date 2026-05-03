@@ -22,7 +22,7 @@ public class MunicipalityEntity {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
-    @Column(nullable = false, length = 32)
+    @Column(nullable = false, unique = true, length = 32)
     private String code;
 
     @Column(nullable = false, length = 128)

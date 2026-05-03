@@ -14,6 +14,7 @@ public class Hospital {
     private boolean active;
     private String postalCode;
     private Integer bedCount;
+    private Integer doctorCount;
     private Integer nurseCount;
     private UUID municipalityId;
     private String municipalityName;
@@ -50,6 +51,9 @@ public class Hospital {
 
     public Integer getBedCount() { return bedCount; }
     public void setBedCount(Integer bedCount) { this.bedCount = bedCount; }
+
+    public Integer getDoctorCount() { return doctorCount; }
+    public void setDoctorCount(Integer doctorCount) { this.doctorCount = doctorCount; }
 
     public Integer getNurseCount() { return nurseCount; }
     public void setNurseCount(Integer nurseCount) { this.nurseCount = nurseCount; }

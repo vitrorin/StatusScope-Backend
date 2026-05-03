@@ -17,6 +17,7 @@ public class CreateHospitalDto {
     private String inviteCode;
     private String postalCode;
     private Integer bedCount;
+    private Integer doctorCount;
     private Integer nurseCount;
     private UUID municipalityId;
     private BigDecimal latitude;
@@ -42,6 +43,9 @@ public class CreateHospitalDto {
 
     public Integer getBedCount() { return bedCount; }
     public void setBedCount(Integer bedCount) { this.bedCount = bedCount; }
+
+    public Integer getDoctorCount() { return doctorCount; }
+    public void setDoctorCount(Integer doctorCount) { this.doctorCount = doctorCount; }
 
     public Integer getNurseCount() { return nurseCount; }
     public void setNurseCount(Integer nurseCount) { this.nurseCount = nurseCount; }

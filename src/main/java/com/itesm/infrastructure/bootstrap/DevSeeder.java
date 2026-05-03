@@ -7,6 +7,7 @@ import com.itesm.domain.models.UserStatus;
 import com.itesm.domain.repository.HospitalRepository;
 import com.itesm.domain.repository.RoleRepository;
 import com.itesm.domain.repository.UserRepository;
+import com.itesm.infrastructure.firebase.FirebaseConfig;
 import com.itesm.infrastructure.firebase.FirebaseUserService;
 import com.itesm.infrastructure.persistence.entity.DiseaseEntity;
 import com.itesm.infrastructure.persistence.entity.EvaluationDifferentialDiagnosisEntity;
@@ -20,8 +21,10 @@ import com.itesm.infrastructure.persistence.entity.PatientEvaluationEntity;
 import com.itesm.infrastructure.persistence.entity.PatientEvaluationFileEntity;
 import com.itesm.infrastructure.persistence.entity.UserEntity;
 import io.quarkus.runtime.StartupEvent;
+import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -52,14 +55,18 @@ public class DevSeeder {
     FirebaseUserService firebaseUserService;
 
     @Inject
+    Instance<FirebaseConfig> firebaseConfig;
+
+    @Inject
     EntityManager entityManager;
 
     @ConfigProperty(name = "quarkus.profile")
     String profile;
 
     @Transactional
-    void onStart(@Observes StartupEvent ev) {
+    void onStart(@Observes @Priority(20) StartupEvent ev) {
         if (!"dev".equals(profile)) return;
+        ensureFirebaseInitialized();
         if (userRepository.findByEmail("admin@statusscope.local").isPresent()) return; // idempotent
 
         seedUser("admin@statusscope.local",       "System Admin",    null,
@@ -77,6 +84,12 @@ public class DevSeeder {
                 UUID.fromString("30000000-0000-0000-0000-000000000002"),
                 UUID.fromString("00000000-0000-0000-0000-000000000003"));
         seedDiagnosisAssistantFixtures();
+    }
+
+    private void ensureFirebaseInitialized() {
+        if (firebaseConfig.isResolvable()) {
+            firebaseConfig.get().ensureInitialized();
+        }
     }
 
     private void seedUser(String email, String fullName, UUID hospitalId, UUID roleId) {
@@ -117,7 +130,7 @@ public class DevSeeder {
 
     private void seedDiagnosisAssistantFixtures() {
         UUID hospitalId = UUID.fromString("30000000-0000-0000-0000-000000000001");
-        UUID municipalityId = UUID.fromString("42000000-0000-0000-0000-000000000001");
+        UUID municipalityId = UUID.fromString("42000000-0000-0000-0000-000000001003");
         UUID covidId = UUID.fromString("60000000-0000-0000-0000-000000000004");
         UUID patientId = UUID.fromString("71000000-0000-0000-0000-000000000001");
         UUID evaluationId = UUID.fromString("71000000-0000-0000-0000-000000000101");

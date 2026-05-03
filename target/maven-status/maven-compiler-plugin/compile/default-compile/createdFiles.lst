@@ -75,6 +75,7 @@ com\itesm\infrastructure\mapper\MunicipalityMapper.class
 com\itesm\domain\repository\MunicipalityRepository.class
 com\itesm\infrastructure\persistence\entity\PatientEvaluationEntity.class
 com\itesm\application\dto\AssistantRequestDto.class
+com\itesm\infrastructure\bootstrap\DataMigrationRunner.class
 com\itesm\application\dto\AssignRoleDto.class
 com\itesm\infrastructure\gemini\GeminiChatStrategy.class
 com\itesm\application\dto\DiagnosisEvaluationEventDto.class

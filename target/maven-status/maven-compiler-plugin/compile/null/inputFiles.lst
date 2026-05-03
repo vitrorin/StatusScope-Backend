@@ -54,6 +54,7 @@ D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\domain\reposit
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\domain\repository\OutbreakRepository.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\domain\repository\RoleRepository.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\domain\repository\UserRepository.java
+D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\bootstrap\DataMigrationRunner.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\bootstrap\DevSeeder.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\firebase\FirebaseConfig.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\firebase\FirebaseUserService.java

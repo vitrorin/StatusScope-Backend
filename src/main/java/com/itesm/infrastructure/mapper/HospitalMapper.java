@@ -17,6 +17,7 @@ public final class HospitalMapper {
         h.setActive(e.isActive());
         h.setPostalCode(e.getPostalCode());
         h.setBedCount(e.getBedCount());
+        h.setDoctorCount(e.getDoctorCount());
         h.setNurseCount(e.getNurseCount());
         h.setLatitude(e.getLatitude());
         h.setLongitude(e.getLongitude());
@@ -44,6 +45,7 @@ public final class HospitalMapper {
         e.setActive(h.isActive());
         e.setPostalCode(h.getPostalCode());
         e.setBedCount(h.getBedCount());
+        e.setDoctorCount(h.getDoctorCount());
         e.setNurseCount(h.getNurseCount());
         e.setLatitude(h.getLatitude());
         e.setLongitude(h.getLongitude());

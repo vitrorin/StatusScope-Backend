@@ -46,6 +46,9 @@ public class HospitalEntity {
     @Column(name = "bed_count")
     private Integer bedCount;
 
+    @Column(name = "doctor_count")
+    private Integer doctorCount;
+
     @Column(name = "nurse_count")
     private Integer nurseCount;
 
@@ -91,6 +94,9 @@ public class HospitalEntity {
 
     public Integer getBedCount() { return bedCount; }
     public void setBedCount(Integer bedCount) { this.bedCount = bedCount; }
+
+    public Integer getDoctorCount() { return doctorCount; }
+    public void setDoctorCount(Integer doctorCount) { this.doctorCount = doctorCount; }
 
     public Integer getNurseCount() { return nurseCount; }
     public void setNurseCount(Integer nurseCount) { this.nurseCount = nurseCount; }
