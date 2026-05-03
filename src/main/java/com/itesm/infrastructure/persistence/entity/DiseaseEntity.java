@@ -4,11 +4,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -31,11 +33,8 @@ public class DiseaseEntity {
     @Column(nullable = false, length = 128)
     private String name;
 
-    @Column(length = 1024)
-    private String symptoms;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "primary_specialty_id", nullable = false)
+    @JoinColumn(name = "specialty_id", nullable = false)
     private SpecialtyEntity primarySpecialty;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -45,6 +44,19 @@ public class DiseaseEntity {
             inverseJoinColumns = @JoinColumn(name = "specialty_id")
     )
     private Set<SpecialtyEntity> specialties = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "disease_symptoms",
+            joinColumns = @JoinColumn(name = "disease_id"),
+            inverseJoinColumns = @JoinColumn(name = "symptom_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"disease_id", "symptom_id"}),
+            indexes = {
+                    @Index(name = "idx_disease_symptoms_disease", columnList = "disease_id"),
+                    @Index(name = "idx_disease_symptoms_symptom", columnList = "symptom_id")
+            }
+    )
+    private Set<SymptomEntity> symptoms = new HashSet<>();
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -61,14 +73,14 @@ public class DiseaseEntity {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public String getSymptoms() { return symptoms; }
-    public void setSymptoms(String symptoms) { this.symptoms = symptoms; }
-
     public SpecialtyEntity getPrimarySpecialty() { return primarySpecialty; }
     public void setPrimarySpecialty(SpecialtyEntity primarySpecialty) { this.primarySpecialty = primarySpecialty; }
 
     public Set<SpecialtyEntity> getSpecialties() { return specialties; }
     public void setSpecialties(Set<SpecialtyEntity> specialties) { this.specialties = specialties; }
+
+    public Set<SymptomEntity> getSymptoms() { return symptoms; }
+    public void setSymptoms(Set<SymptomEntity> symptoms) { this.symptoms = symptoms; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }

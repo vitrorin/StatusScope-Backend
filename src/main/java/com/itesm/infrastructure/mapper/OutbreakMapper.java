@@ -5,6 +5,9 @@ import com.itesm.domain.models.Municipality;
 import com.itesm.domain.models.Outbreak;
 import com.itesm.domain.models.State;
 import com.itesm.infrastructure.persistence.entity.OutbreakEntity;
+import com.itesm.infrastructure.persistence.entity.SymptomEntity;
+
+import java.util.stream.Collectors;
 
 public final class OutbreakMapper {
     private OutbreakMapper() {}
@@ -22,7 +25,10 @@ public final class OutbreakMapper {
             d.setId(e.getDisease().getId());
             d.setCode(e.getDisease().getCode());
             d.setName(e.getDisease().getName());
-            d.setSymptoms(e.getDisease().getSymptoms());
+            d.setSymptoms(e.getDisease().getSymptoms().stream()
+                    .map(SymptomEntity::getName)
+                    .sorted()
+                    .collect(Collectors.joining(", ")));
             o.setDisease(d);
         }
 

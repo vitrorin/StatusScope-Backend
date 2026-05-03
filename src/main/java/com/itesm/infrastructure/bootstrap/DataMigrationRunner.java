@@ -41,7 +41,7 @@ public class DataMigrationRunner {
                 return;
             }
 
-            statement.executeUpdate("delete from flyway_schema_history where version in ('1', '2')");
+            statement.executeUpdate("delete from flyway_schema_history where version is not null and version <> '0'");
             LOG.info("DataMigrationRunner: reset catalog migration history after schema recreation");
         } catch (SQLException e) {
             throw new IllegalStateException("Could not prepare data migration history", e);

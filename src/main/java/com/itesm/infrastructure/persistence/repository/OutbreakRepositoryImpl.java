@@ -19,7 +19,20 @@ public class OutbreakRepositoryImpl implements OutbreakRepository, PanacheReposi
         if (municipalityIds == null || municipalityIds.isEmpty()) {
             return List.of();
         }
-        return find("status = ?1 and municipality.id in ?2", "ACTIVE", municipalityIds)
+        return getEntityManager()
+                .createQuery("""
+                        select distinct o
+                        from OutbreakEntity o
+                        join fetch o.disease d
+                        left join fetch d.symptoms
+                        join fetch o.municipality m
+                        join fetch m.state
+                        where o.status = :status
+                          and m.id in :municipalityIds
+                        """, OutbreakEntity.class)
+                .setParameter("status", "ACTIVE")
+                .setParameter("municipalityIds", municipalityIds)
+                .getResultList()
                 .stream()
                 .map(OutbreakMapper::toDomain)
                 .collect(Collectors.toList());

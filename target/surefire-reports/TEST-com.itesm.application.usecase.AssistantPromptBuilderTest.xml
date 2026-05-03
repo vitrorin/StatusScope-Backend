@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.itesm.application.usecase.AssistantPromptBuilderTest" time="0.015" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.itesm.application.usecase.AssistantPromptBuilderTest" time="0.021" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="MX"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-25.0.3\bin"/>
-    <property name="sun.java.command" value="C:\Users\Alan2\AppData\Local\Temp\surefire811503049278678198\surefirebooter-20260502201215897_3.jar C:\Users\Alan2\AppData\Local\Temp\surefire811503049278678198 2026-05-02T20-12-15_795-jvmRun1 surefire-20260502201215897_1tmp surefire_0-20260502201215897_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Alan2\AppData\Local\Temp\surefire989777999312194984\surefirebooter-20260503072500828_3.jar C:\Users\Alan2\AppData\Local\Temp\surefire989777999312194984 2026-05-03T07-25-00_733-jvmRun1 surefire-20260503072500828_1tmp surefire_0-20260503072500828_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="maven.home" value="C:\Users\Alan2\.m2\wrapper\dists\apache-maven-3.9.12\59fe215c0ad6947fea90184bf7add084544567b927287592651fda3782e0e798"/>
     <property name="test" value="AskDiagnosisAssistantUseCaseTest,AssistantPromptBuilderTest"/>
@@ -33,7 +33,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Alan2\AppData\Local\Temp\surefire811503049278678198\surefirebooter-20260502201215897_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Alan2\AppData\Local\Temp\surefire989777999312194984\surefirebooter-20260503072500828_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.3+9-LTS-195"/>
@@ -66,8 +66,8 @@
     <property name="java.class.version" value="69.0"/>
   </properties>
   <testcase name="shouldOmitOutbreakBlockWhenListEmpty" classname="com.itesm.application.usecase.AssistantPromptBuilderTest" time="0.003"/>
-  <testcase name="shouldIncludePatientContextWhenProvided" classname="com.itesm.application.usecase.AssistantPromptBuilderTest" time="0.003"/>
-  <testcase name="shouldContainStateNameInPrompt" classname="com.itesm.application.usecase.AssistantPromptBuilderTest" time="0.002"/>
-  <testcase name="shouldContainDiseaseNameWhenOutbreakPresent" classname="com.itesm.application.usecase.AssistantPromptBuilderTest" time="0.001"/>
-  <testcase name="shouldNotLeakOutbreaksFromOtherStates" classname="com.itesm.application.usecase.AssistantPromptBuilderTest" time="0.001"/>
+  <testcase name="shouldIncludePatientContextWhenProvided" classname="com.itesm.application.usecase.AssistantPromptBuilderTest" time="0.004"/>
+  <testcase name="shouldContainStateNameInPrompt" classname="com.itesm.application.usecase.AssistantPromptBuilderTest" time="0.001"/>
+  <testcase name="shouldContainDiseaseNameWhenOutbreakPresent" classname="com.itesm.application.usecase.AssistantPromptBuilderTest" time="0.002"/>
+  <testcase name="shouldNotLeakOutbreaksFromOtherStates" classname="com.itesm.application.usecase.AssistantPromptBuilderTest" time="0.003"/>
 </testsuite>

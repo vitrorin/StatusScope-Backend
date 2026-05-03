@@ -94,6 +94,7 @@ D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\RoleEntity.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\SpecialtyEntity.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\StateEntity.java
+D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\SymptomEntity.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\UserEntity.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\repository\HospitalRepositoryImpl.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\repository\MunicipalityRepositoryImpl.java
@@ -110,3 +111,5 @@ D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\interfaces\res
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\interfaces\rest\AuthResource.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\interfaces\rest\DiagnosisAssistantResource.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\interfaces\rest\DiagnosisEvaluationResource.java
+D:\StatuScope\Backend\StatusScope-Backend\src\main\java\db\migration\V1__seed_mexico_municipalities.java
+D:\StatuScope\Backend\StatusScope-Backend\src\main\java\db\migration\V3__seed_diseases_and_symptoms.java

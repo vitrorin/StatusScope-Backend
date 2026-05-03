@@ -38,30 +38,19 @@ INSERT INTO specialties (id, code, name, description, created_at, updated_at) VA
 ('50000000-0000-0000-0000-000000000001', 'GEN',  'General Medicine',  'Primary care and general practice',         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('50000000-0000-0000-0000-000000000002', 'CARD', 'Cardiology',        'Heart and circulatory conditions',          CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('50000000-0000-0000-0000-000000000003', 'PULM', 'Pulmonology',       'Respiratory system',                        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('50000000-0000-0000-0000-000000000004', 'INF',  'Infectious Disease','Infectious and communicable diseases',      CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('50000000-0000-0000-0000-000000000005', 'PED',  'Pediatrics',        'Care of infants, children, and adolescents',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+('50000000-0000-0000-0000-000000000004', 'INF',  'Infectious Diseases','Infectious and communicable diseases',     CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000005', 'PED',  'Pediatrics',        'Care of infants, children, and adolescents',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000006', 'GASTRO','Gastroenterology', 'Digestive system and gastrointestinal conditions', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000007', 'NEURO','Neurology',         'Brain, nervous system, and neurologic conditions', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000008', 'ENT',  'Otolaryngology',    'Ear, nose, throat, head and neck conditions', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000009', 'DERM', 'Dermatology',       'Skin, hair, and nail conditions',            CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000010', 'GYN',  'Gynecology',        'Female reproductive health conditions',      CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000011', 'URO',  'Urology',           'Urinary tract and male reproductive conditions', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000012', 'FAM',  'Family Medicine',   'Comprehensive primary care across ages',     CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000013', 'OPH',  'Ophthalmology',     'Eye and vision conditions',                  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000014', 'DENT', 'Dentistry',         'Oral and dental conditions',                 CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- Diseases (each has one required primary specialty)
-INSERT INTO diseases (id, code, name, symptoms, primary_specialty_id, created_at, updated_at) VALUES
-('60000000-0000-0000-0000-000000000001', 'FLU-A',  'Influenza A',         'Fever, cough, body aches, fatigue',           '50000000-0000-0000-0000-000000000004', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('60000000-0000-0000-0000-000000000002', 'HTN',    'Hypertension',        'Often asymptomatic; headaches, dizziness',    '50000000-0000-0000-0000-000000000002', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('60000000-0000-0000-0000-000000000003', 'ASTHMA', 'Asthma',              'Wheezing, shortness of breath, chest tightness','50000000-0000-0000-0000-000000000003', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('60000000-0000-0000-0000-000000000004', 'COVID',  'COVID-19',            'Fever, cough, loss of taste/smell, fatigue',  '50000000-0000-0000-0000-000000000004', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
--- Disease additional specialties (M:N - primary specialty stays on diseases.primary_specialty_id)
-INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
-('60000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000003'),
-('60000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000005'),
-('60000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000001');
-INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
-('60000000-0000-0000-0000-000000000002', '50000000-0000-0000-0000-000000000001');
-INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
-('60000000-0000-0000-0000-000000000003', '50000000-0000-0000-0000-000000000005'),
-('60000000-0000-0000-0000-000000000003', '50000000-0000-0000-0000-000000000001');
-INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
-('60000000-0000-0000-0000-000000000004', '50000000-0000-0000-0000-000000000003'),
-('60000000-0000-0000-0000-000000000004', '50000000-0000-0000-0000-000000000005'),
-('60000000-0000-0000-0000-000000000004', '50000000-0000-0000-0000-000000000001');
+-- Diseases and symptoms are seeded by Flyway data migrations from the disease catalog CSV.
 
 -- Roles
 INSERT INTO roles (id, code, name, description, created_at, updated_at) VALUES
