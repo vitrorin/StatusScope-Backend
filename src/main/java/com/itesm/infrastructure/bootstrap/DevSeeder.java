@@ -171,8 +171,10 @@ public class DevSeeder {
             OutbreakEntity outbreak = new OutbreakEntity();
             outbreak.setId(outbreakId);
             outbreak.setDisease(covid);
+            outbreak.setScope("MUNICIPALITY");
             outbreak.setMunicipality(municipality);
             outbreak.setCaseCount(12);
+            outbreak.setConfirmationStatus("CONFIRMED");
             outbreak.setStatus("ACTIVE");
             outbreak.setStartedAt(LocalDateTime.now().minusDays(2));
             outbreak.setCreatedAt(LocalDateTime.now());

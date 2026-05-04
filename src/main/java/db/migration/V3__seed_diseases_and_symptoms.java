@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,10 +45,22 @@ public class V3__seed_diseases_and_symptoms extends BaseJavaMigration {
         Connection connection = context.getConnection();
         Map<String, String> specialtyIdsByName = loadSpecialtyIdsByName(connection);
 
+        clearDiseaseCatalog(connection);
         insertSymptoms(connection, csvData.symptoms());
         DiseaseSeedResult diseaseSeedResult = insertDiseases(connection, csvData.rows(), specialtyIdsByName);
         insertDiseaseSpecialties(connection, diseaseSeedResult.diseaseIdsByName(), diseaseSeedResult.specialtyIdsByDiseaseName());
         insertDiseaseSymptoms(connection, csvData.rows(), csvData.symptomIdsByName(), diseaseSeedResult.diseaseIdsByName());
+    }
+
+    private void clearDiseaseCatalog(Connection connection) throws Exception {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("drop table if exists disease_category_links");
+            statement.executeUpdate("drop table if exists disease_categories");
+            statement.executeUpdate("delete from disease_symptoms");
+            statement.executeUpdate("delete from disease_specialties");
+            statement.executeUpdate("delete from symptoms");
+            statement.executeUpdate("delete from diseases");
+        }
     }
 
     private CsvData loadCsvData() throws Exception {

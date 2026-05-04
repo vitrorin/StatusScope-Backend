@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.notNullValue;
 
 @QuarkusTest
@@ -88,8 +89,10 @@ class DiagnosisAssistantResourceTest {
             OutbreakEntity outbreak = new OutbreakEntity();
             outbreak.setId(OUTBREAK_ID);
             outbreak.setDisease(disease);
+            outbreak.setScope("MUNICIPALITY");
             outbreak.setMunicipality(municipality);
             outbreak.setCaseCount(12);
+            outbreak.setConfirmationStatus("CONFIRMED");
             outbreak.setStatus("ACTIVE");
             outbreak.setStartedAt(LocalDateTime.now().minusDays(3));
             outbreak.setCreatedAt(LocalDateTime.now());
@@ -149,8 +152,8 @@ class DiagnosisAssistantResourceTest {
                 .statusCode(200)
                 .body("contextUsed", notNullValue())
                 .body("contextUsed.stateName", notNullValue())
-                .body("contextUsed.outbreaks[0].diseaseName", equalTo("COVID-19"))
-                .body("contextUsed.outbreaks[0].caseCount", equalTo(12));
+                .body("contextUsed.outbreaks.findAll { it.diseaseName == 'COVID-19' && it.confirmationStatus == 'CONFIRMED' }.caseCount",
+                        hasItem(12));
     }
 
     private String buildRequestBody(String content) {

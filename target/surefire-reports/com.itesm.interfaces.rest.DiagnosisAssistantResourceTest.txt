@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.itesm.interfaces.rest.DiagnosisAssistantResourceTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.031 s -- in com.itesm.interfaces.rest.DiagnosisAssistantResourceTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.228 s -- in com.itesm.interfaces.rest.DiagnosisAssistantResourceTest

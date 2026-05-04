@@ -38,7 +38,9 @@ class AssistantPromptBuilderTest {
         Outbreak o = new Outbreak();
         o.setId(UUID.randomUUID());
         o.setDisease(d);
+        o.setScope("MUNICIPALITY");
         o.setCaseCount(caseCount);
+        o.setConfirmationStatus("CONFIRMED");
         o.setStartedAt(LocalDateTime.now().minusDays(3));
         o.setStatus("ACTIVE");
         return o;
@@ -49,6 +51,7 @@ class AssistantPromptBuilderTest {
         String prompt = builder.build(state("Nuevo Leon"), List.of(outbreak("Measles", "Fever, rash", 12)), null);
         Assertions.assertTrue(prompt.contains("Measles"));
         Assertions.assertTrue(prompt.contains("12"));
+        Assertions.assertTrue(prompt.contains("CONFIRMED"));
         Assertions.assertTrue(prompt.contains("Fever, rash"));
     }
 

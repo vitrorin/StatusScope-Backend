@@ -113,3 +113,4 @@ D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\interfaces\res
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\interfaces\rest\DiagnosisEvaluationResource.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\db\migration\V1__seed_mexico_municipalities.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\db\migration\V3__seed_diseases_and_symptoms.java
+D:\StatuScope\Backend\StatusScope-Backend\src\main\java\db\migration\V4__seed_outbreaks.java

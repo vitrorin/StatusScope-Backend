@@ -33,7 +33,15 @@ public class DataMigrationRunner {
     private void resetCatalogHistoryAfterSchemaRecreation() {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
-            if (!tableExists(statement, "municipalities") || !tableExists(statement, "flyway_schema_history")) {
+            dropLegacyDiseaseCategoryTables(statement);
+
+            if (!tableExists(statement, "flyway_schema_history")) {
+                return;
+            }
+
+            clearFailedMigrationHistory(statement);
+
+            if (!tableExists(statement, "municipalities")) {
                 return;
             }
 
@@ -46,6 +54,15 @@ public class DataMigrationRunner {
         } catch (SQLException e) {
             throw new IllegalStateException("Could not prepare data migration history", e);
         }
+    }
+
+    private void dropLegacyDiseaseCategoryTables(Statement statement) throws SQLException {
+        statement.executeUpdate("drop table if exists disease_category_links");
+        statement.executeUpdate("drop table if exists disease_categories");
+    }
+
+    private void clearFailedMigrationHistory(Statement statement) throws SQLException {
+        statement.executeUpdate("delete from flyway_schema_history where success = false");
     }
 
     private boolean tableExists(Statement statement, String tableName) throws SQLException {

@@ -72,17 +72,17 @@ class AskDiagnosisAssistantUseCaseTest {
 
     @Test
     void shouldQueryOutbreaksWithDoctorMunicipalityScope() {
-        Mockito.when(outbreakRepository.findActiveByMunicipalityIds(List.of(municipalityId))).thenReturn(List.of());
+        Mockito.when(outbreakRepository.findActiveByMunicipalityIdsOrStateId(List.of(municipalityId), stateId)).thenReturn(List.of());
 
         AssistantRequestDto request = buildRequest("Patient has fever and rash");
         useCase.execute(request);
 
-        Mockito.verify(outbreakRepository).findActiveByMunicipalityIds(List.of(municipalityId));
+        Mockito.verify(outbreakRepository).findActiveByMunicipalityIdsOrStateId(List.of(municipalityId), stateId);
     }
 
     @Test
     void shouldPrependSystemMessageBeforeDoctorTurns() {
-        Mockito.when(outbreakRepository.findActiveByMunicipalityIds(List.of(municipalityId))).thenReturn(List.of());
+        Mockito.when(outbreakRepository.findActiveByMunicipalityIdsOrStateId(List.of(municipalityId), stateId)).thenReturn(List.of());
 
         AssistantRequestDto request = buildRequest("Patient has fever");
         useCase.execute(request);
@@ -99,7 +99,7 @@ class AskDiagnosisAssistantUseCaseTest {
 
     @Test
     void shouldForwardPriorTurnsUnchanged() {
-        Mockito.when(outbreakRepository.findActiveByMunicipalityIds(List.of(municipalityId))).thenReturn(List.of());
+        Mockito.when(outbreakRepository.findActiveByMunicipalityIdsOrStateId(List.of(municipalityId), stateId)).thenReturn(List.of());
 
         AssistantMessageDto userMsg = new AssistantMessageDto();
         userMsg.setRole("user");
@@ -142,18 +142,22 @@ class AskDiagnosisAssistantUseCaseTest {
         Outbreak outbreak = new Outbreak();
         outbreak.setId(UUID.randomUUID());
         outbreak.setDisease(disease);
+        outbreak.setScope("STATE");
         outbreak.setState(state);
         outbreak.setCaseCount(12);
+        outbreak.setConfirmationStatus("SUSPECTED");
         outbreak.setStartedAt(LocalDateTime.now().minusDays(3));
         outbreak.setStatus("ACTIVE");
 
-        Mockito.when(outbreakRepository.findActiveByMunicipalityIds(List.of(municipalityId))).thenReturn(List.of(outbreak));
+        Mockito.when(outbreakRepository.findActiveByMunicipalityIdsOrStateId(List.of(municipalityId), stateId)).thenReturn(List.of(outbreak));
 
         AssistantResponseDto response = useCase.execute(buildRequest("Patient has fever and spots"));
 
         AssistantContextDto ctx = response.getContextUsed();
         Assertions.assertEquals(1, ctx.getOutbreaks().size());
         Assertions.assertEquals("Measles", ctx.getOutbreaks().get(0).getDiseaseName());
+        Assertions.assertEquals("STATE", ctx.getOutbreaks().get(0).getScope());
+        Assertions.assertEquals("SUSPECTED", ctx.getOutbreaks().get(0).getConfirmationStatus());
         Assertions.assertEquals(12, ctx.getOutbreaks().get(0).getCaseCount());
     }
 

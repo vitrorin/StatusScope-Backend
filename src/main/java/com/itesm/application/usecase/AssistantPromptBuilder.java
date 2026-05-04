@@ -32,12 +32,20 @@ public class AssistantPromptBuilder {
                 sb.append("  - ").append(o.getDisease().getName())
                   .append(": ").append(o.getCaseCount())
                   .append(" active cases since ").append(o.getStartedAt()).append(".\n");
+                if (o.getScope() != null && !o.getScope().isBlank()) {
+                    sb.append("    Scope: ").append(o.getScope()).append(".\n");
+                }
+                if (o.getConfirmationStatus() != null && !o.getConfirmationStatus().isBlank()) {
+                    sb.append("    Confirmation status: ").append(o.getConfirmationStatus()).append(".\n");
+                }
                 if (o.getMunicipality() != null) {
                     sb.append("    Location: ").append(o.getMunicipality().getName());
                     if (o.getState() != null && o.getState().getName() != null) {
                         sb.append(", ").append(o.getState().getName());
                     }
                     sb.append(".\n");
+                } else if (o.getState() != null && o.getState().getName() != null) {
+                    sb.append("    Location: ").append(o.getState().getName()).append(".\n");
                 }
                 if (o.getDisease().getSymptoms() != null && !o.getDisease().getSymptoms().isBlank()) {
                     sb.append("    Hallmark symptoms: ").append(o.getDisease().getSymptoms()).append(".\n");

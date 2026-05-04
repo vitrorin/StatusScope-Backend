@@ -6,9 +6,11 @@ import java.util.UUID;
 public class Outbreak {
     private UUID id;
     private Disease disease;
+    private String scope;
     private State state;
     private Municipality municipality;
     private int caseCount;
+    private String confirmationStatus;
     private String status;
     private LocalDateTime startedAt;
     private LocalDateTime endedAt;
@@ -19,6 +21,9 @@ public class Outbreak {
     public Disease getDisease() { return disease; }
     public void setDisease(Disease disease) { this.disease = disease; }
 
+    public String getScope() { return scope; }
+    public void setScope(String scope) { this.scope = scope; }
+
     public State getState() { return state; }
     public void setState(State state) { this.state = state; }
 
@@ -27,6 +32,9 @@ public class Outbreak {
 
     public int getCaseCount() { return caseCount; }
     public void setCaseCount(int caseCount) { this.caseCount = caseCount; }
+
+    public String getConfirmationStatus() { return confirmationStatus; }
+    public void setConfirmationStatus(String confirmationStatus) { this.confirmationStatus = confirmationStatus; }
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }

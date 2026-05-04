@@ -15,7 +15,9 @@ public final class OutbreakMapper {
     public static Outbreak toDomain(OutbreakEntity e) {
         Outbreak o = new Outbreak();
         o.setId(e.getId());
+        o.setScope(e.getScope());
         o.setCaseCount(e.getCaseCount());
+        o.setConfirmationStatus(e.getConfirmationStatus());
         o.setStatus(e.getStatus());
         o.setStartedAt(e.getStartedAt());
         o.setEndedAt(e.getEndedAt());
@@ -37,7 +39,14 @@ public final class OutbreakMapper {
             o.setMunicipality(municipality);
         }
 
-        if (e.getMunicipality() != null && e.getMunicipality().getState() != null) {
+        if (e.getState() != null) {
+            State state = new State();
+            state.setId(e.getState().getId());
+            state.setCode(e.getState().getCode());
+            state.setName(e.getState().getName());
+            state.setDescription(e.getState().getDescription());
+            o.setState(state);
+        } else if (e.getMunicipality() != null && e.getMunicipality().getState() != null) {
             State state = new State();
             state.setId(e.getMunicipality().getState().getId());
             state.setCode(e.getMunicipality().getState().getCode());

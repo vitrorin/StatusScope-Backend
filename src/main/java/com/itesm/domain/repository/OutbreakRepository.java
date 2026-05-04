@@ -7,4 +7,5 @@ import java.util.UUID;
 
 public interface OutbreakRepository {
     List<Outbreak> findActiveByMunicipalityIds(List<UUID> municipalityIds);
+    List<Outbreak> findActiveByMunicipalityIdsOrStateId(List<UUID> municipalityIds, UUID stateId);
 }

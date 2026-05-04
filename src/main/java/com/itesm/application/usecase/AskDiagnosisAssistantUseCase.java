@@ -63,7 +63,9 @@ public class AskDiagnosisAssistantUseCase {
         State state = null;
 
         if (geoContext.getIncludedMunicipalityIds() != null && !geoContext.getIncludedMunicipalityIds().isEmpty()) {
-            outbreaks = outbreakRepository.findActiveByMunicipalityIds(geoContext.getIncludedMunicipalityIds());
+            outbreaks = outbreakRepository.findActiveByMunicipalityIdsOrStateId(
+                    geoContext.getIncludedMunicipalityIds(),
+                    geoContext.getStateId());
             if (!outbreaks.isEmpty() && outbreaks.get(0).getState() != null) {
                 state = outbreaks.get(0).getState();
             } else {
@@ -87,9 +89,11 @@ public class AskDiagnosisAssistantUseCase {
                 .filter(o -> o.getDisease() != null)
                 .map(o -> new OutbreakSummaryDto(
                         o.getDisease().getName(),
+                        o.getScope(),
                         o.getMunicipality() == null ? null : o.getMunicipality().getName(),
                         o.getState() == null ? null : o.getState().getName(),
                         o.getCaseCount(),
+                        o.getConfirmationStatus(),
                         o.getStartedAt()))
                 .collect(Collectors.toList());
 
