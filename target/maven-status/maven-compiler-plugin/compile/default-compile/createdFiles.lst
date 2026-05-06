@@ -29,11 +29,13 @@ com\itesm\infrastructure\gemini\dto\GeminiPart.class
 com\itesm\application\dto\UserSummaryDto.class
 com\itesm\infrastructure\openai\dto\ChatCompletionResponse$Choice.class
 com\itesm\infrastructure\persistence\repository\RoleRepositoryImpl.class
+com\itesm\infrastructure\persistence\entity\DiagnosisAssistantThreadEntity.class
 com\itesm\application\dto\CreateUserByAdminDto.class
 com\itesm\application\usecase\GetMyProfileUseCase.class
 com\itesm\infrastructure\persistence\entity\HospitalEntity.class
 com\itesm\infrastructure\gemini\dto\GeminiGenerateResponse.class
 com\itesm\application\dto\DiagnosisEvaluationDto.class
+com\itesm\application\usecase\GetDiagnosisAssistantThreadUseCase.class
 com\itesm\infrastructure\firebase\FirebaseUserService.class
 com\itesm\infrastructure\persistence\entity\RegionEntity.class
 com\itesm\application\dto\AssistantResponseDto.class
@@ -57,6 +59,7 @@ com\itesm\infrastructure\persistence\entity\DiagnosisEntity.class
 com\itesm\application\dto\DiagnosisRecommendedTestDto.class
 com\itesm\infrastructure\firebase\FirebaseConfig.class
 com\itesm\application\usecase\AssistantPromptBuilder.class
+com\itesm\application\port\out\AssistantChatMessage.class
 com\itesm\infrastructure\persistence\entity\PatientEntity.class
 com\itesm\infrastructure\openai\dto\ChatCompletionResponse.class
 com\itesm\infrastructure\openai\dto\ChatMessage.class
@@ -69,6 +72,7 @@ com\itesm\infrastructure\persistence\repository\HospitalRepositoryImpl.class
 com\itesm\infrastructure\openai\OpenAiHttpClient.class
 com\itesm\infrastructure\persistence\entity\PatientEvaluationEntity.class
 com\itesm\application\dto\AssistantRequestDto.class
+com\itesm\infrastructure\persistence\entity\DiagnosisAssistantMessageEntity.class
 com\itesm\application\dto\AssignRoleDto.class
 com\itesm\infrastructure\gemini\GeminiChatStrategy.class
 com\itesm\application\dto\DiagnosisEvaluationEventDto.class
@@ -86,7 +90,9 @@ com\itesm\application\security\AuthorizationService.class
 com\itesm\application\usecase\exception\InvalidInviteException.class
 com\itesm\infrastructure\gemini\dto\GeminiGenerationConfig.class
 com\itesm\interfaces\rest\AdminUserResource.class
+com\itesm\application\port\out\AssistantChatGateway.class
 com\itesm\infrastructure\mapper\OutbreakMapper.class
+com\itesm\application\dto\AssistantThreadDto.class
 com\itesm\infrastructure\persistence\entity\OutbreakEntity.class
 com\itesm\infrastructure\llm\LlmChatClient.class
 com\itesm\interfaces\rest\DiagnosisEvaluationResource.class

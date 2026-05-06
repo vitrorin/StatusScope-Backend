@@ -43,3 +43,9 @@ cloudrun.env
 
 
 .m2*
+
+# Build output
+target/
+
+# Local verification temp files
+.tmp/

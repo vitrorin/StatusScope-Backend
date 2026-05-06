@@ -1,11 +1,11 @@
 package com.itesm.interfaces.rest;
 
+import com.itesm.application.port.out.AssistantChatGateway;
 import com.itesm.domain.models.Hospital;
 import com.itesm.domain.models.User;
 import com.itesm.domain.models.UserStatus;
 import com.itesm.domain.repository.RoleRepository;
 import com.itesm.domain.repository.UserRepository;
-import com.itesm.infrastructure.llm.LlmChatClient;
 import com.itesm.infrastructure.persistence.entity.DiseaseEntity;
 import com.itesm.infrastructure.persistence.entity.OutbreakEntity;
 import com.itesm.infrastructure.persistence.entity.RegionEntity;
@@ -38,7 +38,7 @@ class DiagnosisAssistantResourceTest {
     private static final UUID OUTBREAK_ID = UUID.fromString("81000000-0000-0000-0000-000000000001");
 
     @InjectMock
-    LlmChatClient llmChatClient;
+    AssistantChatGateway assistantChatGateway;
 
     @Inject
     UserRepository userRepository;
@@ -52,7 +52,7 @@ class DiagnosisAssistantResourceTest {
     @BeforeEach
     @Transactional
     void seedTestUsers() {
-        Mockito.when(llmChatClient.chat(Mockito.anyList()))
+        Mockito.when(assistantChatGateway.chat(Mockito.anyList()))
                 .thenReturn("Based on the active measles outbreak, consider Koplik spots.");
 
         if (userRepository.findByEmail(DOCTOR_EMAIL).isEmpty()) {

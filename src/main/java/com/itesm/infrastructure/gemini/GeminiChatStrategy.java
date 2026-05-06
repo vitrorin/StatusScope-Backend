@@ -1,5 +1,6 @@
 package com.itesm.infrastructure.gemini;
 
+import com.itesm.application.port.out.AssistantChatMessage;
 import com.itesm.application.usecase.exception.OpenAiException;
 import com.itesm.infrastructure.gemini.dto.GeminiContent;
 import com.itesm.infrastructure.gemini.dto.GeminiGenerateRequest;
@@ -7,7 +8,6 @@ import com.itesm.infrastructure.gemini.dto.GeminiGenerateResponse;
 import com.itesm.infrastructure.gemini.dto.GeminiGenerationConfig;
 import com.itesm.infrastructure.gemini.dto.GeminiPart;
 import com.itesm.infrastructure.llm.LlmChatStrategy;
-import com.itesm.infrastructure.openai.dto.ChatMessage;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
 import jakarta.ws.rs.WebApplicationException;
@@ -37,7 +37,7 @@ public class GeminiChatStrategy implements LlmChatStrategy {
     GeminiHttpClient httpClient;
 
     @Override
-    public String chat(List<ChatMessage> messages) {
+    public String chat(List<AssistantChatMessage> messages) {
         if (apiKey == null || apiKey.isBlank()) {
             LOG.warn("Gemini API key is not configured");
             throw new OpenAiException("Gemini API key is not configured");
@@ -68,13 +68,13 @@ public class GeminiChatStrategy implements LlmChatStrategy {
         }
     }
 
-    private GeminiGenerateRequest buildRequest(List<ChatMessage> messages) {
+    private GeminiGenerateRequest buildRequest(List<AssistantChatMessage> messages) {
         GeminiGenerateRequest request = new GeminiGenerateRequest();
         request.setGenerationConfig(new GeminiGenerationConfig(temperature));
 
         List<GeminiContent> contents = new ArrayList<>();
 
-        for (ChatMessage msg : messages) {
+        for (AssistantChatMessage msg : messages) {
             if ("system".equals(msg.getRole())) {
                 // Gemini handles system messages via systemInstruction, not in contents
                 GeminiContent systemInstruction = new GeminiContent(

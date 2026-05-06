@@ -3,6 +3,7 @@ C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\it
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\AssistantMessageDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\AssistantRequestDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\AssistantResponseDto.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\AssistantThreadDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\CreateHospitalDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\CreateUserByAdminDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\DiagnosisDifferentialDto.java
@@ -15,7 +16,12 @@ C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\it
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\OutbreakSummaryDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\PatientContextDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\RegisterUserDto.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\UpdateDiagnosisEvaluationDto.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\UpdateDiagnosisEvaluationStatusDto.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\UploadDiagnosisEvaluationFileDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\UserSummaryDto.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\port\out\AssistantChatGateway.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\port\out\AssistantChatMessage.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\security\AuthenticatedUserContext.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\security\AuthorizationService.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\security\CurrentUser.java
@@ -23,6 +29,7 @@ C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\it
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\AskDiagnosisAssistantUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\AssignRoleToUserUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\AssistantPromptBuilder.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\CreateDiagnosisEvaluationUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\CreateHospitalUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\CreateUserByAdminUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\DisableUserUseCase.java
@@ -30,9 +37,11 @@ C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\it
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\exception\InvalidInviteException.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\exception\NotFoundException.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\exception\OpenAiException.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\GetDiagnosisAssistantThreadUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\GetDiagnosisEvaluationUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\GetMyProfileUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\RegisterUserUseCase.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\UpdateDiagnosisEvaluationUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\domain\models\Disease.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\domain\models\Hospital.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\domain\models\Outbreak.java
@@ -68,6 +77,8 @@ C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\it
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\openai\OpenAiChatClient.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\openai\OpenAiHttpClient.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\AlertEntity.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiagnosisAssistantMessageEntity.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiagnosisAssistantThreadEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiagnosisEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiseaseEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\EvaluationDifferentialDiagnosisEntity.java

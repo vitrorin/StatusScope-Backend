@@ -5,6 +5,8 @@ import com.itesm.application.dto.AssistantMessageDto;
 import com.itesm.application.dto.AssistantRequestDto;
 import com.itesm.application.dto.AssistantResponseDto;
 import com.itesm.application.dto.OutbreakSummaryDto;
+import com.itesm.application.port.out.AssistantChatGateway;
+import com.itesm.application.port.out.AssistantChatMessage;
 import com.itesm.application.security.AuthenticatedUserContext;
 import com.itesm.application.security.CurrentUser;
 import com.itesm.application.usecase.exception.NotFoundException;
@@ -13,8 +15,6 @@ import com.itesm.domain.models.Outbreak;
 import com.itesm.domain.models.Region;
 import com.itesm.domain.repository.HospitalRepository;
 import com.itesm.domain.repository.OutbreakRepository;
-import com.itesm.infrastructure.llm.LlmChatClient;
-import com.itesm.infrastructure.openai.dto.ChatMessage;
 import com.itesm.infrastructure.persistence.entity.DiagnosisAssistantMessageEntity;
 import com.itesm.infrastructure.persistence.entity.DiagnosisAssistantThreadEntity;
 import com.itesm.infrastructure.persistence.entity.HospitalEntity;
@@ -45,7 +45,7 @@ public class AskDiagnosisAssistantUseCase {
     OutbreakRepository outbreakRepository;
 
     @Inject
-    LlmChatClient llmChatClient;
+    AssistantChatGateway assistantChatGateway;
 
     @Inject
     AssistantPromptBuilder promptBuilder;
@@ -99,13 +99,13 @@ public class AskDiagnosisAssistantUseCase {
             conversationHistory.addAll(request.getMessages());
         }
 
-        List<ChatMessage> chatMessages = new ArrayList<>();
-        chatMessages.add(new ChatMessage("system", systemPrompt));
+        List<AssistantChatMessage> chatMessages = new ArrayList<>();
+        chatMessages.add(new AssistantChatMessage("system", systemPrompt));
         for (AssistantMessageDto msg : conversationHistory) {
-            chatMessages.add(new ChatMessage(msg.getRole(), msg.getContent()));
+            chatMessages.add(new AssistantChatMessage(msg.getRole(), msg.getContent()));
         }
 
-        String reply = llmChatClient.chat(chatMessages);
+        String reply = assistantChatGateway.chat(chatMessages);
 
         if (thread != null) {
             persistMessage(thread, "assistant", reply, conversationHistory.size() + 1);
