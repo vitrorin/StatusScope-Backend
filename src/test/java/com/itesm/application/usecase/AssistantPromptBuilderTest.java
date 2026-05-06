@@ -3,7 +3,7 @@ package com.itesm.application.usecase;
 import com.itesm.application.dto.PatientContextDto;
 import com.itesm.domain.models.Disease;
 import com.itesm.domain.models.Outbreak;
-import com.itesm.domain.models.Region;
+import com.itesm.domain.models.State;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,12 +21,12 @@ class AssistantPromptBuilderTest {
         builder = new AssistantPromptBuilder();
     }
 
-    private Region region(String name) {
-        Region r = new Region();
-        r.setId(UUID.randomUUID());
-        r.setName(name);
-        r.setCode("REG");
-        return r;
+    private State state(String name) {
+        State state = new State();
+        state.setId(UUID.randomUUID());
+        state.setName(name);
+        state.setCode("STATE");
+        return state;
     }
 
     private Outbreak outbreak(String diseaseName, String symptoms, int caseCount) {
@@ -38,7 +38,9 @@ class AssistantPromptBuilderTest {
         Outbreak o = new Outbreak();
         o.setId(UUID.randomUUID());
         o.setDisease(d);
+        o.setScope("MUNICIPALITY");
         o.setCaseCount(caseCount);
+        o.setConfirmationStatus("CONFIRMED");
         o.setStartedAt(LocalDateTime.now().minusDays(3));
         o.setStatus("ACTIVE");
         return o;
@@ -46,15 +48,16 @@ class AssistantPromptBuilderTest {
 
     @Test
     void shouldContainDiseaseNameWhenOutbreakPresent() {
-        String prompt = builder.build(region("Región Norte"), List.of(outbreak("Measles", "Fever, rash", 12)), null);
+        String prompt = builder.build(state("Nuevo Leon"), List.of(outbreak("Measles", "Fever, rash", 12)), null);
         Assertions.assertTrue(prompt.contains("Measles"));
         Assertions.assertTrue(prompt.contains("12"));
+        Assertions.assertTrue(prompt.contains("CONFIRMED"));
         Assertions.assertTrue(prompt.contains("Fever, rash"));
     }
 
     @Test
     void shouldOmitOutbreakBlockWhenListEmpty() {
-        String prompt = builder.build(region("Región Norte"), List.of(), null);
+        String prompt = builder.build(state("Nuevo Leon"), List.of(), null);
         Assertions.assertFalse(prompt.contains("Active outbreaks"));
         Assertions.assertFalse(prompt.contains("overlap with an active outbreak"));
     }
@@ -64,29 +67,26 @@ class AssistantPromptBuilderTest {
         PatientContextDto pc = new PatientContextDto();
         pc.setAgeYears(35);
         pc.setSex("female");
-        pc.setPostalCode("64000");
         pc.setSymptoms("fever, rash");
 
-        String prompt = builder.build(region("Región Norte"), List.of(), pc);
+        String prompt = builder.build(state("Nuevo Leon"), List.of(), pc);
         Assertions.assertTrue(prompt.contains("35"));
         Assertions.assertTrue(prompt.contains("female"));
-        Assertions.assertTrue(prompt.contains("64000"));
         Assertions.assertTrue(prompt.contains("fever, rash"));
     }
 
     @Test
-    void shouldContainRegionNameInPrompt() {
-        String prompt = builder.build(region("Región Centro"), List.of(), null);
-        Assertions.assertTrue(prompt.contains("Región Centro"));
+    void shouldContainStateNameInPrompt() {
+        String prompt = builder.build(state("Ciudad de Mexico"), List.of(), null);
+        Assertions.assertTrue(prompt.contains("Ciudad de Mexico"));
     }
 
     @Test
-    void shouldNotLeakOutbreaksFromOtherRegions() {
-        // The builder only receives outbreaks already filtered by region — it should render
-        // what it gets. This test ensures it doesn't add extra items if called with one outbreak.
+    void shouldNotLeakOutbreaksFromOtherStates() {
+        // The builder only receives outbreaks already filtered by state; it should render what it gets.
         Outbreak o = outbreak("Dengue", "Fever, joint pain", 5);
-        String prompt = builder.build(region("Región Norte"), List.of(o), null);
+        String prompt = builder.build(state("Nuevo Leon"), List.of(o), null);
         Assertions.assertTrue(prompt.contains("Dengue"));
-        Assertions.assertFalse(prompt.contains("COVID")); // no covid in the list
+        Assertions.assertFalse(prompt.contains("COVID"));
     }
 }

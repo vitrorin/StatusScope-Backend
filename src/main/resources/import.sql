@@ -1,46 +1,56 @@
--- Regions
-INSERT INTO regions (id, code, name, description, created_at, updated_at) VALUES
-('40000000-0000-0000-0000-000000000001', 'NORTE',  'Región Norte',  'Monterrey y zona metropolitana', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('40000000-0000-0000-0000-000000000002', 'CENTRO', 'Región Centro', 'Ciudad de México y zona metropolitana', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
--- Hospitals
-INSERT INTO hospitals (id, code, name, address, phone, invite_code, active, postal_code, bed_count, nurse_count, region_id, created_at, updated_at) VALUES
-('30000000-0000-0000-0000-000000000001', 'HGZ-21', 'Hospital General Zona 21', 'Av. Principal 100, Monterrey', '+52 81 0000 0001', 'INVITE-HGZ21', TRUE, '64000', 240, 180, '40000000-0000-0000-0000-000000000001', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('30000000-0000-0000-0000-000000000002', 'HRE-05', 'Hospital Regional Este',   'Calle 5 Ote 200, CDMX',       '+52 55 0000 0002', 'INVITE-HRE05', TRUE, '06800', 320, 240, '40000000-0000-0000-0000-000000000002', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+-- States represent Mexican federal entities.
+INSERT INTO states (id, code, name, description, created_at, updated_at) VALUES
+('40000000-0000-0000-0000-000000000001', 'AGS',  'Aguascalientes',   'Estado de Aguascalientes', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000002', 'BC',   'Baja California',  'Estado de Baja California', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000003', 'BCS',  'Baja California Sur', 'Estado de Baja California Sur', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000004', 'CAM',  'Campeche',         'Estado de Campeche', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000005', 'COA',  'Coahuila de Zaragoza', 'Estado de Coahuila de Zaragoza', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000006', 'COL',  'Colima',           'Estado de Colima', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000007', 'CHP',  'Chiapas',          'Estado de Chiapas', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000008', 'CHH',  'Chihuahua',        'Estado de Chihuahua', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000009', 'CDMX', 'Ciudad de Mexico', 'Entidad federativa Ciudad de Mexico', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000010', 'DUR',  'Durango',          'Estado de Durango', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000011', 'GUA',  'Guanajuato',       'Estado de Guanajuato', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000012', 'GRO',  'Guerrero',         'Estado de Guerrero', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000013', 'HID',  'Hidalgo',          'Estado de Hidalgo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000014', 'JAL',  'Jalisco',          'Estado de Jalisco', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000015', 'MEX',  'Mexico',           'Estado de Mexico', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000016', 'MIC',  'Michoacan de Ocampo', 'Estado de Michoacan de Ocampo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000017', 'MOR',  'Morelos',          'Estado de Morelos', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000018', 'NAY',  'Nayarit',          'Estado de Nayarit', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000019', 'NL',   'Nuevo Leon',       'Estado de Nuevo Leon', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000020', 'OAX',  'Oaxaca',           'Estado de Oaxaca', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000021', 'PUE',  'Puebla',           'Estado de Puebla', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000022', 'QRO',  'Queretaro',        'Estado de Queretaro', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000023', 'ROO',  'Quintana Roo',     'Estado de Quintana Roo', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000024', 'SLP',  'San Luis Potosi',  'Estado de San Luis Potosi', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000025', 'SIN',  'Sinaloa',          'Estado de Sinaloa', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000026', 'SON',  'Sonora',           'Estado de Sonora', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000027', 'TAB',  'Tabasco',          'Estado de Tabasco', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000028', 'TAM',  'Tamaulipas',       'Estado de Tamaulipas', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000029', 'TLA',  'Tlaxcala',         'Estado de Tlaxcala', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000030', 'VER',  'Veracruz de Ignacio de la Llave', 'Estado de Veracruz de Ignacio de la Llave', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000031', 'YUC',  'Yucatan',          'Estado de Yucatan', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('40000000-0000-0000-0000-000000000032', 'ZAC',  'Zacatecas',        'Estado de Zacatecas', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Specialties
 INSERT INTO specialties (id, code, name, description, created_at, updated_at) VALUES
 ('50000000-0000-0000-0000-000000000001', 'GEN',  'General Medicine',  'Primary care and general practice',         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('50000000-0000-0000-0000-000000000002', 'CARD', 'Cardiology',        'Heart and circulatory conditions',          CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('50000000-0000-0000-0000-000000000003', 'PULM', 'Pulmonology',       'Respiratory system',                        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('50000000-0000-0000-0000-000000000004', 'INF',  'Infectious Disease','Infectious and communicable diseases',      CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('50000000-0000-0000-0000-000000000005', 'PED',  'Pediatrics',        'Care of infants, children, and adolescents',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+('50000000-0000-0000-0000-000000000004', 'INF',  'Infectious Diseases','Infectious and communicable diseases',     CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000005', 'PED',  'Pediatrics',        'Care of infants, children, and adolescents',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000006', 'GASTRO','Gastroenterology', 'Digestive system and gastrointestinal conditions', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000007', 'NEURO','Neurology',         'Brain, nervous system, and neurologic conditions', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000008', 'ENT',  'Otolaryngology',    'Ear, nose, throat, head and neck conditions', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000009', 'DERM', 'Dermatology',       'Skin, hair, and nail conditions',            CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000010', 'GYN',  'Gynecology',        'Female reproductive health conditions',      CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000011', 'URO',  'Urology',           'Urinary tract and male reproductive conditions', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000012', 'FAM',  'Family Medicine',   'Comprehensive primary care across ages',     CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000013', 'OPH',  'Ophthalmology',     'Eye and vision conditions',                  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('50000000-0000-0000-0000-000000000014', 'DENT', 'Dentistry',         'Oral and dental conditions',                 CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- Diseases (each has one required primary specialty)
-INSERT INTO diseases (id, code, name, symptoms, primary_specialty_id, created_at, updated_at) VALUES
-('60000000-0000-0000-0000-000000000001', 'FLU-A',  'Influenza A',         'Fever, cough, body aches, fatigue',           '50000000-0000-0000-0000-000000000004', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('60000000-0000-0000-0000-000000000002', 'HTN',    'Hypertension',        'Often asymptomatic; headaches, dizziness',    '50000000-0000-0000-0000-000000000002', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('60000000-0000-0000-0000-000000000003', 'ASTHMA', 'Asthma',              'Wheezing, shortness of breath, chest tightness','50000000-0000-0000-0000-000000000003', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('60000000-0000-0000-0000-000000000004', 'COVID', 'COVID-19',             'Fever, cough, loss of taste/smell, fatigue',  '50000000-0000-0000-0000-000000000004', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
--- Disease ↔ additional specialties (M:N — primary specialty stays on diseases.primary_specialty_id)
--- Influenza A: also treatable by Pulmonology, Pediatrics, General Medicine
-INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
-('60000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000003'),
-('60000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000005'),
-('60000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000001');
--- Hypertension: also treatable by General Medicine
-INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
-('60000000-0000-0000-0000-000000000002', '50000000-0000-0000-0000-000000000001');
--- Asthma: also treatable by Pediatrics, General Medicine
-INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
-('60000000-0000-0000-0000-000000000003', '50000000-0000-0000-0000-000000000005'),
-('60000000-0000-0000-0000-000000000003', '50000000-0000-0000-0000-000000000001');
--- COVID-19: also treatable by Pulmonology, Pediatrics, General Medicine
-INSERT INTO disease_specialties (disease_id, specialty_id) VALUES
-('60000000-0000-0000-0000-000000000004', '50000000-0000-0000-0000-000000000003'),
-('60000000-0000-0000-0000-000000000004', '50000000-0000-0000-0000-000000000005'),
-('60000000-0000-0000-0000-000000000004', '50000000-0000-0000-0000-000000000001');
+-- Diseases and symptoms are seeded by Flyway data migrations from the disease catalog CSV.
 
 -- Roles
 INSERT INTO roles (id, code, name, description, created_at, updated_at) VALUES
@@ -66,8 +76,8 @@ INSERT INTO privileges (id, code, description, created_at, updated_at) VALUES
 ('10000000-0000-0000-0000-000000000014', 'specialties.manage','Manage specialties catalog', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000015', 'outbreaks.read',    'Read outbreaks',             CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000016', 'outbreaks.manage',  'Manage outbreaks',           CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('10000000-0000-0000-0000-000000000017', 'regions.read',      'Read regions',               CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('10000000-0000-0000-0000-000000000018', 'regions.manage',    'Manage regions',             CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('10000000-0000-0000-0000-000000000017', 'states.read',       'Read states',                CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('10000000-0000-0000-0000-000000000018', 'states.manage',     'Manage states',              CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000019', 'diagnosis.assist',  'Use the AI diagnosis assistant chat', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- SYSTEM_ADMIN: everything
@@ -92,8 +102,7 @@ INSERT INTO role_privileges (role_id, privilege_id) VALUES
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000018'),
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000019');
 
--- HOSPITAL_ADMIN: hospital-scoped clinical + admin (no roles.manage, no hospitals.manage,
---                 no diseases/specialties/regions catalog management)
+-- HOSPITAL_ADMIN: hospital-scoped clinical + admin.
 INSERT INTO role_privileges (role_id, privilege_id) VALUES
 ('00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000001'),
 ('00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000002'),

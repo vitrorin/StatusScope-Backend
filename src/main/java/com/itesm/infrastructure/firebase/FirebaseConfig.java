@@ -9,6 +9,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -22,9 +23,25 @@ public class FirebaseConfig {
 
     @PostConstruct
     void init() {
+        ensureInitialized();
+    }
+
+    public synchronized void ensureInitialized() {
         try {
             if (FirebaseApp.getApps().isEmpty()) {
-                try (InputStream serviceAccount = new FileInputStream(path)) {
+                InputStream serviceAccount;
+                if (new File(path).exists()) {
+                    serviceAccount = new FileInputStream(path);
+                } else {
+                    String resourceName = path.contains("/")
+                            ? path.substring(path.lastIndexOf('/') + 1)
+                            : path;
+                    serviceAccount = getClass().getClassLoader().getResourceAsStream(resourceName);
+                    if (serviceAccount == null) {
+                        throw new IllegalStateException("Failed to initialize Firebase: " + path + " (No such file or directory)");
+                    }
+                }
+                try (serviceAccount) {
                     FirebaseOptions options = FirebaseOptions.builder()
                             .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                             .build();

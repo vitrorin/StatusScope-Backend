@@ -24,6 +24,13 @@ public class CreateHospitalUseCase {
         hospital.setAddress(dto.getAddress());
         hospital.setPhone(dto.getPhone());
         hospital.setInviteCode(dto.getInviteCode());
+        hospital.setPostalCode(dto.getPostalCode());
+        hospital.setBedCount(dto.getBedCount());
+        hospital.setDoctorCount(dto.getDoctorCount());
+        hospital.setNurseCount(dto.getNurseCount());
+        hospital.setMunicipalityId(dto.getMunicipalityId());
+        hospital.setLatitude(dto.getLatitude());
+        hospital.setLongitude(dto.getLongitude());
         hospital.setActive(true);
         return hospitalRepository.create(hospital);
     }

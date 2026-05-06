@@ -4,7 +4,7 @@ import com.itesm.domain.models.Hospital;
 import com.itesm.domain.repository.HospitalRepository;
 import com.itesm.infrastructure.mapper.HospitalMapper;
 import com.itesm.infrastructure.persistence.entity.HospitalEntity;
-import com.itesm.infrastructure.persistence.entity.RegionEntity;
+import com.itesm.infrastructure.persistence.entity.MunicipalityEntity;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
@@ -34,8 +34,8 @@ public class HospitalRepositoryImpl implements HospitalRepository, PanacheReposi
         HospitalEntity entity = HospitalMapper.toEntity(hospital);
         entity.setCreatedAt(LocalDateTime.now());
         entity.setUpdatedAt(LocalDateTime.now());
-        if (hospital.getRegionId() != null) {
-            entity.setRegion(getEntityManager().getReference(RegionEntity.class, hospital.getRegionId()));
+        if (hospital.getMunicipalityId() != null) {
+            entity.setMunicipality(getEntityManager().getReference(MunicipalityEntity.class, hospital.getMunicipalityId()));
         }
         persist(entity);
         return HospitalMapper.toDomain(entity);

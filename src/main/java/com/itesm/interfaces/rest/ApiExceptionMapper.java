@@ -56,6 +56,12 @@ public class ApiExceptionMapper implements ExceptionMapper<Throwable> {
                     .entity(new ApiError(400, "BAD_REQUEST", "Invalid request payload"))
                     .build();
         }
+        if (exception instanceof IllegalArgumentException) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .type(MediaType.APPLICATION_JSON)
+                    .entity(new ApiError(400, "BAD_REQUEST", exception.getMessage()))
+                    .build();
+        }
         if (exception instanceof FirebaseAuthException) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .type(MediaType.APPLICATION_JSON)

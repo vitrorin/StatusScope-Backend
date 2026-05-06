@@ -1,5 +1,6 @@
 package com.itesm.domain.models;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -13,8 +14,14 @@ public class Hospital {
     private boolean active;
     private String postalCode;
     private Integer bedCount;
+    private Integer doctorCount;
     private Integer nurseCount;
-    private UUID regionId;
+    private UUID municipalityId;
+    private String municipalityName;
+    private UUID stateId;
+    private String stateName;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -45,11 +52,29 @@ public class Hospital {
     public Integer getBedCount() { return bedCount; }
     public void setBedCount(Integer bedCount) { this.bedCount = bedCount; }
 
+    public Integer getDoctorCount() { return doctorCount; }
+    public void setDoctorCount(Integer doctorCount) { this.doctorCount = doctorCount; }
+
     public Integer getNurseCount() { return nurseCount; }
     public void setNurseCount(Integer nurseCount) { this.nurseCount = nurseCount; }
 
-    public UUID getRegionId() { return regionId; }
-    public void setRegionId(UUID regionId) { this.regionId = regionId; }
+    public UUID getMunicipalityId() { return municipalityId; }
+    public void setMunicipalityId(UUID municipalityId) { this.municipalityId = municipalityId; }
+
+    public String getMunicipalityName() { return municipalityName; }
+    public void setMunicipalityName(String municipalityName) { this.municipalityName = municipalityName; }
+
+    public UUID getStateId() { return stateId; }
+    public void setStateId(UUID stateId) { this.stateId = stateId; }
+
+    public String getStateName() { return stateName; }
+    public void setStateName(String stateName) { this.stateName = stateName; }
+
+    public BigDecimal getLatitude() { return latitude; }
+    public void setLatitude(BigDecimal latitude) { this.latitude = latitude; }
+
+    public BigDecimal getLongitude() { return longitude; }
+    public void setLongitude(BigDecimal longitude) { this.longitude = longitude; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }

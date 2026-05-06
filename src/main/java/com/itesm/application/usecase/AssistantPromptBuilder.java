@@ -2,7 +2,7 @@ package com.itesm.application.usecase;
 
 import com.itesm.application.dto.PatientContextDto;
 import com.itesm.domain.models.Outbreak;
-import com.itesm.domain.models.Region;
+import com.itesm.domain.models.State;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;
@@ -10,20 +10,43 @@ import java.util.List;
 @ApplicationScoped
 public class AssistantPromptBuilder {
 
-    public String build(Region region, List<Outbreak> outbreaks, PatientContextDto patientContext) {
+    public String build(State state, List<Outbreak> outbreaks, PatientContextDto patientContext) {
+        return build(state, outbreaks, patientContext, 0);
+    }
+
+    public String build(State state, List<Outbreak> outbreaks, PatientContextDto patientContext, double radiusKm) {
         StringBuilder sb = new StringBuilder();
 
-        String regionName = region != null ? region.getName() : "an unknown region";
-        sb.append("You are a clinical decision-support assistant for a doctor in ").append(regionName).append(".\n");
+        String stateName = state != null ? state.getName() : "an unknown state";
+        sb.append("You are a clinical decision-support assistant for a doctor in ").append(stateName).append(".\n");
         sb.append("Reply concisely. Do not invent diagnoses you cannot justify from the symptoms.\n");
 
         if (outbreaks != null && !outbreaks.isEmpty()) {
-            sb.append("\nActive outbreaks in this region (use these to bias differential diagnosis):\n");
+            sb.append("\nActive outbreaks in the hospital geographic radius");
+            if (radiusKm > 0) {
+                sb.append(" (~").append(Math.round(radiusKm)).append(" km)");
+            }
+            sb.append(" (use these to bias differential diagnosis only when symptoms overlap):\n");
             for (Outbreak o : outbreaks) {
                 if (o.getDisease() == null) continue;
                 sb.append("  - ").append(o.getDisease().getName())
                   .append(": ").append(o.getCaseCount())
                   .append(" active cases since ").append(o.getStartedAt()).append(".\n");
+                if (o.getScope() != null && !o.getScope().isBlank()) {
+                    sb.append("    Scope: ").append(o.getScope()).append(".\n");
+                }
+                if (o.getConfirmationStatus() != null && !o.getConfirmationStatus().isBlank()) {
+                    sb.append("    Confirmation status: ").append(o.getConfirmationStatus()).append(".\n");
+                }
+                if (o.getMunicipality() != null) {
+                    sb.append("    Location: ").append(o.getMunicipality().getName());
+                    if (o.getState() != null && o.getState().getName() != null) {
+                        sb.append(", ").append(o.getState().getName());
+                    }
+                    sb.append(".\n");
+                } else if (o.getState() != null && o.getState().getName() != null) {
+                    sb.append("    Location: ").append(o.getState().getName()).append(".\n");
+                }
                 if (o.getDisease().getSymptoms() != null && !o.getDisease().getSymptoms().isBlank()) {
                     sb.append("    Hallmark symptoms: ").append(o.getDisease().getSymptoms()).append(".\n");
                 }
@@ -37,9 +60,6 @@ public class AssistantPromptBuilder {
             }
             if (patientContext.getSex() != null && !patientContext.getSex().isBlank()) {
                 sb.append("  - Sex: ").append(patientContext.getSex()).append("\n");
-            }
-            if (patientContext.getPostalCode() != null && !patientContext.getPostalCode().isBlank()) {
-                sb.append("  - Postal code: ").append(patientContext.getPostalCode()).append("\n");
             }
             if (patientContext.getSymptoms() != null && !patientContext.getSymptoms().isBlank()) {
                 sb.append("  - Reported symptoms: ").append(patientContext.getSymptoms()).append("\n");

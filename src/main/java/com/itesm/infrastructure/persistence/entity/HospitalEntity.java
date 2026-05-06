@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -45,12 +46,21 @@ public class HospitalEntity {
     @Column(name = "bed_count")
     private Integer bedCount;
 
+    @Column(name = "doctor_count")
+    private Integer doctorCount;
+
     @Column(name = "nurse_count")
     private Integer nurseCount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_id")
-    private RegionEntity region;
+    @JoinColumn(name = "municipality_id")
+    private MunicipalityEntity municipality;
+
+    @Column(precision = 10, scale = 7)
+    private BigDecimal latitude;
+
+    @Column(precision = 10, scale = 7)
+    private BigDecimal longitude;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -85,11 +95,20 @@ public class HospitalEntity {
     public Integer getBedCount() { return bedCount; }
     public void setBedCount(Integer bedCount) { this.bedCount = bedCount; }
 
+    public Integer getDoctorCount() { return doctorCount; }
+    public void setDoctorCount(Integer doctorCount) { this.doctorCount = doctorCount; }
+
     public Integer getNurseCount() { return nurseCount; }
     public void setNurseCount(Integer nurseCount) { this.nurseCount = nurseCount; }
 
-    public RegionEntity getRegion() { return region; }
-    public void setRegion(RegionEntity region) { this.region = region; }
+    public MunicipalityEntity getMunicipality() { return municipality; }
+    public void setMunicipality(MunicipalityEntity municipality) { this.municipality = municipality; }
+
+    public BigDecimal getLatitude() { return latitude; }
+    public void setLatitude(BigDecimal latitude) { this.latitude = latitude; }
+
+    public BigDecimal getLongitude() { return longitude; }
+    public void setLongitude(BigDecimal longitude) { this.longitude = longitude; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }

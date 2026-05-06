@@ -40,3 +40,6 @@ firebase-service-account.json
 .env.production
 cloudrun.env
 
+
+
+.m2*

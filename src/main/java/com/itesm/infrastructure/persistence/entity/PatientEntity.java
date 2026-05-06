@@ -27,6 +27,9 @@ public class PatientEntity {
     @JoinColumn(name = "hospital_id", nullable = false)
     private HospitalEntity hospital;
 
+    @Column(name = "full_name", nullable = false, length = 255)
+    private String fullName;
+
     @Column(nullable = false, length = 16)
     private String sex;
 
@@ -53,6 +56,9 @@ public class PatientEntity {
 
     public HospitalEntity getHospital() { return hospital; }
     public void setHospital(HospitalEntity hospital) { this.hospital = hospital; }
+
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
 
     public String getSex() { return sex; }
     public void setSex(String sex) { this.sex = sex; }

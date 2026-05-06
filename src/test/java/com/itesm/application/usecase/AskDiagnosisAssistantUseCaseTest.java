@@ -10,8 +10,9 @@ import com.itesm.application.security.CurrentUser;
 import com.itesm.application.usecase.exception.NotFoundException;
 import com.itesm.domain.models.Disease;
 import com.itesm.domain.models.Hospital;
+import com.itesm.domain.models.Municipality;
 import com.itesm.domain.models.Outbreak;
-import com.itesm.domain.models.Region;
+import com.itesm.domain.models.State;
 import com.itesm.domain.repository.HospitalRepository;
 import com.itesm.domain.repository.OutbreakRepository;
 import com.itesm.infrastructure.llm.LlmChatClient;
@@ -37,7 +38,8 @@ class AskDiagnosisAssistantUseCaseTest {
     private LlmChatClient llmChatClient;
 
     private final UUID hospitalId = UUID.fromString("30000000-0000-0000-0000-000000000001");
-    private final UUID regionId = UUID.fromString("40000000-0000-0000-0000-000000000001");
+    private final UUID stateId = UUID.fromString("40000000-0000-0000-0000-000000000019");
+    private final UUID municipalityId = UUID.fromString("42000000-0000-0000-0000-000000001003");
 
     @BeforeEach
     void setUp() {
@@ -60,25 +62,27 @@ class AskDiagnosisAssistantUseCaseTest {
 
         Hospital hospital = new Hospital();
         hospital.setId(hospitalId);
-        hospital.setRegionId(regionId);
+        hospital.setMunicipalityId(municipalityId);
+        hospital.setStateId(stateId);
+        hospital.setStateName("Nuevo Leon");
         Mockito.when(hospitalRepository.findHospitalById(hospitalId)).thenReturn(Optional.of(hospital));
 
         Mockito.when(llmChatClient.chat(Mockito.anyList())).thenReturn("Consider measles given local outbreak.");
     }
 
     @Test
-    void shouldQueryOutbreaksWithDoctorRegionId() {
-        Mockito.when(outbreakRepository.findActiveByRegionId(regionId)).thenReturn(List.of());
+    void shouldQueryOutbreaksWithDoctorMunicipalityScope() {
+        Mockito.when(outbreakRepository.findActiveByMunicipalityIdsOrStateId(List.of(municipalityId), stateId)).thenReturn(List.of());
 
         AssistantRequestDto request = buildRequest("Patient has fever and rash");
         useCase.execute(request);
 
-        Mockito.verify(outbreakRepository).findActiveByRegionId(regionId);
+        Mockito.verify(outbreakRepository).findActiveByMunicipalityIdsOrStateId(List.of(municipalityId), stateId);
     }
 
     @Test
     void shouldPrependSystemMessageBeforeDoctorTurns() {
-        Mockito.when(outbreakRepository.findActiveByRegionId(regionId)).thenReturn(List.of());
+        Mockito.when(outbreakRepository.findActiveByMunicipalityIdsOrStateId(List.of(municipalityId), stateId)).thenReturn(List.of());
 
         AssistantRequestDto request = buildRequest("Patient has fever");
         useCase.execute(request);
@@ -95,7 +99,7 @@ class AskDiagnosisAssistantUseCaseTest {
 
     @Test
     void shouldForwardPriorTurnsUnchanged() {
-        Mockito.when(outbreakRepository.findActiveByRegionId(regionId)).thenReturn(List.of());
+        Mockito.when(outbreakRepository.findActiveByMunicipalityIdsOrStateId(List.of(municipalityId), stateId)).thenReturn(List.of());
 
         AssistantMessageDto userMsg = new AssistantMessageDto();
         userMsg.setRole("user");
@@ -131,25 +135,29 @@ class AskDiagnosisAssistantUseCaseTest {
         disease.setName("Measles");
         disease.setSymptoms("Fever, rash, Koplik spots");
 
-        Region region = new Region();
-        region.setId(regionId);
-        region.setName("Región Norte");
+        State state = new State();
+        state.setId(stateId);
+        state.setName("Nuevo Leon");
 
         Outbreak outbreak = new Outbreak();
         outbreak.setId(UUID.randomUUID());
         outbreak.setDisease(disease);
-        outbreak.setRegion(region);
+        outbreak.setScope("STATE");
+        outbreak.setState(state);
         outbreak.setCaseCount(12);
+        outbreak.setConfirmationStatus("SUSPECTED");
         outbreak.setStartedAt(LocalDateTime.now().minusDays(3));
         outbreak.setStatus("ACTIVE");
 
-        Mockito.when(outbreakRepository.findActiveByRegionId(regionId)).thenReturn(List.of(outbreak));
+        Mockito.when(outbreakRepository.findActiveByMunicipalityIdsOrStateId(List.of(municipalityId), stateId)).thenReturn(List.of(outbreak));
 
         AssistantResponseDto response = useCase.execute(buildRequest("Patient has fever and spots"));
 
         AssistantContextDto ctx = response.getContextUsed();
         Assertions.assertEquals(1, ctx.getOutbreaks().size());
         Assertions.assertEquals("Measles", ctx.getOutbreaks().get(0).getDiseaseName());
+        Assertions.assertEquals("STATE", ctx.getOutbreaks().get(0).getScope());
+        Assertions.assertEquals("SUSPECTED", ctx.getOutbreaks().get(0).getConfirmationStatus());
         Assertions.assertEquals(12, ctx.getOutbreaks().get(0).getCaseCount());
     }
 
@@ -174,3 +182,4 @@ class AskDiagnosisAssistantUseCaseTest {
         return request;
     }
 }
+

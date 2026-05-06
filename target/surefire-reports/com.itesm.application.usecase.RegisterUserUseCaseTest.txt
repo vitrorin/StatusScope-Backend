@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.itesm.application.usecase.RegisterUserUseCaseTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.693 s -- in com.itesm.application.usecase.RegisterUserUseCaseTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.290 s -- in com.itesm.application.usecase.RegisterUserUseCaseTest
