@@ -5,8 +5,11 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 import java.util.List;
+import java.util.UUID;
 
 public class AssistantRequestDto {
+
+    private UUID evaluationId;
 
     @NotEmpty
     @Size(max = 20)
@@ -20,4 +23,7 @@ public class AssistantRequestDto {
 
     public PatientContextDto getPatientContext() { return patientContext; }
     public void setPatientContext(PatientContextDto patientContext) { this.patientContext = patientContext; }
+
+    public UUID getEvaluationId() { return evaluationId; }
+    public void setEvaluationId(UUID evaluationId) { this.evaluationId = evaluationId; }
 }
