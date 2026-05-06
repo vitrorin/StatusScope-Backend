@@ -154,6 +154,36 @@ class AskDiagnosisAssistantUseCaseTest {
     }
 
     @Test
+    void shouldThrowWhenLatestMessageIsNotFromUser() {
+        Mockito.when(outbreakRepository.findActiveByRegionId(regionId)).thenReturn(List.of());
+
+        AssistantMessageDto userMsg = new AssistantMessageDto();
+        userMsg.setRole("user");
+        userMsg.setContent("Initial question");
+
+        AssistantMessageDto assistantMsg = new AssistantMessageDto();
+        assistantMsg.setRole("assistant");
+        assistantMsg.setContent("Last reply");
+
+        AssistantRequestDto request = new AssistantRequestDto();
+        request.setMessages(List.of(userMsg, assistantMsg));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> useCase.execute(request));
+        Mockito.verifyNoInteractions(assistantChatGateway);
+    }
+
+    @Test
+    void shouldThrowNotFoundWhenHospitalDoesNotExist() {
+        Mockito.when(hospitalRepository.findHospitalById(hospitalId)).thenReturn(Optional.empty());
+
+        AssistantRequestDto request = buildRequest("Some question");
+
+        Assertions.assertThrows(NotFoundException.class, () -> useCase.execute(request));
+        Mockito.verifyNoInteractions(outbreakRepository);
+        Mockito.verifyNoInteractions(assistantChatGateway);
+    }
+
+    @Test
     void shouldThrowNotFoundWhenDoctorHasNoHospital() {
         CurrentUser noHospitalUser = new CurrentUser(
                 UUID.randomUUID(), "ext", "nohospital@test.local", "No Hospital",
