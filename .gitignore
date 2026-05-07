@@ -43,3 +43,13 @@ cloudrun.env
 
 
 .m2*
+
+# Data-ingestion working files
+tools/ingesta-datos/.data/
+tools/ingesta-datos/vendor/
+tools/ingesta-datos/**/__pycache__/
+
+# Data-ingestion working files
+tools/ingesta-datos/.data/
+tools/ingesta-datos/vendor/
+tools/ingesta-datos/**/__pycache__/

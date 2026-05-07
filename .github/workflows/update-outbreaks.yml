@@ -1,0 +1,54 @@
+name: Update outbreaks
+
+on:
+  schedule:
+    - cron: "0 14 * * 4"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-outbreaks:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ingestion dependencies
+        shell: pwsh
+        run: python -m pip install -r ".\tools\ingesta-datos\requirements.txt"
+
+      - name: Restore ingestion cache
+        uses: actions/cache@v4
+        with:
+          path: tools/ingesta-datos/.data/descargas_ingesta
+          key: outbreak-ingestion-cache-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            outbreak-ingestion-cache-${{ runner.os }}-
+
+      - name: Run outbreak ingestion
+        shell: pwsh
+        run: .\tools\ingesta-datos\actualizar_outbreaks.ps1 --force-state-check
+
+      - name: Commit updated outbreak CSVs
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "src/main/resources/data/outbreaks/municipal_outbreaks.csv" "src/main/resources/data/outbreaks/state_outbreaks.csv"
+          git diff --cached --quiet
+          if ($LASTEXITCODE -eq 1) {
+            git commit -m "Update outbreak data"
+            git push
+          } elseif ($LASTEXITCODE -eq 0) {
+            Write-Host "No outbreak data changes to commit."
+          } else {
+            exit $LASTEXITCODE
+          }
