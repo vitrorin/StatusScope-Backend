@@ -11,6 +11,7 @@ D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\dt
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\dto\DiagnosisEvaluationFileDto.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\dto\DiagnosisEvaluationPatientDto.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\dto\DiagnosisRecommendedTestDto.java
+D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\dto\DoctorDashboardSummaryDto.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\dto\HospitalGeoContextDto.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\dto\MyProfileDto.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\dto\OutbreakSummaryDto.java
@@ -36,6 +37,7 @@ D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\us
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\usecase\exception\NotFoundException.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\usecase\exception\OpenAiException.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\usecase\GetDiagnosisEvaluationUseCase.java
+D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\usecase\GetDoctorDashboardSummaryUseCase.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\usecase\GetMyProfileUseCase.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\usecase\HospitalGeoContextService.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\application\usecase\RegisterUserUseCase.java
@@ -113,6 +115,7 @@ D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\interfaces\res
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\interfaces\rest\AuthResource.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\interfaces\rest\DiagnosisAssistantResource.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\interfaces\rest\DiagnosisEvaluationResource.java
+D:\StatuScope\Backend\StatusScope-Backend\src\main\java\com\itesm\interfaces\rest\DoctorDashboardResource.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\db\migration\V1__seed_mexico_municipalities.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\db\migration\V3__seed_diseases_and_symptoms.java
 D:\StatuScope\Backend\StatusScope-Backend\src\main\java\db\migration\V4__seed_outbreaks.java
