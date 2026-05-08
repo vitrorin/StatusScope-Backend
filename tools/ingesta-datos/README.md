@@ -55,32 +55,6 @@ src/main/resources/data/outbreaks/municipal_outbreaks.csv
 src/main/resources/data/outbreaks/state_outbreaks.csv
 ```
 
-## Programar En Windows
-
-Para crear una tarea semanal local en el Programador de tareas de Windows:
-
-```powershell
-.\tools\ingesta-datos\instalar_tarea_outbreaks.ps1
-```
-
-Por defecto queda programada los jueves a las 08:00 y ejecuta:
-
-```powershell
-.\tools\ingesta-datos\actualizar_outbreaks.ps1 --force-state-check
-```
-
-Se puede cambiar dia u hora:
-
-```powershell
-.\tools\ingesta-datos\instalar_tarea_outbreaks.ps1 -DayOfWeek Monday -At "07:30"
-```
-
-Para eliminar la tarea:
-
-```powershell
-.\tools\ingesta-datos\instalar_tarea_outbreaks.ps1 -Remove
-```
-
 ## GitHub Actions
 
 El workflow `.github/workflows/update-outbreaks.yml` ejecuta la ingesta cada jueves a las 14:00 UTC, equivalente a las 08:00 en Mexico City, y tambien permite ejecucion manual desde `workflow_dispatch`.

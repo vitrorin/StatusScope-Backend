@@ -214,61 +214,86 @@ def tokenize_values(value_text: str) -> tuple[str, ...]:
 
 @lru_cache(maxsize=None)
 def parse_values(tokens: tuple[str, ...], expected_count: int) -> tuple[int | None, ...] | None:
+    candidates = parse_value_candidates(tokens, expected_count, strict=False)
+    if not candidates:
+        return None
+    return min(candidates, key=score_standard_hm_values)
+
+
+@lru_cache(maxsize=None)
+def parse_value_candidates(
+    tokens: tuple[str, ...],
+    expected_count: int,
+    *,
+    strict: bool,
+) -> tuple[tuple[int | None, ...], ...]:
     if expected_count < 0:
-        return None
+        return tuple()
     if not tokens:
-        return tuple() if expected_count == 0 else None
+        return (tuple(),) if expected_count == 0 else tuple()
     if expected_count == 0:
-        return None
+        return tuple()
 
     first = tokens[0]
+    candidates: list[tuple[int | None, ...]] = []
     if first == "-":
-        rest = parse_values(tokens[1:], expected_count - 1)
-        if rest is not None:
-            return (None,) + rest
-        skipped = parse_values(tokens[1:], expected_count)
-        if skipped is not None:
-            return skipped
-        return None
+        for rest in parse_value_candidates(tokens[1:], expected_count - 1, strict=strict):
+            candidates.append((None,) + rest)
+        if not strict:
+            candidates.extend(parse_value_candidates(tokens[1:], expected_count, strict=strict))
+        return tuple(candidates)
 
     if len(tokens) >= 2 and tokens[1].isdigit() and len(tokens[1]) == 3:
         combined = int(first + tokens[1])
-        rest = parse_values(tokens[2:], expected_count - 1)
-        if rest is not None:
-            return (combined,) + rest
+        for rest in parse_value_candidates(tokens[2:], expected_count - 1, strict=strict):
+            candidates.append((combined,) + rest)
 
-    rest = parse_values(tokens[1:], expected_count - 1)
-    if rest is not None:
-        return (int(first),) + rest
-    return None
+    for rest in parse_value_candidates(tokens[1:], expected_count - 1, strict=strict):
+        candidates.append((int(first),) + rest)
+    return tuple(candidates)
+
+
+def score_standard_hm_values(values: tuple[int | None, ...]) -> tuple[int, int, int]:
+    score = 0
+    large_values = 0
+    total_gap = 0
+
+    for group_start in range(0, len(values), 4):
+        group = values[group_start : group_start + 4]
+        if len(group) != 4:
+            break
+
+        weekly, male_cases, female_cases, prior_year_cases = (value or 0 for value in group)
+        current_total = male_cases + female_cases
+        if prior_year_cases:
+            gap = abs(prior_year_cases - current_total)
+            total_gap += gap
+            if current_total and gap > max(5, int(current_total * 0.2)):
+                score += 25
+            if male_cases > prior_year_cases:
+                score += 1_000
+            if female_cases > prior_year_cases:
+                score += 1_000
+        elif current_total:
+            score += 10
+
+        if weekly > current_total and current_total:
+            score += 250
+        smaller_sex_count = min(male_cases, female_cases)
+        larger_sex_count = max(male_cases, female_cases)
+        if smaller_sex_count and larger_sex_count >= 10_000 and larger_sex_count > smaller_sex_count * 20:
+            score += 1_500
+        large_values += sum(1 for value in group if value and value >= 100_000)
+
+    return (score, large_values, total_gap)
 
 
 @lru_cache(maxsize=None)
 def parse_values_strict(tokens: tuple[str, ...], expected_count: int) -> tuple[int | None, ...] | None:
-    if expected_count < 0:
+    candidates = parse_value_candidates(tokens, expected_count, strict=True)
+    if not candidates:
         return None
-    if not tokens:
-        return tuple() if expected_count == 0 else None
-    if expected_count == 0:
-        return None
-
-    first = tokens[0]
-    if first == "-":
-        rest = parse_values_strict(tokens[1:], expected_count - 1)
-        if rest is not None:
-            return (None,) + rest
-        return None
-
-    if len(tokens) >= 2 and tokens[1].isdigit() and len(tokens[1]) == 3:
-        combined = int(first + tokens[1])
-        rest = parse_values_strict(tokens[2:], expected_count - 1)
-        if rest is not None:
-            return (combined,) + rest
-
-    rest = parse_values_strict(tokens[1:], expected_count - 1)
-    if rest is not None:
-        return (int(first),) + rest
-    return None
+    return min(candidates, key=score_standard_hm_values)
 
 
 def extract_hiv_stage_rows(
