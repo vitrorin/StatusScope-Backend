@@ -10,12 +10,14 @@ import com.itesm.application.usecase.GetDoctorDashboardSummaryUseCase;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Path("/doctor/dashboard")
 @Produces(MediaType.APPLICATION_JSON)
@@ -47,7 +49,27 @@ public class DoctorDashboardResource {
         return Response.ok(new MapResponse(
                 summary.getZones(),
                 summary.getDiseaseBreakdown(),
-                summary.getGeneratedAt())).build();
+                summary.getGeneratedAt(),
+                summary.getRadiusKm())).build();
+    }
+
+    @GET
+    @Path("/map/states")
+    @RequiresPrivilege("diagnosis.assist")
+    public Response stateMap() {
+        return Response.ok(new StateMapResponse(getDoctorDashboardSummaryUseCase.listStateMap())).build();
+    }
+
+    @GET
+    @Path("/map/states/{stateId}/outbreaks")
+    @RequiresPrivilege("diagnosis.assist")
+    public Response stateOutbreakMap(@PathParam("stateId") UUID stateId) {
+        DoctorDashboardSummaryDto summary = getDoctorDashboardSummaryUseCase.stateMap(stateId);
+        return Response.ok(new MapResponse(
+                summary.getZones(),
+                summary.getDiseaseBreakdown(),
+                summary.getGeneratedAt(),
+                0)).build();
     }
 
     @GET
@@ -63,7 +85,10 @@ public class DoctorDashboardResource {
     @RequiresPrivilege("diagnosis.assist")
     public Response localDiseaseBreakdown() {
         DoctorDashboardSummaryDto summary = getDoctorDashboardSummaryUseCase.execute();
-        return Response.ok(new DiseaseBreakdownResponse(summary.getDiseaseBreakdown(), summary.getStateName())).build();
+        return Response.ok(new DiseaseBreakdownResponse(
+                summary.getDiseaseBreakdown(),
+                summary.getStateName(),
+                summary.getMunicipalityName())).build();
     }
 
     @GET
@@ -71,7 +96,10 @@ public class DoctorDashboardResource {
     @RequiresPrivilege("diagnosis.assist")
     public Response stateDiseaseBreakdown() {
         DoctorDashboardSummaryDto summary = getDoctorDashboardSummaryUseCase.execute();
-        return Response.ok(new DiseaseBreakdownResponse(summary.getStateDiseaseBreakdown(), summary.getStateName())).build();
+        return Response.ok(new DiseaseBreakdownResponse(
+                summary.getStateDiseaseBreakdown(),
+                summary.getStateName(),
+                summary.getMunicipalityName())).build();
     }
 
     public record MetricsResponse(List<DoctorDashboardMetricDto> metrics, String hospitalName) {}
@@ -79,10 +107,13 @@ public class DoctorDashboardResource {
     public record MapResponse(
             List<DoctorDashboardZoneDto> zones,
             List<DoctorDashboardDiseaseDto> diseaseBreakdown,
-            LocalDateTime generatedAt
+            LocalDateTime generatedAt,
+            double radiusKm
     ) {}
 
     public record AlertsResponse(List<DoctorDashboardAlertDto> alerts) {}
 
-    public record DiseaseBreakdownResponse(List<DoctorDashboardDiseaseDto> diseaseBreakdown, String stateName) {}
+    public record DiseaseBreakdownResponse(List<DoctorDashboardDiseaseDto> diseaseBreakdown, String stateName, String municipalityName) {}
+
+    public record StateMapResponse(List<GetDoctorDashboardSummaryUseCase.DoctorDashboardStateMapDto> states) {}
 }

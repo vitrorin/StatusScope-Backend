@@ -3,6 +3,7 @@ package com.itesm.application.usecase;
 import com.itesm.application.dto.DoctorDashboardSummaryDto;
 import com.itesm.application.dto.DoctorDashboardSummaryDto.DoctorDashboardAlertDto;
 import com.itesm.application.dto.DoctorDashboardSummaryDto.DoctorDashboardDiseaseDto;
+import com.itesm.application.dto.DoctorDashboardSummaryDto.DoctorDashboardMetricInsightDto;
 import com.itesm.application.dto.DoctorDashboardSummaryDto.DoctorDashboardMetricDto;
 import com.itesm.application.dto.DoctorDashboardSummaryDto.DoctorDashboardZoneDto;
 import com.itesm.application.dto.HospitalGeoContextDto;
@@ -10,8 +11,10 @@ import com.itesm.application.security.AuthenticatedUserContext;
 import com.itesm.application.security.CurrentUser;
 import com.itesm.application.usecase.exception.NotFoundException;
 import com.itesm.domain.models.Hospital;
+import com.itesm.domain.models.Municipality;
 import com.itesm.domain.models.Outbreak;
 import com.itesm.domain.repository.HospitalRepository;
+import com.itesm.domain.repository.MunicipalityRepository;
 import com.itesm.domain.repository.OutbreakRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -22,11 +25,25 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class GetDoctorDashboardSummaryUseCase {
+    private static final Set<String> PRIORITY_DISEASES = Set.of(
+            "covid 19",
+            "dengue fever",
+            "dengue severe",
+            "hiv aids",
+            "influenza",
+            "malaria",
+            "measles",
+            "meningitis",
+            "mpox",
+            "tuberculosis",
+            "whooping cough"
+    );
 
     @Inject
     AuthenticatedUserContext authenticatedUserContext;
@@ -36,6 +53,9 @@ public class GetDoctorDashboardSummaryUseCase {
 
     @Inject
     OutbreakRepository outbreakRepository;
+
+    @Inject
+    MunicipalityRepository municipalityRepository;
 
     @Inject
     HospitalGeoContextService hospitalGeoContextService;
@@ -67,11 +87,47 @@ public class GetDoctorDashboardSummaryUseCase {
         summary.setStateName(hospital.getStateName());
         summary.setRadiusKm(geoContext.getRadiusKm());
         summary.setGeneratedAt(LocalDateTime.now());
-        summary.setMetrics(buildMetrics(hospital, totalCases, outbreaks.size(), topDisease, geoContext.getRadiusKm()));
+        summary.setMetrics(buildMetrics(hospital, totalCases, outbreaks.size(), topDisease, geoContext, outbreaks));
         summary.setDiseaseBreakdown(diseaseBreakdown);
         summary.setStateDiseaseBreakdown(stateDiseaseBreakdown);
         summary.setAlerts(buildAlerts(outbreaks));
-        summary.setZones(buildZones(outbreaks, geoContext));
+        summary.setZones(buildZones(outbreaks, geoContext, hospital));
+        return summary;
+    }
+
+    public List<DoctorDashboardStateMapDto> listStateMap() {
+        Map<UUID, StateAggregate> states = new LinkedHashMap<>();
+        for (Municipality municipality : municipalityRepository.listAllDomain()) {
+            if (municipality.getStateId() == null || municipality.getLatitude() == null || municipality.getLongitude() == null) {
+                continue;
+            }
+            states.computeIfAbsent(
+                    municipality.getStateId(),
+                    id -> new StateAggregate(id, municipality.getStateName()))
+                    .addMunicipality(municipality);
+        }
+
+        for (Outbreak outbreak : outbreakRepository.findAllActiveMunicipal()) {
+            if (outbreak.getMunicipality() == null || outbreak.getMunicipality().getStateId() == null) continue;
+            StateAggregate aggregate = states.get(outbreak.getMunicipality().getStateId());
+            if (aggregate != null) {
+                aggregate.addOutbreak(outbreak);
+            }
+        }
+
+        return states.values().stream()
+                .filter(StateAggregate::hasCoordinates)
+                .sorted(Comparator.comparing(StateAggregate::stateName))
+                .map(StateAggregate::toDto)
+                .toList();
+    }
+
+    public DoctorDashboardSummaryDto stateMap(UUID stateId) {
+        List<Outbreak> outbreaks = outbreakRepository.findActiveMunicipalByStateId(stateId);
+        DoctorDashboardSummaryDto summary = new DoctorDashboardSummaryDto();
+        summary.setGeneratedAt(LocalDateTime.now());
+        summary.setDiseaseBreakdown(buildDiseaseBreakdown(outbreaks));
+        summary.setZones(buildZones(outbreaks, null, null));
         return summary;
     }
 
@@ -80,12 +136,18 @@ public class GetDoctorDashboardSummaryUseCase {
             int totalCases,
             int outbreakCount,
             DoctorDashboardDiseaseDto topDisease,
-            double radiusKm
+            HospitalGeoContextDto geoContext,
+            List<Outbreak> outbreaks
     ) {
+        double radiusKm = geoContext.getRadiusKm();
         String roundedRadius = String.valueOf(Math.round(radiusKm));
         String topDiseaseName = topDisease == null ? "No active outbreaks" : topDisease.getDiseaseName();
         String topDiseaseCases = topDisease == null ? "0 cases" : formatCount(topDisease.getCaseCount()) + " cases";
-        String riskLabel = riskLabel(outbreakCount, totalCases);
+        DashboardSeverity contextSeverity = evaluateContextSeverity(totalCases, outbreakCount);
+        DashboardSeverity topDiseaseSeverity = topDisease == null
+                ? DashboardSeverity.LOW
+                : evaluateAggregateSeverity(topDisease.getDiseaseName(), topDisease.getCaseCount(), topDisease.getOutbreakCount());
+        String riskLabel = contextSeverity.label(outbreakCount == 0 && totalCases == 0);
         String capacityValue = hospital.getBedCount() == null ? "Not configured" : formatCount(hospital.getBedCount()) + " beds";
         String staffingBadge = hospital.getDoctorCount() == null && hospital.getNurseCount() == null
                 ? "Staff pending"
@@ -97,36 +159,39 @@ public class GetDoctorDashboardSummaryUseCase {
                 new DoctorDashboardMetricDto(
                         "active-cases-nearby",
                         "Active Cases Nearby",
-                        formatCount(totalCases),
+                        formatCount(totalCases) + (totalCases == 1 ? " case" : " cases"),
                         roundedRadius + " km",
-                        totalCases > 0 ? "warning" : "positive",
+                        severityStatus(contextSeverity),
                         "Active outbreak cases in hospital context",
                         "Sum of active municipal outbreaks in the hospital radius plus active state-level outbreaks for the hospital state.",
                         totalCases > 0 ? "Active regional load" : "No active regional load",
                         "Keep triage aligned with diseases currently active near the hospital.",
-                        null),
+                        null,
+                        topSevereOutbreakInsights(outbreaks)),
                 new DoctorDashboardMetricDto(
                         "highest-case-disease",
                         "Highest Case Disease",
                         topDiseaseName,
                         topDiseaseCases,
-                        topDisease == null ? "neutral" : "danger",
+                        topDisease == null ? "neutral" : severityStatus(topDiseaseSeverity),
                         "Largest active case count in current context",
                         "This replaces projected growth until weekly historical series are available.",
                         topDisease == null ? "No disease signal" : "Largest current burden",
                         "Use this signal as epidemiological context, not as a standalone diagnosis.",
-                        "trend"),
+                        "trend",
+                        topDiseaseLocationInsights(outbreaks, topDisease == null ? null : topDisease.getDiseaseName())),
                 new DoctorDashboardMetricDto(
                         "local-risk-level",
                         "Local Risk Level",
                         outbreakCount + " active outbreaks",
                         riskLabel,
-                        riskStatus(riskLabel),
+                        severityStatus(contextSeverity),
                         "Based on active outbreak count and total cases",
                         "Risk is derived from active outbreak volume in the hospital geographic context.",
                         riskLabel + " pressure",
                         "Review nearby outbreaks before evaluating compatible symptoms.",
-                        null),
+                        null,
+                        nearestOutbreakInsights(outbreaks, geoContext)),
                 new DoctorDashboardMetricDto(
                         "hospital-profile",
                         "Hospital Profile",
@@ -137,8 +202,93 @@ public class GetDoctorDashboardSummaryUseCase {
                         "This is configured hospital capacity, not live bed occupancy.",
                         "Facility baseline",
                         "Connect bed occupancy and staffing shifts later for real operational capacity.",
-                        null)
+                        null,
+                        hospitalProfileInsights(hospital))
         );
+    }
+
+    private List<DoctorDashboardMetricInsightDto> topSevereOutbreakInsights(List<Outbreak> outbreaks) {
+        return outbreaks.stream()
+                .filter(outbreak -> outbreak.getDisease() != null)
+                .sorted(Comparator
+                        .comparingInt((Outbreak outbreak) -> severityRank(evaluateOutbreakSeverity(outbreak))).reversed()
+                        .thenComparing(Comparator.comparingInt(Outbreak::getCaseCount).reversed()))
+                .limit(5)
+                .map(outbreak -> insightForOutbreak(outbreak, null))
+                .toList();
+    }
+
+    private List<DoctorDashboardMetricInsightDto> topDiseaseLocationInsights(List<Outbreak> outbreaks, String diseaseName) {
+        if (diseaseName == null) return List.of();
+        return outbreaks.stream()
+                .filter(outbreak -> outbreak.getDisease() != null)
+                .filter(outbreak -> diseaseName.equals(outbreak.getDisease().getName()))
+                .sorted(Comparator.comparingInt(Outbreak::getCaseCount).reversed())
+                .limit(5)
+                .map(outbreak -> insightForOutbreak(outbreak, null))
+                .toList();
+    }
+
+    private List<DoctorDashboardMetricInsightDto> nearestOutbreakInsights(List<Outbreak> outbreaks, HospitalGeoContextDto geoContext) {
+        if (geoContext.getLatitude() == null || geoContext.getLongitude() == null) return List.of();
+        double hospitalLatitude = geoContext.getLatitude().doubleValue();
+        double hospitalLongitude = geoContext.getLongitude().doubleValue();
+        return outbreaks.stream()
+                .filter(outbreak -> outbreak.getMunicipality() != null)
+                .filter(outbreak -> outbreak.getMunicipality().getLatitude() != null && outbreak.getMunicipality().getLongitude() != null)
+                .sorted(Comparator.comparingDouble(outbreak -> distanceKm(
+                        hospitalLatitude,
+                        hospitalLongitude,
+                        outbreak.getMunicipality().getLatitude().doubleValue(),
+                        outbreak.getMunicipality().getLongitude().doubleValue())))
+                .limit(5)
+                .map(outbreak -> {
+                    double distance = distanceKm(
+                            hospitalLatitude,
+                            hospitalLongitude,
+                            outbreak.getMunicipality().getLatitude().doubleValue(),
+                            outbreak.getMunicipality().getLongitude().doubleValue());
+                    return insightForOutbreak(outbreak, "%.1f km from hospital".formatted(distance));
+                })
+                .toList();
+    }
+
+    private List<DoctorDashboardMetricInsightDto> hospitalProfileInsights(Hospital hospital) {
+        return List.of(
+                new DoctorDashboardMetricInsightDto(
+                        "Registered beds",
+                        hospital.getName(),
+                        hospital.getBedCount() == null ? "Not configured" : formatCount(hospital.getBedCount()),
+                        "Capacity",
+                        "#0003B8",
+                        "Configured facility baseline"),
+                new DoctorDashboardMetricInsightDto(
+                        "Doctors",
+                        hospital.getName(),
+                        hospital.getDoctorCount() == null ? "0" : formatCount(hospital.getDoctorCount()),
+                        "Staff",
+                        "#64748B",
+                        "Registered clinical staff"),
+                new DoctorDashboardMetricInsightDto(
+                        "Nurses",
+                        hospital.getName(),
+                        hospital.getNurseCount() == null ? "0" : formatCount(hospital.getNurseCount()),
+                        "Staff",
+                        "#64748B",
+                        "Registered nursing staff")
+        );
+    }
+
+    private DoctorDashboardMetricInsightDto insightForOutbreak(Outbreak outbreak, String metaOverride) {
+        DashboardSeverity severity = evaluateOutbreakSeverity(outbreak);
+        String disease = outbreak.getDisease() == null ? "Unknown disease" : outbreak.getDisease().getName();
+        return new DoctorDashboardMetricInsightDto(
+                disease,
+                locationWithState(outbreak),
+                formatCount(outbreak.getCaseCount()) + (outbreak.getCaseCount() == 1 ? " case" : " cases"),
+                severity.label(false),
+                colorForSeverity(severity),
+                metaOverride == null ? outbreak.getConfirmationStatus() : metaOverride);
     }
 
     private List<DoctorDashboardDiseaseDto> buildDiseaseBreakdown(List<Outbreak> outbreaks) {
@@ -167,12 +317,15 @@ public class GetDoctorDashboardSummaryUseCase {
     private List<DoctorDashboardAlertDto> buildAlerts(List<Outbreak> outbreaks) {
         return outbreaks.stream()
                 .filter(outbreak -> outbreak.getDisease() != null)
-                .sorted(Comparator.comparingInt(Outbreak::getCaseCount).reversed())
-                .limit(4)
+                .sorted(Comparator
+                        .comparingInt((Outbreak outbreak) -> severityRank(evaluateOutbreakSeverity(outbreak))).reversed()
+                        .thenComparing(Comparator.comparingInt(Outbreak::getCaseCount).reversed()))
+                .limit(24)
                 .map(outbreak -> {
                     String disease = outbreak.getDisease().getName();
                     String location = locationLabel(outbreak);
-                    String variant = alertVariant(outbreak.getCaseCount(), outbreak.getConfirmationStatus());
+                    DashboardSeverity severity = evaluateOutbreakSeverity(outbreak);
+                    String variant = alertVariant(severity);
                     return new DoctorDashboardAlertDto(
                             outbreak.getId().toString(),
                             disease + " activity",
@@ -183,18 +336,26 @@ public class GetDoctorDashboardSummaryUseCase {
                                     outbreak.getConfirmationStatus()),
                             variant,
                             location,
-                            alertPriority(variant),
-                            "Compare compatible patient symptoms against this active outbreak before closing the evaluation.");
+                            alertPriority(severity),
+                            "Compare compatible patient symptoms against this active outbreak before closing the evaluation.",
+                            outbreak.getCaseCount(),
+                            formatCount(outbreak.getCaseCount()) + (outbreak.getCaseCount() == 1 ? " active case" : " active cases"),
+                            outbreak.getConfirmationStatus(),
+                            outbreak.getMunicipality() == null ? null : outbreak.getMunicipality().getName(),
+                            outbreak.getMunicipality() == null ? (outbreak.getState() == null ? null : outbreak.getState().getName()) : outbreak.getMunicipality().getStateName());
                 })
                 .collect(Collectors.toList());
     }
 
-    private List<DoctorDashboardZoneDto> buildZones(List<Outbreak> outbreaks, HospitalGeoContextDto geoContext) {
+    private List<DoctorDashboardZoneDto> buildZones(List<Outbreak> outbreaks, HospitalGeoContextDto geoContext, Hospital hospital) {
         List<DoctorDashboardZoneDto> zones = new ArrayList<>();
-        if (geoContext.getLatitude() != null && geoContext.getLongitude() != null) {
+        if (geoContext != null && geoContext.getLatitude() != null && geoContext.getLongitude() != null) {
+            String hospitalName = hospital == null || hospital.getName() == null || hospital.getName().isBlank()
+                    ? "Hospital node"
+                    : hospital.getName();
             zones.add(new DoctorDashboardZoneDto(
                     "hospital-node",
-                    geoContext.getMunicipalityName() == null ? "Hospital node" : geoContext.getMunicipalityName() + " hospital node",
+                    hospitalName,
                     "Monitored",
                     "Hospital context",
                     "Current facility",
@@ -202,6 +363,8 @@ public class GetDoctorDashboardSummaryUseCase {
                     "Operational review",
                     "Reference point for nearby outbreak context.",
                     "Use this point as the center of the doctor dashboard surveillance radius.",
+                    geoContext.getMunicipalityName(),
+                    geoContext.getStateName(),
                     geoContext.getLatitude(),
                     geoContext.getLongitude(),
                     "#0003B8"));
@@ -211,60 +374,125 @@ public class GetDoctorDashboardSummaryUseCase {
                 .filter(outbreak -> outbreak.getDisease() != null)
                 .filter(outbreak -> outbreak.getMunicipality() != null)
                 .filter(outbreak -> outbreak.getMunicipality().getLatitude() != null && outbreak.getMunicipality().getLongitude() != null)
-                .sorted(Comparator.comparingInt(Outbreak::getCaseCount).reversed())
-                .limit(5)
-                .forEach(outbreak -> zones.add(new DoctorDashboardZoneDto(
-                        outbreak.getId().toString(),
-                        outbreak.getMunicipality().getName(),
-                        riskLabel(1, outbreak.getCaseCount()),
-                        outbreak.getDisease().getName(),
-                        formatCount(outbreak.getCaseCount()) + " active cases",
-                        "Within " + Math.round(geoContext.getRadiusKm()) + " km",
-                        alertPriority(alertVariant(outbreak.getCaseCount(), outbreak.getConfirmationStatus())),
-                        "Municipal outbreak signal in the hospital context radius.",
-                        "Keep this disease in the differential when symptoms overlap.",
-                        outbreak.getMunicipality().getLatitude(),
-                        outbreak.getMunicipality().getLongitude(),
-                        colorForCaseCount(outbreak.getCaseCount()))));
+                .sorted(Comparator
+                        .comparingInt((Outbreak outbreak) -> severityRank(evaluateOutbreakSeverity(outbreak))).reversed()
+                        .thenComparing(Comparator.comparingInt(Outbreak::getCaseCount).reversed()))
+                .forEach(outbreak -> {
+                    DashboardSeverity severity = evaluateOutbreakSeverity(outbreak);
+                    String radiusLabel = "";
+                    if (geoContext != null
+                            && geoContext.getLatitude() != null
+                            && geoContext.getLongitude() != null
+                            && outbreak.getMunicipality().getLatitude() != null
+                            && outbreak.getMunicipality().getLongitude() != null) {
+                        double distance = distanceKm(
+                                geoContext.getLatitude().doubleValue(),
+                                geoContext.getLongitude().doubleValue(),
+                                outbreak.getMunicipality().getLatitude().doubleValue(),
+                                outbreak.getMunicipality().getLongitude().doubleValue());
+                        radiusLabel = "Within " + Math.max(1, Math.round(distance)) + " km";
+                    }
+                    zones.add(new DoctorDashboardZoneDto(
+                            outbreak.getId().toString(),
+                            outbreak.getMunicipality().getName(),
+                            severity.label(false),
+                            outbreak.getDisease().getName(),
+                            formatCount(outbreak.getCaseCount()) + " active cases",
+                            radiusLabel,
+                            alertPriority(severity),
+                            "Municipal outbreak signal in the hospital context radius.",
+                            "Keep this disease in the differential when symptoms overlap.",
+                            outbreak.getMunicipality().getName(),
+                            outbreak.getMunicipality().getStateName(),
+                            outbreak.getMunicipality().getLatitude(),
+                            outbreak.getMunicipality().getLongitude(),
+                            colorForSeverity(severity)));
+                });
         return zones;
     }
 
-    private String riskLabel(int outbreakCount, int totalCases) {
-        if (outbreakCount >= 10 || totalCases >= 500) return "High";
-        if (outbreakCount >= 4 || totalCases >= 100) return "Moderate";
-        if (outbreakCount > 0) return "Low";
-        return "Clear";
+    private DashboardSeverity evaluateContextSeverity(int totalCases, int outbreakCount) {
+        if (outbreakCount >= 10 || totalCases >= 500) return DashboardSeverity.HIGH;
+        if (outbreakCount >= 4 || totalCases >= 100) return DashboardSeverity.MODERATE;
+        return DashboardSeverity.LOW;
     }
 
-    private String riskStatus(String riskLabel) {
-        return switch (riskLabel) {
-            case "High" -> "danger";
-            case "Moderate" -> "warning";
-            case "Low" -> "neutral";
-            default -> "positive";
+    private DashboardSeverity evaluateAggregateSeverity(String diseaseName, int caseCount, int outbreakCount) {
+        if (outbreakCount >= 10 || caseCount >= 500 || isPriorityDisease(diseaseName) && caseCount >= 25) {
+            return DashboardSeverity.HIGH;
+        }
+        if (outbreakCount >= 4 || caseCount >= 100 || caseCount >= 10) {
+            return DashboardSeverity.MODERATE;
+        }
+        return DashboardSeverity.LOW;
+    }
+
+    private DashboardSeverity evaluateOutbreakSeverity(Outbreak outbreak) {
+        int caseCount = outbreak.getCaseCount();
+        String confirmationStatus = outbreak.getConfirmationStatus();
+        String diseaseName = outbreak.getDisease() == null ? "" : outbreak.getDisease().getName();
+        boolean confirmed = "CONFIRMED".equals(confirmationStatus);
+
+        if (confirmed && caseCount >= 100) return DashboardSeverity.HIGH;
+        if (confirmed && isPriorityDisease(diseaseName) && caseCount >= 25) return DashboardSeverity.HIGH;
+        if (confirmed && caseCount >= 10) return DashboardSeverity.MODERATE;
+        if (!confirmed && caseCount >= 25) return DashboardSeverity.MODERATE;
+        return DashboardSeverity.LOW;
+    }
+
+    private String severityStatus(DashboardSeverity severity) {
+        return switch (severity) {
+            case HIGH -> "danger";
+            case MODERATE -> "warning";
+            case LOW -> "positive";
         };
     }
 
-    private String alertVariant(int caseCount, String confirmationStatus) {
-        if (caseCount >= 100 && "CONFIRMED".equals(confirmationStatus)) return "critical";
-        if (caseCount >= 25) return "warning";
-        if ("CONFIRMED".equals(confirmationStatus)) return "info";
-        return "neutral";
-    }
-
-    private String alertPriority(String variant) {
-        return switch (variant) {
-            case "critical" -> "Immediate";
-            case "warning" -> "High";
-            case "info" -> "Review";
-            default -> "Routine";
+    private String alertVariant(DashboardSeverity severity) {
+        return switch (severity) {
+            case HIGH -> "critical";
+            case MODERATE -> "warning";
+            case LOW -> "success";
         };
     }
 
-    private String colorForCaseCount(int caseCount) {
-        if (caseCount >= 100) return "#EF4444";
-        if (caseCount >= 25) return "#F97316";
-        return "#FB923C";
+    private String alertPriority(DashboardSeverity severity) {
+        return switch (severity) {
+            case HIGH -> "Immediate";
+            case MODERATE -> "High";
+            case LOW -> "Routine";
+        };
+    }
+
+    private int severityRank(DashboardSeverity severity) {
+        return switch (severity) {
+            case HIGH -> 3;
+            case MODERATE -> 2;
+            case LOW -> 1;
+        };
+    }
+
+    private String colorForSeverity(DashboardSeverity severity) {
+        return switch (severity) {
+            case HIGH -> "#EF4444";
+            case MODERATE -> "#F97316";
+            case LOW -> "#22C55E";
+        };
+    }
+
+    private boolean isPriorityDisease(String diseaseName) {
+        return PRIORITY_DISEASES.contains(normalizeDiseaseName(diseaseName));
+    }
+
+    private String normalizeDiseaseName(String diseaseName) {
+        String normalized = java.text.Normalizer.normalize(diseaseName == null ? "" : diseaseName, java.text.Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "")
+                .replaceAll("[^A-Za-z0-9]+", " ")
+                .trim()
+                .toLowerCase();
+        if ("hiv aids".equals(normalized) || "hiv".equals(normalized)) return "hiv aids";
+        if ("covid 19".equals(normalized) || "covid".equals(normalized)) return "covid 19";
+        return normalized;
     }
 
     private String locationLabel(Outbreak outbreak) {
@@ -275,6 +503,30 @@ public class GetDoctorDashboardSummaryUseCase {
             return outbreak.getState().getName();
         }
         return "hospital region";
+    }
+
+    private String locationWithState(Outbreak outbreak) {
+        if (outbreak.getMunicipality() != null) {
+            String stateName = outbreak.getMunicipality().getStateName();
+            return stateName == null || stateName.isBlank()
+                    ? outbreak.getMunicipality().getName()
+                    : outbreak.getMunicipality().getName() + ", " + stateName;
+        }
+        if (outbreak.getState() != null) {
+            return outbreak.getState().getName();
+        }
+        return "hospital region";
+    }
+
+    private double distanceKm(double latitudeA, double longitudeA, double latitudeB, double longitudeB) {
+        double earthRadiusKm = 6371.0;
+        double dLat = Math.toRadians(latitudeB - latitudeA);
+        double dLon = Math.toRadians(longitudeB - longitudeA);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(Math.toRadians(latitudeA)) * Math.cos(Math.toRadians(latitudeB))
+                * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return earthRadiusKm * c;
     }
 
     private String formatCount(int value) {
@@ -298,5 +550,72 @@ public class GetDoctorDashboardSummaryUseCase {
         String diseaseName() { return diseaseName; }
         int caseCount() { return caseCount; }
         int outbreakCount() { return outbreakCount; }
+    }
+
+    public record DoctorDashboardStateMapDto(
+            UUID stateId,
+            String stateName,
+            double latitude,
+            double longitude,
+            int outbreakCount,
+            int caseCount
+    ) {}
+
+    private static class StateAggregate {
+        private final UUID stateId;
+        private final String stateName;
+        private double latitudeSum;
+        private double longitudeSum;
+        private int municipalityCount;
+        private int outbreakCount;
+        private int caseCount;
+
+        StateAggregate(UUID stateId, String stateName) {
+            this.stateId = stateId;
+            this.stateName = stateName;
+        }
+
+        void addMunicipality(Municipality municipality) {
+            latitudeSum += municipality.getLatitude().doubleValue();
+            longitudeSum += municipality.getLongitude().doubleValue();
+            municipalityCount++;
+        }
+
+        void addOutbreak(Outbreak outbreak) {
+            outbreakCount++;
+            caseCount += outbreak.getCaseCount();
+        }
+
+        boolean hasCoordinates() {
+            return municipalityCount > 0;
+        }
+
+        String stateName() {
+            return stateName;
+        }
+
+        DoctorDashboardStateMapDto toDto() {
+            return new DoctorDashboardStateMapDto(
+                    stateId,
+                    stateName,
+                    latitudeSum / municipalityCount,
+                    longitudeSum / municipalityCount,
+                    outbreakCount,
+                    caseCount);
+        }
+    }
+
+    private enum DashboardSeverity {
+        LOW,
+        MODERATE,
+        HIGH;
+
+        String label(boolean clearWhenLow) {
+            return switch (this) {
+                case HIGH -> "High";
+                case MODERATE -> "Moderate";
+                case LOW -> clearWhenLow ? "Clear" : "Low";
+            };
+        }
     }
 }

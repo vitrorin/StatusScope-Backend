@@ -17,6 +17,49 @@ public class OutbreakRepositoryImpl implements OutbreakRepository, PanacheReposi
     private static final UUID NO_MUNICIPALITY_MATCH = new UUID(0, 0);
 
     @Override
+    public List<Outbreak> findAllActiveMunicipal() {
+        return getEntityManager()
+                .createQuery("""
+                        select distinct o
+                        from OutbreakEntity o
+                        join fetch o.disease d
+                        left join fetch d.symptoms
+                        join fetch o.municipality m
+                        left join fetch m.state
+                        where o.status = :status
+                          and o.scope = 'MUNICIPALITY'
+                        """, OutbreakEntity.class)
+                .setParameter("status", "ACTIVE")
+                .getResultList()
+                .stream()
+                .map(OutbreakMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Outbreak> findActiveMunicipalByStateId(UUID stateId) {
+        if (stateId == null) return List.of();
+        return getEntityManager()
+                .createQuery("""
+                        select distinct o
+                        from OutbreakEntity o
+                        join fetch o.disease d
+                        left join fetch d.symptoms
+                        join fetch o.municipality m
+                        left join fetch m.state s
+                        where o.status = :status
+                          and o.scope = 'MUNICIPALITY'
+                          and s.id = :stateId
+                        """, OutbreakEntity.class)
+                .setParameter("status", "ACTIVE")
+                .setParameter("stateId", stateId)
+                .getResultList()
+                .stream()
+                .map(OutbreakMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Outbreak> findActiveByMunicipalityIds(List<UUID> municipalityIds) {
         return findActiveByMunicipalityIdsOrStateId(municipalityIds, null).stream()
                 .filter(outbreak -> "MUNICIPALITY".equals(outbreak.getScope()))
