@@ -61,6 +61,10 @@ public class GetDoctorDashboardSummaryUseCase {
     HospitalGeoContextService hospitalGeoContextService;
 
     public DoctorDashboardSummaryDto execute() {
+        return execute(null);
+    }
+
+    public DoctorDashboardSummaryDto execute(Double radiusKmOverride) {
         CurrentUser currentUser = authenticatedUserContext.getCurrentUser();
         UUID hospitalId = currentUser.getHospitalId();
         if (hospitalId == null) {
@@ -70,7 +74,9 @@ public class GetDoctorDashboardSummaryUseCase {
         Hospital hospital = hospitalRepository.findHospitalById(hospitalId)
                 .orElseThrow(() -> new NotFoundException("Hospital not found for id: " + hospitalId));
 
-        HospitalGeoContextDto geoContext = hospitalGeoContextService.resolve(hospital);
+        HospitalGeoContextDto geoContext = radiusKmOverride == null
+                ? hospitalGeoContextService.resolve(hospital)
+                : hospitalGeoContextService.resolve(hospital, radiusKmOverride);
         List<Outbreak> outbreaks = outbreakRepository.findActiveByMunicipalityIds(geoContext.getIncludedMunicipalityIds());
         List<Outbreak> stateOutbreaks = outbreakRepository.findActiveByMunicipalityIdsOrStateId(
                 List.of(),
@@ -129,6 +135,60 @@ public class GetDoctorDashboardSummaryUseCase {
         summary.setDiseaseBreakdown(buildDiseaseBreakdown(outbreaks));
         summary.setZones(buildZones(outbreaks, null, null));
         return summary;
+    }
+
+    public DoctorDashboardReportDto report(String scope, Double radiusKmOverride) {
+        CurrentUser currentUser = authenticatedUserContext.getCurrentUser();
+        UUID hospitalId = currentUser.getHospitalId();
+        if (hospitalId == null) {
+            throw new NotFoundException("Doctor has no assigned hospital");
+        }
+
+        Hospital hospital = hospitalRepository.findHospitalById(hospitalId)
+                .orElseThrow(() -> new NotFoundException("Hospital not found for id: " + hospitalId));
+
+        HospitalGeoContextDto geoContext = radiusKmOverride == null
+                ? hospitalGeoContextService.resolve(hospital)
+                : hospitalGeoContextService.resolve(hospital, radiusKmOverride);
+        List<Outbreak> localOutbreaks = outbreakRepository.findActiveByMunicipalityIds(geoContext.getIncludedMunicipalityIds());
+        List<Outbreak> stateOutbreaks = outbreakRepository.findActiveByMunicipalityIdsOrStateId(
+                List.of(),
+                geoContext.getStateId());
+        String normalizedScope = scope == null ? "both" : scope.toLowerCase();
+        List<Outbreak> reportOutbreaks = switch (normalizedScope) {
+            case "local" -> localOutbreaks;
+            case "state" -> stateOutbreaks;
+            case "both" -> {
+                List<Outbreak> combined = new ArrayList<>(localOutbreaks);
+                combined.addAll(stateOutbreaks);
+                yield combined;
+            }
+            default -> throw new IllegalArgumentException("Unsupported report scope: " + scope);
+        };
+
+        List<DoctorDashboardReportOutbreakDto> rows = reportOutbreaks.stream()
+                .filter(outbreak -> outbreak.getDisease() != null)
+                .sorted(Comparator
+                        .comparingInt((Outbreak outbreak) -> severityRank(evaluateOutbreakSeverity(outbreak))).reversed()
+                        .thenComparing(Comparator.comparingInt(Outbreak::getCaseCount).reversed())
+                        .thenComparing(this::locationWithState))
+                .map(outbreak -> new DoctorDashboardReportOutbreakDto(
+                        outbreak.getId(),
+                        outbreak.getDisease().getName(),
+                        locationWithState(outbreak),
+                        outbreak.getScope(),
+                        outbreak.getCaseCount(),
+                        outbreak.getConfirmationStatus(),
+                        outbreak.getStartedAt()))
+                .toList();
+
+        return new DoctorDashboardReportDto(
+                normalizedScope,
+                hospital.getName(),
+                hospital.getMunicipalityName(),
+                hospital.getStateName(),
+                LocalDateTime.now(),
+                rows);
     }
 
     private List<DoctorDashboardMetricDto> buildMetrics(
@@ -559,6 +619,25 @@ public class GetDoctorDashboardSummaryUseCase {
             double longitude,
             int outbreakCount,
             int caseCount
+    ) {}
+
+    public record DoctorDashboardReportDto(
+            String scope,
+            String hospitalName,
+            String municipalityName,
+            String stateName,
+            LocalDateTime generatedAt,
+            List<DoctorDashboardReportOutbreakDto> outbreaks
+    ) {}
+
+    public record DoctorDashboardReportOutbreakDto(
+            UUID id,
+            String diseaseName,
+            String location,
+            String scope,
+            int caseCount,
+            String confirmationStatus,
+            LocalDateTime startedAt
     ) {}
 
     private static class StateAggregate {
