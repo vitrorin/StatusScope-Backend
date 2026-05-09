@@ -29,6 +29,14 @@ replay_pid*
 # Node
 node_modules/
 
+# Build output
+target/
+build/
+out/
+.quarkus/
+.gradle/
+coverage/
+
 # Firebase credentials
 *-firebase-adminsdk-*.json
 firebase-service-account.json
@@ -48,8 +56,8 @@ cloudrun.env
 tools/ingesta-datos/.data/
 tools/ingesta-datos/vendor/
 tools/ingesta-datos/**/__pycache__/
+.pytest_cache/
+.mypy_cache/
 
-# Data-ingestion working files
-tools/ingesta-datos/.data/
-tools/ingesta-datos/vendor/
-tools/ingesta-datos/**/__pycache__/
+# Local report exports
+statuscope-*-outbreak-report-*.pdf
