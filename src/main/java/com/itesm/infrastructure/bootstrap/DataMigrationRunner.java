@@ -6,6 +6,7 @@ import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.flywaydb.core.Flyway;
 import org.jboss.logging.Logger;
 
@@ -24,10 +25,20 @@ public class DataMigrationRunner {
     @Inject
     AgroalDataSource dataSource;
 
+    @ConfigProperty(name = "quarkus.hibernate-orm.schema-management.strategy", defaultValue = "none")
+    String schemaManagementStrategy;
+
     void onStart(@Observes @Priority(10) StartupEvent ev) {
-        resetCatalogHistoryAfterSchemaRecreation();
+        if (isSchemaRecreatedOnStart()) {
+            resetCatalogHistoryAfterSchemaRecreation();
+        }
         flyway.migrate();
         LOG.info("DataMigrationRunner: Flyway data migrations applied");
+    }
+
+    private boolean isSchemaRecreatedOnStart() {
+        return "drop-and-create".equalsIgnoreCase(schemaManagementStrategy)
+                || "create".equalsIgnoreCase(schemaManagementStrategy);
     }
 
     private void resetCatalogHistoryAfterSchemaRecreation() {
