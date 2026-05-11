@@ -11,6 +11,7 @@ import com.itesm.domain.models.Region;
 import com.itesm.domain.repository.HospitalRepository;
 import com.itesm.domain.repository.OutbreakRepository;
 import com.itesm.infrastructure.persistence.entity.DiagnosisAssistantMessageEntity;
+import com.itesm.infrastructure.persistence.entity.DiagnosisAssistantSuggestionEntity;
 import com.itesm.infrastructure.persistence.entity.DiagnosisAssistantThreadEntity;
 import com.itesm.infrastructure.persistence.entity.PatientEvaluationEntity;
 import com.itesm.infrastructure.persistence.entity.UserEntity;
@@ -81,6 +82,7 @@ class GetDiagnosisAssistantThreadUseCaseTest {
 
         mockThreadQuery(thread);
         mockMessageQuery(List.of(userMessage, assistantMessage));
+        mockSuggestionQuery(List.of());
 
         Region region = new Region();
         region.setId(REGION_ID);
@@ -155,7 +157,17 @@ class GetDiagnosisAssistantThreadUseCaseTest {
                 .thenReturn(query);
         Mockito.when(query.setParameter(Mockito.eq("threadId"), Mockito.any()))
                 .thenReturn(query);
-        Mockito.when(query.getResultStream())
-                .thenReturn(messages.stream());
+        Mockito.when(query.getResultList()).thenReturn(messages);
+        Mockito.when(query.getResultStream()).thenReturn(messages.stream());
+    }
+
+    @SuppressWarnings("unchecked")
+    private void mockSuggestionQuery(List<DiagnosisAssistantSuggestionEntity> rows) {
+        TypedQuery<DiagnosisAssistantSuggestionEntity> query = Mockito.mock(TypedQuery.class);
+        Mockito.when(entityManager.createQuery(Mockito.contains("from DiagnosisAssistantSuggestionEntity"), Mockito.eq(DiagnosisAssistantSuggestionEntity.class)))
+                .thenReturn(query);
+        Mockito.when(query.setParameter(Mockito.eq("messageIds"), Mockito.any()))
+                .thenReturn(query);
+        Mockito.when(query.getResultList()).thenReturn(rows);
     }
 }

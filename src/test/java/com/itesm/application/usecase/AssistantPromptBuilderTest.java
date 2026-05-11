@@ -46,7 +46,7 @@ class AssistantPromptBuilderTest {
 
     @Test
     void shouldContainDiseaseNameWhenOutbreakPresent() {
-        String prompt = builder.build(region("Región Norte"), List.of(outbreak("Measles", "Fever, rash", 12)), null);
+        String prompt = builder.build(region("Región Norte"), List.of(outbreak("Measles", "Fever, rash", 12)), null, List.of());
         Assertions.assertTrue(prompt.contains("Measles"));
         Assertions.assertTrue(prompt.contains("12"));
         Assertions.assertTrue(prompt.contains("Fever, rash"));
@@ -54,7 +54,7 @@ class AssistantPromptBuilderTest {
 
     @Test
     void shouldOmitOutbreakBlockWhenListEmpty() {
-        String prompt = builder.build(region("Región Norte"), List.of(), null);
+        String prompt = builder.build(region("Región Norte"), List.of(), null, List.of());
         Assertions.assertFalse(prompt.contains("Active outbreaks"));
         Assertions.assertFalse(prompt.contains("overlap with an active outbreak"));
     }
@@ -66,7 +66,7 @@ class AssistantPromptBuilderTest {
         pc.setSex("female");
         pc.setSymptoms("fever, rash");
 
-        String prompt = builder.build(region("Región Norte"), List.of(), pc);
+        String prompt = builder.build(region("Región Norte"), List.of(), pc, List.of());
         Assertions.assertTrue(prompt.contains("35"));
         Assertions.assertTrue(prompt.contains("female"));
         Assertions.assertTrue(prompt.contains("fever, rash"));
@@ -74,7 +74,7 @@ class AssistantPromptBuilderTest {
 
     @Test
     void shouldContainRegionNameInPrompt() {
-        String prompt = builder.build(region("Región Centro"), List.of(), null);
+        String prompt = builder.build(region("Región Centro"), List.of(), null, List.of());
         Assertions.assertTrue(prompt.contains("Región Centro"));
     }
 
@@ -83,8 +83,31 @@ class AssistantPromptBuilderTest {
         // The builder only receives outbreaks already filtered by region — it should render
         // what it gets. This test ensures it doesn't add extra items if called with one outbreak.
         Outbreak o = outbreak("Dengue", "Fever, joint pain", 5);
-        String prompt = builder.build(region("Región Norte"), List.of(o), null);
+        String prompt = builder.build(region("Región Norte"), List.of(o), null, List.of());
         Assertions.assertTrue(prompt.contains("Dengue"));
         Assertions.assertFalse(prompt.contains("COVID")); // no covid in the list
+    }
+
+    @Test
+    void shouldIncludeHistoricalCasesWhenProvided() {
+        HistoricalCaseRetriever.HistoricalCase hc = new HistoricalCaseRetriever.HistoricalCase(
+                UUID.randomUUID(),
+                LocalDateTime.now().minusWeeks(2),
+                28,
+                "female",
+                "fever, headache, joint pain",
+                "Dengue",
+                0.5
+        );
+        String prompt = builder.build(region("Región Norte"), List.of(), null, List.of(hc));
+        Assertions.assertTrue(prompt.contains("Similar confirmed cases"));
+        Assertions.assertTrue(prompt.contains("Dengue"));
+    }
+
+    @Test
+    void shouldInstructLlmToEmitDiagnosisJsonBlock() {
+        String prompt = builder.build(region("Región Norte"), List.of(), null, List.of());
+        Assertions.assertTrue(prompt.contains("<DIAGNOSIS_JSON>"));
+        Assertions.assertTrue(prompt.contains("differentialDiagnoses"));
     }
 }

@@ -2,6 +2,7 @@ package com.itesm.application.usecase;
 
 import com.itesm.application.dto.AssistantContextDto;
 import com.itesm.application.dto.AssistantMessageDto;
+import com.itesm.application.dto.AssistantSuggestionDto;
 import com.itesm.application.dto.AssistantThreadDto;
 import com.itesm.application.dto.OutbreakSummaryDto;
 import com.itesm.application.security.AuthenticatedUserContext;
@@ -13,12 +14,16 @@ import com.itesm.domain.models.Region;
 import com.itesm.domain.repository.HospitalRepository;
 import com.itesm.domain.repository.OutbreakRepository;
 import com.itesm.infrastructure.persistence.entity.DiagnosisAssistantMessageEntity;
+import com.itesm.infrastructure.persistence.entity.DiagnosisAssistantSuggestionEntity;
 import com.itesm.infrastructure.persistence.entity.DiagnosisAssistantThreadEntity;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -64,23 +69,70 @@ public class GetDiagnosisAssistantThreadUseCase {
     }
 
     private List<AssistantMessageDto> loadMessages(UUID threadId) {
-        return entityManager.createQuery("""
+        List<DiagnosisAssistantMessageEntity> messages = entityManager.createQuery("""
                 select m
                 from DiagnosisAssistantMessageEntity m
                 where m.thread.id = :threadId
                 order by m.sequenceNo asc
                 """, DiagnosisAssistantMessageEntity.class)
                 .setParameter("threadId", threadId)
-                .getResultStream()
-                .map(this::toMessageDto)
+                .getResultList();
+
+        if (messages.isEmpty()) {
+            return List.of();
+        }
+
+        Map<UUID, List<AssistantSuggestionDto>> suggestionsByMessage = loadSuggestionsByMessage(
+                messages.stream().map(DiagnosisAssistantMessageEntity::getId).collect(Collectors.toList()));
+
+        return messages.stream()
+                .map(m -> toMessageDto(m, suggestionsByMessage.getOrDefault(m.getId(), List.of())))
                 .collect(Collectors.toList());
     }
 
-    private AssistantMessageDto toMessageDto(DiagnosisAssistantMessageEntity message) {
+    private Map<UUID, List<AssistantSuggestionDto>> loadSuggestionsByMessage(List<UUID> messageIds) {
+        if (messageIds.isEmpty()) {
+            return Map.of();
+        }
+        List<DiagnosisAssistantSuggestionEntity> rows = entityManager.createQuery("""
+                select s
+                from DiagnosisAssistantSuggestionEntity s
+                left join fetch s.disease
+                where s.message.id in :messageIds
+                order by s.message.id, s.rankOrder asc
+                """, DiagnosisAssistantSuggestionEntity.class)
+                .setParameter("messageIds", messageIds)
+                .getResultList();
+
+        Map<UUID, List<AssistantSuggestionDto>> grouped = new HashMap<>();
+        for (DiagnosisAssistantSuggestionEntity row : rows) {
+            grouped.computeIfAbsent(row.getMessage().getId(), k -> new ArrayList<>()).add(toSuggestionDto(row));
+        }
+        return grouped;
+    }
+
+    private AssistantSuggestionDto toSuggestionDto(DiagnosisAssistantSuggestionEntity row) {
+        AssistantSuggestionDto dto = new AssistantSuggestionDto();
+        dto.setId(row.getId());
+        dto.setMessageId(row.getMessage().getId());
+        dto.setDiseaseId(row.getDisease() == null ? null : row.getDisease().getId());
+        dto.setDisplayName(row.getDisplayName());
+        dto.setRankOrder(row.getRankOrder());
+        dto.setConfidence(row.getConfidence());
+        dto.setRationale(row.getRationale());
+        dto.setLocalityRiskLevel(row.getLocalityRiskLevel());
+        dto.setPrimary(row.isWasPrimarySuggestion());
+        return dto;
+    }
+
+    private AssistantMessageDto toMessageDto(DiagnosisAssistantMessageEntity message,
+                                              List<AssistantSuggestionDto> suggestions) {
         AssistantMessageDto dto = new AssistantMessageDto();
+        dto.setId(message.getId());
         dto.setRole(message.getRole());
         dto.setContent(message.getMessageText());
         dto.setCreatedAt(message.getCreatedAt());
+        dto.setSuggestions(suggestions);
         return dto;
     }
 

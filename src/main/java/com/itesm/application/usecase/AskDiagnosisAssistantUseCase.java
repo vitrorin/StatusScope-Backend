@@ -4,6 +4,7 @@ import com.itesm.application.dto.AssistantContextDto;
 import com.itesm.application.dto.AssistantMessageDto;
 import com.itesm.application.dto.AssistantRequestDto;
 import com.itesm.application.dto.AssistantResponseDto;
+import com.itesm.application.dto.AssistantSuggestionDto;
 import com.itesm.application.dto.OutbreakSummaryDto;
 import com.itesm.application.port.out.AssistantChatGateway;
 import com.itesm.application.port.out.AssistantChatMessage;
@@ -16,7 +17,10 @@ import com.itesm.domain.models.Region;
 import com.itesm.domain.repository.HospitalRepository;
 import com.itesm.domain.repository.OutbreakRepository;
 import com.itesm.infrastructure.persistence.entity.DiagnosisAssistantMessageEntity;
+import com.itesm.infrastructure.persistence.entity.DiagnosisAssistantRetrievedCaseEntity;
+import com.itesm.infrastructure.persistence.entity.DiagnosisAssistantSuggestionEntity;
 import com.itesm.infrastructure.persistence.entity.DiagnosisAssistantThreadEntity;
+import com.itesm.infrastructure.persistence.entity.DiseaseEntity;
 import com.itesm.infrastructure.persistence.entity.HospitalEntity;
 import com.itesm.infrastructure.persistence.entity.PatientEvaluationEntity;
 import com.itesm.infrastructure.persistence.entity.UserEntity;
@@ -51,6 +55,12 @@ public class AskDiagnosisAssistantUseCase {
     AssistantPromptBuilder promptBuilder;
 
     @Inject
+    HistoricalCaseRetriever historicalCaseRetriever;
+
+    @Inject
+    AssistantSuggestionParser suggestionParser;
+
+    @Inject
     EntityManager entityManager;
 
     @Transactional
@@ -76,14 +86,14 @@ public class AskDiagnosisAssistantUseCase {
             }
         }
 
-        String systemPrompt = promptBuilder.build(region, outbreaks, request.getPatientContext());
-
         AssistantMessageDto latestUserMessage = latestUserMessage(request.getMessages());
+
         DiagnosisAssistantThreadEntity thread = null;
+        PatientEvaluationEntity evaluation = null;
         List<AssistantMessageDto> conversationHistory = new ArrayList<>();
 
         if (request.getEvaluationId() != null) {
-            PatientEvaluationEntity evaluation = loadManagedEvaluation(request.getEvaluationId(), currentUser.getUserId());
+            evaluation = loadManagedEvaluation(request.getEvaluationId(), currentUser.getUserId());
             thread = findOrCreateThread(evaluation, currentUser);
             conversationHistory.addAll(loadThreadMessages(thread.getId()));
 
@@ -99,16 +109,32 @@ public class AskDiagnosisAssistantUseCase {
             conversationHistory.addAll(request.getMessages());
         }
 
+        List<HistoricalCaseRetriever.HistoricalCase> historical = retrieveHistorical(
+                hospitalId,
+                evaluation != null ? evaluation.getId() : null,
+                evaluation != null ? evaluation.getSymptomsText() : symptomsFromContext(request));
+
+        String systemPrompt = promptBuilder.build(region, outbreaks, request.getPatientContext(), historical);
+
         List<AssistantChatMessage> chatMessages = new ArrayList<>();
         chatMessages.add(new AssistantChatMessage("system", systemPrompt));
         for (AssistantMessageDto msg : conversationHistory) {
             chatMessages.add(new AssistantChatMessage(msg.getRole(), msg.getContent()));
         }
 
-        String reply = assistantChatGateway.chat(chatMessages);
+        String rawReply = assistantChatGateway.chat(chatMessages);
+        AssistantSuggestionParser.ParseResult parsed = suggestionParser.parse(rawReply);
+        String displayedReply = parsed.cleanedReply();
+
+        DiagnosisAssistantMessageEntity assistantMessage = null;
+        List<AssistantSuggestionDto> persistedSuggestions = List.of();
 
         if (thread != null) {
-            persistMessage(thread, "assistant", reply, conversationHistory.size() + 1);
+            assistantMessage = persistMessage(thread, "assistant", displayedReply, conversationHistory.size() + 1);
+            persistedSuggestions = persistSuggestions(assistantMessage, evaluation, parsed.suggestions());
+            persistRetrievedCases(assistantMessage, historical);
+        } else {
+            persistedSuggestions = parsed.suggestions();
         }
 
         List<OutbreakSummaryDto> outbreakSummaries = outbreaks.stream()
@@ -122,7 +148,26 @@ public class AskDiagnosisAssistantUseCase {
         String regionName = region != null ? region.getName() : null;
         AssistantContextDto contextUsed = new AssistantContextDto(regionName, outbreakSummaries);
 
-        return new AssistantResponseDto(reply, contextUsed);
+        AssistantResponseDto response = new AssistantResponseDto(displayedReply, contextUsed);
+        response.setMessageId(assistantMessage != null ? assistantMessage.getId() : null);
+        response.setSuggestions(persistedSuggestions);
+        return response;
+    }
+
+    private List<HistoricalCaseRetriever.HistoricalCase> retrieveHistorical(UUID hospitalId,
+                                                                            UUID evaluationId,
+                                                                            String symptoms) {
+        if (symptoms == null || symptoms.isBlank()) {
+            return List.of();
+        }
+        return historicalCaseRetriever.retrieveSimilar(hospitalId, evaluationId, symptoms);
+    }
+
+    private String symptomsFromContext(AssistantRequestDto request) {
+        if (request.getPatientContext() == null) {
+            return null;
+        }
+        return request.getPatientContext().getSymptoms();
     }
 
     private AssistantMessageDto latestUserMessage(List<AssistantMessageDto> messages) {
@@ -213,8 +258,83 @@ public class AskDiagnosisAssistantUseCase {
         return message;
     }
 
+    private List<AssistantSuggestionDto> persistSuggestions(DiagnosisAssistantMessageEntity message,
+                                                            PatientEvaluationEntity evaluation,
+                                                            List<AssistantSuggestionDto> suggestions) {
+        if (suggestions == null || suggestions.isEmpty() || evaluation == null) {
+            return List.of();
+        }
+
+        List<AssistantSuggestionDto> result = new ArrayList<>(suggestions.size());
+        for (AssistantSuggestionDto src : suggestions) {
+            DiseaseEntity disease = resolveDiseaseByName(src.getDisplayName());
+
+            DiagnosisAssistantSuggestionEntity entity = new DiagnosisAssistantSuggestionEntity();
+            entity.setId(UUID.randomUUID());
+            entity.setMessage(message);
+            entity.setEvaluation(evaluation);
+            entity.setDisease(disease);
+            entity.setDisplayName(src.getDisplayName());
+            entity.setRankOrder(src.getRankOrder());
+            entity.setConfidence(src.getConfidence());
+            entity.setRationale(src.getRationale());
+            entity.setLocalityRiskLevel(src.getLocalityRiskLevel());
+            entity.setWasPrimarySuggestion(src.isPrimary());
+            entity.setCreatedAt(LocalDateTime.now());
+            entityManager.persist(entity);
+
+            AssistantSuggestionDto dto = new AssistantSuggestionDto();
+            dto.setId(entity.getId());
+            dto.setMessageId(message.getId());
+            dto.setDiseaseId(disease == null ? null : disease.getId());
+            dto.setDisplayName(entity.getDisplayName());
+            dto.setRankOrder(entity.getRankOrder());
+            dto.setConfidence(entity.getConfidence());
+            dto.setRationale(entity.getRationale());
+            dto.setLocalityRiskLevel(entity.getLocalityRiskLevel());
+            dto.setPrimary(entity.isWasPrimarySuggestion());
+            result.add(dto);
+        }
+        return result;
+    }
+
+    private void persistRetrievedCases(DiagnosisAssistantMessageEntity message,
+                                       List<HistoricalCaseRetriever.HistoricalCase> historical) {
+        if (historical == null || historical.isEmpty()) {
+            return;
+        }
+        int rank = 1;
+        LocalDateTime now = LocalDateTime.now();
+        for (HistoricalCaseRetriever.HistoricalCase hc : historical) {
+            DiagnosisAssistantRetrievedCaseEntity entity = new DiagnosisAssistantRetrievedCaseEntity();
+            entity.setId(UUID.randomUUID());
+            entity.setMessage(message);
+            entity.setRetrievedEvaluation(entityManager.getReference(PatientEvaluationEntity.class, hc.evaluationId()));
+            entity.setRankOrder(rank++);
+            entity.setSimilarityScore(hc.similarityScore());
+            entity.setCreatedAt(now);
+            entityManager.persist(entity);
+        }
+    }
+
+    private DiseaseEntity resolveDiseaseByName(String displayName) {
+        if (displayName == null || displayName.isBlank()) {
+            return null;
+        }
+        return entityManager.createQuery("""
+                select d
+                from DiseaseEntity d
+                where lower(d.name) = :name
+                """, DiseaseEntity.class)
+                .setParameter("name", displayName.trim().toLowerCase(Locale.ROOT))
+                .getResultStream()
+                .findFirst()
+                .orElse(null);
+    }
+
     private AssistantMessageDto toAssistantMessageDto(DiagnosisAssistantMessageEntity message) {
         AssistantMessageDto dto = new AssistantMessageDto();
+        dto.setId(message.getId());
         dto.setRole(message.getRole());
         dto.setContent(message.getMessageText());
         dto.setCreatedAt(message.getCreatedAt());

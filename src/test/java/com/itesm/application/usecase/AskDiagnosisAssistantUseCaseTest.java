@@ -1,5 +1,6 @@
 package com.itesm.application.usecase;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itesm.application.dto.AssistantContextDto;
 import com.itesm.application.dto.AssistantMessageDto;
 import com.itesm.application.dto.AssistantRequestDto;
@@ -52,6 +53,13 @@ class AskDiagnosisAssistantUseCaseTest {
         useCase.outbreakRepository = outbreakRepository;
         useCase.assistantChatGateway = assistantChatGateway;
         useCase.promptBuilder = new AssistantPromptBuilder();
+        useCase.historicalCaseRetriever = Mockito.mock(HistoricalCaseRetriever.class);
+        Mockito.when(useCase.historicalCaseRetriever.retrieveSimilar(
+                Mockito.any(), Mockito.any(), Mockito.anyString())).thenReturn(List.of());
+
+        AssistantSuggestionParser parser = new AssistantSuggestionParser();
+        parser.objectMapper = new ObjectMapper();
+        useCase.suggestionParser = parser;
 
         CurrentUser currentUser = new CurrentUser(
                 UUID.randomUUID(), "ext-id", "doctor@test.local", "Dr. Test",
