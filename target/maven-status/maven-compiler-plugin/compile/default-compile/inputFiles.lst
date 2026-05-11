@@ -1,5 +1,6 @@
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\AssignRoleDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\AssistantContextDto.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\AssistantFeedbackDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\AssistantMessageDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\AssistantRequestDto.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\dto\AssistantResponseDto.java
@@ -40,6 +41,7 @@ C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\it
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\GetDiagnosisAssistantThreadUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\GetDiagnosisEvaluationUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\GetMyProfileUseCase.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\RecordAssistantFeedbackUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\RegisterUserUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\application\usecase\UpdateDiagnosisEvaluationUseCase.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\domain\models\Disease.java
@@ -80,6 +82,7 @@ C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\it
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiagnosisAssistantMessageEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiagnosisAssistantThreadEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiagnosisEntity.java
+C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiagnosisFeedbackEventEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\DiseaseEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\EvaluationDifferentialDiagnosisEntity.java
 C:\Users\mateo\Desktop\proyecto_escuela\StatusScope-Backend\src\main\java\com\itesm\infrastructure\persistence\entity\EvaluationRecommendedTestEntity.java

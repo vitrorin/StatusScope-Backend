@@ -26,7 +26,9 @@ com\itesm\application\usecase\RegisterUserUseCase.class
 com\itesm\application\usecase\exception\OpenAiException.class
 com\itesm\infrastructure\persistence\entity\SpecialtyEntity.class
 com\itesm\infrastructure\gemini\dto\GeminiPart.class
+com\itesm\application\dto\UploadDiagnosisEvaluationFileDto.class
 com\itesm\application\dto\UserSummaryDto.class
+com\itesm\application\usecase\CreateDiagnosisEvaluationUseCase.class
 com\itesm\infrastructure\openai\dto\ChatCompletionResponse$Choice.class
 com\itesm\infrastructure\persistence\repository\RoleRepositoryImpl.class
 com\itesm\infrastructure\persistence\entity\DiagnosisAssistantThreadEntity.class
@@ -48,6 +50,7 @@ com\itesm\application\usecase\GetDiagnosisEvaluationUseCase.class
 com\itesm\domain\repository\HospitalRepository.class
 com\itesm\application\security\CurrentUser.class
 com\itesm\application\usecase\exception\NotFoundException.class
+com\itesm\application\usecase\RecordAssistantFeedbackUseCase.class
 com\itesm\application\dto\DiagnosisEvaluationPatientDto.class
 com\itesm\infrastructure\persistence\entity\DiseaseEntity.class
 com\itesm\infrastructure\gemini\dto\GeminiContent.class
@@ -63,12 +66,14 @@ com\itesm\application\port\out\AssistantChatMessage.class
 com\itesm\infrastructure\persistence\entity\PatientEntity.class
 com\itesm\infrastructure\openai\dto\ChatCompletionResponse.class
 com\itesm\infrastructure\openai\dto\ChatMessage.class
+com\itesm\infrastructure\persistence\entity\DiagnosisFeedbackEventEntity.class
 com\itesm\infrastructure\persistence\entity\EvaluationRecommendedTestEntity.class
 com\itesm\infrastructure\bootstrap\DevSeeder.class
 com\itesm\infrastructure\gemini\dto\GeminiGenerateRequest.class
 com\itesm\application\usecase\DisableUserUseCase.class
 com\itesm\infrastructure\persistence\entity\PrivilegeEntity.class
 com\itesm\infrastructure\persistence\repository\HospitalRepositoryImpl.class
+com\itesm\application\usecase\UpdateDiagnosisEvaluationUseCase.class
 com\itesm\infrastructure\openai\OpenAiHttpClient.class
 com\itesm\infrastructure\persistence\entity\PatientEvaluationEntity.class
 com\itesm\application\dto\AssistantRequestDto.class
@@ -77,6 +82,7 @@ com\itesm\application\dto\AssignRoleDto.class
 com\itesm\infrastructure\gemini\GeminiChatStrategy.class
 com\itesm\application\dto\DiagnosisEvaluationEventDto.class
 com\itesm\domain\models\Region.class
+com\itesm\application\dto\UpdateDiagnosisEvaluationStatusDto.class
 com\itesm\infrastructure\mapper\PrivilegeMapper.class
 com\itesm\domain\models\Role.class
 com\itesm\application\dto\DiagnosisEvaluationFileDto.class
@@ -96,7 +102,9 @@ com\itesm\application\dto\AssistantThreadDto.class
 com\itesm\infrastructure\persistence\entity\OutbreakEntity.class
 com\itesm\infrastructure\llm\LlmChatClient.class
 com\itesm\interfaces\rest\DiagnosisEvaluationResource.class
+com\itesm\application\dto\AssistantFeedbackDto.class
 com\itesm\infrastructure\security\AuthorizationInterceptor.class
+com\itesm\application\dto\UpdateDiagnosisEvaluationDto.class
 com\itesm\infrastructure\persistence\entity\EventEntity.class
 com\itesm\application\usecase\AskDiagnosisAssistantUseCase.class
 com\itesm\infrastructure\persistence\entity\PatientEvaluationFileEntity.class

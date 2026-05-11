@@ -88,6 +88,10 @@ public class GetDiagnosisEvaluationUseCase {
         dto.setCreatedAt(evaluation.getCreatedAt());
         dto.setUpdatedAt(evaluation.getUpdatedAt());
         dto.setFinalizedAt(evaluation.getFinalizedAt());
+        dto.setFinalDiseaseId(evaluation.getFinalDisease() == null ? null : evaluation.getFinalDisease().getId());
+        dto.setFinalDiagnosisLabel(evaluation.getFinalDiagnosisLabel());
+        dto.setFinalDecisionSource(evaluation.getFinalDecisionSource());
+        dto.setDoctorFeedbackNotes(evaluation.getDoctorFeedbackNotes());
         dto.setPatient(toPatientDto(evaluation.getPatient()));
         dto.setEvent(toEventDto(evaluation.getEvent()));
         dto.setDifferentialDiagnoses(loadDifferentials(evaluation.getId()));
