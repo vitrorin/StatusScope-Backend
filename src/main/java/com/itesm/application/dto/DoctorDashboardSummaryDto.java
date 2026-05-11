@@ -57,12 +57,20 @@ public class DoctorDashboardSummaryDto {
         private String signalLabel;
         private String recommendedAction;
         private String iconKey;
+        private List<DoctorDashboardMetricInsightDto> insights;
 
         public DoctorDashboardMetricDto() {}
 
         public DoctorDashboardMetricDto(String id, String title, String value, String badge, String status,
                                         String subtitle, String detailSummary, String signalLabel,
                                         String recommendedAction, String iconKey) {
+            this(id, title, value, badge, status, subtitle, detailSummary, signalLabel, recommendedAction, iconKey, List.of());
+        }
+
+        public DoctorDashboardMetricDto(String id, String title, String value, String badge, String status,
+                                        String subtitle, String detailSummary, String signalLabel,
+                                        String recommendedAction, String iconKey,
+                                        List<DoctorDashboardMetricInsightDto> insights) {
             this.id = id;
             this.title = title;
             this.value = value;
@@ -73,6 +81,7 @@ public class DoctorDashboardSummaryDto {
             this.signalLabel = signalLabel;
             this.recommendedAction = recommendedAction;
             this.iconKey = iconKey;
+            this.insights = insights;
         }
 
         public String getId() { return id; }
@@ -95,6 +104,41 @@ public class DoctorDashboardSummaryDto {
         public void setRecommendedAction(String recommendedAction) { this.recommendedAction = recommendedAction; }
         public String getIconKey() { return iconKey; }
         public void setIconKey(String iconKey) { this.iconKey = iconKey; }
+        public List<DoctorDashboardMetricInsightDto> getInsights() { return insights; }
+        public void setInsights(List<DoctorDashboardMetricInsightDto> insights) { this.insights = insights; }
+    }
+
+    public static class DoctorDashboardMetricInsightDto {
+        private String title;
+        private String location;
+        private String cases;
+        private String severity;
+        private String color;
+        private String meta;
+
+        public DoctorDashboardMetricInsightDto() {}
+
+        public DoctorDashboardMetricInsightDto(String title, String location, String cases, String severity, String color, String meta) {
+            this.title = title;
+            this.location = location;
+            this.cases = cases;
+            this.severity = severity;
+            this.color = color;
+            this.meta = meta;
+        }
+
+        public String getTitle() { return title; }
+        public void setTitle(String title) { this.title = title; }
+        public String getLocation() { return location; }
+        public void setLocation(String location) { this.location = location; }
+        public String getCases() { return cases; }
+        public void setCases(String cases) { this.cases = cases; }
+        public String getSeverity() { return severity; }
+        public void setSeverity(String severity) { this.severity = severity; }
+        public String getColor() { return color; }
+        public void setColor(String color) { this.color = color; }
+        public String getMeta() { return meta; }
+        public void setMeta(String meta) { this.meta = meta; }
     }
 
     public static class DoctorDashboardDiseaseDto {
@@ -130,11 +174,23 @@ public class DoctorDashboardSummaryDto {
         private String area;
         private String priority;
         private String recommendedAction;
+        private int caseCount;
+        private String caseLabel;
+        private String confirmationStatus;
+        private String municipalityName;
+        private String stateName;
 
         public DoctorDashboardAlertDto() {}
 
         public DoctorDashboardAlertDto(String id, String title, String description, String variant,
                                        String area, String priority, String recommendedAction) {
+            this(id, title, description, variant, area, priority, recommendedAction, 0, null, null, null, null);
+        }
+
+        public DoctorDashboardAlertDto(String id, String title, String description, String variant,
+                                       String area, String priority, String recommendedAction,
+                                       int caseCount, String caseLabel, String confirmationStatus,
+                                       String municipalityName, String stateName) {
             this.id = id;
             this.title = title;
             this.description = description;
@@ -142,6 +198,11 @@ public class DoctorDashboardSummaryDto {
             this.area = area;
             this.priority = priority;
             this.recommendedAction = recommendedAction;
+            this.caseCount = caseCount;
+            this.caseLabel = caseLabel;
+            this.confirmationStatus = confirmationStatus;
+            this.municipalityName = municipalityName;
+            this.stateName = stateName;
         }
 
         public String getId() { return id; }
@@ -158,6 +219,16 @@ public class DoctorDashboardSummaryDto {
         public void setPriority(String priority) { this.priority = priority; }
         public String getRecommendedAction() { return recommendedAction; }
         public void setRecommendedAction(String recommendedAction) { this.recommendedAction = recommendedAction; }
+        public int getCaseCount() { return caseCount; }
+        public void setCaseCount(int caseCount) { this.caseCount = caseCount; }
+        public String getCaseLabel() { return caseLabel; }
+        public void setCaseLabel(String caseLabel) { this.caseLabel = caseLabel; }
+        public String getConfirmationStatus() { return confirmationStatus; }
+        public void setConfirmationStatus(String confirmationStatus) { this.confirmationStatus = confirmationStatus; }
+        public String getMunicipalityName() { return municipalityName; }
+        public void setMunicipalityName(String municipalityName) { this.municipalityName = municipalityName; }
+        public String getStateName() { return stateName; }
+        public void setStateName(String stateName) { this.stateName = stateName; }
     }
 
     public static class DoctorDashboardZoneDto {
@@ -170,6 +241,8 @@ public class DoctorDashboardSummaryDto {
         private String priority;
         private String note;
         private String recommendedAction;
+        private String municipalityName;
+        private String stateName;
         private BigDecimal latitude;
         private BigDecimal longitude;
         private String borderColor;
@@ -178,6 +251,7 @@ public class DoctorDashboardSummaryDto {
 
         public DoctorDashboardZoneDto(String id, String name, String risk, String disease, String cases,
                                       String radius, String priority, String note, String recommendedAction,
+                                      String municipalityName, String stateName,
                                       BigDecimal latitude, BigDecimal longitude, String borderColor) {
             this.id = id;
             this.name = name;
@@ -188,6 +262,8 @@ public class DoctorDashboardSummaryDto {
             this.priority = priority;
             this.note = note;
             this.recommendedAction = recommendedAction;
+            this.municipalityName = municipalityName;
+            this.stateName = stateName;
             this.latitude = latitude;
             this.longitude = longitude;
             this.borderColor = borderColor;
@@ -211,6 +287,10 @@ public class DoctorDashboardSummaryDto {
         public void setNote(String note) { this.note = note; }
         public String getRecommendedAction() { return recommendedAction; }
         public void setRecommendedAction(String recommendedAction) { this.recommendedAction = recommendedAction; }
+        public String getMunicipalityName() { return municipalityName; }
+        public void setMunicipalityName(String municipalityName) { this.municipalityName = municipalityName; }
+        public String getStateName() { return stateName; }
+        public void setStateName(String stateName) { this.stateName = stateName; }
         public BigDecimal getLatitude() { return latitude; }
         public void setLatitude(BigDecimal latitude) { this.latitude = latitude; }
         public BigDecimal getLongitude() { return longitude; }
