@@ -65,8 +65,10 @@ public class DevSeeder {
 
     @Transactional
     void onStart(@Observes @Priority(20) StartupEvent ev) {
-        if (!"dev".equals(profile)) return;
-        ensureFirebaseInitialized();
+        if (!"dev".equals(profile) && !"test".equals(profile)) return;
+        if ("dev".equals(profile)) {
+            ensureFirebaseInitialized();
+        }
         if (userRepository.findByEmail("admin@statusscope.local").isPresent()) return; // idempotent
 
         seedUser("admin@statusscope.local",       "System Admin",    null,

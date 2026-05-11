@@ -32,7 +32,7 @@ $args = @(
     "-Dquarkus.datasource.jdbc.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1",
     "-Dquarkus.datasource.username=sa",
     "-Dquarkus.datasource.password=",
-    "-Dtest=AskDiagnosisAssistantUseCaseTest,DiagnosisAssistantResourceTest,DiagnosisEvaluationResourceTest",
+    "-Dtest=AssistantPromptBuilderTest,AskDiagnosisAssistantUseCaseTest,GetDiagnosisAssistantThreadUseCaseTest,LlmChatClientTest,DiagnosisAssistantResourceTest,DiagnosisEvaluationResourceTest",
     "test"
 )
 

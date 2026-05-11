@@ -1,11 +1,13 @@
 package com.itesm.interfaces.rest;
 
+import com.itesm.application.dto.AssistantFeedbackDto;
 import com.itesm.application.dto.UpdateDiagnosisEvaluationDto;
 import com.itesm.application.dto.UpdateDiagnosisEvaluationStatusDto;
 import com.itesm.application.dto.UploadDiagnosisEvaluationFileDto;
 import com.itesm.application.security.RequiresPrivilege;
 import com.itesm.application.usecase.CreateDiagnosisEvaluationUseCase;
 import com.itesm.application.usecase.GetDiagnosisEvaluationUseCase;
+import com.itesm.application.usecase.RecordAssistantFeedbackUseCase;
 import com.itesm.application.usecase.UpdateDiagnosisEvaluationUseCase;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -34,6 +36,9 @@ public class DiagnosisEvaluationResource {
 
     @Inject
     UpdateDiagnosisEvaluationUseCase updateDiagnosisEvaluationUseCase;
+
+    @Inject
+    RecordAssistantFeedbackUseCase recordAssistantFeedbackUseCase;
 
     @POST
     @RequiresPrivilege("diagnosis.assist")
@@ -74,5 +79,12 @@ public class DiagnosisEvaluationResource {
     @RequiresPrivilege("diagnosis.assist")
     public Response uploadFile(@PathParam("id") UUID id, @Valid UploadDiagnosisEvaluationFileDto dto) {
         return Response.ok(updateDiagnosisEvaluationUseCase.uploadFile(id, dto)).build();
+    }
+
+    @POST
+    @Path("/{id}/assistant-feedback")
+    @RequiresPrivilege("diagnosis.assist")
+    public Response recordAssistantFeedback(@PathParam("id") UUID id, @Valid AssistantFeedbackDto dto) {
+        return Response.ok(recordAssistantFeedbackUseCase.record(id, dto)).build();
     }
 }

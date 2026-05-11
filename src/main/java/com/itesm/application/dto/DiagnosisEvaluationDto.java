@@ -13,6 +13,10 @@ public class DiagnosisEvaluationDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime finalizedAt;
+    private UUID finalDiseaseId;
+    private String finalDiagnosisLabel;
+    private String finalDecisionSource;
+    private String doctorFeedbackNotes;
     private DiagnosisEvaluationPatientDto patient;
     private DiagnosisEvaluationEventDto event;
     private List<DiagnosisDifferentialDto> differentialDiagnoses = new ArrayList<>();
@@ -39,6 +43,18 @@ public class DiagnosisEvaluationDto {
 
     public LocalDateTime getFinalizedAt() { return finalizedAt; }
     public void setFinalizedAt(LocalDateTime finalizedAt) { this.finalizedAt = finalizedAt; }
+
+    public UUID getFinalDiseaseId() { return finalDiseaseId; }
+    public void setFinalDiseaseId(UUID finalDiseaseId) { this.finalDiseaseId = finalDiseaseId; }
+
+    public String getFinalDiagnosisLabel() { return finalDiagnosisLabel; }
+    public void setFinalDiagnosisLabel(String finalDiagnosisLabel) { this.finalDiagnosisLabel = finalDiagnosisLabel; }
+
+    public String getFinalDecisionSource() { return finalDecisionSource; }
+    public void setFinalDecisionSource(String finalDecisionSource) { this.finalDecisionSource = finalDecisionSource; }
+
+    public String getDoctorFeedbackNotes() { return doctorFeedbackNotes; }
+    public void setDoctorFeedbackNotes(String doctorFeedbackNotes) { this.doctorFeedbackNotes = doctorFeedbackNotes; }
 
     public DiagnosisEvaluationPatientDto getPatient() { return patient; }
     public void setPatient(DiagnosisEvaluationPatientDto patient) { this.patient = patient; }

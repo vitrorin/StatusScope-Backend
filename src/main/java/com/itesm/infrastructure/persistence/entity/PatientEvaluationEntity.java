@@ -60,6 +60,19 @@ public class PatientEvaluationEntity {
     @Column(name = "finalized_at")
     private LocalDateTime finalizedAt;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "final_disease_id")
+    private DiseaseEntity finalDisease;
+
+    @Column(name = "final_diagnosis_label", length = 256)
+    private String finalDiagnosisLabel;
+
+    @Column(name = "final_decision_source", length = 48)
+    private String finalDecisionSource;
+
+    @Column(name = "doctor_feedback_notes", columnDefinition = "TEXT")
+    private String doctorFeedbackNotes;
+
     public UUID getId() { return id; }
     public void setId(UUID id) { this.id = id; }
 
@@ -89,4 +102,16 @@ public class PatientEvaluationEntity {
 
     public LocalDateTime getFinalizedAt() { return finalizedAt; }
     public void setFinalizedAt(LocalDateTime finalizedAt) { this.finalizedAt = finalizedAt; }
+
+    public DiseaseEntity getFinalDisease() { return finalDisease; }
+    public void setFinalDisease(DiseaseEntity finalDisease) { this.finalDisease = finalDisease; }
+
+    public String getFinalDiagnosisLabel() { return finalDiagnosisLabel; }
+    public void setFinalDiagnosisLabel(String finalDiagnosisLabel) { this.finalDiagnosisLabel = finalDiagnosisLabel; }
+
+    public String getFinalDecisionSource() { return finalDecisionSource; }
+    public void setFinalDecisionSource(String finalDecisionSource) { this.finalDecisionSource = finalDecisionSource; }
+
+    public String getDoctorFeedbackNotes() { return doctorFeedbackNotes; }
+    public void setDoctorFeedbackNotes(String doctorFeedbackNotes) { this.doctorFeedbackNotes = doctorFeedbackNotes; }
 }

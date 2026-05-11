@@ -1,10 +1,13 @@
 package com.itesm.application.usecase;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itesm.application.dto.AssistantContextDto;
 import com.itesm.application.dto.AssistantMessageDto;
 import com.itesm.application.dto.AssistantRequestDto;
 import com.itesm.application.dto.AssistantResponseDto;
 import com.itesm.application.dto.PatientContextDto;
+import com.itesm.application.port.out.AssistantChatGateway;
+import com.itesm.application.port.out.AssistantChatMessage;
 import com.itesm.application.security.AuthenticatedUserContext;
 import com.itesm.application.security.CurrentUser;
 import com.itesm.application.usecase.exception.NotFoundException;
@@ -15,8 +18,6 @@ import com.itesm.domain.models.Outbreak;
 import com.itesm.domain.models.State;
 import com.itesm.domain.repository.HospitalRepository;
 import com.itesm.domain.repository.OutbreakRepository;
-import com.itesm.infrastructure.llm.LlmChatClient;
-import com.itesm.infrastructure.openai.dto.ChatMessage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ class AskDiagnosisAssistantUseCaseTest {
     private AuthenticatedUserContext authenticatedUserContext;
     private HospitalRepository hospitalRepository;
     private OutbreakRepository outbreakRepository;
-    private LlmChatClient llmChatClient;
+    private AssistantChatGateway assistantChatGateway;
 
     private final UUID hospitalId = UUID.fromString("30000000-0000-0000-0000-000000000001");
     private final UUID stateId = UUID.fromString("40000000-0000-0000-0000-000000000019");
@@ -46,14 +47,21 @@ class AskDiagnosisAssistantUseCaseTest {
         authenticatedUserContext = Mockito.mock(AuthenticatedUserContext.class);
         hospitalRepository = Mockito.mock(HospitalRepository.class);
         outbreakRepository = Mockito.mock(OutbreakRepository.class);
-        llmChatClient = Mockito.mock(LlmChatClient.class);
+        assistantChatGateway = Mockito.mock(AssistantChatGateway.class);
 
         useCase = new AskDiagnosisAssistantUseCase();
         useCase.authenticatedUserContext = authenticatedUserContext;
         useCase.hospitalRepository = hospitalRepository;
         useCase.outbreakRepository = outbreakRepository;
-        useCase.llmChatClient = llmChatClient;
+        useCase.assistantChatGateway = assistantChatGateway;
         useCase.promptBuilder = new AssistantPromptBuilder();
+        useCase.historicalCaseRetriever = Mockito.mock(HistoricalCaseRetriever.class);
+        Mockito.when(useCase.historicalCaseRetriever.retrieveSimilar(
+                Mockito.any(), Mockito.any(), Mockito.anyString())).thenReturn(List.of());
+
+        AssistantSuggestionParser parser = new AssistantSuggestionParser();
+        parser.objectMapper = new ObjectMapper();
+        useCase.suggestionParser = parser;
 
         CurrentUser currentUser = new CurrentUser(
                 UUID.randomUUID(), "ext-id", "doctor@test.local", "Dr. Test",
@@ -67,7 +75,7 @@ class AskDiagnosisAssistantUseCaseTest {
         hospital.setStateName("Nuevo Leon");
         Mockito.when(hospitalRepository.findHospitalById(hospitalId)).thenReturn(Optional.of(hospital));
 
-        Mockito.when(llmChatClient.chat(Mockito.anyList())).thenReturn("Consider measles given local outbreak.");
+        Mockito.when(assistantChatGateway.chat(Mockito.anyList())).thenReturn("Consider measles given local outbreak.");
     }
 
     @Test
@@ -88,10 +96,10 @@ class AskDiagnosisAssistantUseCaseTest {
         useCase.execute(request);
 
         @SuppressWarnings("unchecked")
-        ArgumentCaptor<List<ChatMessage>> captor = ArgumentCaptor.forClass(List.class);
-        Mockito.verify(llmChatClient).chat(captor.capture());
+        ArgumentCaptor<List<AssistantChatMessage>> captor = ArgumentCaptor.forClass(List.class);
+        Mockito.verify(assistantChatGateway).chat(captor.capture());
 
-        List<ChatMessage> messages = captor.getValue();
+        List<AssistantChatMessage> messages = captor.getValue();
         Assertions.assertEquals("system", messages.get(0).getRole());
         Assertions.assertEquals("user", messages.get(1).getRole());
         Assertions.assertEquals("Patient has fever", messages.get(1).getContent());
@@ -117,9 +125,9 @@ class AskDiagnosisAssistantUseCaseTest {
         useCase.execute(request);
 
         @SuppressWarnings("unchecked")
-        ArgumentCaptor<List<ChatMessage>> captor = ArgumentCaptor.forClass(List.class);
-        Mockito.verify(llmChatClient).chat(captor.capture());
-        List<ChatMessage> sent = captor.getValue();
+        ArgumentCaptor<List<AssistantChatMessage>> captor = ArgumentCaptor.forClass(List.class);
+        Mockito.verify(assistantChatGateway).chat(captor.capture());
+        List<AssistantChatMessage> sent = captor.getValue();
 
         // 1 system + 3 original turns
         Assertions.assertEquals(4, sent.size());
@@ -159,6 +167,36 @@ class AskDiagnosisAssistantUseCaseTest {
         Assertions.assertEquals("STATE", ctx.getOutbreaks().get(0).getScope());
         Assertions.assertEquals("SUSPECTED", ctx.getOutbreaks().get(0).getConfirmationStatus());
         Assertions.assertEquals(12, ctx.getOutbreaks().get(0).getCaseCount());
+    }
+
+    @Test
+    void shouldThrowWhenLatestMessageIsNotFromUser() {
+        Mockito.when(outbreakRepository.findActiveByMunicipalityIdsOrStateId(List.of(municipalityId), stateId)).thenReturn(List.of());
+
+        AssistantMessageDto userMsg = new AssistantMessageDto();
+        userMsg.setRole("user");
+        userMsg.setContent("Initial question");
+
+        AssistantMessageDto assistantMsg = new AssistantMessageDto();
+        assistantMsg.setRole("assistant");
+        assistantMsg.setContent("Last reply");
+
+        AssistantRequestDto request = new AssistantRequestDto();
+        request.setMessages(List.of(userMsg, assistantMsg));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> useCase.execute(request));
+        Mockito.verifyNoInteractions(assistantChatGateway);
+    }
+
+    @Test
+    void shouldThrowNotFoundWhenHospitalDoesNotExist() {
+        Mockito.when(hospitalRepository.findHospitalById(hospitalId)).thenReturn(Optional.empty());
+
+        AssistantRequestDto request = buildRequest("Some question");
+
+        Assertions.assertThrows(NotFoundException.class, () -> useCase.execute(request));
+        Mockito.verifyNoInteractions(outbreakRepository);
+        Mockito.verifyNoInteractions(assistantChatGateway);
     }
 
     @Test

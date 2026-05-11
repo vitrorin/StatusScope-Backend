@@ -83,10 +83,32 @@ class AssistantPromptBuilderTest {
 
     @Test
     void shouldNotLeakOutbreaksFromOtherStates() {
-        // The builder only receives outbreaks already filtered by state; it should render what it gets.
         Outbreak o = outbreak("Dengue", "Fever, joint pain", 5);
         String prompt = builder.build(state("Nuevo Leon"), List.of(o), null);
         Assertions.assertTrue(prompt.contains("Dengue"));
         Assertions.assertFalse(prompt.contains("COVID"));
+    }
+
+    @Test
+    void shouldIncludeHistoricalCasesWhenProvided() {
+        HistoricalCaseRetriever.HistoricalCase hc = new HistoricalCaseRetriever.HistoricalCase(
+                UUID.randomUUID(),
+                LocalDateTime.now().minusWeeks(2),
+                28,
+                "female",
+                "fever, headache, joint pain",
+                "Dengue",
+                0.5
+        );
+        String prompt = builder.build(state("Nuevo Leon"), List.of(), null, List.of(hc));
+        Assertions.assertTrue(prompt.contains("Similar confirmed cases"));
+        Assertions.assertTrue(prompt.contains("Dengue"));
+    }
+
+    @Test
+    void shouldInstructLlmToEmitDiagnosisJsonBlock() {
+        String prompt = builder.build(state("Nuevo Leon"), List.of(), null, List.of());
+        Assertions.assertTrue(prompt.contains("<DIAGNOSIS_JSON>"));
+        Assertions.assertTrue(prompt.contains("differentialDiagnoses"));
     }
 }

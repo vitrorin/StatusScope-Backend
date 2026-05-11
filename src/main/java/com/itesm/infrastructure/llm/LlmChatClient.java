@@ -1,7 +1,8 @@
 package com.itesm.infrastructure.llm;
 
+import com.itesm.application.port.out.AssistantChatGateway;
+import com.itesm.application.port.out.AssistantChatMessage;
 import com.itesm.application.usecase.exception.OpenAiException;
-import com.itesm.infrastructure.openai.dto.ChatMessage;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -15,7 +16,7 @@ import java.util.List;
  * secondary strategy (Gemini). If both fail, the secondary exception is propagated.
  */
 @ApplicationScoped
-public class LlmChatClient {
+public class LlmChatClient implements AssistantChatGateway {
 
     private static final Logger LOG = Logger.getLogger(LlmChatClient.class);
 
@@ -27,7 +28,8 @@ public class LlmChatClient {
     @Named("gemini")
     LlmChatStrategy fallback;
 
-    public String chat(List<ChatMessage> messages) {
+    @Override
+    public String chat(List<AssistantChatMessage> messages) {
         try {
             return primary.chat(messages);
         } catch (Exception primaryException) {
