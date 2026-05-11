@@ -28,6 +28,8 @@ import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.notNullValue;
 
 @QuarkusTest
@@ -250,6 +252,21 @@ class DiagnosisEvaluationResourceTest {
     }
 
     @Test
+    void shouldListNormalizedDiseasesForDiagnosisFeedback() {
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", DOCTOR_EMAIL)
+                .queryParam("query", "covid")
+                .when()
+                .get("/diagnosis/diseases")
+                .then()
+                .statusCode(200)
+                .body("size()", greaterThan(0))
+                .body("name", hasItem("COVID-19"));
+    }
+
+    @Test
     void shouldReturnEvaluationById() {
         given()
                 .contentType(ContentType.JSON)
@@ -307,6 +324,33 @@ class DiagnosisEvaluationResourceTest {
                 .statusCode(200)
                 .body("status", equalTo("CONFIRMED"))
                 .body("finalizedAt", notNullValue());
+    }
+
+    @Test
+    void shouldRecordAssistantFeedbackWithNormalizedDisease() {
+        String payload = """
+                {
+                  "finalDecisionSource": "DOCTOR_ONLY",
+                  "finalDiseaseId": "%s",
+                  "doctorFeedbackNotes": "Confirmed after lab review."
+                }
+                """.formatted(DISEASE_ID);
+
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", DOCTOR_EMAIL)
+                .body(payload)
+                .when()
+                .post("/diagnosis/evaluations/{id}/assistant-feedback", EVALUATION_ID)
+                .then()
+                .statusCode(200)
+                .body("status", equalTo("CONFIRMED"))
+                .body("finalDecisionSource", equalTo("DOCTOR_ONLY"))
+                .body("finalDiseaseId", equalTo(DISEASE_ID.toString()))
+                .body("finalDiseaseName", equalTo("COVID-19"))
+                .body("finalDiagnosisLabel", equalTo("COVID-19"))
+                .body("doctorFeedbackNotes", equalTo("Confirmed after lab review."));
     }
 
     @Test

@@ -47,8 +47,8 @@ public class RecordAssistantFeedbackUseCase {
 
         PatientEvaluationEntity evaluation = loadManagedEvaluation(evaluationId, currentUser.getUserId());
 
-        DiseaseEntity finalDisease = resolveDisease(dto.getFinalDiseaseId());
-        String finalLabel = trimToNull(dto.getFinalDiagnosisLabel());
+        DiseaseEntity finalDisease = resolveRequiredDisease(dto.getFinalDiseaseId());
+        String finalLabel = finalDisease.getName();
         String notes = trimToNull(dto.getDoctorFeedbackNotes());
         LocalDateTime now = LocalDateTime.now();
 
@@ -125,9 +125,9 @@ public class RecordAssistantFeedbackUseCase {
         return message;
     }
 
-    private DiseaseEntity resolveDisease(UUID diseaseId) {
+    private DiseaseEntity resolveRequiredDisease(UUID diseaseId) {
         if (diseaseId == null) {
-            return null;
+            throw new IllegalArgumentException("finalDiseaseId is required");
         }
         DiseaseEntity disease = entityManager.find(DiseaseEntity.class, diseaseId);
         if (disease == null) {

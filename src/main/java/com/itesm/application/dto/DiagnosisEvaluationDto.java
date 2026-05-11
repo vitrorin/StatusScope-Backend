@@ -14,6 +14,7 @@ public class DiagnosisEvaluationDto {
     private LocalDateTime updatedAt;
     private LocalDateTime finalizedAt;
     private UUID finalDiseaseId;
+    private String finalDiseaseName;
     private String finalDiagnosisLabel;
     private String finalDecisionSource;
     private String doctorFeedbackNotes;
@@ -46,6 +47,9 @@ public class DiagnosisEvaluationDto {
 
     public UUID getFinalDiseaseId() { return finalDiseaseId; }
     public void setFinalDiseaseId(UUID finalDiseaseId) { this.finalDiseaseId = finalDiseaseId; }
+
+    public String getFinalDiseaseName() { return finalDiseaseName; }
+    public void setFinalDiseaseName(String finalDiseaseName) { this.finalDiseaseName = finalDiseaseName; }
 
     public String getFinalDiagnosisLabel() { return finalDiagnosisLabel; }
     public void setFinalDiagnosisLabel(String finalDiagnosisLabel) { this.finalDiagnosisLabel = finalDiagnosisLabel; }
