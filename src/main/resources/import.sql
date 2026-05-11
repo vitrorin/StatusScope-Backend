@@ -78,7 +78,8 @@ INSERT INTO privileges (id, code, description, created_at, updated_at) VALUES
 ('10000000-0000-0000-0000-000000000016', 'outbreaks.manage',  'Manage outbreaks',           CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000017', 'states.read',       'Read states',                CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000018', 'states.manage',     'Manage states',              CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('10000000-0000-0000-0000-000000000019', 'diagnosis.assist',  'Use the AI diagnosis assistant chat', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+('10000000-0000-0000-0000-000000000019', 'diagnosis.assist',  'Use the AI diagnosis assistant chat', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('10000000-0000-0000-0000-000000000020', 'admin.operations',  'Access hospital admin operational features', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- SYSTEM_ADMIN: everything
 INSERT INTO role_privileges (role_id, privilege_id) VALUES
@@ -101,6 +102,9 @@ INSERT INTO role_privileges (role_id, privilege_id) VALUES
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000017'),
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000018'),
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000019');
+-- admin.operations for SYSTEM_ADMIN
+INSERT INTO role_privileges (role_id, privilege_id) VALUES
+('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000020');
 
 -- HOSPITAL_ADMIN: hospital-scoped clinical + admin.
 INSERT INTO role_privileges (role_id, privilege_id) VALUES
@@ -116,6 +120,9 @@ INSERT INTO role_privileges (role_id, privilege_id) VALUES
 ('00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000015'),
 ('00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000016'),
 ('00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000017');
+-- admin.operations for HOSPITAL_ADMIN
+INSERT INTO role_privileges (role_id, privilege_id) VALUES
+('00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000020');
 
 -- DOCTOR: read alerts + clinical features for their patients
 INSERT INTO role_privileges (role_id, privilege_id) VALUES
@@ -131,3 +138,82 @@ INSERT INTO role_privileges (role_id, privilege_id) VALUES
 -- Users and user_roles are seeded by DevSeeder.java in dev profile (creates real Firebase
 -- identities with password "Password123!" and writes matching DB rows with the real UID).
 -- Do not insert users here or DevSeeder's idempotency guard will short-circuit.
+
+-- ============================================================
+-- HOSPITALS (needed as FK parent for operational seed data)
+-- municipality_id is left NULL here; Flyway V2 sets real values in local-persistent profile.
+-- ============================================================
+INSERT INTO hospitals (id, code, name, address, phone, invite_code, active, postal_code, bed_count, doctor_count, nurse_count, municipality_id, latitude, longitude, created_at, updated_at) VALUES
+('30000000-0000-0000-0000-000000000001', 'HGZ-21', 'Hospital General Zona 21',  'Av. Principal 100, Monterrey',    '+52 81 0000 0001', 'INVITE-HGZ21', TRUE, '64000', 240, 72, 180, NULL, 25.6866142, -100.3161126, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('30000000-0000-0000-0000-000000000002', 'HRE-05', 'Hospital Regional Este',     'Calle 5 Ote 200, Xochimilco',     '+52 55 0000 0002', 'INVITE-HRE05', TRUE, '16000', 320, 96, 240, NULL, 19.2572310,  -99.1037420,  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- ============================================================
+-- OPERATIONAL MODULE SEED DATA (Hospital 1: HGZ-21, Monterrey)
+-- ============================================================
+
+-- hospital_resource_snapshots
+INSERT INTO hospital_resource_snapshots (id, hospital_id, total_beds, available_beds, icu_total_beds, icu_available_beds, isolation_rooms_total, isolation_rooms_available, oxygen_capacity_units, oxygen_available_units, doctors_on_shift, nurses_on_shift, specialists_on_shift, source, captured_at, created_at) VALUES
+('20000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', 240, 60, 20, 5, 10, 3, 500, 150, 42, 130, 15, 'MANUAL', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- hospital_department_resources
+INSERT INTO hospital_department_resources (id, hospital_id, department_code, department_name, level_label, total_beds, occupied_beds, status, notes, updated_at) VALUES
+('21000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', 'EMERGENCY',   'Emergency Department',       'Level 1', 40,  35, 'HIGH_LOAD', 'Near capacity',         CURRENT_TIMESTAMP),
+('21000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000001', 'GENERAL',     'General Ward',               'Level 2', 80,  65, 'NORMAL',    NULL,                    CURRENT_TIMESTAMP),
+('21000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000001', 'ICU',         'Intensive Care Unit',        'Level 3', 20,  15, 'HIGH_LOAD', 'Surge expected',        CURRENT_TIMESTAMP),
+('21000000-0000-0000-0000-000000000004', '30000000-0000-0000-0000-000000000001', 'RESPIRATORY', 'Respiratory Ward',           'Level 2', 30,  25, 'HIGH_LOAD', 'Outbreak isolation active', CURRENT_TIMESTAMP),
+('21000000-0000-0000-0000-000000000005', '30000000-0000-0000-0000-000000000001', 'PEDIATRICS',  'Pediatric Ward',             'Level 2', 25,  15, 'NORMAL',    NULL,                    CURRENT_TIMESTAMP);
+
+-- hospital_staffing_profiles
+INSERT INTO hospital_staffing_profiles (id, hospital_id, role_code, role_name, headcount, on_shift_count, on_call_count, standby_count, updated_at) VALUES
+('22000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', 'EMERGENCY_PHYSICIAN',  'Emergency Physicians',            10, 4, 3, 3, CURRENT_TIMESTAMP),
+('22000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000001', 'ICU_NURSE',            'ICU Nurses',                      18, 6, 6, 6, CURRENT_TIMESTAMP),
+('22000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000001', 'PULMONOLOGIST',        'Pulmonologists',                   5, 2, 2, 1, CURRENT_TIMESTAMP),
+('22000000-0000-0000-0000-000000000004', '30000000-0000-0000-0000-000000000001', 'INFECTIOUS_DISEASE',   'Infectious Disease Specialists',   4, 2, 1, 1, CURRENT_TIMESTAMP),
+('22000000-0000-0000-0000-000000000005', '30000000-0000-0000-0000-000000000001', 'GENERAL_PRACTITIONER', 'General Practitioners',           30, 12, 9, 9, CURRENT_TIMESTAMP),
+('22000000-0000-0000-0000-000000000006', '30000000-0000-0000-0000-000000000001', 'NURSING_STAFF',        'Nursing Staff',                   80, 30, 25, 25, CURRENT_TIMESTAMP);
+
+-- hospital_inventory_items
+INSERT INTO hospital_inventory_items (id, hospital_id, item_code, item_name, category, location, current_quantity, capacity_quantity, unit, critical_threshold, target_quantity, status, updated_at) VALUES
+('23000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', 'N95_MASK',     'N95 Respirator Masks',   'PPE',          'Central Supply', 500,  2000, 'units',    200,  1500, 'LOW',      CURRENT_TIMESTAMP),
+('23000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000001', 'VENTILATOR',   'Mechanical Ventilators', 'EQUIPMENT',    'ICU',            8,    20,   'units',    3,    15,   'NORMAL',   CURRENT_TIMESTAMP),
+('23000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000001', 'O2_CYLINDER',  'Oxygen Cylinders',       'SUPPLY',       'Gas Room',       80,   200,  'cylinders',40,   150,  'NORMAL',   CURRENT_TIMESTAMP),
+('23000000-0000-0000-0000-000000000004', '30000000-0000-0000-0000-000000000001', 'IV_FLUID',     'IV Saline Solution',     'PHARMACEUTICAL','Pharmacy',      300,  1000, 'bags',     100,  800,  'NORMAL',   CURRENT_TIMESTAMP),
+('23000000-0000-0000-0000-000000000005', '30000000-0000-0000-0000-000000000001', 'ISO_GOWN',     'Isolation Gowns',        'PPE',          'Central Supply', 150,  1000, 'units',    200,  700,  'CRITICAL', CURRENT_TIMESTAMP),
+('23000000-0000-0000-0000-000000000006', '30000000-0000-0000-0000-000000000001', 'ANTIVIRAL',    'Antiviral Medications',  'PHARMACEUTICAL','Pharmacy',      60,   300,  'doses',    50,   250,  'LOW',      CURRENT_TIMESTAMP);
+
+-- operational_recommendations (3 example records for hospital 1)
+INSERT INTO operational_recommendations (id, hospital_id, source_alert_id, source_outbreak_id, type, severity, status, category, title, description, expected_impact, urgency_window, confidence_score, rationale_json, recommended_actions_json, affected_departments_json, affected_resources_json, created_by_mode, created_at, updated_at) VALUES
+('24000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', NULL, NULL, 'BED_CAPACITY', 'CRITICAL', 'NEW', 'BED_CAPACITY',
+  'ICU Capacity Critical - Activate Surge Protocol',
+  'ICU occupancy is at 75% with 5 beds remaining. Trending upward due to respiratory disease activity.',
+  'Prevent ICU overflow and ensure critical care availability',
+  'Immediately',
+  0.95,
+  '["ICU occupancy trending 75% with active outbreak","Respiratory case referrals increasing 18% week over week"]',
+  '["Activate ICU surge protocol","Convert step-down unit beds to monitored ICU capacity","Expedite eligible ICU discharges"]',
+  '["ICU","Step-Down Unit"]',
+  '["ICU Beds","Ventilators","ICU Nursing"]',
+  'RULE_ENGINE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('24000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000001', NULL, NULL, 'STAFFING', 'HIGH', 'ACCEPTED', 'STAFFING',
+  'Increase Emergency Physician Staffing',
+  'Doctor-to-bed ratio is below recommended threshold during high outbreak season.',
+  'Improve patient throughput during outbreak surge',
+  'Next staffing rotation',
+  0.85,
+  '["Doctor-to-bed ratio is 1:57, below recommended 1:30","Multiple active outbreaks in catchment area"]',
+  '["Activate 3 additional on-call physicians","Redirect from low-urgency departments"]',
+  '["Emergency Department","ICU"]',
+  '["Physician Staff","On-Call Roster"]',
+  'RULE_ENGINE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('24000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000001', NULL, NULL, 'ISOLATION', 'MEDIUM', 'NEW', 'ISOLATION',
+  'Review PPE Stock Levels',
+  'Current PPE inventory (N95 masks, isolation gowns) is below minimum threshold given active respiratory outbreak.',
+  'Maintain staff protection and infection control capability',
+  'Within 48 hours',
+  0.78,
+  '["N95 mask stock at 500 units vs 200 critical threshold","Isolation gowns critically low at 150 units"]',
+  '["Emergency procurement of 1500 N95 masks","Order 700 isolation gowns","Audit and restock PPE distribution"]',
+  '["Emergency Department","Respiratory Ward","General Admission"]',
+  '["N95 Masks","Isolation Gowns"]',
+  'RULE_ENGINE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
