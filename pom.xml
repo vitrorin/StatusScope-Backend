@@ -109,6 +109,16 @@
                     <systemPropertyVariables>
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                         <maven.home>${maven.home}</maven.home>
+                        <!--
+                          Force the test datasource to H2 so the suite never depends on a running
+                          MySQL instance. System properties beat both env vars and the .env file
+                          in SmallRye Config priority, so this wins even if a developer has
+                          QUARKUS_DATASOURCE_JDBC_URL set locally.
+                        -->
+                        <quarkus.datasource.db-kind>h2</quarkus.datasource.db-kind>
+                        <quarkus.datasource.username>sa</quarkus.datasource.username>
+                        <quarkus.datasource.password></quarkus.datasource.password>
+                        <quarkus.datasource.jdbc.url>jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1</quarkus.datasource.jdbc.url>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

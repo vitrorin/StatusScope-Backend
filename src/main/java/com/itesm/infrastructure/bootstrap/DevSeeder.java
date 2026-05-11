@@ -59,7 +59,7 @@ public class DevSeeder {
 
     @Transactional
     void onStart(@Observes StartupEvent ev) {
-        if (!"dev".equals(profile)) return;
+        if (!"dev".equals(profile) && !"test".equals(profile)) return;
         if (userRepository.findByEmail("admin@statusscope.local").isPresent()) return; // idempotent
 
         seedUser("admin@statusscope.local",       "System Admin",    null,
