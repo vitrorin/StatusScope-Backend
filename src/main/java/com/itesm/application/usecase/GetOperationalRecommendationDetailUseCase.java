@@ -50,10 +50,13 @@ public class GetOperationalRecommendationDetailUseCase {
                 .map(t -> {
                     TaskDto td = new TaskDto();
                     td.setId(t.getId().toString());
+                    if (t.getOwnerContactId() != null) td.setOwnerContactId(t.getOwnerContactId().toString());
+                    if (t.getOwnerGroupId() != null) td.setOwnerGroupId(t.getOwnerGroupId().toString());
                     td.setOwnerLabel(t.getOwnerLabel());
                     td.setDepartmentLabel(t.getDepartmentLabel());
                     td.setPriority(t.getPriority());
                     td.setStatus(t.getStatus());
+                    td.setSourceActionCode(t.getSourceActionCode());
                     td.setDeadlineAt(t.getDeadlineAt());
                     td.setNotes(t.getNotes());
                     td.setCreatedAt(t.getCreatedAt());
@@ -64,9 +67,14 @@ public class GetOperationalRecommendationDetailUseCase {
                 .map(n -> {
                     NotificationDto nd = new NotificationDto();
                     nd.setId(n.getId().toString());
+                    if (n.getAudienceGroupId() != null) nd.setAudienceGroupId(n.getAudienceGroupId().toString());
+                    if (n.getAudienceContactId() != null) nd.setAudienceContactId(n.getAudienceContactId().toString());
                     nd.setAudienceLabel(n.getAudienceLabel());
                     nd.setMessage(n.getMessage());
                     nd.setStatus(n.getStatus());
+                    nd.setDeliveryChannel(n.getDeliveryChannel());
+                    nd.setDeliveryStatusDetail(n.getDeliveryStatusDetail());
+                    nd.setSourceActionCode(n.getSourceActionCode());
                     nd.setSentAt(n.getSentAt());
                     return nd;
                 }).collect(Collectors.toList()));
@@ -75,12 +83,16 @@ public class GetOperationalRecommendationDetailUseCase {
                 .map(sr -> {
                     SupplyRequestItemDto sd = new SupplyRequestItemDto();
                     sd.setId(sr.getId().toString());
+                    if (sr.getInventoryItemId() != null) sd.setInventoryItemId(sr.getInventoryItemId().toString());
                     sd.setSupplyTypeLabel(sr.getSupplyTypeLabel());
                     sd.setQuantity(sr.getQuantity());
                     sd.setUnit(sr.getUnit());
                     sd.setDestination(sr.getDestination());
                     sd.setSuggestedSupplier(sr.getSuggestedSupplier());
                     sd.setStatus(sr.getStatus());
+                    sd.setSourceActionCode(sr.getSourceActionCode());
+                    sd.setPriority(sr.getPriority());
+                    sd.setRequestedNeededBy(sr.getRequestedNeededBy());
                     sd.setCreatedAt(sr.getCreatedAt());
                     return sd;
                 }).collect(Collectors.toList()));

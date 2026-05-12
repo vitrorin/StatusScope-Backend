@@ -8,12 +8,16 @@ public class OperationalTask {
     private UUID recommendationId;
     private UUID hospitalId;
     private UUID ownerUserId;
+    private UUID ownerContactId;
+    private UUID ownerGroupId;
     private String ownerLabel;
     private String departmentLabel;
     private LocalDateTime deadlineAt;
     private String priority;
     private String notes;
     private String status;
+    private String sourceActionCode;
+    private UUID recommendedByRecommendationId;
     private UUID createdByUserId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -26,6 +30,10 @@ public class OperationalTask {
     public void setHospitalId(UUID hospitalId) { this.hospitalId = hospitalId; }
     public UUID getOwnerUserId() { return ownerUserId; }
     public void setOwnerUserId(UUID ownerUserId) { this.ownerUserId = ownerUserId; }
+    public UUID getOwnerContactId() { return ownerContactId; }
+    public void setOwnerContactId(UUID ownerContactId) { this.ownerContactId = ownerContactId; }
+    public UUID getOwnerGroupId() { return ownerGroupId; }
+    public void setOwnerGroupId(UUID ownerGroupId) { this.ownerGroupId = ownerGroupId; }
     public String getOwnerLabel() { return ownerLabel; }
     public void setOwnerLabel(String ownerLabel) { this.ownerLabel = ownerLabel; }
     public String getDepartmentLabel() { return departmentLabel; }
@@ -38,6 +46,10 @@ public class OperationalTask {
     public void setNotes(String notes) { this.notes = notes; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    public String getSourceActionCode() { return sourceActionCode; }
+    public void setSourceActionCode(String sourceActionCode) { this.sourceActionCode = sourceActionCode; }
+    public UUID getRecommendedByRecommendationId() { return recommendedByRecommendationId; }
+    public void setRecommendedByRecommendationId(UUID recommendedByRecommendationId) { this.recommendedByRecommendationId = recommendedByRecommendationId; }
     public UUID getCreatedByUserId() { return createdByUserId; }
     public void setCreatedByUserId(UUID createdByUserId) { this.createdByUserId = createdByUserId; }
     public LocalDateTime getCreatedAt() { return createdAt; }

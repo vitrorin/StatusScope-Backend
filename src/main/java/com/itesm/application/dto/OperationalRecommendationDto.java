@@ -23,6 +23,17 @@ public class OperationalRecommendationDto {
     private List<String> recommendedActions;
     private List<String> affectedDepartments;
     private List<String> affectedResources;
+    private String displayCategoryLabel;
+    private String displaySeverityLabel;
+    private String displayStatusLabel;
+    private RecommendationTargetDto primaryDepartment;
+    private RecommendationTargetDto primaryStaffingProfile;
+    private RecommendationTargetDto primaryInventoryItem;
+    private List<RecommendationActionDto> availableActions;
+    private List<String> allowedStatusTransitions;
+    private String primaryActionCode;
+    private LocalDateTime expiresAt;
+    private RecommendationTargetDto assignedOwner;
     private String createdByMode;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -68,6 +79,28 @@ public class OperationalRecommendationDto {
     public void setAffectedDepartments(List<String> affectedDepartments) { this.affectedDepartments = affectedDepartments; }
     public List<String> getAffectedResources() { return affectedResources; }
     public void setAffectedResources(List<String> affectedResources) { this.affectedResources = affectedResources; }
+    public String getDisplayCategoryLabel() { return displayCategoryLabel; }
+    public void setDisplayCategoryLabel(String displayCategoryLabel) { this.displayCategoryLabel = displayCategoryLabel; }
+    public String getDisplaySeverityLabel() { return displaySeverityLabel; }
+    public void setDisplaySeverityLabel(String displaySeverityLabel) { this.displaySeverityLabel = displaySeverityLabel; }
+    public String getDisplayStatusLabel() { return displayStatusLabel; }
+    public void setDisplayStatusLabel(String displayStatusLabel) { this.displayStatusLabel = displayStatusLabel; }
+    public RecommendationTargetDto getPrimaryDepartment() { return primaryDepartment; }
+    public void setPrimaryDepartment(RecommendationTargetDto primaryDepartment) { this.primaryDepartment = primaryDepartment; }
+    public RecommendationTargetDto getPrimaryStaffingProfile() { return primaryStaffingProfile; }
+    public void setPrimaryStaffingProfile(RecommendationTargetDto primaryStaffingProfile) { this.primaryStaffingProfile = primaryStaffingProfile; }
+    public RecommendationTargetDto getPrimaryInventoryItem() { return primaryInventoryItem; }
+    public void setPrimaryInventoryItem(RecommendationTargetDto primaryInventoryItem) { this.primaryInventoryItem = primaryInventoryItem; }
+    public List<RecommendationActionDto> getAvailableActions() { return availableActions; }
+    public void setAvailableActions(List<RecommendationActionDto> availableActions) { this.availableActions = availableActions; }
+    public List<String> getAllowedStatusTransitions() { return allowedStatusTransitions; }
+    public void setAllowedStatusTransitions(List<String> allowedStatusTransitions) { this.allowedStatusTransitions = allowedStatusTransitions; }
+    public String getPrimaryActionCode() { return primaryActionCode; }
+    public void setPrimaryActionCode(String primaryActionCode) { this.primaryActionCode = primaryActionCode; }
+    public LocalDateTime getExpiresAt() { return expiresAt; }
+    public void setExpiresAt(LocalDateTime expiresAt) { this.expiresAt = expiresAt; }
+    public RecommendationTargetDto getAssignedOwner() { return assignedOwner; }
+    public void setAssignedOwner(RecommendationTargetDto assignedOwner) { this.assignedOwner = assignedOwner; }
     public String getCreatedByMode() { return createdByMode; }
     public void setCreatedByMode(String createdByMode) { this.createdByMode = createdByMode; }
     public LocalDateTime getCreatedAt() { return createdAt; }
@@ -101,18 +134,57 @@ public class OperationalRecommendationDto {
         public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     }
 
+    public static class RecommendationActionDto {
+        private String code;
+        private String label;
+        private String style;
+        private boolean enabled;
+        private String disabledReason;
+
+        public String getCode() { return code; }
+        public void setCode(String code) { this.code = code; }
+        public String getLabel() { return label; }
+        public void setLabel(String label) { this.label = label; }
+        public String getStyle() { return style; }
+        public void setStyle(String style) { this.style = style; }
+        public boolean isEnabled() { return enabled; }
+        public void setEnabled(boolean enabled) { this.enabled = enabled; }
+        public String getDisabledReason() { return disabledReason; }
+        public void setDisabledReason(String disabledReason) { this.disabledReason = disabledReason; }
+    }
+
+    public static class RecommendationTargetDto {
+        private String id;
+        private String label;
+        private String type;
+
+        public String getId() { return id; }
+        public void setId(String id) { this.id = id; }
+        public String getLabel() { return label; }
+        public void setLabel(String label) { this.label = label; }
+        public String getType() { return type; }
+        public void setType(String type) { this.type = type; }
+    }
+
     public static class TaskDto {
         private String id;
+        private String ownerContactId;
+        private String ownerGroupId;
         private String ownerLabel;
         private String departmentLabel;
         private String priority;
         private String status;
+        private String sourceActionCode;
         private LocalDateTime deadlineAt;
         private String notes;
         private LocalDateTime createdAt;
 
         public String getId() { return id; }
         public void setId(String id) { this.id = id; }
+        public String getOwnerContactId() { return ownerContactId; }
+        public void setOwnerContactId(String ownerContactId) { this.ownerContactId = ownerContactId; }
+        public String getOwnerGroupId() { return ownerGroupId; }
+        public void setOwnerGroupId(String ownerGroupId) { this.ownerGroupId = ownerGroupId; }
         public String getOwnerLabel() { return ownerLabel; }
         public void setOwnerLabel(String ownerLabel) { this.ownerLabel = ownerLabel; }
         public String getDepartmentLabel() { return departmentLabel; }
@@ -121,6 +193,8 @@ public class OperationalRecommendationDto {
         public void setPriority(String priority) { this.priority = priority; }
         public String getStatus() { return status; }
         public void setStatus(String status) { this.status = status; }
+        public String getSourceActionCode() { return sourceActionCode; }
+        public void setSourceActionCode(String sourceActionCode) { this.sourceActionCode = sourceActionCode; }
         public LocalDateTime getDeadlineAt() { return deadlineAt; }
         public void setDeadlineAt(LocalDateTime deadlineAt) { this.deadlineAt = deadlineAt; }
         public String getNotes() { return notes; }
@@ -131,35 +205,56 @@ public class OperationalRecommendationDto {
 
     public static class NotificationDto {
         private String id;
+        private String audienceGroupId;
+        private String audienceContactId;
         private String audienceLabel;
         private String message;
         private String status;
+        private String deliveryChannel;
+        private String deliveryStatusDetail;
+        private String sourceActionCode;
         private LocalDateTime sentAt;
 
         public String getId() { return id; }
         public void setId(String id) { this.id = id; }
+        public String getAudienceGroupId() { return audienceGroupId; }
+        public void setAudienceGroupId(String audienceGroupId) { this.audienceGroupId = audienceGroupId; }
+        public String getAudienceContactId() { return audienceContactId; }
+        public void setAudienceContactId(String audienceContactId) { this.audienceContactId = audienceContactId; }
         public String getAudienceLabel() { return audienceLabel; }
         public void setAudienceLabel(String audienceLabel) { this.audienceLabel = audienceLabel; }
         public String getMessage() { return message; }
         public void setMessage(String message) { this.message = message; }
         public String getStatus() { return status; }
         public void setStatus(String status) { this.status = status; }
+        public String getDeliveryChannel() { return deliveryChannel; }
+        public void setDeliveryChannel(String deliveryChannel) { this.deliveryChannel = deliveryChannel; }
+        public String getDeliveryStatusDetail() { return deliveryStatusDetail; }
+        public void setDeliveryStatusDetail(String deliveryStatusDetail) { this.deliveryStatusDetail = deliveryStatusDetail; }
+        public String getSourceActionCode() { return sourceActionCode; }
+        public void setSourceActionCode(String sourceActionCode) { this.sourceActionCode = sourceActionCode; }
         public LocalDateTime getSentAt() { return sentAt; }
         public void setSentAt(LocalDateTime sentAt) { this.sentAt = sentAt; }
     }
 
     public static class SupplyRequestItemDto {
         private String id;
+        private String inventoryItemId;
         private String supplyTypeLabel;
         private int quantity;
         private String unit;
         private String destination;
         private String suggestedSupplier;
         private String status;
+        private String sourceActionCode;
+        private String priority;
+        private LocalDateTime requestedNeededBy;
         private LocalDateTime createdAt;
 
         public String getId() { return id; }
         public void setId(String id) { this.id = id; }
+        public String getInventoryItemId() { return inventoryItemId; }
+        public void setInventoryItemId(String inventoryItemId) { this.inventoryItemId = inventoryItemId; }
         public String getSupplyTypeLabel() { return supplyTypeLabel; }
         public void setSupplyTypeLabel(String supplyTypeLabel) { this.supplyTypeLabel = supplyTypeLabel; }
         public int getQuantity() { return quantity; }
@@ -172,6 +267,12 @@ public class OperationalRecommendationDto {
         public void setSuggestedSupplier(String suggestedSupplier) { this.suggestedSupplier = suggestedSupplier; }
         public String getStatus() { return status; }
         public void setStatus(String status) { this.status = status; }
+        public String getSourceActionCode() { return sourceActionCode; }
+        public void setSourceActionCode(String sourceActionCode) { this.sourceActionCode = sourceActionCode; }
+        public String getPriority() { return priority; }
+        public void setPriority(String priority) { this.priority = priority; }
+        public LocalDateTime getRequestedNeededBy() { return requestedNeededBy; }
+        public void setRequestedNeededBy(LocalDateTime requestedNeededBy) { this.requestedNeededBy = requestedNeededBy; }
         public LocalDateTime getCreatedAt() { return createdAt; }
         public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     }

@@ -14,6 +14,10 @@ public class SupplyRequest {
     private String destination;
     private String suggestedSupplier;
     private String status;
+    private String sourceActionCode;
+    private String priority;
+    private LocalDateTime requestedNeededBy;
+    private UUID linkedRecommendationInventoryItemId;
     private UUID requestedByUserId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -38,6 +42,14 @@ public class SupplyRequest {
     public void setSuggestedSupplier(String suggestedSupplier) { this.suggestedSupplier = suggestedSupplier; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    public String getSourceActionCode() { return sourceActionCode; }
+    public void setSourceActionCode(String sourceActionCode) { this.sourceActionCode = sourceActionCode; }
+    public String getPriority() { return priority; }
+    public void setPriority(String priority) { this.priority = priority; }
+    public LocalDateTime getRequestedNeededBy() { return requestedNeededBy; }
+    public void setRequestedNeededBy(LocalDateTime requestedNeededBy) { this.requestedNeededBy = requestedNeededBy; }
+    public UUID getLinkedRecommendationInventoryItemId() { return linkedRecommendationInventoryItemId; }
+    public void setLinkedRecommendationInventoryItemId(UUID linkedRecommendationInventoryItemId) { this.linkedRecommendationInventoryItemId = linkedRecommendationInventoryItemId; }
     public UUID getRequestedByUserId() { return requestedByUserId; }
     public void setRequestedByUserId(UUID requestedByUserId) { this.requestedByUserId = requestedByUserId; }
     public LocalDateTime getCreatedAt() { return createdAt; }

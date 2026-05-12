@@ -76,6 +76,46 @@ public class OperationalRecommendationEntity {
     @Column(name = "affected_resources_json", columnDefinition = "TEXT")
     private String affectedResourcesJson;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "primary_department_resource_id")
+    private HospitalDepartmentResourceEntity primaryDepartmentResource;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "primary_staffing_profile_id")
+    private HospitalStaffingProfileEntity primaryStaffingProfile;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "primary_inventory_item_id")
+    private HospitalInventoryItemEntity primaryInventoryItem;
+
+    @Column(name = "presentation_variant", length = 32)
+    private String presentationVariant;
+
+    @Column(name = "primary_action_code", length = 32)
+    private String primaryActionCode;
+
+    @Column(name = "available_actions_json", columnDefinition = "TEXT")
+    private String availableActionsJson;
+
+    @Column(name = "allowed_status_transitions_json", columnDefinition = "TEXT")
+    private String allowedStatusTransitionsJson;
+
+    @Column(name = "display_category_label", length = 64)
+    private String displayCategoryLabel;
+
+    @Column(name = "display_severity_label", length = 32)
+    private String displaySeverityLabel;
+
+    @Column(name = "display_status_label", length = 32)
+    private String displayStatusLabel;
+
+    @Column(name = "expires_at")
+    private LocalDateTime expiresAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assigned_owner_user_id")
+    private UserEntity assignedOwnerUser;
+
     @Column(name = "model_provider", length = 64)
     private String modelProvider;
 
@@ -133,6 +173,30 @@ public class OperationalRecommendationEntity {
     public void setAffectedDepartmentsJson(String affectedDepartmentsJson) { this.affectedDepartmentsJson = affectedDepartmentsJson; }
     public String getAffectedResourcesJson() { return affectedResourcesJson; }
     public void setAffectedResourcesJson(String affectedResourcesJson) { this.affectedResourcesJson = affectedResourcesJson; }
+    public HospitalDepartmentResourceEntity getPrimaryDepartmentResource() { return primaryDepartmentResource; }
+    public void setPrimaryDepartmentResource(HospitalDepartmentResourceEntity primaryDepartmentResource) { this.primaryDepartmentResource = primaryDepartmentResource; }
+    public HospitalStaffingProfileEntity getPrimaryStaffingProfile() { return primaryStaffingProfile; }
+    public void setPrimaryStaffingProfile(HospitalStaffingProfileEntity primaryStaffingProfile) { this.primaryStaffingProfile = primaryStaffingProfile; }
+    public HospitalInventoryItemEntity getPrimaryInventoryItem() { return primaryInventoryItem; }
+    public void setPrimaryInventoryItem(HospitalInventoryItemEntity primaryInventoryItem) { this.primaryInventoryItem = primaryInventoryItem; }
+    public String getPresentationVariant() { return presentationVariant; }
+    public void setPresentationVariant(String presentationVariant) { this.presentationVariant = presentationVariant; }
+    public String getPrimaryActionCode() { return primaryActionCode; }
+    public void setPrimaryActionCode(String primaryActionCode) { this.primaryActionCode = primaryActionCode; }
+    public String getAvailableActionsJson() { return availableActionsJson; }
+    public void setAvailableActionsJson(String availableActionsJson) { this.availableActionsJson = availableActionsJson; }
+    public String getAllowedStatusTransitionsJson() { return allowedStatusTransitionsJson; }
+    public void setAllowedStatusTransitionsJson(String allowedStatusTransitionsJson) { this.allowedStatusTransitionsJson = allowedStatusTransitionsJson; }
+    public String getDisplayCategoryLabel() { return displayCategoryLabel; }
+    public void setDisplayCategoryLabel(String displayCategoryLabel) { this.displayCategoryLabel = displayCategoryLabel; }
+    public String getDisplaySeverityLabel() { return displaySeverityLabel; }
+    public void setDisplaySeverityLabel(String displaySeverityLabel) { this.displaySeverityLabel = displaySeverityLabel; }
+    public String getDisplayStatusLabel() { return displayStatusLabel; }
+    public void setDisplayStatusLabel(String displayStatusLabel) { this.displayStatusLabel = displayStatusLabel; }
+    public LocalDateTime getExpiresAt() { return expiresAt; }
+    public void setExpiresAt(LocalDateTime expiresAt) { this.expiresAt = expiresAt; }
+    public UserEntity getAssignedOwnerUser() { return assignedOwnerUser; }
+    public void setAssignedOwnerUser(UserEntity assignedOwnerUser) { this.assignedOwnerUser = assignedOwnerUser; }
     public String getModelProvider() { return modelProvider; }
     public void setModelProvider(String modelProvider) { this.modelProvider = modelProvider; }
     public String getModelVersion() { return modelVersion; }

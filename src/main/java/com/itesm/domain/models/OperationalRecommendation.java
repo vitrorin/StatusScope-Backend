@@ -23,6 +23,18 @@ public class OperationalRecommendation {
     private String recommendedActionsJson;
     private String affectedDepartmentsJson;
     private String affectedResourcesJson;
+    private UUID primaryDepartmentResourceId;
+    private UUID primaryStaffingProfileId;
+    private UUID primaryInventoryItemId;
+    private String presentationVariant;
+    private String primaryActionCode;
+    private String availableActionsJson;
+    private String allowedStatusTransitionsJson;
+    private String displayCategoryLabel;
+    private String displaySeverityLabel;
+    private String displayStatusLabel;
+    private LocalDateTime expiresAt;
+    private UUID assignedOwnerUserId;
     private String modelProvider;
     private String modelVersion;
     private String inputContextJson;
@@ -67,6 +79,30 @@ public class OperationalRecommendation {
     public void setAffectedDepartmentsJson(String affectedDepartmentsJson) { this.affectedDepartmentsJson = affectedDepartmentsJson; }
     public String getAffectedResourcesJson() { return affectedResourcesJson; }
     public void setAffectedResourcesJson(String affectedResourcesJson) { this.affectedResourcesJson = affectedResourcesJson; }
+    public UUID getPrimaryDepartmentResourceId() { return primaryDepartmentResourceId; }
+    public void setPrimaryDepartmentResourceId(UUID primaryDepartmentResourceId) { this.primaryDepartmentResourceId = primaryDepartmentResourceId; }
+    public UUID getPrimaryStaffingProfileId() { return primaryStaffingProfileId; }
+    public void setPrimaryStaffingProfileId(UUID primaryStaffingProfileId) { this.primaryStaffingProfileId = primaryStaffingProfileId; }
+    public UUID getPrimaryInventoryItemId() { return primaryInventoryItemId; }
+    public void setPrimaryInventoryItemId(UUID primaryInventoryItemId) { this.primaryInventoryItemId = primaryInventoryItemId; }
+    public String getPresentationVariant() { return presentationVariant; }
+    public void setPresentationVariant(String presentationVariant) { this.presentationVariant = presentationVariant; }
+    public String getPrimaryActionCode() { return primaryActionCode; }
+    public void setPrimaryActionCode(String primaryActionCode) { this.primaryActionCode = primaryActionCode; }
+    public String getAvailableActionsJson() { return availableActionsJson; }
+    public void setAvailableActionsJson(String availableActionsJson) { this.availableActionsJson = availableActionsJson; }
+    public String getAllowedStatusTransitionsJson() { return allowedStatusTransitionsJson; }
+    public void setAllowedStatusTransitionsJson(String allowedStatusTransitionsJson) { this.allowedStatusTransitionsJson = allowedStatusTransitionsJson; }
+    public String getDisplayCategoryLabel() { return displayCategoryLabel; }
+    public void setDisplayCategoryLabel(String displayCategoryLabel) { this.displayCategoryLabel = displayCategoryLabel; }
+    public String getDisplaySeverityLabel() { return displaySeverityLabel; }
+    public void setDisplaySeverityLabel(String displaySeverityLabel) { this.displaySeverityLabel = displaySeverityLabel; }
+    public String getDisplayStatusLabel() { return displayStatusLabel; }
+    public void setDisplayStatusLabel(String displayStatusLabel) { this.displayStatusLabel = displayStatusLabel; }
+    public LocalDateTime getExpiresAt() { return expiresAt; }
+    public void setExpiresAt(LocalDateTime expiresAt) { this.expiresAt = expiresAt; }
+    public UUID getAssignedOwnerUserId() { return assignedOwnerUserId; }
+    public void setAssignedOwnerUserId(UUID assignedOwnerUserId) { this.assignedOwnerUserId = assignedOwnerUserId; }
     public String getModelProvider() { return modelProvider; }
     public void setModelProvider(String modelProvider) { this.modelProvider = modelProvider; }
     public String getModelVersion() { return modelVersion; }

@@ -38,6 +38,12 @@ public class AdminDashboardSummaryDto {
         private String status;
         private String badge;
         private String iconKey;
+        private String displayVariant;
+        private Integer progressPercent;
+        private String progressColorToken;
+        private String badgeTone;
+        private String recommendedActionId;
+        private String actionLabel;
 
         public AdminMetricCardDto() {}
         public AdminMetricCardDto(String id, String title, String value, String subtitle, String status, String badge, String iconKey) {
@@ -58,6 +64,18 @@ public class AdminDashboardSummaryDto {
         public void setBadge(String badge) { this.badge = badge; }
         public String getIconKey() { return iconKey; }
         public void setIconKey(String iconKey) { this.iconKey = iconKey; }
+        public String getDisplayVariant() { return displayVariant; }
+        public void setDisplayVariant(String displayVariant) { this.displayVariant = displayVariant; }
+        public Integer getProgressPercent() { return progressPercent; }
+        public void setProgressPercent(Integer progressPercent) { this.progressPercent = progressPercent; }
+        public String getProgressColorToken() { return progressColorToken; }
+        public void setProgressColorToken(String progressColorToken) { this.progressColorToken = progressColorToken; }
+        public String getBadgeTone() { return badgeTone; }
+        public void setBadgeTone(String badgeTone) { this.badgeTone = badgeTone; }
+        public String getRecommendedActionId() { return recommendedActionId; }
+        public void setRecommendedActionId(String recommendedActionId) { this.recommendedActionId = recommendedActionId; }
+        public String getActionLabel() { return actionLabel; }
+        public void setActionLabel(String actionLabel) { this.actionLabel = actionLabel; }
     }
 
     public static class AdminDashboardAlertDto {
@@ -92,6 +110,9 @@ public class AdminDashboardSummaryDto {
         private int outbreakCount;
         private double latitude;
         private double longitude;
+        private String displayPriorityLabel;
+        private String recommendedActionId;
+        private String displayColorToken;
 
         public String getMunicipalityId() { return municipalityId; }
         public void setMunicipalityId(String municipalityId) { this.municipalityId = municipalityId; }
@@ -105,6 +126,12 @@ public class AdminDashboardSummaryDto {
         public void setLatitude(double latitude) { this.latitude = latitude; }
         public double getLongitude() { return longitude; }
         public void setLongitude(double longitude) { this.longitude = longitude; }
+        public String getDisplayPriorityLabel() { return displayPriorityLabel; }
+        public void setDisplayPriorityLabel(String displayPriorityLabel) { this.displayPriorityLabel = displayPriorityLabel; }
+        public String getRecommendedActionId() { return recommendedActionId; }
+        public void setRecommendedActionId(String recommendedActionId) { this.recommendedActionId = recommendedActionId; }
+        public String getDisplayColorToken() { return displayColorToken; }
+        public void setDisplayColorToken(String displayColorToken) { this.displayColorToken = displayColorToken; }
     }
 
     public static class AdminRecommendedActionDto {

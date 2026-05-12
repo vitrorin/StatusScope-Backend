@@ -33,6 +33,14 @@ public class OperationalTaskEntity {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID ownerUserId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_contact_id")
+    private HospitalOperationalContactEntity ownerContact;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_group_id")
+    private HospitalOperationalGroupEntity ownerGroup;
+
     @Column(name = "owner_label", length = 255)
     private String ownerLabel;
 
@@ -50,6 +58,13 @@ public class OperationalTaskEntity {
 
     @Column(nullable = false, length = 32)
     private String status;
+
+    @Column(name = "source_action_code", length = 32)
+    private String sourceActionCode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recommended_by_recommendation_id")
+    private OperationalRecommendationEntity recommendedByRecommendation;
 
     @Column(name = "created_by_user_id")
     @JdbcTypeCode(SqlTypes.VARCHAR)
@@ -69,6 +84,10 @@ public class OperationalTaskEntity {
     public void setHospital(HospitalEntity hospital) { this.hospital = hospital; }
     public UUID getOwnerUserId() { return ownerUserId; }
     public void setOwnerUserId(UUID ownerUserId) { this.ownerUserId = ownerUserId; }
+    public HospitalOperationalContactEntity getOwnerContact() { return ownerContact; }
+    public void setOwnerContact(HospitalOperationalContactEntity ownerContact) { this.ownerContact = ownerContact; }
+    public HospitalOperationalGroupEntity getOwnerGroup() { return ownerGroup; }
+    public void setOwnerGroup(HospitalOperationalGroupEntity ownerGroup) { this.ownerGroup = ownerGroup; }
     public String getOwnerLabel() { return ownerLabel; }
     public void setOwnerLabel(String ownerLabel) { this.ownerLabel = ownerLabel; }
     public String getDepartmentLabel() { return departmentLabel; }
@@ -81,6 +100,10 @@ public class OperationalTaskEntity {
     public void setNotes(String notes) { this.notes = notes; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    public String getSourceActionCode() { return sourceActionCode; }
+    public void setSourceActionCode(String sourceActionCode) { this.sourceActionCode = sourceActionCode; }
+    public OperationalRecommendationEntity getRecommendedByRecommendation() { return recommendedByRecommendation; }
+    public void setRecommendedByRecommendation(OperationalRecommendationEntity recommendedByRecommendation) { this.recommendedByRecommendation = recommendedByRecommendation; }
     public UUID getCreatedByUserId() { return createdByUserId; }
     public void setCreatedByUserId(UUID createdByUserId) { this.createdByUserId = createdByUserId; }
     public LocalDateTime getCreatedAt() { return createdAt; }

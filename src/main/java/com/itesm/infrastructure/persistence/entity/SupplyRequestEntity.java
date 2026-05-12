@@ -51,6 +51,19 @@ public class SupplyRequestEntity {
     @Column(nullable = false, length = 32)
     private String status;
 
+    @Column(name = "source_action_code", length = 32)
+    private String sourceActionCode;
+
+    @Column(length = 16)
+    private String priority;
+
+    @Column(name = "requested_needed_by")
+    private LocalDateTime requestedNeededBy;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "linked_recommendation_inventory_item_id")
+    private HospitalInventoryItemEntity linkedRecommendationInventoryItem;
+
     @Column(name = "requested_by_user_id")
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID requestedByUserId;
@@ -81,6 +94,14 @@ public class SupplyRequestEntity {
     public void setSuggestedSupplier(String suggestedSupplier) { this.suggestedSupplier = suggestedSupplier; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    public String getSourceActionCode() { return sourceActionCode; }
+    public void setSourceActionCode(String sourceActionCode) { this.sourceActionCode = sourceActionCode; }
+    public String getPriority() { return priority; }
+    public void setPriority(String priority) { this.priority = priority; }
+    public LocalDateTime getRequestedNeededBy() { return requestedNeededBy; }
+    public void setRequestedNeededBy(LocalDateTime requestedNeededBy) { this.requestedNeededBy = requestedNeededBy; }
+    public HospitalInventoryItemEntity getLinkedRecommendationInventoryItem() { return linkedRecommendationInventoryItem; }
+    public void setLinkedRecommendationInventoryItem(HospitalInventoryItemEntity linkedRecommendationInventoryItem) { this.linkedRecommendationInventoryItem = linkedRecommendationInventoryItem; }
     public UUID getRequestedByUserId() { return requestedByUserId; }
     public void setRequestedByUserId(UUID requestedByUserId) { this.requestedByUserId = requestedByUserId; }
     public LocalDateTime getCreatedAt() { return createdAt; }

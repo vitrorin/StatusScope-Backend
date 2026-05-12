@@ -21,6 +21,67 @@ Why this is the correct feature:
 
 Today, all of that is mocked in the UI with hardcoded arrays and local state. There is no backend contract that makes the flow functional.
 
+## Implementation Status (Updated 2026-05-12)
+
+### Backend completed
+
+- schema support is implemented
+  - `hospital_resource_snapshots`
+  - `hospital_department_resources`
+  - `hospital_staffing_profiles`
+  - `hospital_inventory_items`
+  - `operational_recommendations`
+  - `operational_recommendation_audit`
+  - `operational_tasks`
+  - `operational_notifications`
+  - `supply_requests`
+- realistic seed data exists for the default hospital
+- hospital-scoped admin APIs are implemented in `AdminOperationalResource`
+  - `GET /admin/dashboard/summary`
+  - `GET /admin/recommendations`
+  - `GET /admin/recommendations/{id}`
+  - `POST /admin/recommendations/refresh`
+  - `PATCH /admin/recommendations/{id}/status`
+  - `POST /admin/recommendations/{id}/tasks`
+  - `POST /admin/recommendations/{id}/notifications`
+  - `POST /admin/recommendations/{id}/supply-requests`
+  - `GET /admin/resources/summary`
+  - `GET /admin/resources/departments`
+  - `GET /admin/resources/staffing`
+  - `GET /admin/resources/inventory`
+  - `PUT /admin/resources/summary`
+  - `PUT /admin/resources/departments/{departmentId}`
+  - `PUT /admin/resources/staffing/{profileId}`
+  - `PUT /admin/resources/inventory/{itemId}`
+- recommendation workflow is implemented end-to-end
+  - status transitions are persisted
+  - tasks, notifications, and supply requests are persisted
+  - audit trail entries are persisted and returned in recommendation detail
+- deterministic recommendation generation is implemented
+  - uses outbreaks
+  - uses nearby alerts
+  - uses hospital resource snapshots
+  - uses inventory criticality
+  - uses active events
+  - uses recent patient evaluation volume
+- automated refresh is implemented
+  - manual refresh endpoint exists
+  - scheduled refresh job now runs across hospitals
+  - duplicate open recommendations are refreshed instead of duplicated
+- recommendation provenance is persisted
+  - `source_alert_id`
+  - `source_outbreak_id`
+  - `input_context_json`
+  - `model_provider`
+  - `model_version`
+- backend test coverage now includes the admin operational module
+
+### Backend intentionally not implemented yet
+
+- LLM narrative composition for recommendation wording
+  - the backend is now functionally complete using deterministic text/rationale generation
+  - LLM summarization remains an optional enhancement, not a blocker for frontend integration
+
 ## Current Backend Reuse We Already Have
 
 The current backend already gives us strong building blocks:
@@ -457,6 +518,9 @@ Backend flow:
 
 ### Phase 1: Make the UI read real backend data
 
+Status:
+- Completed on backend
+
 Deliver:
 
 - new schema tables
@@ -470,6 +534,9 @@ Result:
 
 ### Phase 2: Make overlays functional
 
+Status:
+- Completed on backend
+
 Deliver:
 
 - task creation endpoint
@@ -482,6 +549,10 @@ Result:
 - "Assign task", "Notify staff", and "Order supplies" become real workflows
 
 ### Phase 3: Automated recommendation generation
+
+Status:
+- Completed for deterministic generation, scheduled refresh, and dedupe
+- Optional LLM wording enhancement still open
 
 Deliver:
 
@@ -567,3 +638,557 @@ The UI is already designed around a persistent workflow system, not a one-off ch
 - audit history
 
 That approach fits the current schema direction, reuses the existing outbreak/hospital foundations, and gives the `hospital_admin` a real end-to-end product instead of a mocked AI feed.
+
+---
+
+## Frontend Completion Addendum (Added 2026-05-12)
+
+The backend now supports the core operational workflows, but the current admin frontend still contains product logic and presentation assumptions that are hardcoded in the UI.
+
+Examples of what is still frontend-guessed today:
+
+- which actions should appear on a recommendation card
+- which status transitions are allowed from the current state
+- which visual treatment should be used for a recommendation
+- which department or inventory item should be treated as the primary target
+- which users can be assigned for a task
+- how dashboard cards should be interpreted and rendered
+
+To make the feature fully functional and remove those assumptions, the backend contract should be extended so the UI becomes a renderer of backend-defined workflow state instead of a place where workflow rules are duplicated.
+
+## Additional Goal
+
+Make the hospital admin dashboard, recommendations, and resources screens:
+
+1. fully backend-driven
+2. audit-safe
+3. role-aware
+4. assignable to real hospital actors
+5. free of hardcoded product behavior in the frontend
+
+## Remaining Gaps To Close
+
+### 1. Recommendation workflow metadata is still implicit
+
+Current state:
+
+- the backend returns recommendation type, severity, and status
+- the frontend infers actions such as:
+  - assign task
+  - notify staff
+  - order supplies
+  - dismiss
+- the frontend also infers which statuses are available to set
+
+Problem:
+
+- business rules now live in two places
+- the UI can drift from the backend
+- changes to workflow rules require frontend rewrites
+
+Required improvement:
+
+- the backend should explicitly return:
+  - allowed actions
+  - allowed status transitions
+  - preferred primary action
+  - action disable reasons when applicable
+
+### 2. Recommendation targeting is still too generic
+
+Current state:
+
+- recommendations have `affected_departments_json` and `affected_resources_json`
+- the UI treats these as display strings only
+
+Problem:
+
+- tasks, notifications, and supply requests are not tied strongly enough to concrete records
+- the UI cannot know the primary department, primary staffing profile, or primary inventory item without guessing
+
+Required improvement:
+
+- recommendations should point to concrete target entities whenever possible
+
+### 3. The frontend has no real assignee model for hospital operations
+
+Current state:
+
+- tasks can persist an owner label
+- the UI does not have a backend-driven list of assignable staff or operational roles
+
+Problem:
+
+- assignment is not truly operational
+- task ownership remains partly free text
+
+Required improvement:
+
+- add a real assignment directory for hospital admins to select from
+
+### 4. Dashboard cards are only partially declarative
+
+Current state:
+
+- the dashboard summary endpoint returns card data
+- the frontend still interprets status, progress, badges, and some actions heuristically
+
+Problem:
+
+- presentation semantics are still duplicated in UI logic
+
+Required improvement:
+
+- return more explicit dashboard card metadata
+
+### 5. Resources UI still synthesizes staff and inventory behavior
+
+Current state:
+
+- staffing profiles are aggregated
+- the frontend synthesizes a pseudo-roster from counts
+- inventory actions are still generic and not tied to explicit replenishment workflow definitions
+
+Problem:
+
+- the screen is operationally useful, but not truly complete
+
+Required improvement:
+
+- differentiate between:
+  - staffing capacity profiles
+  - real assignable staff directory
+  - inventory action recommendations
+  - inventory replenishment workflows
+
+## Recommended Data Model Extensions
+
+### A. Extend `operational_recommendations`
+
+Add columns:
+
+- `primary_department_resource_id` nullable
+- `primary_staffing_profile_id` nullable
+- `primary_inventory_item_id` nullable
+- `presentation_variant` nullable
+- `primary_action_code` nullable
+- `available_actions_json`
+- `allowed_status_transitions_json`
+- `display_category_label` nullable
+- `display_severity_label` nullable
+- `display_status_label` nullable
+- `expires_at` nullable
+- `assigned_owner_user_id` nullable
+
+Purpose:
+
+- eliminate frontend guessing for action visibility and state transitions
+- let the UI render the exact workflow options supported by backend rules
+- connect recommendations to real resource records
+
+Suggested `available_actions_json` example:
+
+```json
+[
+  { "code": "ASSIGN_TASK", "label": "Assign task", "style": "primary", "enabled": true },
+  { "code": "NOTIFY_STAFF", "label": "Notify staff", "style": "secondary", "enabled": true },
+  { "code": "ORDER_SUPPLIES", "label": "Order supplies", "style": "secondary", "enabled": false, "disabledReason": "No inventory item linked" }
+]
+```
+
+Suggested `allowed_status_transitions_json` example:
+
+```json
+["ACCEPTED", "ASSIGNED", "COMPLETED", "REJECTED"]
+```
+
+### B. Add `hospital_operational_contacts`
+
+Purpose:
+
+- real assignment and notification directory for hospital admins
+
+Suggested columns:
+
+- `id`
+- `hospital_id`
+- `user_id` nullable
+- `display_name`
+- `role_label`
+- `department_code` nullable
+- `contact_channel`
+- `contact_value`
+- `availability_status`
+- `is_assignable`
+- `is_notifiable`
+- `updated_at`
+
+Reason:
+
+- the recommendation overlays currently rely on free text
+- this table allows:
+  - assignable owners
+  - notifyable groups
+  - routing suggestions
+
+### C. Add `hospital_operational_groups`
+
+Purpose:
+
+- define reusable notification and assignment audiences
+
+Suggested columns:
+
+- `id`
+- `hospital_id`
+- `group_code`
+- `group_name`
+- `group_type` (`DEPARTMENT`, `SHIFT_TEAM`, `INCIDENT_RESPONSE`, `SUPPLY_CHAIN`, `EXECUTIVE`)
+- `is_assignable`
+- `is_notifiable`
+- `updated_at`
+
+### D. Add `hospital_operational_group_members`
+
+Purpose:
+
+- many-to-many link between contacts and groups
+
+Suggested columns:
+
+- `id`
+- `group_id`
+- `contact_id`
+- `created_at`
+
+### E. Extend `operational_tasks`
+
+Add columns:
+
+- `owner_contact_id` nullable
+- `owner_group_id` nullable
+- `source_action_code` nullable
+- `recommended_by_recommendation_id` nullable
+
+Reason:
+
+- convert assignment from string-only ownership to linked operational ownership
+
+### F. Extend `operational_notifications`
+
+Add columns:
+
+- `audience_group_id` nullable
+- `audience_contact_id` nullable
+- `delivery_channel`
+- `delivery_status_detail`
+- `source_action_code` nullable
+
+Reason:
+
+- make notifications auditable and route-aware
+
+### G. Extend `supply_requests`
+
+Add columns:
+
+- `source_action_code` nullable
+- `priority`
+- `requested_needed_by` nullable
+- `linked_recommendation_inventory_item_id` nullable
+
+Reason:
+
+- allow UI and operations staff to understand urgency and direct item linkage
+
+### H. Add `operational_recommendation_action_log`
+
+Purpose:
+
+- record user-visible action execution separately from generic audit trail
+
+Suggested columns:
+
+- `id`
+- `recommendation_id`
+- `action_code`
+- `actor_user_id` nullable
+- `target_entity_type` nullable
+- `target_entity_id` nullable
+- `result_status`
+- `result_message`
+- `created_at`
+
+Reason:
+
+- the audit trail is good for history
+- this table is better for structured action execution and UI activity panels
+
+### I. Optional: Add `hospital_inventory_movements`
+
+Purpose:
+
+- support richer inventory UI over time
+
+Suggested columns:
+
+- `id`
+- `hospital_id`
+- `inventory_item_id`
+- `movement_type` (`CONSUMPTION`, `REPLENISHMENT`, `TRANSFER`, `MANUAL_ADJUSTMENT`)
+- `quantity_delta`
+- `unit`
+- `notes`
+- `related_supply_request_id` nullable
+- `created_at`
+
+Reason:
+
+- inventory cards should eventually use real movement history instead of only snapshot values
+
+## Required Backend Contract Changes
+
+### 1. Extend recommendation DTOs
+
+Add to `OperationalRecommendationDto`:
+
+- `displayCategoryLabel`
+- `displaySeverityLabel`
+- `displayStatusLabel`
+- `primaryDepartment`
+- `primaryStaffingProfile`
+- `primaryInventoryItem`
+- `availableActions`
+- `allowedStatusTransitions`
+- `primaryActionCode`
+- `expiresAt`
+- `assignedOwner`
+
+Suggested nested DTOs:
+
+- `RecommendationActionDto`
+  - `code`
+  - `label`
+  - `style`
+  - `enabled`
+  - `disabledReason`
+- `RecommendationTargetDto`
+  - `id`
+  - `label`
+  - `type`
+
+### 2. Add assignee and audience lookup APIs
+
+New APIs:
+
+- `GET /admin/operational-contacts`
+- `GET /admin/operational-groups`
+
+Optional filters:
+
+- `?assignable=true`
+- `?notifiable=true`
+- `?departmentCode=ICU`
+
+Purpose:
+
+- fill task assignment and notification overlays with real data
+
+### 3. Add recommendation helper endpoints
+
+New APIs:
+
+- `GET /admin/recommendations/{id}/workflow-options`
+- `GET /admin/recommendations/{id}/targets`
+
+These can also be embedded directly inside detail responses if preferred.
+
+Purpose:
+
+- avoid frontend duplication of operational decision logic
+
+### 4. Extend dashboard summary DTO
+
+Add to each top card:
+
+- `displayVariant`
+- `progressPercent`
+- `progressColorToken`
+- `badgeTone`
+- `recommendedActionId` nullable
+- `actionLabel` nullable
+
+Add to map zones:
+
+- `displayPriorityLabel`
+- `recommendedActionId` nullable
+- `displayColorToken`
+
+Purpose:
+
+- make dashboard rendering declarative rather than inferred
+
+### 5. Extend resources APIs
+
+Current APIs are enough for snapshots and updates, but add:
+
+- `GET /admin/resources/configuration`
+- `GET /admin/resources/operational-roster`
+- `GET /admin/resources/inventory/{itemId}/movements`
+
+Purpose:
+
+- distinguish editable operational configuration from live shift/state data
+- support a real roster overlay
+- support richer inventory dialogs
+
+## Recommendation Engine Changes
+
+The recommendation engine should also populate the new workflow metadata.
+
+For each generated recommendation it should decide:
+
+- primary target entity
+- available actions
+- valid transitions
+- preferred owner role or group
+- preferred audience group
+- preferred inventory item linkage
+- primary action code
+
+Example:
+
+If recommendation type is `SUPPLY` and it is linked to a critical inventory item:
+
+- `primary_inventory_item_id` = linked item
+- `primary_action_code` = `ORDER_SUPPLIES`
+- `available_actions` includes `ORDER_SUPPLIES`
+- `allowed_status_transitions` includes `ACCEPTED`, `ASSIGNED`, `REJECTED`
+
+If recommendation type is `STAFFING`:
+
+- `primary_staffing_profile_id` = emergency physicians profile
+- `available_actions` includes `ASSIGN_TASK` and `NOTIFY_STAFF`
+- `preferred audience` = emergency staffing group
+
+## UI Changes Required To Remove Hardcoding
+
+### Recommendations page
+
+Replace hardcoded UI logic with backend-driven rendering for:
+
+- action buttons
+- status chips
+- display labels
+- primary target display
+- assignee suggestions
+- notification audience suggestions
+- inventory request defaults
+
+Frontend should stop inferring:
+
+- whether `Order supplies` should appear
+- whether `Assigned` is a valid status
+- which department to prefill
+- which supply type to prefill
+
+Instead it should read:
+
+- `availableActions`
+- `allowedStatusTransitions`
+- `primaryDepartment`
+- `primaryInventoryItem`
+- `assignedOwner`
+
+### Recommendation overlays
+
+Task overlay should use:
+
+- `GET /admin/operational-contacts?assignable=true`
+- recommendation-linked defaults from detail payload
+
+Notify overlay should use:
+
+- `GET /admin/operational-groups?notifiable=true`
+- recommendation preferred audience if present
+
+Supply overlay should use:
+
+- linked inventory item metadata
+- recommendation preferred quantity or target item if present
+
+### Dashboard page
+
+Replace hardcoded interpretation of:
+
+- card progress
+- card tone
+- zone priority labels
+- zone colors
+- alert-derived recommended actions
+
+Use DTO-driven display fields instead.
+
+### Resources page
+
+Replace synthesized pseudo-roster with:
+
+- backend operational roster endpoint
+
+Replace generic inventory actions with:
+
+- item-specific workflow options
+- movement history
+- request priority and destination defaults
+
+## Additional Backend Use Cases / Services
+
+- `ListOperationalContactsUseCase`
+- `ListOperationalGroupsUseCase`
+- `GetOperationalRosterUseCase`
+- `GetInventoryMovementHistoryUseCase`
+- `GetRecommendationWorkflowOptionsUseCase`
+- `RecommendationWorkflowPolicyService`
+- `RecommendationTargetResolver`
+
+## Extended Phased Delivery
+
+### Phase 4: Remove frontend workflow hardcoding
+
+Deliver:
+
+- recommendation workflow metadata in DTOs
+- operational contacts and groups APIs
+- real roster API
+- richer dashboard card metadata
+
+Result:
+
+- frontend no longer guesses actions, targets, transitions, or audiences
+
+### Phase 5: Strengthen operational linkage
+
+Deliver:
+
+- recommendation-to-entity linking
+- assignment directory
+- inventory movement history
+- structured action log
+
+Result:
+
+- the admin UI becomes an operational console, not just a visual wrapper around recommendation text
+
+## Updated Final Recommendation
+
+The backend is already sufficient for a real first version of the hospital admin recommendations experience.
+
+To make the system fully functional and remove the remaining hardcoded frontend behavior, the next step is **not** primarily more AI. The next step is a stronger workflow contract:
+
+- explicit available actions
+- explicit allowed transitions
+- explicit primary targets
+- explicit assignable/notifiable operational actors
+- more declarative dashboard/resource DTOs
+
+That turns the frontend from a rule engine into a renderer of backend-defined hospital operations state, which is the right architecture for a persistent admin product.

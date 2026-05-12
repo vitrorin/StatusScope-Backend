@@ -29,6 +29,14 @@ public class OperationalNotificationEntity {
     @JoinColumn(name = "hospital_id", nullable = false)
     private HospitalEntity hospital;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "audience_group_id")
+    private HospitalOperationalGroupEntity audienceGroup;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "audience_contact_id")
+    private HospitalOperationalContactEntity audienceContact;
+
     @Column(name = "audience_label", length = 255)
     private String audienceLabel;
 
@@ -37,6 +45,15 @@ public class OperationalNotificationEntity {
 
     @Column(nullable = false, length = 32)
     private String status;
+
+    @Column(name = "delivery_channel", length = 32)
+    private String deliveryChannel;
+
+    @Column(name = "delivery_status_detail", length = 255)
+    private String deliveryStatusDetail;
+
+    @Column(name = "source_action_code", length = 32)
+    private String sourceActionCode;
 
     @Column(name = "sent_by_user_id")
     @JdbcTypeCode(SqlTypes.VARCHAR)
@@ -51,12 +68,22 @@ public class OperationalNotificationEntity {
     public void setRecommendation(OperationalRecommendationEntity recommendation) { this.recommendation = recommendation; }
     public HospitalEntity getHospital() { return hospital; }
     public void setHospital(HospitalEntity hospital) { this.hospital = hospital; }
+    public HospitalOperationalGroupEntity getAudienceGroup() { return audienceGroup; }
+    public void setAudienceGroup(HospitalOperationalGroupEntity audienceGroup) { this.audienceGroup = audienceGroup; }
+    public HospitalOperationalContactEntity getAudienceContact() { return audienceContact; }
+    public void setAudienceContact(HospitalOperationalContactEntity audienceContact) { this.audienceContact = audienceContact; }
     public String getAudienceLabel() { return audienceLabel; }
     public void setAudienceLabel(String audienceLabel) { this.audienceLabel = audienceLabel; }
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    public String getDeliveryChannel() { return deliveryChannel; }
+    public void setDeliveryChannel(String deliveryChannel) { this.deliveryChannel = deliveryChannel; }
+    public String getDeliveryStatusDetail() { return deliveryStatusDetail; }
+    public void setDeliveryStatusDetail(String deliveryStatusDetail) { this.deliveryStatusDetail = deliveryStatusDetail; }
+    public String getSourceActionCode() { return sourceActionCode; }
+    public void setSourceActionCode(String sourceActionCode) { this.sourceActionCode = sourceActionCode; }
     public UUID getSentByUserId() { return sentByUserId; }
     public void setSentByUserId(UUID sentByUserId) { this.sentByUserId = sentByUserId; }
     public LocalDateTime getSentAt() { return sentAt; }

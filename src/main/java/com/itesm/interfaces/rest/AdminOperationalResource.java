@@ -6,10 +6,13 @@ import com.itesm.application.security.RequiresPrivilege;
 import com.itesm.application.usecase.CreateOperationalNotificationUseCase;
 import com.itesm.application.usecase.CreateOperationalTaskUseCase;
 import com.itesm.application.usecase.CreateSupplyRequestUseCase;
+import com.itesm.application.usecase.GetInventoryMovementHistoryUseCase;
 import com.itesm.application.usecase.GetAdminDashboardSummaryUseCase;
 import com.itesm.application.usecase.GetHospitalResourcesUseCase;
 import com.itesm.application.usecase.GetOperationalRecommendationDetailUseCase;
 import com.itesm.application.usecase.ListOperationalRecommendationsUseCase;
+import com.itesm.application.usecase.ListOperationalContactsUseCase;
+import com.itesm.application.usecase.ListOperationalGroupsUseCase;
 import com.itesm.application.usecase.RefreshOperationalRecommendationsUseCase;
 import com.itesm.application.usecase.UpdateHospitalResourcesUseCase;
 import com.itesm.application.usecase.UpdateOperationalRecommendationStatusUseCase;
@@ -34,6 +37,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -51,6 +55,9 @@ public class AdminOperationalResource {
     @Inject CreateOperationalNotificationUseCase createOperationalNotificationUseCase;
     @Inject CreateSupplyRequestUseCase createSupplyRequestUseCase;
     @Inject GetHospitalResourcesUseCase getHospitalResourcesUseCase;
+    @Inject GetInventoryMovementHistoryUseCase getInventoryMovementHistoryUseCase;
+    @Inject ListOperationalContactsUseCase listOperationalContactsUseCase;
+    @Inject ListOperationalGroupsUseCase listOperationalGroupsUseCase;
     @Inject UpdateHospitalResourcesUseCase updateHospitalResourcesUseCase;
 
     // ----------------------------------------------------------------
@@ -84,6 +91,32 @@ public class AdminOperationalResource {
     @RequiresPrivilege("admin.operations")
     public Response getRecommendation(@PathParam("id") UUID id) {
         return Response.ok(getOperationalRecommendationDetailUseCase.execute(id)).build();
+    }
+
+    @GET
+    @Path("/recommendations/{id}/workflow-options")
+    @RequiresPrivilege("admin.operations")
+    public Response getRecommendationWorkflowOptions(@PathParam("id") UUID id) {
+        OperationalRecommendationDto dto = getOperationalRecommendationDetailUseCase.execute(id);
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("availableActions", dto.getAvailableActions());
+        payload.put("allowedStatusTransitions", dto.getAllowedStatusTransitions());
+        payload.put("primaryActionCode", dto.getPrimaryActionCode());
+        payload.put("assignedOwner", dto.getAssignedOwner());
+        payload.put("expiresAt", dto.getExpiresAt());
+        return Response.ok(payload).build();
+    }
+
+    @GET
+    @Path("/recommendations/{id}/targets")
+    @RequiresPrivilege("admin.operations")
+    public Response getRecommendationTargets(@PathParam("id") UUID id) {
+        OperationalRecommendationDto dto = getOperationalRecommendationDetailUseCase.execute(id);
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("primaryDepartment", dto.getPrimaryDepartment());
+        payload.put("primaryStaffingProfile", dto.getPrimaryStaffingProfile());
+        payload.put("primaryInventoryItem", dto.getPrimaryInventoryItem());
+        return Response.ok(payload).build();
     }
 
     // ----------------------------------------------------------------
@@ -169,6 +202,51 @@ public class AdminOperationalResource {
     public Response resourceInventory() {
         HospitalResourcesDto dto = getHospitalResourcesUseCase.execute();
         return Response.ok(new ResourceResponse("inventory", dto.getInventory())).build();
+    }
+
+    @GET
+    @Path("/resources/configuration")
+    @RequiresPrivilege("admin.operations")
+    public Response resourceConfiguration() {
+        return Response.ok(new ResourceResponse("configuration", getHospitalResourcesUseCase.execute())).build();
+    }
+
+    @GET
+    @Path("/resources/operational-roster")
+    @RequiresPrivilege("admin.operations")
+    public Response operationalRoster() {
+        return Response.ok(new ResourceResponse(
+                "operational-roster",
+                listOperationalContactsUseCase.execute(null, null, null))).build();
+    }
+
+    @GET
+    @Path("/resources/inventory/{itemId}/movements")
+    @RequiresPrivilege("admin.operations")
+    public Response inventoryMovements(@PathParam("itemId") UUID itemId) {
+        return Response.ok(new ResourceResponse(
+                "inventory-movements",
+                getInventoryMovementHistoryUseCase.execute(itemId))).build();
+    }
+
+    @GET
+    @Path("/operational-contacts")
+    @RequiresPrivilege("admin.operations")
+    public Response operationalContacts(
+            @QueryParam("assignable") Boolean assignable,
+            @QueryParam("notifiable") Boolean notifiable,
+            @QueryParam("departmentCode") String departmentCode) {
+        return Response.ok(listOperationalContactsUseCase.execute(assignable, notifiable, departmentCode)).build();
+    }
+
+    @GET
+    @Path("/operational-groups")
+    @RequiresPrivilege("admin.operations")
+    public Response operationalGroups(
+            @QueryParam("assignable") Boolean assignable,
+            @QueryParam("notifiable") Boolean notifiable,
+            @QueryParam("departmentCode") String departmentCode) {
+        return Response.ok(listOperationalGroupsUseCase.execute(assignable, notifiable, departmentCode)).build();
     }
 
     // ----------------------------------------------------------------

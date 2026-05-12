@@ -67,37 +67,70 @@ public class GetAdminDashboardSummaryUseCase {
         dto.setMunicipalityName(hospital.getMunicipalityName());
         dto.setStateName(hospital.getStateName());
         dto.setGeneratedAt(LocalDateTime.now());
-        dto.setTopCards(buildTopCards(hospital, snapshot, outbreaks));
+        dto.setTopCards(buildTopCards(hospital, snapshot, outbreaks, recommendations));
         dto.setAlerts(buildAlerts(outbreaks));
-        dto.setMapZones(buildMapZones(outbreaks));
+        dto.setMapZones(buildMapZones(outbreaks, recommendations));
         dto.setRecommendedActions(buildRecommendedActions(recommendations));
         return dto;
     }
 
-    private List<AdminMetricCardDto> buildTopCards(Hospital hospital, HospitalResourceSnapshot snapshot, List<Outbreak> outbreaks) {
+    private List<AdminMetricCardDto> buildTopCards(
+            Hospital hospital,
+            HospitalResourceSnapshot snapshot,
+            List<Outbreak> outbreaks,
+            List<OperationalRecommendation> recommendations) {
         List<AdminMetricCardDto> cards = new ArrayList<>();
+        OperationalRecommendation topRecommendation = recommendations.stream().findFirst().orElse(null);
 
         int totalBeds = snapshot != null ? snapshot.getTotalBeds() : (hospital.getBedCount() != null ? hospital.getBedCount() : 0);
         int availBeds = snapshot != null ? snapshot.getAvailableBeds() : 0;
         String bedStatus = availBeds < totalBeds * 0.15 ? "critical" : availBeds < totalBeds * 0.3 ? "warning" : "good";
-        cards.add(new AdminMetricCardDto("beds", "Available Beds",
-                availBeds + "/" + totalBeds, "General Ward", bedStatus, availBeds + " open", "bed"));
+        AdminMetricCardDto beds = new AdminMetricCardDto("beds", "Available Beds",
+                availBeds + "/" + totalBeds, "General Ward", bedStatus, availBeds + " open", "bed");
+        beds.setDisplayVariant(bedStatus);
+        beds.setProgressPercent(totalBeds > 0 ? Math.max(0, Math.min(100, (int) Math.round(((double) availBeds / totalBeds) * 100))) : 0);
+        beds.setProgressColorToken(bedStatus);
+        beds.setBadgeTone(bedStatus);
+        if (topRecommendation != null) beds.setRecommendedActionId(topRecommendation.getId().toString());
+        beds.setActionLabel("Review capacity");
+        cards.add(beds);
 
         int doctors = snapshot != null ? snapshot.getDoctorsOnShift() : (hospital.getDoctorCount() != null ? hospital.getDoctorCount() : 0);
         int nurses = snapshot != null ? snapshot.getNursesOnShift() : (hospital.getNurseCount() != null ? hospital.getNurseCount() : 0);
-        cards.add(new AdminMetricCardDto("staff", "Staff on Shift",
-                (doctors + nurses) + "", "Doctors + Nurses", "good", doctors + " doctors", "users"));
+        AdminMetricCardDto staff = new AdminMetricCardDto("staff", "Staff on Shift",
+                (doctors + nurses) + "", "Doctors + Nurses", "good", doctors + " doctors", "users");
+        staff.setDisplayVariant("good");
+        staff.setProgressPercent(null);
+        staff.setProgressColorToken("good");
+        staff.setBadgeTone("good");
+        if (topRecommendation != null) staff.setRecommendedActionId(topRecommendation.getId().toString());
+        staff.setActionLabel("View roster");
+        cards.add(staff);
 
         int icuAvail = snapshot != null ? snapshot.getIcuAvailableBeds() : 0;
         int icuTotal = snapshot != null ? snapshot.getIcuTotalBeds() : 0;
         String icuStatus = icuAvail == 0 ? "critical" : icuAvail <= 2 ? "warning" : "good";
-        cards.add(new AdminMetricCardDto("icu", "ICU Availability",
-                icuAvail + "/" + icuTotal, "ICU Beds", icuStatus, icuAvail + " free", "activity"));
+        AdminMetricCardDto icu = new AdminMetricCardDto("icu", "ICU Availability",
+                icuAvail + "/" + icuTotal, "ICU Beds", icuStatus, icuAvail + " free", "activity");
+        icu.setDisplayVariant(icuStatus);
+        icu.setProgressPercent(icuTotal > 0 ? Math.max(0, Math.min(100, (int) Math.round(((double) icuAvail / icuTotal) * 100))) : 0);
+        icu.setProgressColorToken(icuStatus);
+        icu.setBadgeTone(icuStatus);
+        if (topRecommendation != null) icu.setRecommendedActionId(topRecommendation.getId().toString());
+        icu.setActionLabel("Open ICU recommendations");
+        cards.add(icu);
 
         long activeOutbreaks = outbreaks.stream().filter(o -> "ACTIVE".equalsIgnoreCase(o.getStatus())).count();
         String outbreakStatus = activeOutbreaks >= 3 ? "critical" : activeOutbreaks >= 1 ? "warning" : "good";
-        cards.add(new AdminMetricCardDto("outbreaks", "Active Outbreaks",
-                String.valueOf(activeOutbreaks), "Nearby area", outbreakStatus, "nearby", "alert-triangle"));
+        AdminMetricCardDto outbreakCard = new AdminMetricCardDto("outbreaks", "Active Outbreaks",
+                String.valueOf(activeOutbreaks), "Nearby area", outbreakStatus, "nearby", "alert-triangle");
+        outbreakCard.setDisplayVariant(outbreakStatus);
+        outbreakCard.setProgressPercent((int) Math.min(100, activeOutbreaks * 25));
+        outbreakCard.setProgressColorToken(outbreakStatus);
+        outbreakCard.setBadgeTone(outbreakStatus);
+        if (topRecommendation != null) outbreakCard.setRecommendedActionId(topRecommendation.getId().toString());
+        outbreakCard.setActionLabel("Review outbreak map");
+        cards.add(outbreakCard);
 
         return cards;
     }
@@ -122,7 +155,8 @@ public class GetAdminDashboardSummaryUseCase {
                 .collect(Collectors.toList());
     }
 
-    private List<AdminMapZoneDto> buildMapZones(List<Outbreak> outbreaks) {
+    private List<AdminMapZoneDto> buildMapZones(List<Outbreak> outbreaks, List<OperationalRecommendation> recommendations) {
+        String topRecommendationId = recommendations.stream().findFirst().map(r -> r.getId().toString()).orElse(null);
         return outbreaks.stream()
                 .filter(o -> o.getMunicipality() != null && o.getMunicipality().getLatitude() != null)
                 .collect(Collectors.groupingBy(o -> o.getMunicipality().getId()))
@@ -135,6 +169,9 @@ public class GetAdminDashboardSummaryUseCase {
                     zone.setMunicipalityName(muni.getName());
                     zone.setOutbreakCount(count);
                     zone.setStatus(count >= 3 ? "critical" : count >= 1 ? "warning" : "active");
+                    zone.setDisplayPriorityLabel(count >= 3 ? "Critical priority" : count >= 1 ? "Elevated priority" : "Active");
+                    zone.setDisplayColorToken(count >= 3 ? "critical" : count >= 1 ? "warning" : "good");
+                    zone.setRecommendedActionId(topRecommendationId);
                     if (muni.getLatitude() != null) zone.setLatitude(muni.getLatitude().doubleValue());
                     if (muni.getLongitude() != null) zone.setLongitude(muni.getLongitude().doubleValue());
                     return zone;

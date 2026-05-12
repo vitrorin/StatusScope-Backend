@@ -14,6 +14,7 @@ public interface OperationalRecommendationRepository {
     List<OperationalRecommendation> findByHospitalId(UUID hospitalId);
     List<OperationalRecommendation> findByHospitalIdAndStatus(UUID hospitalId, String status);
     List<OperationalRecommendation> findByHospitalIdAndSeverity(UUID hospitalId, String severity);
+    Optional<OperationalRecommendation> findOpenByHospitalIdAndTypeAndTitle(UUID hospitalId, String type, String title);
     Optional<OperationalRecommendation> findRecommendationById(UUID id);
     OperationalRecommendation save(OperationalRecommendation recommendation);
     void updateStatus(UUID id, String status);

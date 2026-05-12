@@ -231,7 +231,7 @@ class DiagnosisAssistantResourceTest {
                 .body("messages[3].role", equalTo("assistant"))
                 .body("messages[3].content", equalTo("Follow-up assistant reply."))
                 .body("contextUsed.stateName", notNullValue())
-                .body("contextUsed.outbreaks[0].caseCount", equalTo(12));
+                .body("contextUsed.outbreaks.caseCount", hasItem(12));
     }
 
     @Test

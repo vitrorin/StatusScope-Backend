@@ -217,3 +217,68 @@ INSERT INTO operational_recommendations (id, hospital_id, source_alert_id, sourc
   '["N95 Masks","Isolation Gowns"]',
   'RULE_ENGINE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
+UPDATE operational_recommendations
+SET primary_department_resource_id = '21000000-0000-0000-0000-000000000003',
+    primary_staffing_profile_id = '22000000-0000-0000-0000-000000000002',
+    primary_inventory_item_id = '23000000-0000-0000-0000-000000000002',
+    presentation_variant = 'alert',
+    primary_action_code = 'ASSIGN_TASK',
+    available_actions_json = '[{"code":"ASSIGN_TASK","label":"Assign task","style":"primary","enabled":true},{"code":"NOTIFY_STAFF","label":"Notify staff","style":"secondary","enabled":true},{"code":"ORDER_SUPPLIES","label":"Order supplies","style":"secondary","enabled":true}]',
+    allowed_status_transitions_json = '["ACCEPTED","ASSIGNED","REJECTED"]',
+    display_category_label = 'Bed Capacity',
+    display_severity_label = 'Critical',
+    display_status_label = 'New',
+    expires_at = CURRENT_TIMESTAMP
+WHERE id = '24000000-0000-0000-0000-000000000001';
+
+UPDATE operational_recommendations
+SET primary_department_resource_id = '21000000-0000-0000-0000-000000000001',
+    primary_staffing_profile_id = '22000000-0000-0000-0000-000000000001',
+    presentation_variant = 'urgent',
+    primary_action_code = 'ASSIGN_TASK',
+    available_actions_json = '[{"code":"ASSIGN_TASK","label":"Assign task","style":"primary","enabled":true},{"code":"NOTIFY_STAFF","label":"Notify staff","style":"secondary","enabled":true},{"code":"ORDER_SUPPLIES","label":"Order supplies","style":"secondary","enabled":false,"disabledReason":"No inventory item linked"}]',
+    allowed_status_transitions_json = '["ASSIGNED","COMPLETED","REJECTED"]',
+    display_category_label = 'Staffing',
+    display_severity_label = 'High',
+    display_status_label = 'Accepted',
+    expires_at = CURRENT_TIMESTAMP
+WHERE id = '24000000-0000-0000-0000-000000000002';
+
+UPDATE operational_recommendations
+SET primary_department_resource_id = '21000000-0000-0000-0000-000000000004',
+    primary_staffing_profile_id = '22000000-0000-0000-0000-000000000004',
+    primary_inventory_item_id = '23000000-0000-0000-0000-000000000005',
+    presentation_variant = 'standard',
+    primary_action_code = 'ORDER_SUPPLIES',
+    available_actions_json = '[{"code":"ASSIGN_TASK","label":"Assign task","style":"secondary","enabled":true},{"code":"NOTIFY_STAFF","label":"Notify staff","style":"secondary","enabled":true},{"code":"ORDER_SUPPLIES","label":"Order supplies","style":"primary","enabled":true}]',
+    allowed_status_transitions_json = '["ACCEPTED","ASSIGNED","REJECTED"]',
+    display_category_label = 'Isolation',
+    display_severity_label = 'Medium',
+    display_status_label = 'New',
+    expires_at = CURRENT_TIMESTAMP
+WHERE id = '24000000-0000-0000-0000-000000000003';
+
+-- hospital_operational_contacts
+INSERT INTO hospital_operational_contacts (id, hospital_id, user_id, display_name, role_label, department_code, contact_channel, contact_value, availability_status, is_assignable, is_notifiable, updated_at) VALUES
+('25000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', NULL, 'Dr. Elena Ramirez', 'ICU Supervisor', 'ICU', 'PHONE', '+52 81 1111 0001', 'ON_SHIFT', TRUE, TRUE, CURRENT_TIMESTAMP),
+('25000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000001', NULL, 'Miguel Torres', 'Emergency Operations Lead', 'EMERGENCY', 'PHONE', '+52 81 1111 0002', 'ON_CALL', TRUE, TRUE, CURRENT_TIMESTAMP),
+('25000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000001', NULL, 'Lucia Gomez', 'Central Supply Coordinator', 'SUPPLY', 'EMAIL', 'supply@hgz21.local', 'AVAILABLE', TRUE, TRUE, CURRENT_TIMESTAMP);
+
+-- hospital_operational_groups
+INSERT INTO hospital_operational_groups (id, hospital_id, group_code, group_name, group_type, department_code, is_assignable, is_notifiable, updated_at) VALUES
+('26000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', 'ICU_RESPONSE', 'ICU Response Team', 'INCIDENT_RESPONSE', 'ICU', TRUE, TRUE, CURRENT_TIMESTAMP),
+('26000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000001', 'ED_LEADS', 'Emergency Department Leads', 'DEPARTMENT', 'EMERGENCY', TRUE, TRUE, CURRENT_TIMESTAMP),
+('26000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000001', 'SUPPLY_CHAIN', 'Supply Chain Team', 'SUPPLY_CHAIN', 'SUPPLY', TRUE, TRUE, CURRENT_TIMESTAMP);
+
+-- hospital_operational_group_members
+INSERT INTO hospital_operational_group_members (id, group_id, contact_id, created_at) VALUES
+('27000000-0000-0000-0000-000000000001', '26000000-0000-0000-0000-000000000001', '25000000-0000-0000-0000-000000000001', CURRENT_TIMESTAMP),
+('27000000-0000-0000-0000-000000000002', '26000000-0000-0000-0000-000000000002', '25000000-0000-0000-0000-000000000002', CURRENT_TIMESTAMP),
+('27000000-0000-0000-0000-000000000003', '26000000-0000-0000-0000-000000000003', '25000000-0000-0000-0000-000000000003', CURRENT_TIMESTAMP);
+
+-- hospital_inventory_movements
+INSERT INTO hospital_inventory_movements (id, hospital_id, inventory_item_id, movement_type, quantity_delta, unit, notes, related_supply_request_id, created_at) VALUES
+('28000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', '23000000-0000-0000-0000-000000000005', 'CONSUMPTION', -120, 'units', 'Respiratory isolation surge usage', NULL, CURRENT_TIMESTAMP),
+('28000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000001', '23000000-0000-0000-0000-000000000001', 'REPLENISHMENT', 300, 'units', 'Recent PPE restock', NULL, CURRENT_TIMESTAMP),
+('28000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000001', '23000000-0000-0000-0000-000000000003', 'MANUAL_ADJUSTMENT', -15, 'cylinders', 'Adjusted after overnight count', NULL, CURRENT_TIMESTAMP);
+
