@@ -297,6 +297,8 @@ infrastructure/      ← Firebase, JPA entities, repository implementations, map
 
 Dependencies point inward: `infrastructure` → `application` → `domain`. Domain has no framework dependencies.
 
+The diagnosis assistant follows the same inward dependency rule by exposing an application-owned outbound port, `application/port/out/AssistantChatGateway`, which is implemented in infrastructure by the concrete AI-provider integration.
+
 ### 6.2 Key Use Cases
 
 | Use Case | Responsibility |
@@ -395,6 +397,32 @@ Rather than repeating privilege checks inside every use case, a custom CDI inter
 ### 7.11 API Wrapper with Automatic Token Injection
 
 `lib/api.ts` is a thin facade over `fetch`. All token refresh, header injection, and error normalisation happen in one place. Components and use cases never call `fetch` directly. This makes the auth contract enforceable and easy to change (e.g., swapping token strategy).
+
+### 7.12 Pattern Justification Map
+
+To make the pattern usage explicit, this is the concrete mapping of pattern -> location -> responsibility:
+
+| Pattern | Where | How it is used |
+|--------|------|----------------|
+| **Context + Provider** | `contexts/AuthContext.tsx` | Centralises auth state and actions and exposes them through `useAuth()` so screens do not manage Firebase session logic themselves |
+| **View / Smart-Component Split** | `app/*.tsx` + `components/views/**` | Route files stay focused on navigation while view components own layout, composition, and state |
+| **Role Gate / Declarative Guard** | `components/auth/RoleGate.tsx` | Encapsulates role checks in one reusable wrapper instead of scattering conditional role logic across JSX |
+| **Use Case Pattern** | `application/usecase/*UseCase.java` | Encapsulates application workflows such as diagnosis assistance, registration, and admin operations behind focused entrypoints |
+| **Repository Pattern** | `domain/repository/*` + `infrastructure/persistence/repository/*Impl` | Keeps domain/application code dependent on repository abstractions while persistence details stay in infrastructure |
+| **Interceptor / AOP** | `@RequiresPrivilege` + `AuthorizationInterceptor` | Enforces privilege checks as a cross-cutting concern at method boundaries |
+| **Compensation / Saga** | `RegisterUserUseCase` | Rolls back the Firebase side effect if the database write fails after user creation |
+| **Request-Scoped Context** | `AuthenticatedUserContext` | Carries the authenticated principal through the lifetime of a single HTTP request |
+| **Facade** | `lib/api.ts`, `infrastructure/llm/LlmChatClient` | Hides repetitive integration details behind a small, stable API |
+
+### 7.13 AI Provider Integration: Adapter + Strategy + Facade
+
+The diagnosis assistant uses three complementary patterns in the LLM integration:
+
+- **Adapter**: the application layer depends on its own port, `application/port/out/AssistantChatGateway`, and its own message model, `AssistantChatMessage`. Provider-specific classes such as `infrastructure/openai/OpenAiChatClient` and `infrastructure/gemini/GeminiChatStrategy` adapt that internal contract to each vendor's HTTP API and DTO shape (`ChatCompletionRequest` for OpenAI, `GeminiGenerateRequest` for Gemini). This keeps provider request/response details out of `AskDiagnosisAssistantUseCase`.
+- **Strategy**: `infrastructure/llm/LlmChatStrategy` defines the interchangeable provider contract. `OpenAiChatClient` and `GeminiChatStrategy` are concrete strategies that can satisfy the same `chat(...)` operation with different implementations.
+- **Facade**: `infrastructure/llm/LlmChatClient` exposes one simple `chat(...)` method to the application layer, hides provider selection and fallback behaviour, and shields the use case from the mechanics of calling OpenAI vs Gemini.
+
+`AskDiagnosisAssistantUseCase` now depends only on the application port and internal message type, which makes the adapter boundary explicit and keeps the use case independent from provider SDK/DTO details.
 
 ---
 

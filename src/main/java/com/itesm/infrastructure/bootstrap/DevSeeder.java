@@ -63,10 +63,15 @@ public class DevSeeder {
     @ConfigProperty(name = "quarkus.profile")
     String profile;
 
+    @ConfigProperty(name = "diagnosis.assistant.seed-demo-data", defaultValue = "false")
+    boolean seedDiagnosisAssistantDemoData;
+
     @Transactional
     void onStart(@Observes @Priority(20) StartupEvent ev) {
-        if (!"dev".equals(profile)) return;
-        ensureFirebaseInitialized();
+        if (!"dev".equals(profile) && !"test".equals(profile)) return;
+        if ("dev".equals(profile)) {
+            ensureFirebaseInitialized();
+        }
         if (userRepository.findByEmail("admin@statusscope.local").isPresent()) return; // idempotent
 
         seedUser("admin@statusscope.local",       "System Admin",    null,
@@ -83,7 +88,9 @@ public class DevSeeder {
         seedUser("doctor2@statusscope.local",     "Dr. Luis Pérez",
                 UUID.fromString("30000000-0000-0000-0000-000000000002"),
                 UUID.fromString("00000000-0000-0000-0000-000000000003"));
-        seedDiagnosisAssistantFixtures();
+        if (seedDiagnosisAssistantDemoData) {
+            seedDiagnosisAssistantFixtures();
+        }
     }
 
     private void ensureFirebaseInitialized() {
