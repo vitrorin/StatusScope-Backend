@@ -1,5 +1,6 @@
 package com.itesm.interfaces.rest;
 
+import com.itesm.application.port.out.AssistantChatGateway;
 import com.itesm.domain.models.User;
 import com.itesm.domain.models.UserStatus;
 import com.itesm.domain.repository.RoleRepository;
@@ -14,6 +15,7 @@ import com.itesm.infrastructure.persistence.entity.OutbreakEntity;
 import com.itesm.infrastructure.persistence.entity.PatientEntity;
 import com.itesm.infrastructure.persistence.entity.PatientEvaluationEntity;
 import com.itesm.infrastructure.persistence.entity.UserEntity;
+import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import jakarta.inject.Inject;
@@ -21,6 +23,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -50,6 +53,9 @@ class AdminOperationalResourceTest {
     private static final UUID SEEDED_CONTACT_ID = UUID.fromString("25000000-0000-0000-0000-000000000001");
     private static final UUID SEEDED_GROUP_ID = UUID.fromString("26000000-0000-0000-0000-000000000001");
 
+    @InjectMock
+    AssistantChatGateway assistantChatGateway;
+
     @Inject UserRepository userRepository;
     @Inject RoleRepository roleRepository;
     @Inject EntityManager entityManager;
@@ -57,6 +63,23 @@ class AdminOperationalResourceTest {
     @BeforeEach
     @Transactional
     void seedOperationalSignals() {
+        Mockito.when(assistantChatGateway.chat(Mockito.anyList()))
+                .thenReturn("""
+                        {
+                          "description": "Operational outlook indicates elevated pressure on this resource area. Activate the documented response pathway before the next surge window.",
+                          "expectedImpact": "Improve coordination and reduce avoidable operational bottlenecks",
+                          "urgencyWindow": "Within 24 hours",
+                          "rationale": [
+                            "Current hospital utilization and nearby outbreak activity point to growing operational pressure.",
+                            "Earlier intervention reduces the risk of escalation and reactive staffing or supply changes."
+                          ],
+                          "recommendedActions": [
+                            "Review the assigned unit readiness against the current operational protocol.",
+                            "Prepare the next response step with the responsible hospital lead."
+                          ]
+                        }
+                        """);
+
         User admin = userRepository.findByEmail(ADMIN_EMAIL).orElseGet(() -> {
             var adminRole = roleRepository.findByCode("HOSPITAL_ADMIN").orElseThrow();
             User newAdmin = new User();
@@ -151,7 +174,8 @@ class AdminOperationalResourceTest {
                 .statusCode(200)
                 .body("findAll { it.title == 'Expand Monitored Bed Capacity' }.size()", equalTo(1))
                 .body("findAll { it.title == 'Increase Emergency Physician Staffing' }.size()", equalTo(1))
-                .body("findAll { it.title == 'Replenish Critical Protective and Respiratory Supplies' }.size()", equalTo(1));
+                .body("findAll { it.title == 'Replenish Critical Protective and Respiratory Supplies' }.size()", equalTo(1))
+                .body("find { it.title == 'Expand Monitored Bed Capacity' }.createdByMode", equalTo("LLM_ASSISTED"));
     }
 
     @Test

@@ -54,6 +54,7 @@ public class RefreshOperationalRecommendationsUseCase {
     @Inject EntityManager entityManager;
     @Inject ObjectMapper objectMapper;
     @Inject RecommendationWorkflowPolicyService workflowPolicyService;
+    @Inject OperationalRecommendationNarrativeComposer recommendationNarrativeComposer;
 
     @Transactional
     public int execute() {
@@ -295,8 +296,10 @@ public class RefreshOperationalRecommendationsUseCase {
             ));
         }
 
-        generated.forEach(recommendation ->
-                workflowPolicyService.populateDefaults(recommendation, departments, staffingProfiles, inventoryItems));
+        generated.forEach(recommendation -> {
+            recommendationNarrativeComposer.enhance(recommendation);
+            workflowPolicyService.populateDefaults(recommendation, departments, staffingProfiles, inventoryItems);
+        });
 
         return generated;
     }
