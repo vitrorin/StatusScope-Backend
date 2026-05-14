@@ -114,6 +114,17 @@ public class HospitalResourceRepositoryImpl
         return dept;
     }
 
+    @Override
+    @Transactional
+    public void deleteDepartmentById(UUID id) {
+        HospitalDepartmentResourceEntity entity = em.find(HospitalDepartmentResourceEntity.class, id);
+        if (entity == null) {
+            return;
+        }
+        em.remove(entity);
+        em.flush();
+    }
+
     // -----------------------------------------------------------------------
     // Staffing
     // -----------------------------------------------------------------------
@@ -154,6 +165,17 @@ public class HospitalResourceRepositoryImpl
         em.persist(e);
         profile.setId(e.getId());
         return profile;
+    }
+
+    @Override
+    @Transactional
+    public void deleteStaffingProfileById(UUID id) {
+        HospitalStaffingProfileEntity entity = em.find(HospitalStaffingProfileEntity.class, id);
+        if (entity == null) {
+            return;
+        }
+        em.remove(entity);
+        em.flush();
     }
 
     // -----------------------------------------------------------------------
@@ -200,6 +222,17 @@ public class HospitalResourceRepositoryImpl
         em.persist(e);
         item.setId(e.getId());
         return item;
+    }
+
+    @Override
+    @Transactional
+    public void deleteInventoryItemById(UUID id) {
+        HospitalInventoryItemEntity entity = em.find(HospitalInventoryItemEntity.class, id);
+        if (entity == null) {
+            return;
+        }
+        em.remove(entity);
+        em.flush();
     }
 
     // -----------------------------------------------------------------------

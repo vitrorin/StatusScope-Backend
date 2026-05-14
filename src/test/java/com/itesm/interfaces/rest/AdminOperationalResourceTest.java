@@ -35,6 +35,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 
 @QuarkusTest
@@ -393,6 +394,150 @@ class AdminOperationalResourceTest {
                 .then()
                 .statusCode(200)
                 .body("data.availableBeds", equalTo(24));
+    }
+
+    @Test
+    void shouldCreateAndDeleteHospitalResourcesAndRejectDeletingReferencedInventory() {
+        String createdDepartmentId = given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .body("""
+                        {
+                          "departmentCode": "OBS_UNIT",
+                          "departmentName": "Observation Unit",
+                          "levelLabel": "Level 2",
+                          "totalBeds": 18,
+                          "occupiedBeds": 9,
+                          "status": "STABLE",
+                          "notes": "Created from CRUD resource test."
+                        }
+                        """)
+                .when()
+                .post("/admin/resources/departments")
+                .then()
+                .statusCode(201)
+                .body("id", notNullValue())
+                .body("departmentName", equalTo("Observation Unit"))
+                .extract()
+                .path("id");
+
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .when()
+                .delete("/admin/resources/departments/{id}", createdDepartmentId)
+                .then()
+                .statusCode(204);
+
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .when()
+                .get("/admin/resources/departments")
+                .then()
+                .statusCode(200)
+                .body("data.id", not(hasItem(createdDepartmentId)));
+
+        String createdStaffingId = given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .body("""
+                        {
+                          "roleCode": "RESP_THERAPIST",
+                          "roleName": "Respiratory Therapist",
+                          "headcount": 14,
+                          "onShiftCount": 6,
+                          "onCallCount": 4,
+                          "standbyCount": 2
+                        }
+                        """)
+                .when()
+                .post("/admin/resources/staffing")
+                .then()
+                .statusCode(201)
+                .body("id", notNullValue())
+                .body("roleName", equalTo("Respiratory Therapist"))
+                .extract()
+                .path("id");
+
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .when()
+                .delete("/admin/resources/staffing/{id}", createdStaffingId)
+                .then()
+                .statusCode(204);
+
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .when()
+                .get("/admin/resources/staffing")
+                .then()
+                .statusCode(200)
+                .body("data.id", not(hasItem(createdStaffingId)));
+
+        String createdInventoryId = given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .body("""
+                        {
+                          "itemCode": "PPE_KIT",
+                          "itemName": "PPE Test Kit",
+                          "category": "Protective Equipment",
+                          "location": "Overflow Storage",
+                          "currentQuantity": 35,
+                          "capacityQuantity": 80,
+                          "unit": "kits",
+                          "criticalThreshold": 10,
+                          "targetQuantity": 60,
+                          "status": "ADEQUATE"
+                        }
+                        """)
+                .when()
+                .post("/admin/resources/inventory")
+                .then()
+                .statusCode(201)
+                .body("id", notNullValue())
+                .body("itemName", equalTo("PPE Test Kit"))
+                .extract()
+                .path("id");
+
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .when()
+                .delete("/admin/resources/inventory/{id}", createdInventoryId)
+                .then()
+                .statusCode(204);
+
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .when()
+                .get("/admin/resources/inventory")
+                .then()
+                .statusCode(200)
+                .body("data.id", not(hasItem(createdInventoryId)));
+
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .when()
+                .delete("/admin/resources/inventory/{id}", SEEDED_INVENTORY_ITEM_ID)
+                .then()
+                .statusCode(409)
+                .body("code", equalTo("CONFLICT"));
     }
 
     private void seedOutbreak(UUID outbreakId, DiseaseEntity disease, MunicipalityEntity municipality, int caseCount) {

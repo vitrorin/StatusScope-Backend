@@ -29,6 +29,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -269,6 +270,22 @@ public class AdminOperationalResource {
         return Response.ok(updated).build();
     }
 
+    @POST
+    @Path("/resources/departments")
+    @RequiresPrivilege("admin.operations")
+    public Response createDepartment(HospitalDepartmentResource input) {
+        HospitalDepartmentResource created = updateHospitalResourcesUseCase.createDepartment(input);
+        return Response.status(Response.Status.CREATED).entity(created).build();
+    }
+
+    @DELETE
+    @Path("/resources/departments/{departmentId}")
+    @RequiresPrivilege("admin.operations")
+    public Response deleteDepartment(@PathParam("departmentId") UUID departmentId) {
+        updateHospitalResourcesUseCase.deleteDepartment(departmentId);
+        return Response.noContent().build();
+    }
+
     @PUT
     @Path("/resources/staffing/{profileId}")
     @RequiresPrivilege("admin.operations")
@@ -277,12 +294,44 @@ public class AdminOperationalResource {
         return Response.ok(updated).build();
     }
 
+    @POST
+    @Path("/resources/staffing")
+    @RequiresPrivilege("admin.operations")
+    public Response createStaffingProfile(HospitalStaffingProfile input) {
+        HospitalStaffingProfile created = updateHospitalResourcesUseCase.createStaffingProfile(input);
+        return Response.status(Response.Status.CREATED).entity(created).build();
+    }
+
+    @DELETE
+    @Path("/resources/staffing/{profileId}")
+    @RequiresPrivilege("admin.operations")
+    public Response deleteStaffingProfile(@PathParam("profileId") UUID profileId) {
+        updateHospitalResourcesUseCase.deleteStaffingProfile(profileId);
+        return Response.noContent().build();
+    }
+
     @PUT
     @Path("/resources/inventory/{itemId}")
     @RequiresPrivilege("admin.operations")
     public Response updateInventoryItem(@PathParam("itemId") UUID itemId, HospitalInventoryItem input) {
         HospitalInventoryItem updated = updateHospitalResourcesUseCase.updateInventoryItem(itemId, input);
         return Response.ok(updated).build();
+    }
+
+    @POST
+    @Path("/resources/inventory")
+    @RequiresPrivilege("admin.operations")
+    public Response createInventoryItem(HospitalInventoryItem input) {
+        HospitalInventoryItem created = updateHospitalResourcesUseCase.createInventoryItem(input);
+        return Response.status(Response.Status.CREATED).entity(created).build();
+    }
+
+    @DELETE
+    @Path("/resources/inventory/{itemId}")
+    @RequiresPrivilege("admin.operations")
+    public Response deleteInventoryItem(@PathParam("itemId") UUID itemId) {
+        updateHospitalResourcesUseCase.deleteInventoryItem(itemId);
+        return Response.noContent().build();
     }
 
     // ----------------------------------------------------------------

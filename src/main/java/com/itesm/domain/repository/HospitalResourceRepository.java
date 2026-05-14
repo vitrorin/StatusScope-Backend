@@ -16,12 +16,15 @@ public interface HospitalResourceRepository {
     List<HospitalDepartmentResource> findDepartmentsByHospitalId(UUID hospitalId);
     Optional<HospitalDepartmentResource> findDepartmentById(UUID id);
     HospitalDepartmentResource saveDepartment(HospitalDepartmentResource department);
+    void deleteDepartmentById(UUID id);
 
     List<HospitalStaffingProfile> findStaffingByHospitalId(UUID hospitalId);
     Optional<HospitalStaffingProfile> findStaffingProfileById(UUID id);
     HospitalStaffingProfile saveStaffingProfile(HospitalStaffingProfile profile);
+    void deleteStaffingProfileById(UUID id);
 
     List<HospitalInventoryItem> findInventoryByHospitalId(UUID hospitalId);
     Optional<HospitalInventoryItem> findInventoryItemById(UUID id);
     HospitalInventoryItem saveInventoryItem(HospitalInventoryItem item);
+    void deleteInventoryItemById(UUID id);
 }
