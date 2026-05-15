@@ -52,6 +52,7 @@ class AuthRbacResourceTest {
     @Test
     void doctorShouldBeForbiddenFromAdminRoles() {
         given()
+                .header("Authorization", "Bearer test-token")
                 .header("X-Test-User", "doctor1@statusscope.local")
                 .when()
                 .get("/admin/roles")
@@ -62,6 +63,7 @@ class AuthRbacResourceTest {
     @Test
     void adminShouldAccessRolesEndpoint() {
         given()
+                .header("Authorization", "Bearer test-token")
                 .header("X-Test-User", "admin@statusscope.local")
                 .when()
                 .get("/admin/roles")
@@ -72,6 +74,7 @@ class AuthRbacResourceTest {
     @Test
     void meShouldReturnProfileForAuthenticatedUser() {
         given()
+                .header("Authorization", "Bearer test-token")
                 .header("X-Test-User", "admin@statusscope.local")
                 .when()
                 .get("/auth/me")

@@ -4,8 +4,8 @@ import com.itesm.application.dto.AssistantTranslationDto;
 import com.itesm.application.dto.AssistantTranslationMessageDto;
 import com.itesm.application.dto.AssistantTranslationRequestDto;
 import com.itesm.application.dto.AssistantTranslationResponseDto;
+import com.itesm.application.port.out.AssistantChatMessage;
 import com.itesm.infrastructure.llm.LlmChatClient;
-import com.itesm.infrastructure.openai.dto.ChatMessage;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -44,8 +44,8 @@ public class TranslateDiagnosisAssistantMessagesUseCase {
         }
         targetLanguage = normalizeLanguage(targetLanguage);
         String targetLabel = targetLanguage.equals("es") ? "Spanish for Mexico" : "English";
-        List<ChatMessage> messages = List.of(
-                new ChatMessage("system", """
+        List<AssistantChatMessage> messages = List.of(
+                new AssistantChatMessage("system", """
                         You are a medical text translation assistant.
                         Translate only the provided text into %s.
                         Preserve the original clinical meaning exactly.
@@ -54,7 +54,7 @@ public class TranslateDiagnosisAssistantMessagesUseCase {
                         Preserve markdown, line breaks, numbering, bullets, and emphasis as much as possible.
                         Return only the translated text.
                         """.formatted(targetLabel)),
-                new ChatMessage("user", content)
+                new AssistantChatMessage("user", content)
         );
 
         return llmChatClient.chat(messages);

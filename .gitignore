@@ -61,3 +61,6 @@ tools/ingesta-datos/**/__pycache__/
 
 # Local report exports
 statuscope-*-outbreak-report-*.pdf
+
+# Local verification temp files
+.tmp/
