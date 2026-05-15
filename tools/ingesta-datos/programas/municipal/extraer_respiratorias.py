@@ -5,7 +5,7 @@ import csv
 from datetime import date
 from pathlib import Path
 
-from common_outbreaks import (
+from comun.outbreaks import (
     catalog_by_key,
     find_db_municipality,
     find_sheet,
@@ -16,8 +16,8 @@ from common_outbreaks import (
     normalize,
     parse_date,
 )
-from common_xlsx import read_xlsx
-from ingesta_paths import MUNICIPAL_OUTPUT_DIR, MUNICIPALITIES_PATH, RAW_MUNICIPAL_DIR
+from comun.xlsx import read_xlsx
+from comun.rutas import MUNICIPAL_OUTPUT_DIR, MUNICIPALITIES_PATH, RAW_MUNICIPAL_DIR
 
 
 DEFAULT_SOURCE_DIR = RAW_MUNICIPAL_DIR / "Enfermedades Respiratorias"

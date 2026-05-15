@@ -6,7 +6,7 @@ import math
 import urllib.request
 from pathlib import Path
 
-from ingesta_paths import DOWNLOAD_CACHE_DIR, MUNICIPALITIES_PATH
+from comun.rutas import DOWNLOAD_CACHE_DIR, MUNICIPALITIES_PATH
 
 
 INEGI_MGEM_URL = "https://gaia.inegi.org.mx/wscatgeo/v2/geo/mgem/{state_code}"

@@ -5,8 +5,8 @@ import csv
 from difflib import get_close_matches
 from pathlib import Path
 
-from common_outbreaks import normalize
-from ingesta_paths import BACKEND_DATA_DIR, STATE_OUTPUT_DIR
+from comun.outbreaks import normalize
+from comun.rutas import BACKEND_DATA_DIR, STATE_OUTPUT_DIR
 
 
 DEFAULT_STATE_CASES_PATH = STATE_OUTPUT_DIR / "state_disease_cases.csv"

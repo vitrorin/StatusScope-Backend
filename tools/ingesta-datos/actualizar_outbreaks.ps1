@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ToolsRoot = Split-Path -Parent $ScriptRoot
 $BackendRoot = Split-Path -Parent $ToolsRoot
-$Pipeline = Join-Path $ScriptRoot "programas\run_outbreak_ingestion.py"
+$Pipeline = Join-Path $ScriptRoot "programas\ejecutar_ingesta_outbreaks.py"
 
 Set-Location $BackendRoot
 $env:PYTHONDONTWRITEBYTECODE = "1"

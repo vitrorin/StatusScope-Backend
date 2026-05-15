@@ -1,18 +1,15 @@
 from __future__ import annotations
 
 import argparse
-import shutil
 import subprocess
-import sys
-from pathlib import Path
 
-from ingesta_paths import BACKEND_OUTBREAKS_DIR, STATE_OUTPUT_DIR
+from comun.procesos import publish_csv, run_module
+from comun.rutas import BACKEND_OUTBREAKS_DIR, STATE_OUTPUT_DIR
 
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-DOWNLOAD_SCRIPT = "download_weekly_bulletin.py"
-EXTRACT_SCRIPT = "extract_state_pdf.py"
-FILTER_SCRIPT = "filter_state_outbreak_relevant.py"
+DOWNLOAD_MODULE = "estatal.descargar_boletin_semanal"
+EXTRACT_MODULE = "estatal.extraer_pdf_boletin"
+FILTER_MODULE = "estatal.filtrar_enfermedades_relevantes"
 FINAL_CSV = STATE_OUTPUT_DIR / "state_outbreak_relevant_cases.csv"
 BACKEND_STATE_CSV = BACKEND_OUTBREAKS_DIR / "state_outbreaks.csv"
 
@@ -40,7 +37,7 @@ def main() -> None:
         if args.force_check:
             download_args.append("--force-check")
         try:
-            run_script(DOWNLOAD_SCRIPT, *download_args, capture_failure=True)
+            run_module(DOWNLOAD_MODULE, *download_args, capture_failure=True)
         except subprocess.CalledProcessError:
             if BACKEND_STATE_CSV.exists():
                 print(
@@ -51,30 +48,11 @@ def main() -> None:
             raise
 
     extract_args = ["--include-zero"] if args.include_zero else []
-    run_script(EXTRACT_SCRIPT, *extract_args)
-    run_script(FILTER_SCRIPT)
+    run_module(EXTRACT_MODULE, *extract_args)
+    run_module(FILTER_MODULE)
 
     if args.publish_backend:
-        BACKEND_STATE_CSV.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(FINAL_CSV, BACKEND_STATE_CSV)
-        print(f"Published backend CSV: {BACKEND_STATE_CSV}")
-
-
-def run_script(script_name: str, *args: str, capture_failure: bool = False) -> None:
-    command = [sys.executable, str(SCRIPT_DIR / script_name), *args]
-    print(f"\n> {' '.join(command)}", flush=True)
-    if not capture_failure:
-        subprocess.run(command, check=True)
-        return
-
-    result = subprocess.run(command, text=True, capture_output=True)
-    if result.stdout:
-        print(result.stdout, end="")
-    if result.returncode != 0:
-        error_lines = [line for line in result.stderr.splitlines() if line.strip()]
-        if error_lines:
-            print(f"Download error: {error_lines[-1]}")
-        raise subprocess.CalledProcessError(result.returncode, command, result.stdout, result.stderr)
+        publish_csv(FINAL_CSV, BACKEND_STATE_CSV)
 
 
 if __name__ == "__main__":

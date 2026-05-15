@@ -4,7 +4,7 @@ from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 
-from ingesta_paths import MUNICIPAL_OUTPUT_DIR
+from comun.rutas import MUNICIPAL_OUTPUT_DIR
 
 
 DEFAULT_INPUT_DIR = MUNICIPAL_OUTPUT_DIR
