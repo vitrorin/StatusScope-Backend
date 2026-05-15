@@ -129,7 +129,7 @@ public class GetDoctorDashboardSummaryUseCase {
     }
 
     public DoctorDashboardSummaryDto stateMap(UUID stateId) {
-        List<Outbreak> outbreaks = outbreakRepository.findActiveStateByStateId(stateId);
+        List<Outbreak> outbreaks = outbreakRepository.findActiveMunicipalByStateId(stateId);
         DoctorDashboardSummaryDto summary = new DoctorDashboardSummaryDto();
         summary.setGeneratedAt(LocalDateTime.now());
         summary.setDiseaseBreakdown(buildDiseaseBreakdown(outbreaks));
