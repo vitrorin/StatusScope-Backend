@@ -7,7 +7,9 @@ import com.itesm.application.dto.DoctorDashboardSummaryDto.DoctorDashboardDiseas
 import com.itesm.application.dto.DoctorDashboardSummaryDto.DoctorDashboardMetricDto;
 import com.itesm.application.dto.DoctorDashboardSummaryDto.DoctorDashboardZoneDto;
 import com.itesm.application.usecase.GetDoctorDashboardSummaryUseCase;
+import com.itesm.infrastructure.persistence.entity.DiseaseEntity;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -27,16 +29,19 @@ public class DoctorDashboardResource {
     @Inject
     GetDoctorDashboardSummaryUseCase getDoctorDashboardSummaryUseCase;
 
+    @Inject
+    EntityManager entityManager;
+
     @GET
     @Path("/summary")
-    @RequiresPrivilege("diagnosis.assist")
+    @RequiresPrivilege("outbreaks.read")
     public Response summary(@QueryParam("radiusKm") Double radiusKm) {
         return Response.ok(getDoctorDashboardSummaryUseCase.execute(normalizeRadius(radiusKm))).build();
     }
 
     @GET
     @Path("/metrics")
-    @RequiresPrivilege("diagnosis.assist")
+    @RequiresPrivilege("outbreaks.read")
     public Response metrics(@QueryParam("radiusKm") Double radiusKm) {
         DoctorDashboardSummaryDto summary = getDoctorDashboardSummaryUseCase.execute(normalizeRadius(radiusKm));
         return Response.ok(new MetricsResponse(summary.getMetrics(), summary.getHospitalName())).build();
@@ -44,7 +49,7 @@ public class DoctorDashboardResource {
 
     @GET
     @Path("/map")
-    @RequiresPrivilege("diagnosis.assist")
+    @RequiresPrivilege("outbreaks.read")
     public Response map(@QueryParam("radiusKm") Double radiusKm) {
         DoctorDashboardSummaryDto summary = getDoctorDashboardSummaryUseCase.execute(normalizeRadius(radiusKm));
         return Response.ok(new MapResponse(
@@ -56,14 +61,30 @@ public class DoctorDashboardResource {
 
     @GET
     @Path("/map/states")
-    @RequiresPrivilege("diagnosis.assist")
+    @RequiresPrivilege("outbreaks.read")
     public Response stateMap() {
         return Response.ok(new StateMapResponse(getDoctorDashboardSummaryUseCase.listStateMap())).build();
     }
 
     @GET
+    @Path("/diseases")
+    @RequiresPrivilege("outbreaks.read")
+    public Response diseases() {
+        List<DiseaseCatalogItem> diseases = entityManager
+                .createQuery("select d from DiseaseEntity d order by d.name asc", DiseaseEntity.class)
+                .getResultList()
+                .stream()
+                .map(disease -> new DiseaseCatalogItem(
+                        disease.getId(),
+                        disease.getCode(),
+                        disease.getName()))
+                .toList();
+        return Response.ok(new DiseaseCatalogResponse(diseases)).build();
+    }
+
+    @GET
     @Path("/map/states/{stateId}/outbreaks")
-    @RequiresPrivilege("diagnosis.assist")
+    @RequiresPrivilege("outbreaks.read")
     public Response stateOutbreakMap(@PathParam("stateId") UUID stateId) {
         DoctorDashboardSummaryDto summary = getDoctorDashboardSummaryUseCase.stateMap(stateId);
         return Response.ok(new MapResponse(
@@ -75,7 +96,7 @@ public class DoctorDashboardResource {
 
     @GET
     @Path("/alerts")
-    @RequiresPrivilege("diagnosis.assist")
+    @RequiresPrivilege("outbreaks.read")
     public Response alerts(@QueryParam("radiusKm") Double radiusKm) {
         DoctorDashboardSummaryDto summary = getDoctorDashboardSummaryUseCase.execute(normalizeRadius(radiusKm));
         return Response.ok(new AlertsResponse(summary.getAlerts())).build();
@@ -83,7 +104,7 @@ public class DoctorDashboardResource {
 
     @GET
     @Path("/disease-breakdown/local")
-    @RequiresPrivilege("diagnosis.assist")
+    @RequiresPrivilege("outbreaks.read")
     public Response localDiseaseBreakdown(@QueryParam("radiusKm") Double radiusKm) {
         DoctorDashboardSummaryDto summary = getDoctorDashboardSummaryUseCase.execute(normalizeRadius(radiusKm));
         return Response.ok(new DiseaseBreakdownResponse(
@@ -94,7 +115,7 @@ public class DoctorDashboardResource {
 
     @GET
     @Path("/disease-breakdown/state")
-    @RequiresPrivilege("diagnosis.assist")
+    @RequiresPrivilege("outbreaks.read")
     public Response stateDiseaseBreakdown(@QueryParam("radiusKm") Double radiusKm) {
         DoctorDashboardSummaryDto summary = getDoctorDashboardSummaryUseCase.execute(normalizeRadius(radiusKm));
         return Response.ok(new DiseaseBreakdownResponse(
@@ -105,9 +126,16 @@ public class DoctorDashboardResource {
 
     @GET
     @Path("/reports/{scope}")
-    @RequiresPrivilege("diagnosis.assist")
+    @RequiresPrivilege("outbreaks.read")
     public Response report(@PathParam("scope") String scope, @QueryParam("radiusKm") Double radiusKm) {
         return Response.ok(getDoctorDashboardSummaryUseCase.report(scope, normalizeRadius(radiusKm))).build();
+    }
+
+    @GET
+    @Path("/reports/states/{stateId}")
+    @RequiresPrivilege("outbreaks.read")
+    public Response stateReport(@PathParam("stateId") UUID stateId) {
+        return Response.ok(getDoctorDashboardSummaryUseCase.stateReport(stateId)).build();
     }
 
     private Double normalizeRadius(Double radiusKm) {
@@ -130,4 +158,8 @@ public class DoctorDashboardResource {
     public record DiseaseBreakdownResponse(List<DoctorDashboardDiseaseDto> diseaseBreakdown, String stateName, String municipalityName) {}
 
     public record StateMapResponse(List<GetDoctorDashboardSummaryUseCase.DoctorDashboardStateMapDto> states) {}
+
+    public record DiseaseCatalogItem(UUID id, String code, String name) {}
+
+    public record DiseaseCatalogResponse(List<DiseaseCatalogItem> diseases) {}
 }

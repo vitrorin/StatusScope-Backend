@@ -129,12 +129,45 @@ public class GetDoctorDashboardSummaryUseCase {
     }
 
     public DoctorDashboardSummaryDto stateMap(UUID stateId) {
-        List<Outbreak> outbreaks = outbreakRepository.findActiveMunicipalByStateId(stateId);
+        List<Outbreak> outbreaks = outbreakRepository.findActiveStateByStateId(stateId);
         DoctorDashboardSummaryDto summary = new DoctorDashboardSummaryDto();
         summary.setGeneratedAt(LocalDateTime.now());
         summary.setDiseaseBreakdown(buildDiseaseBreakdown(outbreaks));
         summary.setZones(buildZones(outbreaks, null, null));
         return summary;
+    }
+
+    public DoctorDashboardReportDto stateReport(UUID stateId) {
+        List<Outbreak> outbreaks = outbreakRepository.findActiveStateByStateId(stateId);
+        String stateName = outbreaks.stream()
+                .map(this::stateName)
+                .filter(name -> name != null && !name.isBlank())
+                .findFirst()
+                .orElse(null);
+
+        List<DoctorDashboardReportOutbreakDto> rows = outbreaks.stream()
+                .filter(outbreak -> outbreak.getDisease() != null)
+                .sorted(Comparator
+                        .comparingInt((Outbreak outbreak) -> severityRank(evaluateOutbreakSeverity(outbreak))).reversed()
+                        .thenComparing(Comparator.comparingInt(Outbreak::getCaseCount).reversed())
+                        .thenComparing(this::locationWithState))
+                .map(outbreak -> new DoctorDashboardReportOutbreakDto(
+                        outbreak.getId(),
+                        outbreak.getDisease().getName(),
+                        locationWithState(outbreak),
+                        outbreak.getScope(),
+                        outbreak.getCaseCount(),
+                        outbreak.getConfirmationStatus(),
+                        outbreak.getStartedAt()))
+                .toList();
+
+        return new DoctorDashboardReportDto(
+                "state",
+                null,
+                null,
+                stateName,
+                LocalDateTime.now(),
+                rows);
     }
 
     public DoctorDashboardReportDto report(String scope, Double radiusKmOverride) {
@@ -576,6 +609,16 @@ public class GetDoctorDashboardSummaryUseCase {
             return outbreak.getState().getName();
         }
         return "hospital region";
+    }
+
+    private String stateName(Outbreak outbreak) {
+        if (outbreak.getState() != null && outbreak.getState().getName() != null) {
+            return outbreak.getState().getName();
+        }
+        if (outbreak.getMunicipality() != null) {
+            return outbreak.getMunicipality().getStateName();
+        }
+        return null;
     }
 
     private double distanceKm(double latitudeA, double longitudeA, double latitudeB, double longitudeB) {

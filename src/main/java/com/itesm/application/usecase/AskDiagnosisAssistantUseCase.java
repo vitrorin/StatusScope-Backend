@@ -20,6 +20,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -44,6 +45,9 @@ public class AskDiagnosisAssistantUseCase {
 
     @Inject
     HospitalGeoContextService hospitalGeoContextService;
+
+    @Inject
+    TranslateDiagnosisAssistantMessagesUseCase translateMessagesUseCase;
 
     public AssistantResponseDto execute(AssistantRequestDto request) {
         CurrentUser currentUser = authenticatedUserContext.getCurrentUser();
@@ -100,7 +104,20 @@ public class AskDiagnosisAssistantUseCase {
         String stateName = state != null ? state.getName() : null;
         AssistantContextDto contextUsed = new AssistantContextDto(stateName, outbreakSummaries);
 
-        return new AssistantResponseDto(reply, contextUsed);
+        Map<String, String> replyByLanguage = buildReplyByLanguage(reply);
+
+        return new AssistantResponseDto(reply, replyByLanguage, contextUsed);
+    }
+
+    private Map<String, String> buildReplyByLanguage(String reply) {
+        if (translateMessagesUseCase == null) {
+            return Map.of();
+        }
+
+        return Map.of(
+                "en", translateMessagesUseCase.translate(reply, "en"),
+                "es", translateMessagesUseCase.translate(reply, "es")
+        );
     }
 
     private HospitalGeoContextDto fallbackGeoContext(Hospital hospital) {
