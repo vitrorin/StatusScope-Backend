@@ -28,6 +28,7 @@ import org.mockito.Mockito;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.UUID;
 
@@ -106,6 +107,8 @@ class AdminOperationalResourceTest {
             newDoctor.setRoles(Set.of(doctorRole));
             return userRepository.create(newDoctor);
         });
+
+        resetSeededRecommendation();
 
         MunicipalityEntity nearestMunicipality = entityManager.createQuery("""
                 select m
@@ -358,13 +361,16 @@ class AdminOperationalResourceTest {
                 .body("data.totalBeds", equalTo(240))
                 .body("data.availableBeds", equalTo(18));
 
+        String futureCapturedAt = LocalDateTime.now().plusMinutes(2)
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+
         given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer test-token")
                 .header("X-Test-User", ADMIN_EMAIL)
                 .body("""
                         {
-                          "capturedAt": "2026-05-12T12:00:00",
+                          "capturedAt": "%s",
                           "totalBeds": 240,
                           "availableBeds": 24,
                           "icuTotalBeds": 20,
@@ -378,7 +384,7 @@ class AdminOperationalResourceTest {
                           "specialistsOnShift": 8,
                           "source": "MANUAL"
                         }
-                        """)
+                        """.formatted(futureCapturedAt))
                 .when()
                 .put("/admin/resources/summary")
                 .then()
@@ -538,6 +544,18 @@ class AdminOperationalResourceTest {
                 .then()
                 .statusCode(409)
                 .body("code", equalTo("CONFLICT"));
+    }
+
+    private void resetSeededRecommendation() {
+        entityManager.createNativeQuery("""
+                UPDATE operational_recommendations SET
+                    status = 'NEW',
+                    allowed_status_transitions_json = '["ACCEPTED","ASSIGNED","REJECTED"]',
+                    available_actions_json = '[{"code":"ASSIGN_TASK","label":"Assign task","style":"primary","enabled":true},{"code":"NOTIFY_STAFF","label":"Notify staff","style":"secondary","enabled":true},{"code":"ORDER_SUPPLIES","label":"Order supplies","style":"secondary","enabled":true}]'
+                WHERE id = ?
+                """)
+                .setParameter(1, SEEDED_RECOMMENDATION_ID.toString())
+                .executeUpdate();
     }
 
     private void seedOutbreak(UUID outbreakId, DiseaseEntity disease, MunicipalityEntity municipality, int caseCount) {
