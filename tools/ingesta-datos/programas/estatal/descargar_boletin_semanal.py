@@ -10,11 +10,11 @@ import urllib.parse
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from html import unescape
 from pathlib import Path
 
-from ingesta_paths import DOWNLOAD_CACHE_DIR, RAW_STATE_DIR
+from comun.rutas import DOWNLOAD_CACHE_DIR, RAW_STATE_DIR
 
 
 BULLETIN_INDEX_URL = (
@@ -278,8 +278,8 @@ def recent_known_pdf_url() -> str | None:
     except ValueError:
         return None
     if checked_time.tzinfo is None:
-        checked_time = checked_time.replace(tzinfo=UTC)
-    if datetime.now(UTC) - checked_time <= timedelta(hours=12):
+        checked_time = checked_time.replace(tzinfo=timezone.utc)
+    if datetime.now(timezone.utc) - checked_time <= timedelta(hours=12):
         return url
     return None
 
@@ -302,7 +302,7 @@ def save_metadata(pdf_url: str) -> None:
         "url": pdf_url,
         "attachment_id": parsed.attachment_id if parsed else None,
         "week": parsed.week if parsed else None,
-        "checked_at": datetime.now(UTC).isoformat(timespec="seconds"),
+        "checked_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
     with METADATA_PATH.open("w", encoding="utf-8") as target:
         json.dump(metadata, target, indent=2, ensure_ascii=False)

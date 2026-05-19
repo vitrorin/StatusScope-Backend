@@ -9,8 +9,8 @@ import zipfile
 from dataclasses import dataclass
 from pathlib import Path
 
-from common_outbreaks import normalize
-from ingesta_paths import DOWNLOAD_CACHE_DIR, RAW_MUNICIPAL_DIR
+from comun.outbreaks import normalize
+from comun.rutas import DOWNLOAD_CACHE_DIR, RAW_MUNICIPAL_DIR
 
 
 RESPIRATORY_DIR = RAW_MUNICIPAL_DIR / "Enfermedades Respiratorias"
@@ -48,6 +48,7 @@ SOURCE_FILES = [
         url="https://datosabiertos.salud.gob.mx/gobmx/salud/datos_abiertos/efe/datos_abiertos_efe.zip",
         target_path=EFE_DIR / "efes_abierto_16.csv",
         exact_names=("efes_abierto_16.csv",),
+        required_keywords=("efes", "abierto"),
     ),
     SourceFile(
         label="efe_catalog",
@@ -147,7 +148,11 @@ def download_and_place(source: SourceFile, zip_path: Path, *, cache_path: Path) 
 
 def find_zip_member(zip_path: Path, source: SourceFile) -> str:
     with zipfile.ZipFile(zip_path) as archive:
-        file_members = [member for member in archive.namelist() if not member.endswith("/")]
+        file_members = [
+            member
+            for member in archive.namelist()
+            if not member.endswith("/") and not Path(member).name.startswith("._")
+        ]
         exact_match = find_exact_member(file_members, source.exact_names)
         if exact_match:
             return exact_match

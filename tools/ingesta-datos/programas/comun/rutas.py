@@ -3,7 +3,8 @@ from __future__ import annotations
 from pathlib import Path
 
 
-INGESTA_DIR = Path(__file__).resolve().parents[1]
+PROGRAMAS_DIR = Path(__file__).resolve().parents[1]
+INGESTA_DIR = PROGRAMAS_DIR.parent
 BACKEND_DIR = INGESTA_DIR.parents[1]
 WORKSPACE_DIR = BACKEND_DIR
 BACKEND_DATA_DIR = BACKEND_DIR / "src" / "main" / "resources" / "data"

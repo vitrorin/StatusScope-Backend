@@ -18,8 +18,8 @@ except ModuleNotFoundError:
     site.addsitedir(site.getusersitepackages())
     from pypdf import PdfReader
 
-from common_outbreaks import normalize
-from ingesta_paths import RAW_STATE_DIR, STATE_OUTPUT_DIR
+from comun.outbreaks import normalize
+from comun.rutas import RAW_STATE_DIR, STATE_OUTPUT_DIR
 
 
 DEFAULT_PDF_PATH = RAW_STATE_DIR / "boletin nacional.pdf"

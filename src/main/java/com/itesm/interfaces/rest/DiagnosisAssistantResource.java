@@ -1,9 +1,11 @@
 package com.itesm.interfaces.rest;
 
 import com.itesm.application.dto.AssistantRequestDto;
-import com.itesm.application.usecase.GetDiagnosisAssistantThreadUseCase;
+import com.itesm.application.dto.AssistantTranslationRequestDto;
 import com.itesm.application.security.RequiresPrivilege;
 import com.itesm.application.usecase.AskDiagnosisAssistantUseCase;
+import com.itesm.application.usecase.GetDiagnosisAssistantThreadUseCase;
+import com.itesm.application.usecase.TranslateDiagnosisAssistantMessagesUseCase;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
@@ -26,6 +28,9 @@ public class DiagnosisAssistantResource {
     AskDiagnosisAssistantUseCase useCase;
 
     @Inject
+    TranslateDiagnosisAssistantMessagesUseCase translateUseCase;
+
+    @Inject
     GetDiagnosisAssistantThreadUseCase getDiagnosisAssistantThreadUseCase;
 
     @POST
@@ -33,6 +38,13 @@ public class DiagnosisAssistantResource {
     @RequiresPrivilege("diagnosis.assist")
     public Response sendMessage(@Valid AssistantRequestDto dto) {
         return Response.ok(useCase.execute(dto)).build();
+    }
+
+    @POST
+    @Path("/translations")
+    @RequiresPrivilege("diagnosis.assist")
+    public Response translateMessages(@Valid AssistantTranslationRequestDto dto) {
+        return Response.ok(translateUseCase.execute(dto)).build();
     }
 
     @GET

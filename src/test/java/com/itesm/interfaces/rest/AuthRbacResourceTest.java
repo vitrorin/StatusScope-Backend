@@ -40,6 +40,16 @@ class AuthRbacResourceTest {
     }
 
     @Test
+    void missingRouteShouldReturn404() {
+        given()
+                .when()
+                .get("/does-not-exist")
+                .then()
+                .statusCode(404)
+                .body("code", org.hamcrest.Matchers.equalTo("NOT_FOUND"));
+    }
+
+    @Test
     void doctorShouldBeForbiddenFromAdminRoles() {
         given()
                 .header("Authorization", "Bearer test-token")
@@ -74,4 +84,3 @@ class AuthRbacResourceTest {
                 .body("roles", notNullValue());
     }
 }
-

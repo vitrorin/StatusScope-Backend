@@ -1,17 +1,14 @@
 from __future__ import annotations
 
 import argparse
-import subprocess
-import sys
 from datetime import date
-from pathlib import Path
 
-from common_outbreaks import parse_date
+from comun.outbreaks import parse_date
+from comun.procesos import run_module
 
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-MUNICIPAL_SCRIPT = "run_municipal_outbreak_ingestion.py"
-STATE_SCRIPT = "run_state_outbreak_ingestion.py"
+MUNICIPAL_MODULE = "municipal.ejecutar_ingesta_municipal"
+STATE_MODULE = "estatal.ejecutar_ingesta_estatal"
 
 
 def main() -> None:
@@ -46,7 +43,7 @@ def main() -> None:
         ]
         if args.keep_downloads:
             municipal_args.append("--keep-downloads")
-        run_script(MUNICIPAL_SCRIPT, *municipal_args)
+        run_module(MUNICIPAL_MODULE, *municipal_args)
 
     if not args.skip_state:
         state_args = ["--download", *publish_args]
@@ -56,15 +53,9 @@ def main() -> None:
             state_args.append("--force-check")
         if args.state_pdf_url:
             state_args.extend(["--pdf-url", args.state_pdf_url])
-        run_script(STATE_SCRIPT, *state_args)
+        run_module(STATE_MODULE, *state_args)
 
     print("\nFull outbreak ingestion finished successfully.")
-
-
-def run_script(script_name: str, *args: str) -> None:
-    command = [sys.executable, str(SCRIPT_DIR / script_name), *args]
-    print(f"\n> {' '.join(command)}", flush=True)
-    subprocess.run(command, check=True)
 
 
 if __name__ == "__main__":

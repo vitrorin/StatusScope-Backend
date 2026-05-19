@@ -30,6 +30,62 @@ Opciones utiles:
 
 `--force-state-check` fuerza una nueva busqueda del boletin, aunque ya se haya revisado en las ultimas 12 horas.
 
+## Estructura
+
+```text
+tools/ingesta-datos/
+  actualizar_outbreaks.ps1
+  requirements.txt
+  programas/
+    ejecutar_ingesta_outbreaks.py
+    comun/
+      outbreaks.py
+      procesos.py
+      rutas.py
+      xlsx.py
+    municipal/
+      ejecutar_ingesta_municipal.py
+      descargar_datos_abiertos.py
+      extraer_respiratorias.py
+      extraer_febriles_exantematicas.py
+      extraer_dengue.py
+      combinar_outbreaks_municipales.py
+      actualizar_coordenadas_inegi.py
+    estatal/
+      ejecutar_ingesta_estatal.py
+      descargar_boletin_semanal.py
+      extraer_pdf_boletin.py
+      filtrar_enfermedades_relevantes.py
+```
+
+`comun` contiene rutas, utilidades de fechas/normalizacion, lectura XLSX y helpers para ejecutar modulos o publicar CSVs. `municipal` y `estatal` agrupan los procesos especificos de cada nivel.
+
+## Modulos Python
+
+Desde `tools/ingesta-datos/programas` tambien se pueden ejecutar modulos puntuales:
+
+```powershell
+python -m municipal.ejecutar_ingesta_municipal --help
+python -m estatal.ejecutar_ingesta_estatal --help
+```
+
+No se conservan wrappers con los nombres antiguos. Equivalencias principales:
+
+| Antes | Ahora |
+| --- | --- |
+| `run_outbreak_ingestion.py` | `ejecutar_ingesta_outbreaks.py` |
+| `run_municipal_outbreak_ingestion.py` | `municipal/ejecutar_ingesta_municipal.py` |
+| `download_open_data_sources.py` | `municipal/descargar_datos_abiertos.py` |
+| `extract_respiratory_municipal.py` | `municipal/extraer_respiratorias.py` |
+| `extract_febrile_exanthematous_municipal.py` | `municipal/extraer_febriles_exantematicas.py` |
+| `extract_dengue_municipal.py` | `municipal/extraer_dengue.py` |
+| `combine_municipal_outbreaks.py` | `municipal/combinar_outbreaks_municipales.py` |
+| `update_municipality_coordinates_from_inegi.py` | `municipal/actualizar_coordenadas_inegi.py` |
+| `run_state_outbreak_ingestion.py` | `estatal/ejecutar_ingesta_estatal.py` |
+| `download_weekly_bulletin.py` | `estatal/descargar_boletin_semanal.py` |
+| `extract_state_pdf.py` | `estatal/extraer_pdf_boletin.py` |
+| `filter_state_outbreak_relevant.py` | `estatal/filtrar_enfermedades_relevantes.py` |
+
 ## Dependencias Python
 
 El extractor estatal usa `pypdf`. Para instalarlo localmente:

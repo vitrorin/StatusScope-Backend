@@ -137,6 +137,39 @@ public class GetDoctorDashboardSummaryUseCase {
         return summary;
     }
 
+    public DoctorDashboardReportDto stateReport(UUID stateId) {
+        List<Outbreak> outbreaks = outbreakRepository.findActiveStateByStateId(stateId);
+        String stateName = outbreaks.stream()
+                .map(this::stateName)
+                .filter(name -> name != null && !name.isBlank())
+                .findFirst()
+                .orElse(null);
+
+        List<DoctorDashboardReportOutbreakDto> rows = outbreaks.stream()
+                .filter(outbreak -> outbreak.getDisease() != null)
+                .sorted(Comparator
+                        .comparingInt((Outbreak outbreak) -> severityRank(evaluateOutbreakSeverity(outbreak))).reversed()
+                        .thenComparing(Comparator.comparingInt(Outbreak::getCaseCount).reversed())
+                        .thenComparing(this::locationWithState))
+                .map(outbreak -> new DoctorDashboardReportOutbreakDto(
+                        outbreak.getId(),
+                        outbreak.getDisease().getName(),
+                        locationWithState(outbreak),
+                        outbreak.getScope(),
+                        outbreak.getCaseCount(),
+                        outbreak.getConfirmationStatus(),
+                        outbreak.getStartedAt()))
+                .toList();
+
+        return new DoctorDashboardReportDto(
+                "state",
+                null,
+                null,
+                stateName,
+                LocalDateTime.now(),
+                rows);
+    }
+
     public DoctorDashboardReportDto report(String scope, Double radiusKmOverride) {
         CurrentUser currentUser = authenticatedUserContext.getCurrentUser();
         UUID hospitalId = currentUser.getHospitalId();
@@ -208,12 +241,7 @@ public class GetDoctorDashboardSummaryUseCase {
                 ? DashboardSeverity.LOW
                 : evaluateAggregateSeverity(topDisease.getDiseaseName(), topDisease.getCaseCount(), topDisease.getOutbreakCount());
         String riskLabel = contextSeverity.label(outbreakCount == 0 && totalCases == 0);
-        String capacityValue = hospital.getBedCount() == null ? "Not configured" : formatCount(hospital.getBedCount()) + " beds";
-        String staffingBadge = hospital.getDoctorCount() == null && hospital.getNurseCount() == null
-                ? "Staff pending"
-                : "%s MD / %s RN".formatted(
-                        hospital.getDoctorCount() == null ? "0" : formatCount(hospital.getDoctorCount()),
-                        hospital.getNurseCount() == null ? "0" : formatCount(hospital.getNurseCount()));
+        MunicipalityPriorityAggregate priorityMunicipality = topPriorityMunicipality(outbreaks);
 
         return List.of(
                 new DoctorDashboardMetricDto(
@@ -253,17 +281,19 @@ public class GetDoctorDashboardSummaryUseCase {
                         null,
                         nearestOutbreakInsights(outbreaks, geoContext)),
                 new DoctorDashboardMetricDto(
-                        "hospital-profile",
-                        "Hospital Profile",
-                        capacityValue,
-                        staffingBadge,
-                        "neutral",
-                        "Registered facility capacity",
-                        "This is configured hospital capacity, not live bed occupancy.",
-                        "Facility baseline",
-                        "Connect bed occupancy and staffing shifts later for real operational capacity.",
+                        "priority-municipality",
+                        "Priority Municipality",
+                        priorityMunicipality == null ? "No priority outbreaks" : priorityMunicipality.municipalityName(),
+                        priorityMunicipality == null
+                                ? "0 priority"
+                                : formatCount(priorityMunicipality.outbreakCount()) + " priority",
+                        priorityMunicipality == null ? "positive" : severityStatus(priorityMunicipality.highestSeverity()),
+                        "Municipality with the most high or moderate outbreak signals",
+                        "Groups high and moderate severity municipal outbreaks inside the selected radius.",
+                        priorityMunicipality == null ? "No priority municipality" : "Priority focus",
+                        "Prioritize this municipality when reviewing compatible symptoms and nearby outbreak context.",
                         null,
-                        hospitalProfileInsights(hospital))
+                        priorityMunicipalityInsights(outbreaks, priorityMunicipality))
         );
     }
 
@@ -313,30 +343,43 @@ public class GetDoctorDashboardSummaryUseCase {
                 .toList();
     }
 
-    private List<DoctorDashboardMetricInsightDto> hospitalProfileInsights(Hospital hospital) {
-        return List.of(
-                new DoctorDashboardMetricInsightDto(
-                        "Registered beds",
-                        hospital.getName(),
-                        hospital.getBedCount() == null ? "Not configured" : formatCount(hospital.getBedCount()),
-                        "Capacity",
-                        "#0003B8",
-                        "Configured facility baseline"),
-                new DoctorDashboardMetricInsightDto(
-                        "Doctors",
-                        hospital.getName(),
-                        hospital.getDoctorCount() == null ? "0" : formatCount(hospital.getDoctorCount()),
-                        "Staff",
-                        "#64748B",
-                        "Registered clinical staff"),
-                new DoctorDashboardMetricInsightDto(
-                        "Nurses",
-                        hospital.getName(),
-                        hospital.getNurseCount() == null ? "0" : formatCount(hospital.getNurseCount()),
-                        "Staff",
-                        "#64748B",
-                        "Registered nursing staff")
-        );
+    private MunicipalityPriorityAggregate topPriorityMunicipality(List<Outbreak> outbreaks) {
+        Map<String, MunicipalityPriorityAggregate> aggregates = new LinkedHashMap<>();
+        for (Outbreak outbreak : outbreaks) {
+            if (outbreak.getMunicipality() == null || outbreak.getDisease() == null) continue;
+            DashboardSeverity severity = evaluateOutbreakSeverity(outbreak);
+            if (severity == DashboardSeverity.LOW) continue;
+            String key = outbreak.getMunicipality().getName() + "|" + outbreak.getMunicipality().getStateName();
+            aggregates.computeIfAbsent(key, ignored -> new MunicipalityPriorityAggregate(
+                    outbreak.getMunicipality().getName(),
+                    outbreak.getMunicipality().getStateName())).add(outbreak, severity);
+        }
+
+        return aggregates.values().stream()
+                .max(Comparator
+                        .comparingInt(MunicipalityPriorityAggregate::outbreakCount)
+                        .thenComparingInt(MunicipalityPriorityAggregate::caseCount)
+                        .thenComparingInt(aggregate -> severityRank(aggregate.highestSeverity())))
+                .orElse(null);
+    }
+
+    private List<DoctorDashboardMetricInsightDto> priorityMunicipalityInsights(
+            List<Outbreak> outbreaks,
+            MunicipalityPriorityAggregate priorityMunicipality
+    ) {
+        if (priorityMunicipality == null) return List.of();
+        return outbreaks.stream()
+                .filter(outbreak -> outbreak.getMunicipality() != null)
+                .filter(outbreak -> outbreak.getDisease() != null)
+                .filter(outbreak -> priorityMunicipality.municipalityName().equals(outbreak.getMunicipality().getName()))
+                .filter(outbreak -> priorityMunicipality.stateName().equals(outbreak.getMunicipality().getStateName()))
+                .filter(outbreak -> evaluateOutbreakSeverity(outbreak) != DashboardSeverity.LOW)
+                .sorted(Comparator
+                        .comparingInt((Outbreak outbreak) -> severityRank(evaluateOutbreakSeverity(outbreak))).reversed()
+                        .thenComparing(Comparator.comparingInt(Outbreak::getCaseCount).reversed()))
+                .limit(5)
+                .map(outbreak -> insightForOutbreak(outbreak, "Priority municipality"))
+                .toList();
     }
 
     private DoctorDashboardMetricInsightDto insightForOutbreak(Outbreak outbreak, String metaOverride) {
@@ -578,6 +621,16 @@ public class GetDoctorDashboardSummaryUseCase {
         return "hospital region";
     }
 
+    private String stateName(Outbreak outbreak) {
+        if (outbreak.getState() != null && outbreak.getState().getName() != null) {
+            return outbreak.getState().getName();
+        }
+        if (outbreak.getMunicipality() != null) {
+            return outbreak.getMunicipality().getStateName();
+        }
+        return null;
+    }
+
     private double distanceKm(double latitudeA, double longitudeA, double latitudeB, double longitudeB) {
         double earthRadiusKm = 6371.0;
         double dLat = Math.toRadians(latitudeB - latitudeA);
@@ -610,6 +663,41 @@ public class GetDoctorDashboardSummaryUseCase {
         String diseaseName() { return diseaseName; }
         int caseCount() { return caseCount; }
         int outbreakCount() { return outbreakCount; }
+    }
+
+    private static class MunicipalityPriorityAggregate {
+        private final String municipalityName;
+        private final String stateName;
+        private int outbreakCount;
+        private int caseCount;
+        private DashboardSeverity highestSeverity = DashboardSeverity.LOW;
+
+        MunicipalityPriorityAggregate(String municipalityName, String stateName) {
+            this.municipalityName = municipalityName;
+            this.stateName = stateName;
+        }
+
+        void add(Outbreak outbreak, DashboardSeverity severity) {
+            outbreakCount++;
+            caseCount += outbreak.getCaseCount();
+            if (severityRankValue(severity) > severityRankValue(highestSeverity)) {
+                highestSeverity = severity;
+            }
+        }
+
+        String municipalityName() { return municipalityName; }
+        String stateName() { return stateName; }
+        int outbreakCount() { return outbreakCount; }
+        int caseCount() { return caseCount; }
+        DashboardSeverity highestSeverity() { return highestSeverity; }
+
+        private static int severityRankValue(DashboardSeverity severity) {
+            return switch (severity) {
+                case HIGH -> 3;
+                case MODERATE -> 2;
+                case LOW -> 1;
+            };
+        }
     }
 
     public record DoctorDashboardStateMapDto(
