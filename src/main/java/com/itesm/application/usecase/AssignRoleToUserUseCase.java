@@ -1,5 +1,8 @@
 package com.itesm.application.usecase;
 
+import com.itesm.application.security.AuthenticatedUserContext;
+import com.itesm.application.security.AuthorizationService;
+import com.itesm.application.security.CurrentUser;
 import com.itesm.application.usecase.exception.NotFoundException;
 import com.itesm.domain.models.Role;
 import com.itesm.domain.models.User;
@@ -17,9 +20,20 @@ public class AssignRoleToUserUseCase {
     @Inject
     RoleRepository roleRepository;
 
+    @Inject
+    AuthenticatedUserContext authenticatedUserContext;
+
+    @Inject
+    AuthorizationService authorizationService;
+
     public User execute(String roleCode, java.util.UUID userId) {
+        CurrentUser caller = authenticatedUserContext.getCurrentUser();
         User user = userRepository.findUserById(userId)
                 .orElseThrow(() -> new NotFoundException("User not found"));
+
+        if (!caller.isSystemAdmin()) {
+            authorizationService.assertSameHospital(user.getHospitalId());
+        }
 
         Role role = roleRepository.findByCode(roleCode)
                 .orElseThrow(() -> new NotFoundException("Role not found"));
