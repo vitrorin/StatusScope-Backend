@@ -2,6 +2,9 @@ package com.itesm.application.usecase;
 
 import com.google.firebase.auth.FirebaseAuthException;
 import com.itesm.application.security.RequiresPrivilege;
+import com.itesm.application.security.AuthenticatedUserContext;
+import com.itesm.application.security.AuthorizationService;
+import com.itesm.application.security.CurrentUser;
 import com.itesm.application.usecase.exception.NotFoundException;
 import com.itesm.domain.models.User;
 import com.itesm.domain.models.UserStatus;
@@ -24,10 +27,21 @@ public class DisableUserUseCase {
     @Inject
     FirebaseUserService firebaseUserService;
 
+    @Inject
+    AuthenticatedUserContext authenticatedUserContext;
+
+    @Inject
+    AuthorizationService authorizationService;
+
     @RequiresPrivilege("users.manage")
     public void execute(UUID userId) {
+        CurrentUser caller = authenticatedUserContext.getCurrentUser();
         User user = userRepository.findUserById(userId)
                 .orElseThrow(() -> new NotFoundException("User not found"));
+
+        if (!caller.isSystemAdmin()) {
+            authorizationService.assertSameHospital(user.getHospitalId());
+        }
 
         user.setStatus(UserStatus.DISABLED);
         user.setActive(false);
