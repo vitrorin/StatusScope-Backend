@@ -124,6 +124,14 @@ class AdminOperationalResourceTest {
         seedAlert(nearestMunicipality);
         seedLatestSnapshot();
         seedEventsAndEvaluations(doctor);
+
+        // Reset the seeded recommendation to a clean NEW state so each test
+        // starts with consistent allowedStatusTransitions regardless of ordering.
+        entityManager.createQuery(
+                "update OperationalRecommendationEntity r set r.status = 'NEW',"
+                + " r.assignedOwnerUser = null, r.resolvedAt = null where r.id = :id")
+                .setParameter("id", SEEDED_RECOMMENDATION_ID)
+                .executeUpdate();
     }
 
     @Test
@@ -364,7 +372,7 @@ class AdminOperationalResourceTest {
                 .header("X-Test-User", ADMIN_EMAIL)
                 .body("""
                         {
-                          "capturedAt": "2026-05-12T12:00:00",
+                          "capturedAt": "2099-12-31T12:00:00",
                           "totalBeds": 240,
                           "availableBeds": 24,
                           "icuTotalBeds": 20,

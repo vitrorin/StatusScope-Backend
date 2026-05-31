@@ -247,6 +247,46 @@ class DiagnosisAssistantResourceTest {
                 .statusCode(404);
     }
 
+    @Test
+    void translationsShouldReturn401WhenNoToken() {
+        given()
+                .contentType(ContentType.JSON)
+                .body(buildTranslationBody())
+                .when()
+                .post("/diagnosis/assistant/translations")
+                .then()
+                .statusCode(401);
+    }
+
+    @Test
+    void translationsShouldReturn403WhenCallerIsHospitalAdmin() {
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .body(buildTranslationBody())
+                .when()
+                .post("/diagnosis/assistant/translations")
+                .then()
+                .statusCode(403);
+    }
+
+    @Test
+    void translationsShouldReturn200AndTranslateMessages() {
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", DOCTOR_EMAIL)
+                .body(buildTranslationBody())
+                .when()
+                .post("/diagnosis/assistant/translations")
+                .then()
+                .statusCode(200)
+                .body("translations", notNullValue())
+                .body("translations.size()", equalTo(1))
+                .body("translations[0].clientId", equalTo("msg-001"));
+    }
+
     private String buildRequestBody(String content) {
         return """
                 {
@@ -266,6 +306,17 @@ class DiagnosisAssistantResourceTest {
                   ]
                 }
                 """.formatted(evaluationId, content);
+    }
+
+    private String buildTranslationBody() {
+        return """
+                {
+                  "targetLanguage": "es",
+                  "messages": [
+                    { "clientId": "msg-001", "role": "assistant", "content": "Patient may have dengue." }
+                  ]
+                }
+                """;
     }
 
     private void seedEvaluation(User doctor) {
