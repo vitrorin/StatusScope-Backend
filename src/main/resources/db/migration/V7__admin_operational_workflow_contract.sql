@@ -52,50 +52,14 @@ CREATE TABLE IF NOT EXISTS hospital_inventory_movements (
     CONSTRAINT fk_him_supply_request FOREIGN KEY (related_supply_request_id) REFERENCES supply_requests(id)
 );
 
--- operational_recommendations new columns
-ALTER TABLE operational_recommendations ADD COLUMN IF NOT EXISTS primary_department_resource_id VARCHAR(36);
-ALTER TABLE operational_recommendations ADD COLUMN IF NOT EXISTS primary_staffing_profile_id VARCHAR(36);
-ALTER TABLE operational_recommendations ADD COLUMN IF NOT EXISTS primary_inventory_item_id VARCHAR(36);
-ALTER TABLE operational_recommendations ADD COLUMN IF NOT EXISTS presentation_variant VARCHAR(32);
-ALTER TABLE operational_recommendations ADD COLUMN IF NOT EXISTS primary_action_code VARCHAR(32);
-ALTER TABLE operational_recommendations ADD COLUMN IF NOT EXISTS available_actions_json TEXT;
-ALTER TABLE operational_recommendations ADD COLUMN IF NOT EXISTS allowed_status_transitions_json TEXT;
-ALTER TABLE operational_recommendations ADD COLUMN IF NOT EXISTS display_category_label VARCHAR(64);
-ALTER TABLE operational_recommendations ADD COLUMN IF NOT EXISTS display_severity_label VARCHAR(32);
-ALTER TABLE operational_recommendations ADD COLUMN IF NOT EXISTS display_status_label VARCHAR(32);
-ALTER TABLE operational_recommendations ADD COLUMN IF NOT EXISTS expires_at TIMESTAMP;
-ALTER TABLE operational_recommendations ADD COLUMN IF NOT EXISTS assigned_owner_user_id VARCHAR(36);
-
--- operational_tasks new columns
-ALTER TABLE operational_tasks ADD COLUMN IF NOT EXISTS owner_contact_id VARCHAR(36);
-ALTER TABLE operational_tasks ADD COLUMN IF NOT EXISTS owner_group_id VARCHAR(36);
-ALTER TABLE operational_tasks ADD COLUMN IF NOT EXISTS source_action_code VARCHAR(32);
-ALTER TABLE operational_tasks ADD COLUMN IF NOT EXISTS recommended_by_recommendation_id VARCHAR(36);
-
--- operational_notifications new columns
-ALTER TABLE operational_notifications ADD COLUMN IF NOT EXISTS audience_group_id VARCHAR(36);
-ALTER TABLE operational_notifications ADD COLUMN IF NOT EXISTS audience_contact_id VARCHAR(36);
-ALTER TABLE operational_notifications ADD COLUMN IF NOT EXISTS delivery_channel VARCHAR(32);
-ALTER TABLE operational_notifications ADD COLUMN IF NOT EXISTS delivery_status_detail VARCHAR(255);
-ALTER TABLE operational_notifications ADD COLUMN IF NOT EXISTS source_action_code VARCHAR(32);
-
--- supply_requests new columns
-ALTER TABLE supply_requests ADD COLUMN IF NOT EXISTS source_action_code VARCHAR(32);
-ALTER TABLE supply_requests ADD COLUMN IF NOT EXISTS priority VARCHAR(16);
-ALTER TABLE supply_requests ADD COLUMN IF NOT EXISTS requested_needed_by TIMESTAMP;
-ALTER TABLE supply_requests ADD COLUMN IF NOT EXISTS linked_recommendation_inventory_item_id VARCHAR(36);
-
--- foreign key constraints
-ALTER TABLE operational_recommendations ADD CONSTRAINT IF NOT EXISTS fk_or_department_resource FOREIGN KEY (primary_department_resource_id) REFERENCES hospital_department_resources(id);
-ALTER TABLE operational_recommendations ADD CONSTRAINT IF NOT EXISTS fk_or_staffing_profile FOREIGN KEY (primary_staffing_profile_id) REFERENCES hospital_staffing_profiles(id);
-ALTER TABLE operational_recommendations ADD CONSTRAINT IF NOT EXISTS fk_or_inventory_item FOREIGN KEY (primary_inventory_item_id) REFERENCES hospital_inventory_items(id);
-ALTER TABLE operational_recommendations ADD CONSTRAINT IF NOT EXISTS fk_or_assigned_owner FOREIGN KEY (assigned_owner_user_id) REFERENCES users(id);
-ALTER TABLE operational_tasks ADD CONSTRAINT IF NOT EXISTS fk_ot_owner_contact FOREIGN KEY (owner_contact_id) REFERENCES hospital_operational_contacts(id);
-ALTER TABLE operational_tasks ADD CONSTRAINT IF NOT EXISTS fk_ot_owner_group FOREIGN KEY (owner_group_id) REFERENCES hospital_operational_groups(id);
-ALTER TABLE operational_tasks ADD CONSTRAINT IF NOT EXISTS fk_ot_recommended_by FOREIGN KEY (recommended_by_recommendation_id) REFERENCES operational_recommendations(id);
-ALTER TABLE operational_notifications ADD CONSTRAINT IF NOT EXISTS fk_on_audience_group FOREIGN KEY (audience_group_id) REFERENCES hospital_operational_groups(id);
-ALTER TABLE operational_notifications ADD CONSTRAINT IF NOT EXISTS fk_on_audience_contact FOREIGN KEY (audience_contact_id) REFERENCES hospital_operational_contacts(id);
-ALTER TABLE supply_requests ADD CONSTRAINT IF NOT EXISTS fk_sr_linked_recommendation_inventory_item FOREIGN KEY (linked_recommendation_inventory_item_id) REFERENCES hospital_inventory_items(id);
+-- NOTE: The new columns and foreign keys for the admin operational workflow
+-- are declared on the JPA entities, so Hibernate schema-management creates them
+-- (drop-and-create / update) or asserts them (validate) before this migration
+-- runs in every profile. The original `ALTER TABLE ... ADD COLUMN/CONSTRAINT
+-- IF NOT EXISTS` statements used syntax accepted by H2 (tests/prod) but rejected
+-- by MySQL 8 (local dev), which broke startup. They were redundant with the
+-- entity-managed schema and have been removed so this migration runs on both
+-- MySQL and H2. The data-seeding UPDATEs below remain.
 
 UPDATE operational_recommendations
 SET primary_department_resource_id = '21000000-0000-0000-0000-000000000003',
