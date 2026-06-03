@@ -10,6 +10,7 @@ import com.itesm.infrastructure.persistence.entity.AlertEntity;
 import com.itesm.infrastructure.persistence.entity.HospitalDepartmentResourceEntity;
 import com.itesm.infrastructure.persistence.entity.HospitalEntity;
 import com.itesm.infrastructure.persistence.entity.HospitalInventoryItemEntity;
+import com.itesm.infrastructure.persistence.entity.HospitalInventoryMovementEntity;
 import com.itesm.infrastructure.persistence.entity.HospitalOperationalContactEntity;
 import com.itesm.infrastructure.persistence.entity.HospitalOperationalGroupEntity;
 import com.itesm.infrastructure.persistence.entity.HospitalStaffingProfileEntity;
@@ -25,6 +26,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -39,6 +41,9 @@ public class OperationalRecommendationRepositoryImpl
 
     @Inject
     EntityManager em;
+
+    @ConfigProperty(name = "quarkus.datasource.db-kind", defaultValue = "mysql")
+    String dbKind;
 
     // -----------------------------------------------------------------------
     // Recommendations
@@ -269,6 +274,60 @@ public class OperationalRecommendationRepositoryImpl
         sr.setCreatedAt(e.getCreatedAt());
         sr.setUpdatedAt(e.getUpdatedAt());
         return sr;
+    }
+
+    @Override
+    @Transactional
+    public SupplyRequest createSupplyRequestWithMovement(SupplyRequest sr, String movementNotes) {
+        if (sr.getInventoryItemId() == null) {
+            return createSupplyRequest(sr);
+        }
+
+        if ("mysql".equalsIgnoreCase(dbKind)) {
+            UUID requestId = sr.getId() != null ? sr.getId() : UUID.randomUUID();
+            UUID movementId = UUID.randomUUID();
+            em.createNativeQuery("""
+                    CALL sp_create_supply_request_with_movement(
+                        ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10,
+                        ?11, ?12, ?13, ?14, ?15, ?16
+                    )
+                    """)
+                    .setParameter(1, requestId.toString())
+                    .setParameter(2, movementId.toString())
+                    .setParameter(3, sr.getRecommendationId().toString())
+                    .setParameter(4, sr.getHospitalId().toString())
+                    .setParameter(5, sr.getInventoryItemId().toString())
+                    .setParameter(6, sr.getSupplyTypeLabel())
+                    .setParameter(7, sr.getQuantity())
+                    .setParameter(8, sr.getUnit())
+                    .setParameter(9, sr.getDestination())
+                    .setParameter(10, sr.getSuggestedSupplier())
+                    .setParameter(11, sr.getSourceActionCode())
+                    .setParameter(12, sr.getPriority())
+                    .setParameter(13, sr.getRequestedNeededBy())
+                    .setParameter(14, sr.getLinkedRecommendationInventoryItemId() != null
+                            ? sr.getLinkedRecommendationInventoryItemId().toString()
+                            : null)
+                    .setParameter(15, sr.getRequestedByUserId() != null ? sr.getRequestedByUserId().toString() : null)
+                    .setParameter(16, movementNotes)
+                    .executeUpdate();
+
+            return supplyToDomain(em.find(SupplyRequestEntity.class, requestId));
+        }
+
+        SupplyRequest created = createSupplyRequest(sr);
+        HospitalInventoryMovementEntity movement = new HospitalInventoryMovementEntity();
+        movement.setId(UUID.randomUUID());
+        movement.setHospital(em.getReference(HospitalEntity.class, created.getHospitalId()));
+        movement.setInventoryItem(em.getReference(HospitalInventoryItemEntity.class, created.getInventoryItemId()));
+        movement.setMovementType("REPLENISHMENT");
+        movement.setQuantityDelta(created.getQuantity());
+        movement.setUnit(created.getUnit());
+        movement.setNotes(movementNotes);
+        movement.setRelatedSupplyRequestId(created.getId());
+        movement.setCreatedAt(LocalDateTime.now());
+        em.persist(movement);
+        return created;
     }
 
     @Override

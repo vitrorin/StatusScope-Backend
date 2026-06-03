@@ -6,14 +6,11 @@ import com.itesm.application.usecase.exception.NotFoundException;
 import com.itesm.domain.models.OperationalRecommendation;
 import com.itesm.domain.models.OperationalRecommendationAudit;
 import com.itesm.domain.models.SupplyRequest;
-import com.itesm.domain.models.HospitalInventoryMovement;
-import com.itesm.domain.repository.OperationalDirectoryRepository;
 import com.itesm.domain.repository.OperationalRecommendationRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -21,7 +18,6 @@ public class CreateSupplyRequestUseCase {
 
     @Inject AuthenticatedUserContext authenticatedUserContext;
     @Inject OperationalRecommendationRepository repository;
-    @Inject OperationalDirectoryRepository operationalDirectoryRepository;
 
     @Transactional
     public SupplyRequest execute(UUID recommendationId, SupplyRequest input) {
@@ -47,20 +43,9 @@ public class CreateSupplyRequestUseCase {
                         : rec.getPrimaryInventoryItemId());
         input.setInventoryItemId(input.getInventoryItemId() != null ? input.getInventoryItemId() : rec.getPrimaryInventoryItemId());
 
-        SupplyRequest created = repository.createSupplyRequest(input);
-
-        if (created.getInventoryItemId() != null) {
-            HospitalInventoryMovement movement = new HospitalInventoryMovement();
-            movement.setHospitalId(rec.getHospitalId());
-            movement.setInventoryItemId(created.getInventoryItemId());
-            movement.setMovementType("REPLENISHMENT");
-            movement.setQuantityDelta(created.getQuantity());
-            movement.setUnit(created.getUnit());
-            movement.setNotes("Supply request created from recommendation " + recommendationId);
-            movement.setRelatedSupplyRequestId(created.getId());
-            movement.setCreatedAt(LocalDateTime.now());
-            operationalDirectoryRepository.appendInventoryMovement(movement);
-        }
+        SupplyRequest created = repository.createSupplyRequestWithMovement(
+                input,
+                "Supply request created from recommendation " + recommendationId);
 
         OperationalRecommendationAudit audit = new OperationalRecommendationAudit();
         audit.setRecommendationId(recommendationId);
@@ -69,7 +54,6 @@ public class CreateSupplyRequestUseCase {
         audit.setEventLabel("Supply order: " + input.getQuantity() + " " +
                 (input.getUnit() != null ? input.getUnit() + " " : "") +
                 (input.getSupplyTypeLabel() != null ? input.getSupplyTypeLabel() : "units"));
-        audit.setCreatedAt(LocalDateTime.now());
         repository.appendAudit(audit);
 
         return created;

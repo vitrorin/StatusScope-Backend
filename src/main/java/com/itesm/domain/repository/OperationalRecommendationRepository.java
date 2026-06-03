@@ -29,5 +29,6 @@ public interface OperationalRecommendationRepository {
     List<OperationalNotification> findNotificationsByRecommendationId(UUID recommendationId);
 
     SupplyRequest createSupplyRequest(SupplyRequest supplyRequest);
+    SupplyRequest createSupplyRequestWithMovement(SupplyRequest supplyRequest, String movementNotes);
     List<SupplyRequest> findSupplyRequestsByRecommendationId(UUID recommendationId);
 }
