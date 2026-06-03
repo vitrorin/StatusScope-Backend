@@ -32,7 +32,7 @@ node_modules/
 # Build output
 target/
 build/
-out/
+/out/
 .quarkus/
 .gradle/
 coverage/
