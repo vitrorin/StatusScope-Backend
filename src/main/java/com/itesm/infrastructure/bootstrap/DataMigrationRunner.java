@@ -29,6 +29,7 @@ public class DataMigrationRunner {
     String schemaManagementStrategy;
 
     void onStart(@Observes @Priority(10) StartupEvent ev) {
+        clearFailedMigrationHistoryIfPresent();
         if (isSchemaRecreatedOnStart()) {
             resetCatalogHistoryAfterSchemaRecreation();
         }
@@ -64,6 +65,18 @@ public class DataMigrationRunner {
             LOG.info("DataMigrationRunner: reset catalog migration history after schema recreation");
         } catch (SQLException e) {
             throw new IllegalStateException("Could not prepare data migration history", e);
+        }
+    }
+
+    private void clearFailedMigrationHistoryIfPresent() {
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement()) {
+            if (!tableExists(statement, "flyway_schema_history")) {
+                return;
+            }
+            clearFailedMigrationHistory(statement);
+        } catch (SQLException e) {
+            throw new IllegalStateException("Could not repair failed data migration history", e);
         }
     }
 

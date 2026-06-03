@@ -37,6 +37,12 @@ public class OperationalNotificationEntity {
     @JoinColumn(name = "audience_contact_id")
     private HospitalOperationalContactEntity audienceContact;
 
+    @Column(name = "audience_type", length = 32)
+    private String audienceType;
+
+    @Column(name = "audience_department_code", length = 32)
+    private String audienceDepartmentCode;
+
     @Column(name = "audience_label", length = 255)
     private String audienceLabel;
 
@@ -72,6 +78,10 @@ public class OperationalNotificationEntity {
     public void setAudienceGroup(HospitalOperationalGroupEntity audienceGroup) { this.audienceGroup = audienceGroup; }
     public HospitalOperationalContactEntity getAudienceContact() { return audienceContact; }
     public void setAudienceContact(HospitalOperationalContactEntity audienceContact) { this.audienceContact = audienceContact; }
+    public String getAudienceType() { return audienceType; }
+    public void setAudienceType(String audienceType) { this.audienceType = audienceType; }
+    public String getAudienceDepartmentCode() { return audienceDepartmentCode; }
+    public void setAudienceDepartmentCode(String audienceDepartmentCode) { this.audienceDepartmentCode = audienceDepartmentCode; }
     public String getAudienceLabel() { return audienceLabel; }
     public void setAudienceLabel(String audienceLabel) { this.audienceLabel = audienceLabel; }
     public String getMessage() { return message; }

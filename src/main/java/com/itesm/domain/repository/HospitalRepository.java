@@ -10,5 +10,6 @@ public interface HospitalRepository {
     Optional<Hospital> findHospitalById(UUID id);
     Optional<Hospital> findByInviteCode(String inviteCode);
     Hospital create(Hospital hospital);
+    Hospital update(Hospital hospital);
     List<Hospital> listAllDomain();
 }

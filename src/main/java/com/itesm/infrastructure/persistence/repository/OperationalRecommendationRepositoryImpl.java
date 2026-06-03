@@ -1,6 +1,7 @@
 package com.itesm.infrastructure.persistence.repository;
 
 import com.itesm.domain.models.OperationalNotification;
+import com.itesm.domain.models.OperationalNotificationRecipient;
 import com.itesm.domain.models.OperationalRecommendation;
 import com.itesm.domain.models.OperationalRecommendationAudit;
 import com.itesm.domain.models.OperationalTask;
@@ -14,6 +15,7 @@ import com.itesm.infrastructure.persistence.entity.HospitalOperationalContactEnt
 import com.itesm.infrastructure.persistence.entity.HospitalOperationalGroupEntity;
 import com.itesm.infrastructure.persistence.entity.HospitalStaffingProfileEntity;
 import com.itesm.infrastructure.persistence.entity.OperationalNotificationEntity;
+import com.itesm.infrastructure.persistence.entity.OperationalNotificationRecipientEntity;
 import com.itesm.infrastructure.persistence.entity.OperationalRecommendationAuditEntity;
 import com.itesm.infrastructure.persistence.entity.OperationalRecommendationEntity;
 import com.itesm.infrastructure.persistence.entity.OperationalTaskEntity;
@@ -60,20 +62,6 @@ public class OperationalRecommendationRepositoryImpl
     public List<OperationalRecommendation> findByHospitalIdAndSeverity(UUID hospitalId, String severity) {
         return find("hospital.id = ?1 AND severity = ?2 ORDER BY createdAt DESC", hospitalId, severity)
                 .stream().map(this::toDomain).collect(Collectors.toList());
-    }
-
-    @Override
-    public Optional<OperationalRecommendation> findOpenByHospitalIdAndTypeAndTitle(UUID hospitalId, String type, String title) {
-        return find("""
-                hospital.id = ?1
-                AND type = ?2
-                AND title = ?3
-                AND status NOT IN ('COMPLETED', 'REJECTED')
-                ORDER BY createdAt DESC
-                """, hospitalId, type, title)
-                .stream()
-                .findFirst()
-                .map(this::toDomain);
     }
 
     @Override
@@ -183,6 +171,29 @@ public class OperationalRecommendationRepositoryImpl
     }
 
     @Override
+    @Transactional
+    public OperationalTask updateTask(OperationalTask task) {
+        OperationalTaskEntity e = em.find(OperationalTaskEntity.class, task.getId());
+        if (e == null) throw new jakarta.ws.rs.NotFoundException("Task not found: " + task.getId());
+        e.setOwnerUserId(task.getOwnerUserId());
+        e.setOwnerContact(task.getOwnerContactId() != null
+                ? em.getReference(HospitalOperationalContactEntity.class, task.getOwnerContactId())
+                : null);
+        e.setOwnerGroup(task.getOwnerGroupId() != null
+                ? em.getReference(HospitalOperationalGroupEntity.class, task.getOwnerGroupId())
+                : null);
+        e.setOwnerLabel(task.getOwnerLabel());
+        e.setDepartmentLabel(task.getDepartmentLabel());
+        e.setDeadlineAt(task.getDeadlineAt());
+        e.setPriority(task.getPriority() != null ? task.getPriority() : e.getPriority());
+        e.setNotes(task.getNotes());
+        e.setStatus(task.getStatus() != null ? task.getStatus() : e.getStatus());
+        e.setSourceActionCode(task.getSourceActionCode());
+        e.setUpdatedAt(LocalDateTime.now());
+        return taskToDomain(e);
+    }
+
+    @Override
     public List<OperationalTask> findTasksByRecommendationId(UUID recommendationId) {
         return em.createQuery(
                 "SELECT t FROM OperationalTaskEntity t WHERE t.recommendation.id = :rid ORDER BY t.createdAt DESC",
@@ -190,6 +201,18 @@ public class OperationalRecommendationRepositoryImpl
                 .setParameter("rid", recommendationId)
                 .getResultList()
                 .stream().map(this::taskToDomain).collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<OperationalTask> findActiveTaskByRecommendationId(UUID recommendationId) {
+        return em.createQuery(
+                "SELECT t FROM OperationalTaskEntity t WHERE t.recommendation.id = :rid AND t.status <> 'COMPLETED' AND t.status <> 'CANCELLED' ORDER BY t.createdAt DESC",
+                OperationalTaskEntity.class)
+                .setParameter("rid", recommendationId)
+                .setMaxResults(1)
+                .getResultStream()
+                .findFirst()
+                .map(this::taskToDomain);
     }
 
     // -----------------------------------------------------------------------
@@ -209,6 +232,8 @@ public class OperationalRecommendationRepositoryImpl
         if (notification.getAudienceContactId() != null) {
             e.setAudienceContact(em.getReference(HospitalOperationalContactEntity.class, notification.getAudienceContactId()));
         }
+        e.setAudienceType(notification.getAudienceType());
+        e.setAudienceDepartmentCode(notification.getAudienceDepartmentCode());
         e.setAudienceLabel(notification.getAudienceLabel());
         e.setMessage(notification.getMessage());
         e.setStatus(notification.getStatus() != null ? notification.getStatus() : "SENT");
@@ -233,6 +258,37 @@ public class OperationalRecommendationRepositoryImpl
                 .stream().map(this::notificationToDomain).collect(Collectors.toList());
     }
 
+    @Override
+    @Transactional
+    public OperationalNotificationRecipient createNotificationRecipient(OperationalNotificationRecipient recipient) {
+        OperationalNotificationRecipientEntity e = new OperationalNotificationRecipientEntity();
+        e.setId(recipient.getId() != null ? recipient.getId() : UUID.randomUUID());
+        e.setNotification(em.getReference(OperationalNotificationEntity.class, recipient.getNotificationId()));
+        if (recipient.getContactId() != null) {
+            e.setContact(em.getReference(HospitalOperationalContactEntity.class, recipient.getContactId()));
+        }
+        e.setRecipientName(recipient.getRecipientName());
+        e.setRecipientEmail(recipient.getRecipientEmail());
+        e.setStatus(recipient.getStatus() != null ? recipient.getStatus() : "SENT");
+        e.setDeliveryStatusDetail(recipient.getDeliveryStatusDetail());
+        e.setDeliveredAt(recipient.getDeliveredAt() != null ? recipient.getDeliveredAt() : LocalDateTime.now());
+        em.persist(e);
+        return recipientToDomain(e);
+    }
+
+    @Override
+    public List<OperationalNotificationRecipient> findNotificationRecipientsByNotificationId(UUID notificationId) {
+        return em.createQuery("""
+                SELECT r
+                FROM OperationalNotificationRecipientEntity r
+                WHERE r.notification.id = :notificationId
+                ORDER BY r.deliveredAt ASC
+                """, OperationalNotificationRecipientEntity.class)
+                .setParameter("notificationId", notificationId)
+                .getResultList()
+                .stream().map(this::recipientToDomain).collect(Collectors.toList());
+    }
+
     // -----------------------------------------------------------------------
     // Supply requests
     // -----------------------------------------------------------------------
@@ -242,7 +298,9 @@ public class OperationalRecommendationRepositoryImpl
     public SupplyRequest createSupplyRequest(SupplyRequest sr) {
         SupplyRequestEntity e = new SupplyRequestEntity();
         e.setId(sr.getId() != null ? sr.getId() : UUID.randomUUID());
-        e.setRecommendation(em.getReference(OperationalRecommendationEntity.class, sr.getRecommendationId()));
+        if (sr.getRecommendationId() != null) {
+            e.setRecommendation(em.getReference(OperationalRecommendationEntity.class, sr.getRecommendationId()));
+        }
         e.setHospital(em.getReference(HospitalEntity.class, sr.getHospitalId()));
         if (sr.getInventoryItemId() != null) {
             e.setInventoryItem(em.getReference(HospitalInventoryItemEntity.class, sr.getInventoryItemId()));
@@ -300,6 +358,7 @@ public class OperationalRecommendationRepositoryImpl
         r.setExpectedImpact(e.getExpectedImpact());
         r.setUrgencyWindow(e.getUrgencyWindow());
         r.setConfidenceScore(e.getConfidenceScore());
+        r.setContentTranslationsJson(e.getContentTranslationsJson());
         r.setImageMode(e.getImageMode());
         r.setRationaleJson(e.getRationaleJson());
         r.setRecommendedActionsJson(e.getRecommendedActionsJson());
@@ -344,6 +403,7 @@ public class OperationalRecommendationRepositoryImpl
         e.setExpectedImpact(r.getExpectedImpact());
         e.setUrgencyWindow(r.getUrgencyWindow());
         e.setConfidenceScore(r.getConfidenceScore());
+        e.setContentTranslationsJson(r.getContentTranslationsJson());
         e.setImageMode(r.getImageMode());
         e.setRationaleJson(r.getRationaleJson());
         e.setRecommendedActionsJson(r.getRecommendedActionsJson());
@@ -423,6 +483,8 @@ public class OperationalRecommendationRepositoryImpl
         n.setHospitalId(e.getHospital().getId());
         if (e.getAudienceGroup() != null) n.setAudienceGroupId(e.getAudienceGroup().getId());
         if (e.getAudienceContact() != null) n.setAudienceContactId(e.getAudienceContact().getId());
+        n.setAudienceType(e.getAudienceType());
+        n.setAudienceDepartmentCode(e.getAudienceDepartmentCode());
         n.setAudienceLabel(e.getAudienceLabel());
         n.setMessage(e.getMessage());
         n.setStatus(e.getStatus());
@@ -431,13 +493,27 @@ public class OperationalRecommendationRepositoryImpl
         n.setSourceActionCode(e.getSourceActionCode());
         n.setSentByUserId(e.getSentByUserId());
         n.setSentAt(e.getSentAt());
+        n.setRecipients(findNotificationRecipientsByNotificationId(e.getId()));
         return n;
+    }
+
+    private OperationalNotificationRecipient recipientToDomain(OperationalNotificationRecipientEntity e) {
+        OperationalNotificationRecipient r = new OperationalNotificationRecipient();
+        r.setId(e.getId());
+        r.setNotificationId(e.getNotification().getId());
+        if (e.getContact() != null) r.setContactId(e.getContact().getId());
+        r.setRecipientName(e.getRecipientName());
+        r.setRecipientEmail(e.getRecipientEmail());
+        r.setStatus(e.getStatus());
+        r.setDeliveryStatusDetail(e.getDeliveryStatusDetail());
+        r.setDeliveredAt(e.getDeliveredAt());
+        return r;
     }
 
     private SupplyRequest supplyToDomain(SupplyRequestEntity e) {
         SupplyRequest sr = new SupplyRequest();
         sr.setId(e.getId());
-        sr.setRecommendationId(e.getRecommendation().getId());
+        if (e.getRecommendation() != null) sr.setRecommendationId(e.getRecommendation().getId());
         sr.setHospitalId(e.getHospital().getId());
         if (e.getInventoryItem() != null) sr.setInventoryItemId(e.getInventoryItem().getId());
         sr.setSupplyTypeLabel(e.getSupplyTypeLabel());

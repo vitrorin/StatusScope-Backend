@@ -1,6 +1,7 @@
 package com.itesm.interfaces.rest;
 
 import com.itesm.application.port.out.AssistantChatGateway;
+import com.itesm.application.port.out.AssistantChatMessage;
 import com.itesm.domain.models.User;
 import com.itesm.domain.models.UserStatus;
 import com.itesm.domain.repository.RoleRepository;
@@ -14,6 +15,8 @@ import com.itesm.infrastructure.persistence.entity.MunicipalityEntity;
 import com.itesm.infrastructure.persistence.entity.OutbreakEntity;
 import com.itesm.infrastructure.persistence.entity.PatientEntity;
 import com.itesm.infrastructure.persistence.entity.PatientEvaluationEntity;
+import com.itesm.infrastructure.persistence.entity.SpecialtyEntity;
+import com.itesm.infrastructure.persistence.entity.StateEntity;
 import com.itesm.infrastructure.persistence.entity.UserEntity;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
@@ -28,15 +31,18 @@ import org.mockito.Mockito;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 
 @QuarkusTest
 class AdminOperationalResourceTest {
@@ -45,11 +51,16 @@ class AdminOperationalResourceTest {
     private static final String DOCTOR_EMAIL = "ops-doctor@statusscope.local";
     private static final UUID HOSPITAL_ID = UUID.fromString("30000000-0000-0000-0000-000000000001");
     private static final UUID DISEASE_ID = UUID.fromString("60000000-0000-0000-0000-000000000004");
+    private static final UUID MEASLES_DISEASE_ID = UUID.fromString("86000000-0000-0000-0000-000000000901");
+    private static final UUID DENGUE_DISEASE_ID = UUID.fromString("86000000-0000-0000-0000-000000000902");
     private static final UUID OUTBREAK_ID_1 = UUID.fromString("85000000-0000-0000-0000-000000000001");
     private static final UUID OUTBREAK_ID_2 = UUID.fromString("85000000-0000-0000-0000-000000000002");
+    private static final UUID MUNICIPAL_MEASLES_OUTBREAK_ID = UUID.fromString("85000000-0000-0000-0000-000000000003");
+    private static final UUID STATE_COVID_OUTBREAK_ID = UUID.fromString("85000000-0000-0000-0000-000000000004");
+    private static final UUID STATE_DENGUE_OUTBREAK_ID = UUID.fromString("85000000-0000-0000-0000-000000000005");
+    private static final UUID OLD_MUNICIPAL_DENGUE_OUTBREAK_ID = UUID.fromString("85000000-0000-0000-0000-000000000006");
     private static final UUID ALERT_ID = UUID.fromString("85000000-0000-0000-0000-000000000101");
     private static final UUID SNAPSHOT_ID = UUID.fromString("85000000-0000-0000-0000-000000000201");
-    private static final UUID SEEDED_RECOMMENDATION_ID = UUID.fromString("24000000-0000-0000-0000-000000000001");
     private static final UUID SEEDED_INVENTORY_ITEM_ID = UUID.fromString("23000000-0000-0000-0000-000000000005");
     private static final UUID SEEDED_CONTACT_ID = UUID.fromString("25000000-0000-0000-0000-000000000001");
     private static final UUID SEEDED_GROUP_ID = UUID.fromString("26000000-0000-0000-0000-000000000001");
@@ -65,21 +76,12 @@ class AdminOperationalResourceTest {
     @Transactional
     void seedOperationalSignals() {
         Mockito.when(assistantChatGateway.chat(Mockito.anyList()))
-                .thenReturn("""
-                        {
-                          "description": "Operational outlook indicates elevated pressure on this resource area. Activate the documented response pathway before the next surge window.",
-                          "expectedImpact": "Improve coordination and reduce avoidable operational bottlenecks",
-                          "urgencyWindow": "Within 24 hours",
-                          "rationale": [
-                            "Current hospital utilization and nearby outbreak activity point to growing operational pressure.",
-                            "Earlier intervention reduces the risk of escalation and reactive staffing or supply changes."
-                          ],
-                          "recommendedActions": [
-                            "Review the assigned unit readiness against the current operational protocol.",
-                            "Prepare the next response step with the responsible hospital lead."
-                          ]
-                        }
-                        """);
+                .thenAnswer(invocation -> {
+                    List<AssistantChatMessage> messages = invocation.getArgument(0);
+                    String prompt = messages.isEmpty() ? "" : messages.get(0).getContent();
+                    String draftTitle = extractPromptValue(prompt, "- Current draft title: ", "Operational recommendation");
+                    return llmRecommendationResponse(draftTitle);
+                });
 
         User admin = userRepository.findByEmail(ADMIN_EMAIL).orElseGet(() -> {
             var adminRole = roleRepository.findByCode("HOSPITAL_ADMIN").orElseThrow();
@@ -119,23 +121,25 @@ class AdminOperationalResourceTest {
                 .getSingleResult();
 
         DiseaseEntity disease = entityManager.getReference(DiseaseEntity.class, DISEASE_ID);
+        DiseaseEntity measles = ensureTestDisease(MEASLES_DISEASE_ID, "MEASLES_TEST", "Measles");
+        DiseaseEntity dengue = ensureTestDisease(DENGUE_DISEASE_ID, "DENGUE_TEST", "Dengue");
         seedOutbreak(OUTBREAK_ID_1, disease, nearestMunicipality, 140);
         seedOutbreak(OUTBREAK_ID_2, disease, nearestMunicipality, 95);
+        seedOutbreak(MUNICIPAL_MEASLES_OUTBREAK_ID, measles, nearestMunicipality, 80);
+        seedOutbreak(OLD_MUNICIPAL_DENGUE_OUTBREAK_ID, dengue, nearestMunicipality, 2000, 45);
+        seedStateOutbreak(STATE_COVID_OUTBREAK_ID, disease, nearestMunicipality.getState(), 20000);
+        seedStateOutbreak(STATE_DENGUE_OUTBREAK_ID, dengue, nearestMunicipality.getState(), 10000);
         seedAlert(nearestMunicipality);
         seedLatestSnapshot();
         seedEventsAndEvaluations(doctor);
 
-        // Reset the seeded recommendation to a clean NEW state so each test
-        // starts with consistent allowedStatusTransitions regardless of ordering.
-        entityManager.createQuery(
-                "update OperationalRecommendationEntity r set r.status = 'NEW',"
-                + " r.assignedOwnerUser = null, r.resolvedAt = null where r.id = :id")
-                .setParameter("id", SEEDED_RECOMMENDATION_ID)
-                .executeUpdate();
+        resetOperationalRecommendations();
     }
 
     @Test
-    void shouldListSeededRecommendationsForHospitalAdmin() {
+    void shouldListGeneratedRecommendationsForHospitalAdmin() {
+        refreshRecommendations();
+
         given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer test-token")
@@ -146,9 +150,11 @@ class AdminOperationalResourceTest {
                 .statusCode(200)
                 .body("size()", greaterThan(0))
                 .body("title", hasItem("ICU Capacity Critical - Activate Surge Protocol"))
-                .body("find { it.id == '%s' }.availableActions.code".formatted(SEEDED_RECOMMENDATION_ID), hasItem("ASSIGN_TASK"))
-                .body("find { it.id == '%s' }.allowedStatusTransitions".formatted(SEEDED_RECOMMENDATION_ID), hasItem("ACCEPTED"))
-                .body("find { it.id == '%s' }.primaryDepartment.label".formatted(SEEDED_RECOMMENDATION_ID), equalTo("Intensive Care Unit"));
+                .body("type", hasItem("LOCAL_EPIDEMIOLOGY"))
+                .body("find { it.title == 'ICU Capacity Critical - Activate Surge Protocol' }.availableActions.code", hasItem("ASSIGN_TASK"))
+                .body("find { it.title == 'ICU Capacity Critical - Activate Surge Protocol' }.allowedStatusTransitions", hasItem("ACCEPTED"))
+                .body("find { it.title == 'ICU Capacity Critical - Activate Surge Protocol' }.primaryDepartment.label", equalTo("Intensive Care Unit"))
+                .body("find { it.title == 'ICU Capacity Critical - Activate Surge Protocol' }.translations.es.title", equalTo("Activar protocolo de expansion UCI"));
     }
 
     @Test
@@ -188,7 +194,33 @@ class AdminOperationalResourceTest {
     }
 
     @Test
+    void shouldGenerateUniqueHospitalAndMunicipalEpidemiologyRecommendations() {
+        refreshRecommendations();
+
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .when()
+                .get("/admin/recommendations")
+                .then()
+                .statusCode(200)
+                .body("findAll { it.type.startsWith('EPIDEMIOLOGY') }.size()", equalTo(2))
+                .body("find { it.type == 'EPIDEMIOLOGY_HOSPITAL' }.title", containsString("COVID-19"))
+                .body("find { it.type == 'EPIDEMIOLOGY_MUNICIPAL' }.title", containsString("Measles"))
+                .body("find { it.type == 'EPIDEMIOLOGY_MUNICIPAL' }.title", not(containsString("Dengue")))
+                .body("find { it.type == 'EPIDEMIOLOGY_MUNICIPAL' }.title", containsString("surrounding municipalities"))
+                .body("find { it.type == 'EPIDEMIOLOGY_STATE' }", equalTo(null))
+                .body("find { it.type == 'EPIDEMIOLOGY_HOSPITAL' }.createdByMode", equalTo("LLM_ASSISTED"))
+                .body("find { it.type == 'EPIDEMIOLOGY_MUNICIPAL' }.createdByMode", equalTo("LLM_ASSISTED"))
+                .body("find { it.type == 'EPIDEMIOLOGY_HOSPITAL' }.severity", equalTo("CRITICAL"))
+                .body("find { it.type == 'EPIDEMIOLOGY_MUNICIPAL' }.severity", equalTo("CRITICAL"));
+    }
+
+    @Test
     void shouldPersistWorkflowActionsAndReturnThemInDetail() {
+        String recommendationId = generatedRecommendationId("ICU Capacity Critical - Activate Surge Protocol");
+
         given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer test-token")
@@ -199,7 +231,7 @@ class AdminOperationalResourceTest {
                         }
                         """)
                 .when()
-                .patch("/admin/recommendations/{id}/status", SEEDED_RECOMMENDATION_ID)
+                .patch("/admin/recommendations/{id}/status", recommendationId)
                 .then()
                 .statusCode(204);
 
@@ -218,7 +250,7 @@ class AdminOperationalResourceTest {
                         }
                         """.formatted(SEEDED_CONTACT_ID, SEEDED_GROUP_ID))
                 .when()
-                .post("/admin/recommendations/{id}/tasks", SEEDED_RECOMMENDATION_ID)
+                .post("/admin/recommendations/{id}/tasks", recommendationId)
                 .then()
                 .statusCode(201)
                 .body("id", notNullValue())
@@ -237,10 +269,10 @@ class AdminOperationalResourceTest {
                         }
                         """.formatted(SEEDED_GROUP_ID))
                 .when()
-                .post("/admin/recommendations/{id}/notifications", SEEDED_RECOMMENDATION_ID)
+                .post("/admin/recommendations/{id}/notifications", recommendationId)
                 .then()
                 .statusCode(201)
-                .body("status", equalTo("SENT"));
+                .body("status", equalTo("FAILED"));
 
         given()
                 .contentType(ContentType.JSON)
@@ -257,7 +289,7 @@ class AdminOperationalResourceTest {
                         }
                         """.formatted(SEEDED_INVENTORY_ITEM_ID))
                 .when()
-                .post("/admin/recommendations/{id}/supply-requests", SEEDED_RECOMMENDATION_ID)
+                .post("/admin/recommendations/{id}/supply-requests", recommendationId)
                 .then()
                 .statusCode(201)
                 .body("status", equalTo("REQUESTED"));
@@ -267,7 +299,7 @@ class AdminOperationalResourceTest {
                 .header("Authorization", "Bearer test-token")
                 .header("X-Test-User", ADMIN_EMAIL)
                 .when()
-                .get("/admin/recommendations/{id}", SEEDED_RECOMMENDATION_ID)
+                .get("/admin/recommendations/{id}", recommendationId)
                 .then()
                 .statusCode(200)
                 .body("status", equalTo("ASSIGNED"))
@@ -281,12 +313,94 @@ class AdminOperationalResourceTest {
                 .body("supplyRequests[0].inventoryItemId", equalTo(SEEDED_INVENTORY_ITEM_ID.toString()))
                 .body("auditTrail.eventType", hasItem("STATUS_CHANGED"))
                 .body("auditTrail.eventType", hasItem("TASK_CREATED"))
-                .body("auditTrail.eventType", hasItem("NOTIFICATION_SENT"))
+                .body("auditTrail.eventType", hasItem("NOTIFICATION_EMAIL_FAILED"))
                 .body("auditTrail.eventType", hasItem("SUPPLY_REQUESTED"));
     }
 
     @Test
+    void shouldManageOperationalContactsAndRecordEmailDeliveryEvidence() {
+        String contactId = given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .body("""
+                        {
+                          "displayName": "Jefa de Enfermeria",
+                          "roleLabel": "Chief Nurse",
+                          "departmentCode": "ICU",
+                          "email": "nursing-lead@hgz21.local",
+                          "assignable": true,
+                          "notifiable": true,
+                          "availabilityStatus": "ACTIVE"
+                        }
+                        """)
+                .when()
+                .post("/admin/operational-contacts")
+                .then()
+                .statusCode(201)
+                .body("contactChannel", equalTo("EMAIL"))
+                .body("contactValue", equalTo("nursing-lead@hgz21.local"))
+                .extract()
+                .path("id");
+
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .body("""
+                        {
+                          "displayName": "Contacto invalido",
+                          "roleLabel": "Nurse",
+                          "email": "not-an-email",
+                          "assignable": true,
+                          "notifiable": true,
+                          "availabilityStatus": "ACTIVE"
+                        }
+                        """)
+                .when()
+                .post("/admin/operational-contacts")
+                .then()
+                .statusCode(400);
+
+        String recommendationId = generatedRecommendationId("ICU Capacity Critical - Activate Surge Protocol");
+
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .body("""
+                        {
+                          "ownerContactId": "%s",
+                          "departmentLabel": "ICU",
+                          "priority": "CRITICAL",
+                          "notes": "Activar protocolo de expansion UCI.",
+                          "language": "es"
+                        }
+                        """.formatted(contactId))
+                .when()
+                .post("/admin/recommendations/{id}/tasks", recommendationId)
+                .then()
+                .statusCode(201)
+                .body("ownerContactId", equalTo(contactId))
+                .body("ownerLabel", equalTo("Jefa de Enfermeria"));
+
+        given()
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .when()
+                .get("/admin/recommendations/{id}", recommendationId)
+                .then()
+                .statusCode(200)
+                .body("notifications.find { it.audienceContactId == '%s' }.deliveryChannel".formatted(contactId), equalTo("EMAIL"))
+                .body("notifications.find { it.audienceContactId == '%s' }.status".formatted(contactId), equalTo("SENT"))
+                .body("notifications.find { it.audienceContactId == '%s' }.recipientSummary.sent".formatted(contactId), equalTo(1))
+                .body("auditTrail.eventType", hasItem("TASK_EMAIL_SENT"));
+    }
+
+    @Test
     void shouldExposeOperationalDirectoryAndResourceSupportEndpoints() {
+        String recommendationId = generatedRecommendationId("ICU Capacity Critical - Activate Surge Protocol");
+
         given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer test-token")
@@ -312,7 +426,7 @@ class AdminOperationalResourceTest {
                 .header("Authorization", "Bearer test-token")
                 .header("X-Test-User", ADMIN_EMAIL)
                 .when()
-                .get("/admin/recommendations/{id}/workflow-options", SEEDED_RECOMMENDATION_ID)
+                .get("/admin/recommendations/{id}/workflow-options", recommendationId)
                 .then()
                 .statusCode(200)
                 .body("availableActions.code", hasItem("ASSIGN_TASK"))
@@ -350,6 +464,39 @@ class AdminOperationalResourceTest {
                 .statusCode(200)
                 .body("section", equalTo("inventory-movements"))
                 .body("data.size()", greaterThan(0));
+
+        String directSupplyRequestId = given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .body("""
+                        {
+                          "supplyTypeLabel": "Isolation Gowns",
+                          "quantity": 50,
+                          "unit": "units",
+                          "destination": "Central Supply",
+                          "suggestedSupplier": "Preferred Supplier",
+                          "priority": "HIGH"
+                        }
+                        """)
+                .when()
+                .post("/admin/resources/inventory/{id}/supply-requests", SEEDED_INVENTORY_ITEM_ID)
+                .then()
+                .statusCode(201)
+                .body("recommendationId", nullValue())
+                .body("inventoryItemId", equalTo(SEEDED_INVENTORY_ITEM_ID.toString()))
+                .body("status", equalTo("REQUESTED"))
+                .extract().path("id");
+
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .when()
+                .get("/admin/resources/inventory/{id}/movements", SEEDED_INVENTORY_ITEM_ID)
+                .then()
+                .statusCode(200)
+                .body("data.relatedSupplyRequestId", hasItem(directSupplyRequestId));
     }
 
     @Test
@@ -549,6 +696,10 @@ class AdminOperationalResourceTest {
     }
 
     private void seedOutbreak(UUID outbreakId, DiseaseEntity disease, MunicipalityEntity municipality, int caseCount) {
+        seedOutbreak(outbreakId, disease, municipality, caseCount, 2);
+    }
+
+    private void seedOutbreak(UUID outbreakId, DiseaseEntity disease, MunicipalityEntity municipality, int caseCount, int startedDaysAgo) {
         OutbreakEntity outbreak = entityManager.find(OutbreakEntity.class, outbreakId);
         boolean isNew = outbreak == null;
         if (outbreak == null) {
@@ -562,11 +713,99 @@ class AdminOperationalResourceTest {
         outbreak.setCaseCount(caseCount);
         outbreak.setConfirmationStatus("CONFIRMED");
         outbreak.setStatus("ACTIVE");
+        outbreak.setStartedAt(LocalDateTime.now().minusDays(startedDaysAgo));
+        outbreak.setUpdatedAt(LocalDateTime.now());
+        if (isNew) {
+            entityManager.persist(outbreak);
+        }
+    }
+
+    private void seedStateOutbreak(UUID outbreakId, DiseaseEntity disease, StateEntity state, int caseCount) {
+        OutbreakEntity outbreak = entityManager.find(OutbreakEntity.class, outbreakId);
+        boolean isNew = outbreak == null;
+        if (outbreak == null) {
+            outbreak = new OutbreakEntity();
+            outbreak.setId(outbreakId);
+            outbreak.setCreatedAt(LocalDateTime.now());
+        }
+        outbreak.setDisease(disease);
+        outbreak.setScope("STATE");
+        outbreak.setMunicipality(null);
+        outbreak.setState(state);
+        outbreak.setCaseCount(caseCount);
+        outbreak.setConfirmationStatus("CONFIRMED");
+        outbreak.setStatus("ACTIVE");
         outbreak.setStartedAt(LocalDateTime.now().minusDays(2));
         outbreak.setUpdatedAt(LocalDateTime.now());
         if (isNew) {
             entityManager.persist(outbreak);
         }
+    }
+
+    private DiseaseEntity ensureTestDisease(UUID diseaseId, String code, String name) {
+        DiseaseEntity disease = entityManager.find(DiseaseEntity.class, diseaseId);
+        boolean isNew = disease == null;
+        if (disease == null) {
+            disease = new DiseaseEntity();
+            disease.setId(diseaseId);
+            disease.setCreatedAt(LocalDateTime.now());
+        }
+        SpecialtyEntity specialty = entityManager.getReference(
+                SpecialtyEntity.class,
+                UUID.fromString("50000000-0000-0000-0000-000000000004"));
+        disease.setCode(code);
+        disease.setName(name);
+        disease.setPrimarySpecialty(specialty);
+        disease.setUpdatedAt(LocalDateTime.now());
+        if (isNew) {
+            entityManager.persist(disease);
+        }
+        return disease;
+    }
+
+    private void resetOperationalRecommendations() {
+        entityManager.createQuery("delete from SupplyRequestEntity s where s.hospital.id = :hospitalId")
+                .setParameter("hospitalId", HOSPITAL_ID)
+                .executeUpdate();
+        entityManager.createQuery("delete from OperationalNotificationEntity n where n.hospital.id = :hospitalId")
+                .setParameter("hospitalId", HOSPITAL_ID)
+                .executeUpdate();
+        entityManager.createQuery("delete from OperationalTaskEntity t where t.hospital.id = :hospitalId")
+                .setParameter("hospitalId", HOSPITAL_ID)
+                .executeUpdate();
+        entityManager.createQuery("delete from OperationalRecommendationAuditEntity a where a.recommendation.hospital.id = :hospitalId")
+                .setParameter("hospitalId", HOSPITAL_ID)
+                .executeUpdate();
+        entityManager.createQuery("delete from OperationalRecommendationEntity r where r.hospital.id = :hospitalId")
+                .setParameter("hospitalId", HOSPITAL_ID)
+                .executeUpdate();
+    }
+
+    private void refreshRecommendations() {
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .when()
+                .post("/admin/recommendations/refresh")
+                .then()
+                .statusCode(200)
+                .body("generated", greaterThan(0));
+    }
+
+    private String generatedRecommendationId(String title) {
+        refreshRecommendations();
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", ADMIN_EMAIL)
+                .when()
+                .get("/admin/recommendations")
+                .then()
+                .statusCode(200)
+                .extract()
+                .jsonPath()
+                .getString("find { it.title == '%s' }.id".formatted(title));
     }
 
     private void seedAlert(MunicipalityEntity municipality) {
@@ -673,5 +912,69 @@ class AdminOperationalResourceTest {
                 entityManager.persist(evaluation);
             }
         }
+    }
+
+    private String extractPromptValue(String prompt, String prefix, String fallback) {
+        int start = prompt.indexOf(prefix);
+        if (start < 0) {
+            return fallback;
+        }
+        int valueStart = start + prefix.length();
+        int valueEnd = prompt.indexOf('\n', valueStart);
+        if (valueEnd < 0) {
+            valueEnd = prompt.length();
+        }
+        String value = prompt.substring(valueStart, valueEnd).trim();
+        return value.isBlank() ? fallback : value;
+    }
+
+    private String llmRecommendationResponse(String title) {
+        boolean municipalEpidemiology = title.startsWith("Municipal epidemiological signal - ");
+        String englishTitle = municipalEpidemiology
+                ? title.replace("Municipal epidemiological signal - ", "") + " readiness in surrounding municipalities"
+                : title;
+        String spanishTitle = municipalEpidemiology
+                ? "Preparacion ante " + title.replace("Municipal epidemiological signal - ", "") + " en municipios circundantes"
+                : "ICU Capacity Critical - Activate Surge Protocol".equals(title)
+                ? "Activar protocolo de expansion UCI"
+                : "ES " + title;
+        return """
+                {
+                  "translations": {
+                    "en": {
+                      "title": "%s",
+                      "description": "Operational outlook indicates elevated pressure on this resource area. Activate the documented response pathway before the next surge window.",
+                      "expectedImpact": "Improve coordination and reduce avoidable operational bottlenecks",
+                      "urgencyWindow": "Within 24 hours",
+                      "rationale": [
+                        "Current hospital utilization and nearby outbreak activity point to growing operational pressure.",
+                        "Earlier intervention reduces the risk of escalation and reactive staffing or supply changes."
+                      ],
+                      "recommendedActions": [
+                        "Review the assigned unit readiness against the current operational protocol.",
+                        "Prepare the next response step with the responsible hospital lead."
+                      ]
+                    },
+                    "es": {
+                      "title": "%s",
+                      "description": "El panorama operativo indica presion elevada sobre esta area de recursos. Active la ruta de respuesta documentada antes de la siguiente ventana de incremento.",
+                      "expectedImpact": "Mejorar coordinacion y reducir cuellos de botella operativos evitables",
+                      "urgencyWindow": "Dentro de 24 horas",
+                      "rationale": [
+                        "La utilizacion hospitalaria actual y la actividad de brotes cercanos apuntan a mayor presion operativa.",
+                        "Intervenir antes reduce el riesgo de escalamiento y cambios reactivos de personal o suministros."
+                      ],
+                      "recommendedActions": [
+                        "Revise la preparacion de la unidad asignada contra el protocolo operativo actual.",
+                        "Prepare el siguiente paso de respuesta con el responsable hospitalario."
+                      ]
+                    }
+                  }
+                }
+                """.formatted(jsonEscape(englishTitle), jsonEscape(spanishTitle));
+    }
+
+    private String jsonEscape(String value) {
+        return value.replace("\\", "\\\\").replace("\"", "\\\"");
     }
 }

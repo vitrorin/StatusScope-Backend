@@ -31,6 +31,11 @@ public class MockFirebaseUserService extends FirebaseUserService {
     }
 
     @Override
+    public void enableUser(String uid) throws FirebaseAuthException {
+        // no-op in tests
+    }
+
+    @Override
     public UserRecord getUserByEmail(String email) throws FirebaseAuthException {
         return null;
     }

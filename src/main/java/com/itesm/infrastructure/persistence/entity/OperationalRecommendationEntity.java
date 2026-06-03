@@ -61,6 +61,9 @@ public class OperationalRecommendationEntity {
     @Column(name = "confidence_score", precision = 5, scale = 2)
     private BigDecimal confidenceScore;
 
+    @Column(name = "content_translations_json", columnDefinition = "TEXT")
+    private String contentTranslationsJson;
+
     @Column(name = "image_mode", length = 32)
     private String imageMode;
 
@@ -163,6 +166,8 @@ public class OperationalRecommendationEntity {
     public void setUrgencyWindow(String urgencyWindow) { this.urgencyWindow = urgencyWindow; }
     public BigDecimal getConfidenceScore() { return confidenceScore; }
     public void setConfidenceScore(BigDecimal confidenceScore) { this.confidenceScore = confidenceScore; }
+    public String getContentTranslationsJson() { return contentTranslationsJson; }
+    public void setContentTranslationsJson(String contentTranslationsJson) { this.contentTranslationsJson = contentTranslationsJson; }
     public String getImageMode() { return imageMode; }
     public void setImageMode(String imageMode) { this.imageMode = imageMode; }
     public String getRationaleJson() { return rationaleJson; }

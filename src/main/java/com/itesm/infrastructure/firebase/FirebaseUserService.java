@@ -29,6 +29,11 @@ public class FirebaseUserService {
                 new UserRecord.UpdateRequest(uid).setDisabled(true));
     }
 
+    public void enableUser(String uid) throws FirebaseAuthException {
+        FirebaseAuth.getInstance().updateUser(
+                new UserRecord.UpdateRequest(uid).setDisabled(false));
+    }
+
     public UserRecord getUserByEmail(String email) throws FirebaseAuthException {
         return FirebaseAuth.getInstance().getUserByEmail(email);
     }

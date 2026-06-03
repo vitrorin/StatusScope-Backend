@@ -2,8 +2,6 @@ package com.itesm.application.usecase;
 
 import com.itesm.application.dto.OperationalRecommendationDto;
 import com.itesm.application.dto.OperationalRecommendationDto.AuditEntryDto;
-import com.itesm.application.dto.OperationalRecommendationDto.TaskDto;
-import com.itesm.application.dto.OperationalRecommendationDto.NotificationDto;
 import com.itesm.application.dto.OperationalRecommendationDto.SupplyRequestItemDto;
 import com.itesm.application.security.AuthenticatedUserContext;
 import com.itesm.application.security.CurrentUser;
@@ -44,39 +42,6 @@ public class GetOperationalRecommendationDetailUseCase {
                     e.setEventLabel(a.getEventLabel());
                     e.setCreatedAt(a.getCreatedAt());
                     return e;
-                }).collect(Collectors.toList()));
-
-        dto.setTasks(repository.findTasksByRecommendationId(recommendationId).stream()
-                .map(t -> {
-                    TaskDto td = new TaskDto();
-                    td.setId(t.getId().toString());
-                    if (t.getOwnerContactId() != null) td.setOwnerContactId(t.getOwnerContactId().toString());
-                    if (t.getOwnerGroupId() != null) td.setOwnerGroupId(t.getOwnerGroupId().toString());
-                    td.setOwnerLabel(t.getOwnerLabel());
-                    td.setDepartmentLabel(t.getDepartmentLabel());
-                    td.setPriority(t.getPriority());
-                    td.setStatus(t.getStatus());
-                    td.setSourceActionCode(t.getSourceActionCode());
-                    td.setDeadlineAt(t.getDeadlineAt());
-                    td.setNotes(t.getNotes());
-                    td.setCreatedAt(t.getCreatedAt());
-                    return td;
-                }).collect(Collectors.toList()));
-
-        dto.setNotifications(repository.findNotificationsByRecommendationId(recommendationId).stream()
-                .map(n -> {
-                    NotificationDto nd = new NotificationDto();
-                    nd.setId(n.getId().toString());
-                    if (n.getAudienceGroupId() != null) nd.setAudienceGroupId(n.getAudienceGroupId().toString());
-                    if (n.getAudienceContactId() != null) nd.setAudienceContactId(n.getAudienceContactId().toString());
-                    nd.setAudienceLabel(n.getAudienceLabel());
-                    nd.setMessage(n.getMessage());
-                    nd.setStatus(n.getStatus());
-                    nd.setDeliveryChannel(n.getDeliveryChannel());
-                    nd.setDeliveryStatusDetail(n.getDeliveryStatusDetail());
-                    nd.setSourceActionCode(n.getSourceActionCode());
-                    nd.setSentAt(n.getSentAt());
-                    return nd;
                 }).collect(Collectors.toList()));
 
         dto.setSupplyRequests(repository.findSupplyRequestsByRecommendationId(recommendationId).stream()
