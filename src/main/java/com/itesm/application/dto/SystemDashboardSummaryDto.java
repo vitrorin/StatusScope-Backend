@@ -10,6 +10,8 @@ public class SystemDashboardSummaryDto {
     private List<SystemActivityPointDto> userActivity = new ArrayList<>();
     private List<SystemRegionalDistributionDto> regionalDistribution = new ArrayList<>();
     private List<SystemEventDto> recentEvents = new ArrayList<>();
+    private List<SystemHospitalOutbreakDto> hospitalOutbreaks = new ArrayList<>();
+    private List<SystemHospitalUserMetricDto> hospitalUserMetrics = new ArrayList<>();
 
     public LocalDateTime getGeneratedAt() { return generatedAt; }
     public void setGeneratedAt(LocalDateTime generatedAt) { this.generatedAt = generatedAt; }
@@ -25,6 +27,12 @@ public class SystemDashboardSummaryDto {
 
     public List<SystemEventDto> getRecentEvents() { return recentEvents; }
     public void setRecentEvents(List<SystemEventDto> recentEvents) { this.recentEvents = recentEvents; }
+
+    public List<SystemHospitalOutbreakDto> getHospitalOutbreaks() { return hospitalOutbreaks; }
+    public void setHospitalOutbreaks(List<SystemHospitalOutbreakDto> hospitalOutbreaks) { this.hospitalOutbreaks = hospitalOutbreaks; }
+
+    public List<SystemHospitalUserMetricDto> getHospitalUserMetrics() { return hospitalUserMetrics; }
+    public void setHospitalUserMetrics(List<SystemHospitalUserMetricDto> hospitalUserMetrics) { this.hospitalUserMetrics = hospitalUserMetrics; }
 
     public static class SystemMetricDto {
         private String id;
@@ -62,6 +70,8 @@ public class SystemDashboardSummaryDto {
     public static class SystemActivityPointDto {
         private String label;
         private int value;
+        private int adminValue;
+        private int doctorValue;
 
         public SystemActivityPointDto() {}
 
@@ -70,10 +80,21 @@ public class SystemDashboardSummaryDto {
             this.value = value;
         }
 
+        public SystemActivityPointDto(String label, int value, int adminValue, int doctorValue) {
+            this.label = label;
+            this.value = value;
+            this.adminValue = adminValue;
+            this.doctorValue = doctorValue;
+        }
+
         public String getLabel() { return label; }
         public void setLabel(String label) { this.label = label; }
         public int getValue() { return value; }
         public void setValue(int value) { this.value = value; }
+        public int getAdminValue() { return adminValue; }
+        public void setAdminValue(int adminValue) { this.adminValue = adminValue; }
+        public int getDoctorValue() { return doctorValue; }
+        public void setDoctorValue(int doctorValue) { this.doctorValue = doctorValue; }
     }
 
     public static class SystemRegionalDistributionDto {
@@ -124,5 +145,177 @@ public class SystemDashboardSummaryDto {
         public void setType(String type) { this.type = type; }
         public LocalDateTime getOccurredAt() { return occurredAt; }
         public void setOccurredAt(LocalDateTime occurredAt) { this.occurredAt = occurredAt; }
+    }
+
+    public static class SystemHospitalOutbreakDto {
+        private String id;
+        private String code;
+        private String name;
+        private String municipalityName;
+        private String stateName;
+        private boolean active;
+        private Double latitude;
+        private Double longitude;
+        private int nearbyActiveOutbreakCount;
+        private double radiusKm;
+        private List<SystemNearbyOutbreakDto> nearbyOutbreaks = new ArrayList<>();
+
+        public SystemHospitalOutbreakDto() {}
+
+        public SystemHospitalOutbreakDto(
+                String id,
+                String code,
+                String name,
+                String municipalityName,
+                String stateName,
+                boolean active,
+                Double latitude,
+                Double longitude,
+                int nearbyActiveOutbreakCount,
+                double radiusKm,
+                List<SystemNearbyOutbreakDto> nearbyOutbreaks) {
+            this.id = id;
+            this.code = code;
+            this.name = name;
+            this.municipalityName = municipalityName;
+            this.stateName = stateName;
+            this.active = active;
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.nearbyActiveOutbreakCount = nearbyActiveOutbreakCount;
+            this.radiusKm = radiusKm;
+            this.nearbyOutbreaks = nearbyOutbreaks;
+        }
+
+        public String getId() { return id; }
+        public void setId(String id) { this.id = id; }
+        public String getCode() { return code; }
+        public void setCode(String code) { this.code = code; }
+        public String getName() { return name; }
+        public void setName(String name) { this.name = name; }
+        public String getMunicipalityName() { return municipalityName; }
+        public void setMunicipalityName(String municipalityName) { this.municipalityName = municipalityName; }
+        public String getStateName() { return stateName; }
+        public void setStateName(String stateName) { this.stateName = stateName; }
+        public boolean isActive() { return active; }
+        public void setActive(boolean active) { this.active = active; }
+        public Double getLatitude() { return latitude; }
+        public void setLatitude(Double latitude) { this.latitude = latitude; }
+        public Double getLongitude() { return longitude; }
+        public void setLongitude(Double longitude) { this.longitude = longitude; }
+        public int getNearbyActiveOutbreakCount() { return nearbyActiveOutbreakCount; }
+        public void setNearbyActiveOutbreakCount(int nearbyActiveOutbreakCount) { this.nearbyActiveOutbreakCount = nearbyActiveOutbreakCount; }
+        public double getRadiusKm() { return radiusKm; }
+        public void setRadiusKm(double radiusKm) { this.radiusKm = radiusKm; }
+        public List<SystemNearbyOutbreakDto> getNearbyOutbreaks() { return nearbyOutbreaks; }
+        public void setNearbyOutbreaks(List<SystemNearbyOutbreakDto> nearbyOutbreaks) { this.nearbyOutbreaks = nearbyOutbreaks; }
+    }
+
+    public static class SystemNearbyOutbreakDto {
+        private String id;
+        private String diseaseName;
+        private String municipalityName;
+        private String stateName;
+        private int caseCount;
+        private String confirmationStatus;
+        private String severity;
+        private double distanceKm;
+        private LocalDateTime startedAt;
+
+        public SystemNearbyOutbreakDto() {}
+
+        public SystemNearbyOutbreakDto(
+                String id,
+                String diseaseName,
+                String municipalityName,
+                String stateName,
+                int caseCount,
+                String confirmationStatus,
+                String severity,
+                double distanceKm,
+                LocalDateTime startedAt) {
+            this.id = id;
+            this.diseaseName = diseaseName;
+            this.municipalityName = municipalityName;
+            this.stateName = stateName;
+            this.caseCount = caseCount;
+            this.confirmationStatus = confirmationStatus;
+            this.severity = severity;
+            this.distanceKm = distanceKm;
+            this.startedAt = startedAt;
+        }
+
+        public String getId() { return id; }
+        public void setId(String id) { this.id = id; }
+        public String getDiseaseName() { return diseaseName; }
+        public void setDiseaseName(String diseaseName) { this.diseaseName = diseaseName; }
+        public String getMunicipalityName() { return municipalityName; }
+        public void setMunicipalityName(String municipalityName) { this.municipalityName = municipalityName; }
+        public String getStateName() { return stateName; }
+        public void setStateName(String stateName) { this.stateName = stateName; }
+        public int getCaseCount() { return caseCount; }
+        public void setCaseCount(int caseCount) { this.caseCount = caseCount; }
+        public String getConfirmationStatus() { return confirmationStatus; }
+        public void setConfirmationStatus(String confirmationStatus) { this.confirmationStatus = confirmationStatus; }
+        public String getSeverity() { return severity; }
+        public void setSeverity(String severity) { this.severity = severity; }
+        public double getDistanceKm() { return distanceKm; }
+        public void setDistanceKm(double distanceKm) { this.distanceKm = distanceKm; }
+        public LocalDateTime getStartedAt() { return startedAt; }
+        public void setStartedAt(LocalDateTime startedAt) { this.startedAt = startedAt; }
+    }
+
+    public static class SystemHospitalUserMetricDto {
+        private String hospitalId;
+        private String hospitalName;
+        private String municipalityName;
+        private String stateName;
+        private int totalUsers;
+        private int activeUsers;
+        private int adminUsers;
+        private int doctorUsers;
+        private int inactiveUsers;
+
+        public SystemHospitalUserMetricDto() {}
+
+        public SystemHospitalUserMetricDto(
+                String hospitalId,
+                String hospitalName,
+                String municipalityName,
+                String stateName,
+                int totalUsers,
+                int activeUsers,
+                int adminUsers,
+                int doctorUsers,
+                int inactiveUsers) {
+            this.hospitalId = hospitalId;
+            this.hospitalName = hospitalName;
+            this.municipalityName = municipalityName;
+            this.stateName = stateName;
+            this.totalUsers = totalUsers;
+            this.activeUsers = activeUsers;
+            this.adminUsers = adminUsers;
+            this.doctorUsers = doctorUsers;
+            this.inactiveUsers = inactiveUsers;
+        }
+
+        public String getHospitalId() { return hospitalId; }
+        public void setHospitalId(String hospitalId) { this.hospitalId = hospitalId; }
+        public String getHospitalName() { return hospitalName; }
+        public void setHospitalName(String hospitalName) { this.hospitalName = hospitalName; }
+        public String getMunicipalityName() { return municipalityName; }
+        public void setMunicipalityName(String municipalityName) { this.municipalityName = municipalityName; }
+        public String getStateName() { return stateName; }
+        public void setStateName(String stateName) { this.stateName = stateName; }
+        public int getTotalUsers() { return totalUsers; }
+        public void setTotalUsers(int totalUsers) { this.totalUsers = totalUsers; }
+        public int getActiveUsers() { return activeUsers; }
+        public void setActiveUsers(int activeUsers) { this.activeUsers = activeUsers; }
+        public int getAdminUsers() { return adminUsers; }
+        public void setAdminUsers(int adminUsers) { this.adminUsers = adminUsers; }
+        public int getDoctorUsers() { return doctorUsers; }
+        public void setDoctorUsers(int doctorUsers) { this.doctorUsers = doctorUsers; }
+        public int getInactiveUsers() { return inactiveUsers; }
+        public void setInactiveUsers(int inactiveUsers) { this.inactiveUsers = inactiveUsers; }
     }
 }
