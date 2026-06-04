@@ -2,7 +2,7 @@
 
 Scripts para generar y publicar senales de outbreaks en el backend de StatusScope.
 
-Esta carpeta vive en `tools/ingesta-datos` para que Quarkus no la compile ni la empaquete. Los unicos archivos que consume la aplicacion quedan en `src/main/resources/data/outbreaks`.
+Esta carpeta vive en `tools/ingesta-datos` para que Quarkus no la compile ni la empaquete. Los unicos archivos versionables que consume la aplicacion quedan en `src/main/resources/data/outbreaks`.
 
 ## Comando Principal
 
@@ -111,9 +111,11 @@ src/main/resources/data/outbreaks/municipal_outbreaks.csv
 src/main/resources/data/outbreaks/state_outbreaks.csv
 ```
 
+El backend importa estos CSV al arrancar cuando `OUTBREAK_INGESTION_IMPORT_AT_START=true`, que es el valor local por defecto en `application.properties`.
+
 ## GitHub Actions
 
-El workflow `.github/workflows/update-outbreaks.yml` ejecuta la ingesta cada jueves a las 14:00 UTC, equivalente a las 08:00 en Mexico City, y tambien permite ejecucion manual desde `workflow_dispatch`.
+El workflow `StatusScope-Backend/.github/workflows/update-outbreaks.yml` en este workspace ejecuta la ingesta cada jueves a las 14:00 UTC, equivalente a las 08:00 en Mexico City, y tambien permite ejecucion manual desde `workflow_dispatch`. Si el backend se maneja como repositorio independiente, esa misma ruta aparece como `.github/workflows/update-outbreaks.yml` dentro del repo del backend.
 
 Si los CSV cambian, el workflow hace commit automatico con el usuario `github-actions[bot]`.
 
