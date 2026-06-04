@@ -1,0 +1,108 @@
+name: Deploy Dev
+
+on:
+  push:
+    branches: [develop]
+
+concurrency:
+  group: backend-dev-deploy
+  cancel-in-progress: true
+
+env:
+  REGISTRY_REGION: us-central1
+  REGISTRY_REPO: statuscope
+  IMAGE_NAME: statusscope-backend
+  SERVICE_NAME: statusscope-backend-dev
+  REGION: us-central1
+  DB_USERNAME_SECRET: statusscope-backend-db-username
+  DB_PASSWORD_SECRET: statusscope-backend-db-password
+  CLOUD_SQL_JDBC_URL_SECRET: statusscope-backend-cloudsql-jdbc-url
+  FIREBASE_SA_SECRET: statusscope-backend-firebase-service-account
+  FRONTEND_ORIGINS: https://statuscope-frontend-dev-y45ietehrq-uc.a.run.app,https://statuscope-frontend-dev-868551464379.us-central1.run.app
+
+jobs:
+  validate:
+    name: Tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Run tests
+        run: ./mvnw -B test
+
+  deploy:
+    name: Build & Deploy to Cloud Run
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Setup gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGISTRY_REGION }}-docker.pkg.dev
+
+      - name: Build and push Quarkus image
+        env:
+          QUARKUS_DATASOURCE_USERNAME: build
+          QUARKUS_DATASOURCE_PASSWORD: build
+          QUARKUS_DATASOURCE_JDBC_URL: "jdbc:mysql://google/build?cloudSqlInstance=example-project:us-central1:statusscope-dev&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false"
+          QUARKUS_HTTP_CORS_ORIGINS: http://localhost:8080
+        run: |
+          ./mvnw -B -Pcontainer-image clean package -DskipTests \
+            -Dquarkus.container-image.build=true \
+            -Dquarkus.container-image.push=true \
+            -Dquarkus.container-image.registry=${{ env.REGISTRY_REGION }}-docker.pkg.dev \
+            -Dquarkus.container-image.group=${{ secrets.GCP_PROJECT_ID }}/${{ env.REGISTRY_REPO }} \
+            -Dquarkus.container-image.name=${{ env.IMAGE_NAME }} \
+            -Dquarkus.container-image.tag=${{ github.sha }} \
+            -Dquarkus.container-image.additional-tags=latest
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --image ${{ env.REGISTRY_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REGISTRY_REPO }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
+            --region ${{ env.REGION }} \
+            --platform managed \
+            --allow-unauthenticated \
+            --port 8080 \
+            --min-instances 0 \
+            --max-instances 3 \
+            --memory 512Mi \
+            --service-account ${{ secrets.GCP_RUNTIME_SERVICE_ACCOUNT }} \
+            --add-cloudsql-instances ${{ secrets.CLOUD_SQL_INSTANCE }} \
+            --update-env-vars '^|^QUARKUS_PROFILE=prod|FIREBASE_SA_PATH=/secrets/firebase/firebase-service-account.json|OUTBREAK_INGESTION_IMPORT_AT_START=true|QUARKUS_HTTP_CORS_ORIGINS=${{ env.FRONTEND_ORIGINS }}' \
+            --update-secrets QUARKUS_DATASOURCE_USERNAME=${{ env.DB_USERNAME_SECRET }}:latest,QUARKUS_DATASOURCE_PASSWORD=${{ env.DB_PASSWORD_SECRET }}:latest,QUARKUS_DATASOURCE_JDBC_URL=${{ env.CLOUD_SQL_JDBC_URL_SECRET }}:latest,/secrets/firebase/firebase-service-account.json=${{ env.FIREBASE_SA_SECRET }}:latest \
+            --project ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Smoke test health endpoint
+        run: |
+          SERVICE_URL=$(gcloud run services describe ${{ env.SERVICE_NAME }} \
+            --region ${{ env.REGION }} \
+            --project ${{ secrets.GCP_PROJECT_ID }} \
+            --format='value(status.url)')
+          curl --fail "$SERVICE_URL/q/health"

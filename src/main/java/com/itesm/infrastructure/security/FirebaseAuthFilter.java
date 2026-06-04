@@ -14,6 +14,7 @@ import io.quarkus.arc.profile.UnlessBuildProfile;
 import jakarta.annotation.Priority;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Priorities;
+import jakarta.ws.rs.HttpMethod;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.core.Response;
@@ -42,6 +43,10 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext ctx) throws IOException {
+        if (HttpMethod.OPTIONS.equalsIgnoreCase(ctx.getMethod())) {
+            return;
+        }
+
         String path = ctx.getUriInfo().getPath();
         if (path.startsWith("/")) {
             path = path.substring(1);
@@ -53,7 +58,7 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
 
         String header = ctx.getHeaders().getFirst("Authorization");
         if (header == null || !header.startsWith("Bearer ")) {
-            ctx.abortWith(Response.status(401).build());
+            abortUnauthorized(ctx);
             return;
         }
 
@@ -63,7 +68,7 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
 
             User user = userRepository.findByExternalAuthId(decoded.getUid()).orElse(null);
             if (user == null || user.getStatus() != UserStatus.ACTIVE) {
-                ctx.abortWith(Response.status(401).build());
+                abortUnauthorized(ctx);
                 return;
             }
 
@@ -84,7 +89,11 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
                     privileges
             ));
         } catch (FirebaseAuthException e) {
-            ctx.abortWith(Response.status(401).build());
+            abortUnauthorized(ctx);
         }
+    }
+
+    private void abortUnauthorized(ContainerRequestContext ctx) {
+        ctx.abortWith(Response.status(401).build());
     }
 }

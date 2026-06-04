@@ -1,6 +1,7 @@
 package com.itesm.application.dto;
 
 import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class HospitalResourcesDto {
@@ -36,6 +37,8 @@ public class HospitalResourcesDto {
         private int doctorsOnShift;
         private int nursesOnShift;
         private int specialistsOnShift;
+        private BigDecimal bedOccupancyPct;
+        private BigDecimal icuOccupancyPct;
         private String source;
         private LocalDateTime capturedAt;
 
@@ -61,6 +64,10 @@ public class HospitalResourcesDto {
         public void setNursesOnShift(int nursesOnShift) { this.nursesOnShift = nursesOnShift; }
         public int getSpecialistsOnShift() { return specialistsOnShift; }
         public void setSpecialistsOnShift(int specialistsOnShift) { this.specialistsOnShift = specialistsOnShift; }
+        public BigDecimal getBedOccupancyPct() { return bedOccupancyPct; }
+        public void setBedOccupancyPct(BigDecimal bedOccupancyPct) { this.bedOccupancyPct = bedOccupancyPct; }
+        public BigDecimal getIcuOccupancyPct() { return icuOccupancyPct; }
+        public void setIcuOccupancyPct(BigDecimal icuOccupancyPct) { this.icuOccupancyPct = icuOccupancyPct; }
         public String getSource() { return source; }
         public void setSource(String source) { this.source = source; }
         public LocalDateTime getCapturedAt() { return capturedAt; }

@@ -50,20 +50,9 @@ public class CreateSupplyRequestUseCase {
                         : rec.getPrimaryInventoryItemId());
         input.setInventoryItemId(input.getInventoryItemId() != null ? input.getInventoryItemId() : rec.getPrimaryInventoryItemId());
 
-        SupplyRequest created = repository.createSupplyRequest(input);
-
-        if (created.getInventoryItemId() != null) {
-            HospitalInventoryMovement movement = new HospitalInventoryMovement();
-            movement.setHospitalId(rec.getHospitalId());
-            movement.setInventoryItemId(created.getInventoryItemId());
-            movement.setMovementType("REPLENISHMENT");
-            movement.setQuantityDelta(created.getQuantity());
-            movement.setUnit(created.getUnit());
-            movement.setNotes("Supply request created from recommendation " + recommendationId);
-            movement.setRelatedSupplyRequestId(created.getId());
-            movement.setCreatedAt(LocalDateTime.now());
-            operationalDirectoryRepository.appendInventoryMovement(movement);
-        }
+        SupplyRequest created = repository.createSupplyRequestWithMovement(
+                input,
+                "Supply request created from recommendation " + recommendationId);
 
         OperationalRecommendationAudit audit = new OperationalRecommendationAudit();
         audit.setRecommendationId(recommendationId);
@@ -72,7 +61,6 @@ public class CreateSupplyRequestUseCase {
         audit.setEventLabel("Supply order: " + input.getQuantity() + " " +
                 (input.getUnit() != null ? input.getUnit() + " " : "") +
                 (input.getSupplyTypeLabel() != null ? input.getSupplyTypeLabel() : "units"));
-        audit.setCreatedAt(LocalDateTime.now());
         repository.appendAudit(audit);
 
         return created;

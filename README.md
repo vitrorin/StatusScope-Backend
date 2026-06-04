@@ -92,6 +92,37 @@ Useful profiles:
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
+## Deploy To Cloud Run
+
+The backend deploy pipeline lives in `.github/workflows/deploy-dev.yml` and runs on pushes to `develop`.
+
+Required GitHub secrets:
+
+| Secret | Purpose |
+| --- | --- |
+| `GCP_PROJECT_ID` | Google Cloud project ID |
+| `GCP_SA_KEY` | Deploy service account JSON |
+| `GCP_RUNTIME_SERVICE_ACCOUNT` | Cloud Run runtime service account email |
+| `CLOUD_SQL_INSTANCE` | Cloud SQL connection name, for example `project:us-central1:statusscope-dev` |
+| `FRONTEND_ORIGIN` | Allowed frontend origin for CORS |
+
+Required Secret Manager secrets:
+
+| Secret | Runtime variable |
+| --- | --- |
+| `statusscope-backend-db-username` | `QUARKUS_DATASOURCE_USERNAME` |
+| `statusscope-backend-db-password` | `QUARKUS_DATASOURCE_PASSWORD` |
+| `statusscope-backend-cloudsql-jdbc-url` | `QUARKUS_DATASOURCE_JDBC_URL` |
+| `statusscope-backend-firebase-service-account` | mounted at `/secrets/firebase/firebase-service-account.json` |
+
+The Cloud SQL JDBC URL secret must use the Cloud SQL socket factory format:
+
+```text
+jdbc:mysql://google/statusscope?cloudSqlInstance=<project>:<region>:<instance>&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false
+```
+
+The Cloud Run runtime service account needs `Cloud SQL Client` and `Secret Manager Secret Accessor`.
+
 Useful dev URLs:
 
 | URL | Description |
