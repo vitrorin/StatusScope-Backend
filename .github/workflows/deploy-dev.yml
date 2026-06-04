@@ -18,6 +18,7 @@ env:
   DB_PASSWORD_SECRET: statusscope-backend-db-password
   CLOUD_SQL_JDBC_URL_SECRET: statusscope-backend-cloudsql-jdbc-url
   FIREBASE_SA_SECRET: statusscope-backend-firebase-service-account
+  FRONTEND_ORIGINS: https://statuscope-frontend-dev-y45ietehrq-uc.a.run.app,https://statuscope-frontend-dev-868551464379.us-central1.run.app
 
 jobs:
   validate:
@@ -94,7 +95,7 @@ jobs:
             --memory 512Mi \
             --service-account ${{ secrets.GCP_RUNTIME_SERVICE_ACCOUNT }} \
             --add-cloudsql-instances ${{ secrets.CLOUD_SQL_INSTANCE }} \
-            --update-env-vars QUARKUS_PROFILE=prod,FIREBASE_SA_PATH=/secrets/firebase/firebase-service-account.json,QUARKUS_HTTP_CORS_ORIGINS=${{ secrets.FRONTEND_ORIGIN }} \
+            --update-env-vars QUARKUS_PROFILE=prod,FIREBASE_SA_PATH=/secrets/firebase/firebase-service-account.json,QUARKUS_HTTP_CORS_ORIGINS=${{ env.FRONTEND_ORIGINS }} \
             --update-secrets QUARKUS_DATASOURCE_USERNAME=${{ env.DB_USERNAME_SECRET }}:latest,QUARKUS_DATASOURCE_PASSWORD=${{ env.DB_PASSWORD_SECRET }}:latest,QUARKUS_DATASOURCE_JDBC_URL=${{ env.CLOUD_SQL_JDBC_URL_SECRET }}:latest,/secrets/firebase/firebase-service-account.json=${{ env.FIREBASE_SA_SECRET }}:latest \
             --project ${{ secrets.GCP_PROJECT_ID }}
 
