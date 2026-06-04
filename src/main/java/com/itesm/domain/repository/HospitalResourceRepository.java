@@ -6,11 +6,13 @@ import com.itesm.domain.models.HospitalResourceSnapshot;
 import com.itesm.domain.models.HospitalStaffingProfile;
 
 import java.util.List;
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
 public interface HospitalResourceRepository {
     Optional<HospitalResourceSnapshot> findLatestSnapshotByHospitalId(UUID hospitalId);
+    Optional<BigDecimal> findBedOccupancyPct(UUID hospitalId);
     HospitalResourceSnapshot saveSnapshot(HospitalResourceSnapshot snapshot);
 
     List<HospitalDepartmentResource> findDepartmentsByHospitalId(UUID hospitalId);

@@ -15,7 +15,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +31,9 @@ public class HospitalResourceRepositoryImpl
 
     @Inject
     EntityManager em;
+
+    @ConfigProperty(name = "quarkus.datasource.db-kind", defaultValue = "mysql")
+    String dbKind;
 
     // -----------------------------------------------------------------------
     // Snapshots
@@ -44,6 +49,26 @@ public class HospitalResourceRepositoryImpl
                 .getResultStream()
                 .findFirst()
                 .map(this::snapshotToDomain);
+    }
+
+    @Override
+    public Optional<BigDecimal> findBedOccupancyPct(UUID hospitalId) {
+        if (!"mysql".equalsIgnoreCase(dbKind)) {
+            return Optional.empty();
+        }
+        Object result = em.createNativeQuery("SELECT fn_bed_occupancy_pct(?1)")
+                .setParameter(1, hospitalId.toString())
+                .getSingleResult();
+        if (result == null) {
+            return Optional.empty();
+        }
+        if (result instanceof BigDecimal value) {
+            return Optional.of(value);
+        }
+        if (result instanceof Number value) {
+            return Optional.of(BigDecimal.valueOf(value.doubleValue()));
+        }
+        return Optional.of(new BigDecimal(result.toString()));
     }
 
     @Override
@@ -217,11 +242,19 @@ public class HospitalResourceRepositoryImpl
         e.setUnit(item.getUnit());
         e.setCriticalThreshold(item.getCriticalThreshold());
         e.setTargetQuantity(item.getTargetQuantity());
-        e.setStatus(item.getStatus() != null ? item.getStatus() : "ADEQUATE");
+        e.setStatus(item.getStatus() != null ? item.getStatus() : inventoryStatus(item.getCurrentQuantity(), item.getCriticalThreshold()));
         e.setUpdatedAt(LocalDateTime.now());
         em.persist(e);
+        em.flush();
+        em.refresh(e);
         item.setId(e.getId());
-        return item;
+        return inventoryToDomain(e);
+    }
+
+    private String inventoryStatus(int currentQuantity, int criticalThreshold) {
+        if (currentQuantity <= criticalThreshold) return "CRITICAL";
+        if (currentQuantity <= criticalThreshold * 2) return "LOW";
+        return "ADEQUATE";
     }
 
     @Override
