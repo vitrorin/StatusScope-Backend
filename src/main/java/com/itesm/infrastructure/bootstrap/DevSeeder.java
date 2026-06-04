@@ -75,19 +75,19 @@ public class DevSeeder {
         if (userRepository.findByEmail("admin@statusscope.local").isPresent()) return; // idempotent
 
         seedUser("admin@statusscope.local",       "System Admin",    null,
-                UUID.fromString("00000000-0000-0000-0000-000000000001"));
+                UUID.fromString("00000000-0000-0000-0000-000000000001"), 0);
         seedUser("admin.hgz21@statusscope.local", "Admin HGZ-21",
                 UUID.fromString("30000000-0000-0000-0000-000000000001"),
-                UUID.fromString("00000000-0000-0000-0000-000000000002"));
+                UUID.fromString("00000000-0000-0000-0000-000000000002"), 1);
         seedUser("admin.hre05@statusscope.local", "Admin HRE-05",
                 UUID.fromString("30000000-0000-0000-0000-000000000002"),
-                UUID.fromString("00000000-0000-0000-0000-000000000002"));
+                UUID.fromString("00000000-0000-0000-0000-000000000002"), 2);
         seedUser("doctor1@statusscope.local",     "Dra. Ana López",
                 UUID.fromString("30000000-0000-0000-0000-000000000001"),
-                UUID.fromString("00000000-0000-0000-0000-000000000003"));
+                UUID.fromString("00000000-0000-0000-0000-000000000003"), 4);
         seedUser("doctor2@statusscope.local",     "Dr. Luis Pérez",
                 UUID.fromString("30000000-0000-0000-0000-000000000002"),
-                UUID.fromString("00000000-0000-0000-0000-000000000003"));
+                UUID.fromString("00000000-0000-0000-0000-000000000003"), 6);
         if (seedDiagnosisAssistantDemoData) {
             seedDiagnosisAssistantFixtures();
         }
@@ -99,7 +99,7 @@ public class DevSeeder {
         }
     }
 
-    private void seedUser(String email, String fullName, UUID hospitalId, UUID roleId) {
+    private void seedUser(String email, String fullName, UUID hospitalId, UUID roleId, int lastLoginDaysAgo) {
         String uid;
         try {
             uid = firebaseUserService.createUser(email, "Password123!", fullName);
@@ -130,6 +130,7 @@ public class DevSeeder {
         u.setExternalAuthId(uid);
         u.setStatus(UserStatus.ACTIVE);
         u.setActive(true);
+        u.setLastLoginAt(LocalDateTime.now().minusDays(lastLoginDaysAgo).minusHours(lastLoginDaysAgo % 3));
         u.setRoles(Set.of(role));
         userRepository.create(u);
         LOG.infof("DevSeeder: seeded user %s", email);
