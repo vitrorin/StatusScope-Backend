@@ -31,7 +31,7 @@ public class RecommendationWorkflowPolicyService {
             HospitalDepartmentResource department = switch (recommendation.getType()) {
                 case "BED_CAPACITY" -> firstDepartment(departments, "ICU", "GENERAL");
                 case "STAFFING" -> firstDepartment(departments, "EMERGENCY", "ICU");
-                case "ISOLATION" -> firstDepartment(departments, "RESPIRATORY", "EMERGENCY");
+                case "ISOLATION", "LOCAL_EPIDEMIOLOGY" -> firstDepartment(departments, "RESPIRATORY", "EMERGENCY");
                 case "SUPPLY" -> firstDepartment(departments, "EMERGENCY", "RESPIRATORY");
                 default -> null;
             };
@@ -44,7 +44,7 @@ public class RecommendationWorkflowPolicyService {
             HospitalStaffingProfile staffing = switch (recommendation.getType()) {
                 case "BED_CAPACITY" -> firstStaffing(staffingProfiles, "ICU_NURSE", "NURSING_STAFF");
                 case "STAFFING" -> firstStaffing(staffingProfiles, "EMERGENCY_PHYSICIAN", "GENERAL_PRACTITIONER");
-                case "ISOLATION" -> firstStaffing(staffingProfiles, "INFECTIOUS_DISEASE", "PULMONOLOGIST");
+                case "ISOLATION", "LOCAL_EPIDEMIOLOGY" -> firstStaffing(staffingProfiles, "INFECTIOUS_DISEASE", "PULMONOLOGIST");
                 default -> null;
             };
             if (staffing != null) {
@@ -55,7 +55,7 @@ public class RecommendationWorkflowPolicyService {
         if (recommendation.getPrimaryInventoryItemId() == null) {
             HospitalInventoryItem inventory = switch (recommendation.getType()) {
                 case "SUPPLY" -> firstInventory(inventoryItems, "ISO_GOWN", "N95_MASK", "O2_CYLINDER");
-                case "ISOLATION" -> firstInventory(inventoryItems, "N95_MASK", "ISO_GOWN");
+                case "ISOLATION", "LOCAL_EPIDEMIOLOGY" -> firstInventory(inventoryItems, "N95_MASK", "ISO_GOWN");
                 case "BED_CAPACITY" -> firstInventory(inventoryItems, "VENTILATOR", "O2_CYLINDER");
                 default -> null;
             };
@@ -123,7 +123,7 @@ public class RecommendationWorkflowPolicyService {
         return switch (recommendation.getType()) {
             case "SUPPLY" -> "ORDER_SUPPLIES";
             case "STAFFING", "BED_CAPACITY" -> "ASSIGN_TASK";
-            case "ISOLATION" -> "NOTIFY_STAFF";
+            case "ISOLATION", "LOCAL_EPIDEMIOLOGY" -> "NOTIFY_STAFF";
             default -> "ASSIGN_TASK";
         };
     }

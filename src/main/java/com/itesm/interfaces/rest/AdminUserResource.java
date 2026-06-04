@@ -3,6 +3,8 @@ package com.itesm.interfaces.rest;
 import com.itesm.application.dto.AssignRoleDto;
 import com.itesm.application.dto.AdminUserDto;
 import com.itesm.application.dto.CreateUserByAdminDto;
+import com.itesm.application.dto.UpdateUserByAdminDto;
+import com.itesm.application.dto.UpdateUserStatusDto;
 import com.itesm.application.dto.UserSummaryDto;
 import com.itesm.application.security.AuthenticatedUserContext;
 import com.itesm.application.security.AuthorizationService;
@@ -10,6 +12,8 @@ import com.itesm.application.security.RequiresPrivilege;
 import com.itesm.application.usecase.AssignRoleToUserUseCase;
 import com.itesm.application.usecase.CreateUserByAdminUseCase;
 import com.itesm.application.usecase.DisableUserUseCase;
+import com.itesm.application.usecase.UpdateUserByAdminUseCase;
+import com.itesm.application.usecase.UpdateUserStatusByAdminUseCase;
 import com.itesm.domain.models.User;
 import com.itesm.domain.repository.HospitalRepository;
 import com.itesm.domain.repository.UserRepository;
@@ -22,6 +26,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -40,6 +45,12 @@ public class AdminUserResource {
 
     @Inject
     DisableUserUseCase disableUserUseCase;
+
+    @Inject
+    UpdateUserByAdminUseCase updateUserByAdminUseCase;
+
+    @Inject
+    UpdateUserStatusByAdminUseCase updateUserStatusByAdminUseCase;
 
     @Inject
     AssignRoleToUserUseCase assignRoleToUserUseCase;
@@ -88,9 +99,18 @@ public class AdminUserResource {
     @PATCH
     @Path("/users/{id}/status")
     @RequiresPrivilege("users.manage")
-    public Response disableUser(@PathParam("id") UUID userId) {
-        disableUserUseCase.execute(userId);
-        return Response.noContent().build();
+    public Response updateUserStatus(@PathParam("id") UUID userId, UpdateUserStatusDto dto) {
+        User updated = updateUserStatusByAdminUseCase.execute(userId, dto == null ? null : dto.getStatus());
+        Map<UUID, String> hospitalNamesById = hospitalRepository.listAllDomain().stream()
+                .collect(Collectors.toMap(h -> h.getId(), h -> h.getName()));
+        return Response.ok(toAdminUserDto(updated, hospitalNamesById)).build();
+    }
+
+    @PUT
+    @Path("/users/{id}")
+    @RequiresPrivilege("users.manage")
+    public Response updateUser(@PathParam("id") UUID userId, @Valid UpdateUserByAdminDto dto) {
+        return Response.ok(updateUserByAdminUseCase.execute(userId, dto)).build();
     }
 
     @POST

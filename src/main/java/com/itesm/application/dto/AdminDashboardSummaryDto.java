@@ -2,6 +2,7 @@ package com.itesm.application.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class AdminDashboardSummaryDto {
     private String hospitalName;
@@ -140,6 +141,7 @@ public class AdminDashboardSummaryDto {
         private String type;
         private String severity;
         private String status;
+        private Map<String, OperationalRecommendationDto.LocalizedContentDto> translations;
 
         public String getId() { return id; }
         public void setId(String id) { this.id = id; }
@@ -151,5 +153,7 @@ public class AdminDashboardSummaryDto {
         public void setSeverity(String severity) { this.severity = severity; }
         public String getStatus() { return status; }
         public void setStatus(String status) { this.status = status; }
+        public Map<String, OperationalRecommendationDto.LocalizedContentDto> getTranslations() { return translations; }
+        public void setTranslations(Map<String, OperationalRecommendationDto.LocalizedContentDto> translations) { this.translations = translations; }
     }
 }

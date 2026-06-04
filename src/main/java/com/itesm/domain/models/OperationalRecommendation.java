@@ -18,6 +18,7 @@ public class OperationalRecommendation {
     private String expectedImpact;
     private String urgencyWindow;
     private BigDecimal confidenceScore;
+    private String contentTranslationsJson;
     private String imageMode;
     private String rationaleJson;
     private String recommendedActionsJson;
@@ -69,6 +70,8 @@ public class OperationalRecommendation {
     public void setUrgencyWindow(String urgencyWindow) { this.urgencyWindow = urgencyWindow; }
     public BigDecimal getConfidenceScore() { return confidenceScore; }
     public void setConfidenceScore(BigDecimal confidenceScore) { this.confidenceScore = confidenceScore; }
+    public String getContentTranslationsJson() { return contentTranslationsJson; }
+    public void setContentTranslationsJson(String contentTranslationsJson) { this.contentTranslationsJson = contentTranslationsJson; }
     public String getImageMode() { return imageMode; }
     public void setImageMode(String imageMode) { this.imageMode = imageMode; }
     public String getRationaleJson() { return rationaleJson; }

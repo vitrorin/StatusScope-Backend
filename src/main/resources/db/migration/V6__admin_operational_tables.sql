@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS operational_notifications (
 
 CREATE TABLE IF NOT EXISTS supply_requests (
     id                    VARCHAR(36)  NOT NULL PRIMARY KEY,
-    recommendation_id     VARCHAR(36)  NOT NULL,
+    recommendation_id     VARCHAR(36),
     hospital_id           VARCHAR(36)  NOT NULL,
     inventory_item_id     VARCHAR(36),
     supply_type_label     VARCHAR(255),

@@ -1,6 +1,7 @@
 package com.itesm.interfaces.rest;
 
 import com.itesm.application.dto.HospitalResourcesDto;
+import com.itesm.application.dto.OperationalContactUpsertDto;
 import com.itesm.application.dto.OperationalRecommendationDto;
 import com.itesm.application.security.RequiresPrivilege;
 import com.itesm.application.usecase.CreateOperationalNotificationUseCase;
@@ -13,6 +14,7 @@ import com.itesm.application.usecase.GetOperationalRecommendationDetailUseCase;
 import com.itesm.application.usecase.ListOperationalRecommendationsUseCase;
 import com.itesm.application.usecase.ListOperationalContactsUseCase;
 import com.itesm.application.usecase.ListOperationalGroupsUseCase;
+import com.itesm.application.usecase.ManageOperationalContactUseCase;
 import com.itesm.application.usecase.RefreshOperationalRecommendationsUseCase;
 import com.itesm.application.usecase.UpdateHospitalResourcesUseCase;
 import com.itesm.application.usecase.UpdateOperationalRecommendationStatusUseCase;
@@ -24,6 +26,7 @@ import com.itesm.domain.models.OperationalNotification;
 import com.itesm.domain.models.OperationalTask;
 import com.itesm.domain.models.SupplyRequest;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
@@ -59,6 +62,7 @@ public class AdminOperationalResource {
     @Inject GetInventoryMovementHistoryUseCase getInventoryMovementHistoryUseCase;
     @Inject ListOperationalContactsUseCase listOperationalContactsUseCase;
     @Inject ListOperationalGroupsUseCase listOperationalGroupsUseCase;
+    @Inject ManageOperationalContactUseCase manageOperationalContactUseCase;
     @Inject UpdateHospitalResourcesUseCase updateHospitalResourcesUseCase;
 
     // ----------------------------------------------------------------
@@ -230,6 +234,14 @@ public class AdminOperationalResource {
                 getInventoryMovementHistoryUseCase.execute(itemId))).build();
     }
 
+    @POST
+    @Path("/resources/inventory/{itemId}/supply-requests")
+    @RequiresPrivilege("admin.operations")
+    public Response createInventorySupplyRequest(@PathParam("itemId") UUID itemId, SupplyRequest supplyRequest) {
+        SupplyRequest created = createSupplyRequestUseCase.executeForInventory(itemId, supplyRequest);
+        return Response.status(Response.Status.CREATED).entity(created).build();
+    }
+
     @GET
     @Path("/operational-contacts")
     @RequiresPrivilege("admin.operations")
@@ -238,6 +250,32 @@ public class AdminOperationalResource {
             @QueryParam("notifiable") Boolean notifiable,
             @QueryParam("departmentCode") String departmentCode) {
         return Response.ok(listOperationalContactsUseCase.execute(assignable, notifiable, departmentCode)).build();
+    }
+
+    @POST
+    @Path("/operational-contacts")
+    @RequiresPrivilege("admin.operations")
+    public Response createOperationalContact(@Valid OperationalContactUpsertDto input) {
+        return Response.status(Response.Status.CREATED)
+                .entity(manageOperationalContactUseCase.create(input))
+                .build();
+    }
+
+    @PUT
+    @Path("/operational-contacts/{contactId}")
+    @RequiresPrivilege("admin.operations")
+    public Response updateOperationalContact(
+            @PathParam("contactId") UUID contactId,
+            @Valid OperationalContactUpsertDto input) {
+        return Response.ok(manageOperationalContactUseCase.update(contactId, input)).build();
+    }
+
+    @PATCH
+    @Path("/operational-contacts/{contactId}/status")
+    @RequiresPrivilege("admin.operations")
+    public Response updateOperationalContactStatus(@PathParam("contactId") UUID contactId, Map<String, String> body) {
+        String status = body.get("status");
+        return Response.ok(manageOperationalContactUseCase.updateStatus(contactId, status)).build();
     }
 
     @GET

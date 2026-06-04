@@ -9,6 +9,7 @@ public class HospitalOperationalGroup {
     private String groupCode;
     private String groupName;
     private String groupType;
+    private String departmentCode;
     private boolean assignable;
     private boolean notifiable;
     private int memberCount;
@@ -24,6 +25,8 @@ public class HospitalOperationalGroup {
     public void setGroupName(String groupName) { this.groupName = groupName; }
     public String getGroupType() { return groupType; }
     public void setGroupType(String groupType) { this.groupType = groupType; }
+    public String getDepartmentCode() { return departmentCode; }
+    public void setDepartmentCode(String departmentCode) { this.departmentCode = departmentCode; }
     public boolean isAssignable() { return assignable; }
     public void setAssignable(boolean assignable) { this.assignable = assignable; }
     public boolean isNotifiable() { return notifiable; }

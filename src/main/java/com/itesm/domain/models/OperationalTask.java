@@ -19,6 +19,7 @@ public class OperationalTask {
     private String sourceActionCode;
     private UUID recommendedByRecommendationId;
     private UUID createdByUserId;
+    private String language;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -52,6 +53,8 @@ public class OperationalTask {
     public void setRecommendedByRecommendationId(UUID recommendedByRecommendationId) { this.recommendedByRecommendationId = recommendedByRecommendationId; }
     public UUID getCreatedByUserId() { return createdByUserId; }
     public void setCreatedByUserId(UUID createdByUserId) { this.createdByUserId = createdByUserId; }
+    public String getLanguage() { return language; }
+    public void setLanguage(String language) { this.language = language; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }

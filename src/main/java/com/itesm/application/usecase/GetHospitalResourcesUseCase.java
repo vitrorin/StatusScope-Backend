@@ -14,6 +14,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -34,7 +36,7 @@ public class GetHospitalResourcesUseCase {
 
         HospitalResourceSnapshot snapshot = resourceRepository
                 .findLatestSnapshotByHospitalId(hospitalId).orElse(null);
-        dto.setSummary(toSummaryDto(snapshot));
+        dto.setSummary(toSummaryDto(snapshot, hospitalId));
 
         dto.setDepartments(resourceRepository.findDepartmentsByHospitalId(hospitalId)
                 .stream().map(this::toDeptDto).collect(Collectors.toList()));
@@ -48,7 +50,7 @@ public class GetHospitalResourcesUseCase {
         return dto;
     }
 
-    private ResourceSummaryDto toSummaryDto(HospitalResourceSnapshot s) {
+    private ResourceSummaryDto toSummaryDto(HospitalResourceSnapshot s, UUID hospitalId) {
         ResourceSummaryDto dto = new ResourceSummaryDto();
         if (s == null) return dto;
         dto.setTotalBeds(s.getTotalBeds());
@@ -62,9 +64,19 @@ public class GetHospitalResourcesUseCase {
         dto.setDoctorsOnShift(s.getDoctorsOnShift());
         dto.setNursesOnShift(s.getNursesOnShift());
         dto.setSpecialistsOnShift(s.getSpecialistsOnShift());
+        dto.setBedOccupancyPct(resourceRepository.findBedOccupancyPct(hospitalId)
+                .orElseGet(() -> occupancyPct(s.getTotalBeds(), s.getAvailableBeds())));
+        dto.setIcuOccupancyPct(occupancyPct(s.getIcuTotalBeds(), s.getIcuAvailableBeds()));
         dto.setSource(s.getSource());
         dto.setCapturedAt(s.getCapturedAt());
         return dto;
+    }
+
+    private BigDecimal occupancyPct(int total, int available) {
+        if (total <= 0) return null;
+        return BigDecimal.valueOf(total - available)
+                .multiply(BigDecimal.valueOf(100))
+                .divide(BigDecimal.valueOf(total), 2, RoundingMode.HALF_UP);
     }
 
     private DepartmentDto toDeptDto(com.itesm.domain.models.HospitalDepartmentResource d) {
