@@ -32,7 +32,8 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
     private static final Set<String> PUBLIC_PATH_PREFIXES = Set.of(
             "auth/register",
             "q/health",
-            "q/openapi"
+            "q/openapi",
+            "internal/outbreaks/import"
     );
 
     @Inject

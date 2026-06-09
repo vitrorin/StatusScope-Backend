@@ -44,7 +44,23 @@ public class OutbreakCsvImporter {
 
     @Transactional
     public ImportSummary importMunicipalOutbreaks() {
-        CsvData csvData = readCsvResource(MUNICIPAL_OUTBREAKS_RESOURCE);
+        try (InputStream inputStream = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream(MUNICIPAL_OUTBREAKS_RESOURCE)) {
+            if (inputStream == null) {
+                throw new IllegalStateException("Missing CSV resource: " + MUNICIPAL_OUTBREAKS_RESOURCE);
+            }
+            return importMunicipalOutbreaks(inputStream);
+        } catch (Exception e) {
+            if (e instanceof RuntimeException runtimeException) {
+                throw runtimeException;
+            }
+            throw new IllegalStateException("Could not read CSV resource: " + MUNICIPAL_OUTBREAKS_RESOURCE, e);
+        }
+    }
+
+    @Transactional
+    public ImportSummary importMunicipalOutbreaks(InputStream inputStream) {
+        CsvData csvData = readCsvFromStream(inputStream, MUNICIPAL_OUTBREAKS_RESOURCE);
         csvData.requireHeaders(
                 "scope",
                 "municipality_id",
@@ -131,7 +147,23 @@ public class OutbreakCsvImporter {
 
     @Transactional
     public ImportSummary importStateOutbreaks() {
-        CsvData csvData = readCsvResource(STATE_OUTBREAKS_RESOURCE);
+        try (InputStream inputStream = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream(STATE_OUTBREAKS_RESOURCE)) {
+            if (inputStream == null) {
+                throw new IllegalStateException("Missing CSV resource: " + STATE_OUTBREAKS_RESOURCE);
+            }
+            return importStateOutbreaks(inputStream);
+        } catch (Exception e) {
+            if (e instanceof RuntimeException runtimeException) {
+                throw runtimeException;
+            }
+            throw new IllegalStateException("Could not read CSV resource: " + STATE_OUTBREAKS_RESOURCE, e);
+        }
+    }
+
+    @Transactional
+    public ImportSummary importStateOutbreaks(InputStream inputStream) {
+        CsvData csvData = readCsvFromStream(inputStream, STATE_OUTBREAKS_RESOURCE);
         csvData.requireHeaders("scope", "estado", "disease_name", "case_count", "confirmation_status", "status");
 
         Map<String, DiseaseEntity> diseasesByName = loadDiseasesByNormalizedName();
@@ -375,51 +407,45 @@ public class OutbreakCsvImporter {
         return outbreaks;
     }
 
-    private CsvData readCsvResource(String resource) {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        try (InputStream inputStream = classLoader.getResourceAsStream(resource)) {
-            if (inputStream == null) {
-                throw new IllegalStateException("Missing CSV resource: " + resource);
-            }
-
-            List<List<String>> records = new ArrayList<>();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (!line.isBlank()) {
-                        records.add(parseCsvLine(line));
-                    }
+    private CsvData readCsvFromStream(InputStream inputStream, String sourceLabel) {
+        List<List<String>> records = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.isBlank()) {
+                    records.add(parseCsvLine(line));
                 }
             }
-            if (records.size() < 2) {
-                throw new IllegalStateException("CSV resource must contain a header and at least one row: " + resource);
-            }
-
-            List<String> header = records.get(0);
-            header.set(0, stripBom(header.get(0)).trim());
-
-            List<Map<String, String>> rows = new ArrayList<>();
-            for (int rowIndex = 1; rowIndex < records.size(); rowIndex++) {
-                List<String> record = records.get(rowIndex);
-                if (record.size() != header.size()) {
-                    throw new IllegalStateException("Invalid CSV row " + (rowIndex + 1) + " in " + resource
-                            + ": expected " + header.size() + " columns but got " + record.size());
-                }
-
-                Map<String, String> row = new LinkedHashMap<>();
-                for (int columnIndex = 0; columnIndex < header.size(); columnIndex++) {
-                    row.put(header.get(columnIndex).trim(), record.get(columnIndex).trim());
-                }
-                rows.add(row);
-            }
-
-            return new CsvData(header, rows, resource);
         } catch (Exception e) {
             if (e instanceof RuntimeException runtimeException) {
                 throw runtimeException;
             }
-            throw new IllegalStateException("Could not read CSV resource: " + resource, e);
+            throw new IllegalStateException("Could not read CSV from " + sourceLabel, e);
         }
+
+        if (records.size() < 2) {
+            throw new IllegalStateException("CSV must contain a header and at least one row: " + sourceLabel);
+        }
+
+        List<String> header = records.get(0);
+        header.set(0, stripBom(header.get(0)).trim());
+
+        List<Map<String, String>> rows = new ArrayList<>();
+        for (int rowIndex = 1; rowIndex < records.size(); rowIndex++) {
+            List<String> record = records.get(rowIndex);
+            if (record.size() != header.size()) {
+                throw new IllegalStateException("Invalid CSV row " + (rowIndex + 1) + " in " + sourceLabel
+                        + ": expected " + header.size() + " columns but got " + record.size());
+            }
+
+            Map<String, String> row = new LinkedHashMap<>();
+            for (int columnIndex = 0; columnIndex < header.size(); columnIndex++) {
+                row.put(header.get(columnIndex).trim(), record.get(columnIndex).trim());
+            }
+            rows.add(row);
+        }
+
+        return new CsvData(header, rows, sourceLabel);
     }
 
     private List<String> parseCsvLine(String line) {
