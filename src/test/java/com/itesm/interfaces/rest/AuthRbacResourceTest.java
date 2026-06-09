@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 
 @QuarkusTest
@@ -77,6 +79,67 @@ class AuthRbacResourceTest {
                 .get("/admin/roles")
                 .then()
                 .statusCode(200);
+    }
+
+    @Test
+    void systemAdminProfileShouldExposeSystemPrivilegeOnly() {
+        given()
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", "admin@statusscope.local")
+                .when()
+                .get("/auth/me")
+                .then()
+                .statusCode(200)
+                .body("roles", hasItem("SYSTEM_ADMIN"))
+                .body("privileges", hasItem("isSystemAdmin"))
+                .body("privileges", not(hasItem("admin.operations")));
+    }
+
+    @Test
+    void hospitalAdminProfileShouldExposeHospitalOperationsPrivilegeOnly() {
+        given()
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", "admin.hgz21@statusscope.local")
+                .when()
+                .get("/auth/me")
+                .then()
+                .statusCode(200)
+                .body("roles", hasItem("HOSPITAL_ADMIN"))
+                .body("privileges", hasItem("admin.operations"))
+                .body("privileges", not(hasItem("isSystemAdmin")));
+    }
+
+    @Test
+    void systemAdminShouldAccessSystemDashboard() {
+        given()
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", "admin@statusscope.local")
+                .when()
+                .get("/system/dashboard/summary")
+                .then()
+                .statusCode(200);
+    }
+
+    @Test
+    void hospitalAdminShouldBeForbiddenFromSystemDashboard() {
+        given()
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", "admin.hgz21@statusscope.local")
+                .when()
+                .get("/system/dashboard/summary")
+                .then()
+                .statusCode(403);
+    }
+
+    @Test
+    void systemAdminShouldBeForbiddenFromHospitalAdminOperations() {
+        given()
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", "admin@statusscope.local")
+                .when()
+                .get("/admin/epidemiology/summary")
+                .then()
+                .statusCode(403);
     }
 
     @Test

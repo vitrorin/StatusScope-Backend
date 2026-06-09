@@ -88,9 +88,12 @@ Useful profiles:
 
 ```bash
 ./mvnw test
+./mvnw -Dtest=AuthRbacResourceTest test
 ./mvnw package -DskipTests
 java -jar target/quarkus-app/quarkus-run.jar
 ```
+
+`AuthRbacResourceTest` includes the focused super-admin split check: `SYSTEM_ADMIN` has `isSystemAdmin` and no `admin.operations`, while `HOSPITAL_ADMIN` has `admin.operations` and no `isSystemAdmin`.
 
 ## Deploy To Cloud Run
 
@@ -143,6 +146,8 @@ Seed data includes platform and hospital roles:
 | `DOCTOR` | Doctor dashboard, analytics, and diagnosis workflows |
 
 `SYSTEM_ADMIN` users are not tied to a single hospital. Hospital-scoped users require a `hospitalId`.
+
+The RBAC seed separates platform and hospital operations: `SYSTEM_ADMIN` receives `isSystemAdmin` for global system routes, while `HOSPITAL_ADMIN` receives `admin.operations` for hospital-scoped operational routes.
 
 ## Main API Areas
 
