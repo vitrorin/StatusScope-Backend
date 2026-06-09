@@ -18,7 +18,7 @@ public class SystemDashboardResource {
 
     @GET
     @Path("/summary")
-    @RequiresPrivilege("users.read")
+    @RequiresPrivilege("isSystemAdmin")
     public Response summary() {
         return Response.ok(getSystemDashboardSummaryUseCase.execute()).build();
     }

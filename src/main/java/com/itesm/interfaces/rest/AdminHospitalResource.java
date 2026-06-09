@@ -43,7 +43,7 @@ public class AdminHospitalResource {
     AuthenticatedUserContext authenticatedUserContext;
 
     @POST
-    @RequiresPrivilege("hospitals.manage")
+    @RequiresPrivilege("isSystemAdmin")
     public Response create(@Valid CreateHospitalDto dto) {
         requireSystemAdmin();
         Hospital hospital = createHospitalUseCase.execute(dto);
@@ -51,7 +51,7 @@ public class AdminHospitalResource {
     }
 
     @GET
-    @RequiresPrivilege("hospitals.read")
+    @RequiresPrivilege("isSystemAdmin")
     public Response list() {
         List<Hospital> hospitals = hospitalRepository.listAllDomain();
         return Response.ok(hospitals).build();
@@ -59,7 +59,7 @@ public class AdminHospitalResource {
 
     @GET
     @Path("/municipalities")
-    @RequiresPrivilege("hospitals.read")
+    @RequiresPrivilege("isSystemAdmin")
     public Response listMunicipalities() {
         requireSystemAdmin();
         return Response.ok(municipalityRepository.listAllDomain()).build();
@@ -67,7 +67,7 @@ public class AdminHospitalResource {
 
     @PUT
     @Path("/{id}")
-    @RequiresPrivilege("hospitals.manage")
+    @RequiresPrivilege("isSystemAdmin")
     public Response update(@PathParam("id") java.util.UUID id, @Valid CreateHospitalDto dto) {
         requireSystemAdmin();
         Hospital hospital = hospitalRepository.findHospitalById(id)
@@ -89,7 +89,7 @@ public class AdminHospitalResource {
 
     @PATCH
     @Path("/{id}/status")
-    @RequiresPrivilege("hospitals.manage")
+    @RequiresPrivilege("isSystemAdmin")
     public Response updateStatus(@PathParam("id") java.util.UUID id, UpdateHospitalStatusDto dto) {
         requireSystemAdmin();
         Hospital hospital = hospitalRepository.findHospitalById(id)

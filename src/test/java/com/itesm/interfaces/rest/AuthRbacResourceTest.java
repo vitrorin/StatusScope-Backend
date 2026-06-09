@@ -1,14 +1,22 @@
 package com.itesm.interfaces.rest;
 
+import com.itesm.domain.repository.UserRepository;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+import jakarta.inject.Inject;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
 
 @QuarkusTest
 class AuthRbacResourceTest {
+
+    @Inject
+    UserRepository userRepository;
 
     @Test
     void registerShouldCreateUserWithInviteCode() {
@@ -82,5 +90,46 @@ class AuthRbacResourceTest {
                 .statusCode(200)
                 .body("email", org.hamcrest.Matchers.equalTo("admin@statusscope.local"))
                 .body("roles", notNullValue());
+    }
+
+    @Test
+    void meShouldTrackDoctorLogin() {
+        LocalDateTime before = LocalDateTime.now().minusSeconds(1);
+
+        given()
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", "doctor1@statusscope.local")
+                .when()
+                .get("/auth/me")
+                .then()
+                .statusCode(200)
+                .body("email", org.hamcrest.Matchers.equalTo("doctor1@statusscope.local"));
+
+        LocalDateTime lastLoginAt = userRepository.findByEmail("doctor1@statusscope.local")
+                .orElseThrow()
+                .getLastLoginAt();
+        Assertions.assertNotNull(lastLoginAt);
+        Assertions.assertFalse(lastLoginAt.isBefore(before));
+    }
+
+    @Test
+    void meShouldNotTrackSystemAdminLogin() {
+        LocalDateTime beforeLogin = userRepository.findByEmail("admin@statusscope.local")
+                .orElseThrow()
+                .getLastLoginAt();
+
+        given()
+                .header("Authorization", "Bearer test-token")
+                .header("X-Test-User", "admin@statusscope.local")
+                .when()
+                .get("/auth/me")
+                .then()
+                .statusCode(200)
+                .body("email", org.hamcrest.Matchers.equalTo("admin@statusscope.local"));
+
+        LocalDateTime afterLogin = userRepository.findByEmail("admin@statusscope.local")
+                .orElseThrow()
+                .getLastLoginAt();
+        Assertions.assertEquals(beforeLogin, afterLogin);
     }
 }

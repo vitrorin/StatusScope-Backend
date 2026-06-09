@@ -41,7 +41,8 @@ El sistema usa dos mecanismos:
 
 1. **import.sql** (carga inicial vía Hibernate `sql-load-script`):
    - Inserciones directas SQL con IDs UUID fijos y predecibles
-   - Se ejecuta en perfiles `dev`, `test` y `prod` (H2)
+   - Se ejecuta en desarrollo local destructivo y en `test`; el perfil `prod`
+     usa MySQL/Cloud SQL, valida el esquema y no carga `import.sql`
    - Contiene: estados, especialidades, roles, privilegios, hospitales,
      datos operativos de ejemplo
 

@@ -41,7 +41,7 @@ OUTBREAK_INGESTION_IMPORT_AT_START=true
 OPENAI_API_KEY=
 OPENAI_MODEL=gpt-4o
 GEMINI_API_KEY=
-GEMINI_MODEL=gemini-2.0-flash
+GEMINI_MODEL=gemini-2.5-flash
 
 STATUSSCOPE_MAIL_ENABLED=false
 STATUSSCOPE_MAIL_FROM=StatuScope <no-reply@statusscope.local>
@@ -82,7 +82,7 @@ Useful profiles:
 | `demo` | Explicit destructive demo profile |
 | `local-persistent` | Validates an existing schema and runs Flyway migrations |
 | `local-schema-update` | One-time local schema update helper for older local databases |
-| `prod` | In-memory H2 demo/runtime profile with seed data |
+| `prod` | Cloud Run / Cloud SQL MySQL runtime profile; validates schema and does not load `import.sql` |
 
 ## Build And Test
 
@@ -104,7 +104,8 @@ Required GitHub secrets:
 | `GCP_SA_KEY` | Deploy service account JSON |
 | `GCP_RUNTIME_SERVICE_ACCOUNT` | Cloud Run runtime service account email |
 | `CLOUD_SQL_INSTANCE` | Cloud SQL connection name, for example `project:us-central1:statusscope-dev` |
-| `FRONTEND_ORIGIN` | Allowed frontend origin for CORS |
+
+Allowed frontend origins for CORS are configured in `.github/workflows/deploy-dev.yml` as `FRONTEND_ORIGINS` and passed to the runtime as `QUARKUS_HTTP_CORS_ORIGINS`.
 
 Required Secret Manager secrets:
 

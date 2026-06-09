@@ -15,14 +15,10 @@ import jakarta.ws.rs.ForbiddenException;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.math.BigDecimal;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.TextStyle;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -104,54 +100,32 @@ public class GetSystemDashboardSummaryUseCase {
                 .filter(user -> user.getLastLoginAt() != null)
                 .collect(Collectors.groupingBy(user -> user.getLastLoginAt().toLocalDate()));
 
-        List<SystemDashboardSummaryDto.SystemActivityPointDto> points = Stream.iterate(today.minusDays(6), date -> date.plusDays(1))
+        return Stream.iterate(today.minusDays(6), date -> date.plusDays(1))
                 .limit(7)
                 .map(date -> {
                     List<User> dayUsers = loginsByDate.getOrDefault(date, List.of());
-                    int adminValue = (int) dayUsers.stream().filter(this::isAdminUser).count();
+                    int adminValue = (int) dayUsers.stream().filter(this::isHospitalAdminUser).count();
                     int doctorValue = (int) dayUsers.stream().filter(this::isDoctorUser).count();
                     int total = Math.max(dayUsers.size(), adminValue + doctorValue);
                     return new SystemDashboardSummaryDto.SystemActivityPointDto(
-                            labelForDay(date.getDayOfWeek()),
+                            date.toString(),
+                            date,
                             total,
                             adminValue,
                             doctorValue);
                 })
                 .collect(Collectors.toList());
-        int totalRealActivity = points.stream().mapToInt(SystemDashboardSummaryDto.SystemActivityPointDto::getValue).sum();
-        if (totalRealActivity >= 12 || users.isEmpty()) {
-            return points;
-        }
-        int adminBase = Math.max(2, (int) users.stream().filter(this::isAdminUser).count() + 1);
-        int doctorBase = Math.max(5, (int) users.stream().filter(this::isDoctorUser).count() * 2);
-        int[] adminShape = {2, 3, 2, 4, 5, 4, 6};
-        int[] doctorShape = {6, 8, 7, 10, 12, 11, 14};
-        List<SystemDashboardSummaryDto.SystemActivityPointDto> fallback = new ArrayList<>();
-        for (int index = 0; index < points.size(); index++) {
-            int adminValue = adminBase + adminShape[index];
-            int doctorValue = doctorBase + doctorShape[index];
-            fallback.add(new SystemDashboardSummaryDto.SystemActivityPointDto(
-                    points.get(index).getLabel(),
-                    adminValue + doctorValue,
-                    adminValue,
-                    doctorValue));
-        }
-        return fallback;
     }
 
-    private boolean isAdminUser(User user) {
+    private boolean isHospitalAdminUser(User user) {
         return user.getRoles().stream().anyMatch(role -> {
             String code = role.getCode();
-            return "SYSTEM_ADMIN".equals(code) || "HOSPITAL_ADMIN".equals(code);
+            return "HOSPITAL_ADMIN".equals(code);
         });
     }
 
     private boolean isDoctorUser(User user) {
         return user.getRoles().stream().anyMatch(role -> "DOCTOR".equals(role.getCode()));
-    }
-
-    private String labelForDay(DayOfWeek day) {
-        return day.getDisplayName(TextStyle.SHORT, Locale.ENGLISH).toUpperCase(Locale.ROOT);
     }
 
     private List<SystemDashboardSummaryDto.SystemRegionalDistributionDto> buildRegionalDistribution(List<Hospital> hospitals) {
@@ -242,7 +216,7 @@ public class GetSystemDashboardSummaryUseCase {
                     List<User> hospitalUsers = users.stream()
                             .filter(user -> hospital.getId() != null && hospital.getId().equals(user.getHospitalId()))
                             .collect(Collectors.toList());
-                    int adminUsers = (int) hospitalUsers.stream().filter(this::isAdminUser).count();
+                    int adminUsers = (int) hospitalUsers.stream().filter(this::isHospitalAdminUser).count();
                     int doctorUsers = (int) hospitalUsers.stream().filter(this::isDoctorUser).count();
                     int activeUsers = (int) hospitalUsers.stream().filter(user -> user.getStatus() == UserStatus.ACTIVE).count();
                     return new SystemDashboardSummaryDto.SystemHospitalUserMetricDto(
