@@ -16,6 +16,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -107,6 +108,6 @@ public class UserEntity {
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 
-    public Set<RoleEntity> getRoles() { return roles; }
+    public Set<RoleEntity> getRoles() { return Collections.unmodifiableSet(roles); }
     public void setRoles(Set<RoleEntity> roles) { this.roles = roles; }
 }

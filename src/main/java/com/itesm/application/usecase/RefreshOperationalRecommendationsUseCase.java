@@ -384,7 +384,6 @@ public class RefreshOperationalRecommendationsUseCase {
                     signal,
                     "EPIDEMIOLOGY_HOSPITAL",
                     "Hospital epidemiological signal",
-                    "Hospital",
                     geoContext,
                     snapshot,
                     signals
@@ -408,7 +407,6 @@ public class RefreshOperationalRecommendationsUseCase {
                     signal,
                     "EPIDEMIOLOGY_MUNICIPAL",
                     "Municipal epidemiological signal",
-                    "Municipal radius",
                     geoContext,
                     snapshot,
                     signals
@@ -449,7 +447,6 @@ public class RefreshOperationalRecommendationsUseCase {
             EpidemiologySignal signal,
             String type,
             String draftScopeTitle,
-            String scopeLabel,
             HospitalGeoContextDto geoContext,
             HospitalResourceSnapshot snapshot,
             RecommendationSignals signals) {

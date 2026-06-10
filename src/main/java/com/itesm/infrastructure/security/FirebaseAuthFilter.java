@@ -21,6 +21,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -63,10 +64,19 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
         }
 
         try {
-            FirebaseToken decoded = FirebaseAuth.getInstance()
-                    .verifyIdToken(header.substring("Bearer ".length()), true);
+            String token = header.substring("Bearer ".length()).strip();
+            if (token.isEmpty()) {
+                abortUnauthorized(ctx);
+                return;
+            }
+            FirebaseToken decoded = FirebaseAuth.getInstance().verifyIdToken(token, true);
+            String uid = decoded.getUid();
+            if (uid == null || uid.isBlank()) {
+                abortUnauthorized(ctx);
+                return;
+            }
 
-            User user = userRepository.findByExternalAuthId(decoded.getUid()).orElse(null);
+            User user = userRepository.findByExternalAuthId(uid).orElse(null);
             if (user == null || user.getStatus() != UserStatus.ACTIVE) {
                 abortUnauthorized(ctx);
                 return;

@@ -93,7 +93,7 @@ public class GetDoctorDashboardSummaryUseCase {
         summary.setStateName(hospital.getStateName());
         summary.setRadiusKm(geoContext.getRadiusKm());
         summary.setGeneratedAt(LocalDateTime.now());
-        summary.setMetrics(buildMetrics(hospital, totalCases, outbreaks.size(), topDisease, geoContext, outbreaks));
+        summary.setMetrics(buildMetrics(totalCases, outbreaks.size(), topDisease, geoContext, outbreaks));
         summary.setDiseaseBreakdown(diseaseBreakdown);
         summary.setStateDiseaseBreakdown(stateDiseaseBreakdown);
         summary.setAlerts(buildAlerts(outbreaks));
@@ -225,7 +225,6 @@ public class GetDoctorDashboardSummaryUseCase {
     }
 
     private List<DoctorDashboardMetricDto> buildMetrics(
-            Hospital hospital,
             int totalCases,
             int outbreakCount,
             DoctorDashboardDiseaseDto topDisease,
