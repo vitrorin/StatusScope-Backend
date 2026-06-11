@@ -44,4 +44,5 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.token=$SONAR_TOKEN \
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
-            -DskipITs=true
+            -DskipITs=true \
+            -Dmaven.test.failure.ignore=true

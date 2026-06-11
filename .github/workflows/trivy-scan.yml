@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Trivy filesystem scan
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@0.30.0
         with:
           scan-type: fs
           scan-ref: '.'
@@ -55,17 +55,20 @@ jobs:
           java-version: '17'
           cache: maven
 
-      - name: Build container image
+      - name: Build JAR
+        env:
+          QUARKUS_DATASOURCE_USERNAME: build
+          QUARKUS_DATASOURCE_PASSWORD: build
+          QUARKUS_DATASOURCE_JDBC_URL: jdbc:h2:mem:build
         run: |
           chmod +x ./mvnw
-          ./mvnw package -DskipTests -Pcontainer-image \
-            -Dquarkus.container-image.build=true \
-            -Dquarkus.container-image.push=false \
-            -Dquarkus.container-image.name=statusscope-backend \
-            -Dquarkus.container-image.tag=scan
+          ./mvnw package -DskipTests -q
+
+      - name: Build container image
+        run: docker build -t statusscope-backend:scan .
 
       - name: Run Trivy container image scan
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@0.30.0
         with:
           image-ref: statusscope-backend:scan
           format: sarif
@@ -81,7 +84,7 @@ jobs:
           category: trivy-container
 
       - name: Export human-readable report
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@0.30.0
         with:
           image-ref: statusscope-backend:scan
           format: table
