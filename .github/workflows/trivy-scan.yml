@@ -20,15 +20,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+
       - name: Run Trivy filesystem scan
-        uses: aquasecurity/trivy-action@0.30.0
-        with:
-          scan-type: fs
-          scan-ref: '.'
-          format: sarif
-          output: trivy-fs-results.sarif
-          severity: CRITICAL,HIGH
-          exit-code: '0'
+        run: |
+          trivy fs . \
+            --format sarif \
+            --output trivy-fs-results.sarif \
+            --severity CRITICAL,HIGH \
+            --exit-code 0
 
       - name: Upload Trivy filesystem results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
@@ -67,14 +69,17 @@ jobs:
       - name: Build container image
         run: docker build -t statusscope-backend:scan .
 
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+
       - name: Run Trivy container image scan
-        uses: aquasecurity/trivy-action@0.30.0
-        with:
-          image-ref: statusscope-backend:scan
-          format: sarif
-          output: trivy-image-results.sarif
-          severity: CRITICAL,HIGH
-          exit-code: '0'
+        run: |
+          trivy image statusscope-backend:scan \
+            --format sarif \
+            --output trivy-image-results.sarif \
+            --severity CRITICAL,HIGH \
+            --exit-code 0
 
       - name: Upload Trivy container results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
@@ -84,11 +89,10 @@ jobs:
           category: trivy-container
 
       - name: Export human-readable report
-        uses: aquasecurity/trivy-action@0.30.0
-        with:
-          image-ref: statusscope-backend:scan
-          format: table
-          severity: CRITICAL,HIGH
+        run: |
+          trivy image statusscope-backend:scan \
+            --format table \
+            --severity CRITICAL,HIGH
 
       - name: Upload report artifact
         uses: actions/upload-artifact@v4
