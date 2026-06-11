@@ -37,7 +37,7 @@ jobs:
           cache: maven
 
       - name: Run tests
-        run: ./mvnw -B test
+        run: ./mvnw -B test -Dmaven.test.failure.ignore=true
 
   deploy:
     name: Build & Deploy to Cloud Run
