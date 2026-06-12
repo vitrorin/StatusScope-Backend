@@ -103,6 +103,27 @@ Useful profiles:
 | `prod` | Cloud Run / Cloud SQL runtime profile; validates schema and skips `import.sql` |
 | `test` | H2 in-memory profile used by automated tests |
 
+## Module 4 Database Benchmark
+
+The advanced database evidence runner lives in `scripts/mysql/benchmark`.
+It reads MySQL credentials from `.env` (`QUARKUS_DATASOURCE_USERNAME`,
+`QUARKUS_DATASOURCE_PASSWORD`, and `QUARKUS_DATASOURCE_JDBC_URL`) and defaults
+to a laptop-safe workload.
+
+```powershell
+python -m pip install --user -r scripts\mysql\benchmark\requirements.txt
+python scripts\mysql\benchmark\run_module4_benchmark.py --print-config
+python scripts\mysql\benchmark\run_module4_benchmark.py
+```
+
+The runner recreates only `statusscope_module4_before` and
+`statusscope_module4_after`; it does not mutate the source database. Artifacts
+are written to the workspace-level `report-captures/module4/<run_id>/`, including
+`module4_database_report.pdf`, `metrics_summary.csv`, `metrics_raw.json`,
+`charts/`, and `explain_plans/`.
+
+Use `--preset rubric` for the final heavy run with concurrency `10,50,100`.
+
 ## Build And Test
 
 ```bash

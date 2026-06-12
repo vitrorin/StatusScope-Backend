@@ -18,7 +18,12 @@ CREATE PROCEDURE add_index_if_missing(
     IN p_create_sql TEXT
 )
 BEGIN
-    IF NOT EXISTS (
+    IF EXISTS (
+        SELECT 1
+        FROM information_schema.tables
+        WHERE table_schema = DATABASE()
+          AND table_name = p_table_name
+    ) AND NOT EXISTS (
         SELECT 1
         FROM information_schema.statistics
         WHERE table_schema = DATABASE()
@@ -56,6 +61,18 @@ CALL add_index_if_missing(
     'outbreaks',
     'idx_outbreaks_status_scope_state',
     'CREATE INDEX idx_outbreaks_status_scope_state ON outbreaks (status, scope, state_id)'
+);
+
+CALL add_index_if_missing(
+    'outbreaks',
+    'idx_outbreaks_status_scope_municipality_cases',
+    'CREATE INDEX idx_outbreaks_status_scope_municipality_cases ON outbreaks (status, scope, municipality_id, case_count DESC)'
+);
+
+CALL add_index_if_missing(
+    'outbreaks',
+    'idx_outbreaks_status_scope_state_cases',
+    'CREATE INDEX idx_outbreaks_status_scope_state_cases ON outbreaks (status, scope, state_id, case_count DESC)'
 );
 
 -- ============================================================================
@@ -118,6 +135,12 @@ CALL add_index_if_missing(
     'hospital_department_resources',
     'idx_dept_hospital_status',
     'CREATE INDEX idx_dept_hospital_status ON hospital_department_resources (hospital_id, status)'
+);
+
+CALL add_index_if_missing(
+    'hospital_department_resources',
+    'idx_dept_hospital_name',
+    'CREATE INDEX idx_dept_hospital_name ON hospital_department_resources (hospital_id, department_name)'
 );
 
 -- ============================================================================
@@ -187,6 +210,108 @@ CALL add_index_if_missing(
     'CREATE INDEX idx_movements_item_created ON hospital_inventory_movements (inventory_item_id, created_at DESC)'
 );
 
+CALL add_index_if_missing(
+    'hospital_inventory_movements',
+    'idx_movements_hospital_item_created',
+    'CREATE INDEX idx_movements_hospital_item_created ON hospital_inventory_movements (hospital_id, inventory_item_id, created_at DESC)'
+);
+
+-- ============================================================================
+-- 10. directorio operacional, tareas, notificaciones y solicitudes
+-- ============================================================================
+
+CALL add_index_if_missing(
+    'hospital_operational_contacts',
+    'idx_contacts_hospital_department_name',
+    'CREATE INDEX idx_contacts_hospital_department_name ON hospital_operational_contacts (hospital_id, department_code, display_name)'
+);
+
+CALL add_index_if_missing(
+    'hospital_operational_contacts',
+    'idx_contacts_email_notify',
+    'CREATE INDEX idx_contacts_email_notify ON hospital_operational_contacts (hospital_id, department_code, contact_channel, is_notifiable, display_name)'
+);
+
+CALL add_index_if_missing(
+    'hospital_operational_groups',
+    'idx_groups_hospital_department_name',
+    'CREATE INDEX idx_groups_hospital_department_name ON hospital_operational_groups (hospital_id, department_code, group_name)'
+);
+
+CALL add_index_if_missing(
+    'operational_tasks',
+    'idx_tasks_recommendation_created',
+    'CREATE INDEX idx_tasks_recommendation_created ON operational_tasks (recommendation_id, created_at DESC)'
+);
+
+CALL add_index_if_missing(
+    'operational_tasks',
+    'idx_tasks_active_recommendation_created',
+    'CREATE INDEX idx_tasks_active_recommendation_created ON operational_tasks (recommendation_id, status, created_at DESC)'
+);
+
+CALL add_index_if_missing(
+    'operational_notifications',
+    'idx_notifications_recommendation_sent',
+    'CREATE INDEX idx_notifications_recommendation_sent ON operational_notifications (recommendation_id, sent_at DESC)'
+);
+
+CALL add_index_if_missing(
+    'operational_notification_recipients',
+    'idx_recipients_notification_delivered',
+    'CREATE INDEX idx_recipients_notification_delivered ON operational_notification_recipients (notification_id, delivered_at ASC)'
+);
+
+CALL add_index_if_missing(
+    'supply_requests',
+    'idx_supply_recommendation_created',
+    'CREATE INDEX idx_supply_recommendation_created ON supply_requests (recommendation_id, created_at DESC)'
+);
+
+-- ============================================================================
+-- 11. diagnostico: evaluaciones, historico, archivos, tests y diferenciales
+-- ============================================================================
+
+CALL add_index_if_missing(
+    'patient_evaluations',
+    'idx_eval_doctor_status_created',
+    'CREATE INDEX idx_eval_doctor_status_created ON patient_evaluations (doctor_user_id, status, created_at DESC)'
+);
+
+CALL add_index_if_missing(
+    'patient_evaluations',
+    'idx_eval_doctor_status_finalized',
+    'CREATE INDEX idx_eval_doctor_status_finalized ON patient_evaluations (doctor_user_id, status, finalized_at DESC)'
+);
+
+CALL add_index_if_missing(
+    'evaluation_differential_diagnoses',
+    'idx_edd_evaluation_rank',
+    'CREATE INDEX idx_edd_evaluation_rank ON evaluation_differential_diagnoses (evaluation_id, rank_order ASC)'
+);
+
+CALL add_index_if_missing(
+    'evaluation_recommended_tests',
+    'idx_ert_evaluation_sort',
+    'CREATE INDEX idx_ert_evaluation_sort ON evaluation_recommended_tests (evaluation_id, sort_order ASC)'
+);
+
+CALL add_index_if_missing(
+    'patient_evaluation_files',
+    'idx_pef_evaluation_uploaded',
+    'CREATE INDEX idx_pef_evaluation_uploaded ON patient_evaluation_files (evaluation_id, uploaded_at DESC)'
+);
+
+-- ============================================================================
+-- 12. enfermedades: busqueda FULLTEXT y fallback LIKE por codigo/nombre
+-- ============================================================================
+
+CALL add_index_if_missing(
+    'diseases',
+    'idx_diseases_fulltext_name_code',
+    'CREATE FULLTEXT INDEX idx_diseases_fulltext_name_code ON diseases (name, code)'
+);
+
 DROP PROCEDURE IF EXISTS add_index_if_missing;
 
 -- ============================================================================
@@ -210,14 +335,32 @@ DROP PROCEDURE IF EXISTS add_index_if_missing;
 -- ============================================================================
 -- DROP INDEX IF EXISTS idx_outbreaks_status_scope_municipality ON outbreaks;
 -- DROP INDEX IF EXISTS idx_outbreaks_status_scope_state ON outbreaks;
+-- DROP INDEX IF EXISTS idx_outbreaks_status_scope_municipality_cases ON outbreaks;
+-- DROP INDEX IF EXISTS idx_outbreaks_status_scope_state_cases ON outbreaks;
 -- DROP INDEX IF EXISTS idx_recs_hospital_created ON operational_recommendations;
 -- DROP INDEX IF EXISTS idx_recs_hospital_status_created ON operational_recommendations;
 -- DROP INDEX IF EXISTS idx_recs_hospital_severity_created ON operational_recommendations;
 -- DROP INDEX IF EXISTS idx_snapshots_hospital_captured ON hospital_resource_snapshots;
 -- DROP INDEX IF EXISTS idx_dept_hospital_status ON hospital_department_resources;
+-- DROP INDEX IF EXISTS idx_dept_hospital_name ON hospital_department_resources;
 -- DROP INDEX IF EXISTS idx_inventory_hospital_category ON hospital_inventory_items;
 -- DROP INDEX IF EXISTS idx_inventory_hospital_status ON hospital_inventory_items;
 -- DROP INDEX IF EXISTS idx_staff_hospital_role ON hospital_staffing_profiles;
 -- DROP INDEX IF EXISTS idx_patients_hospital_name ON patients;
 -- DROP INDEX IF EXISTS idx_audit_recommendation_created ON operational_recommendation_audit;
 -- DROP INDEX IF EXISTS idx_movements_item_created ON hospital_inventory_movements;
+-- DROP INDEX IF EXISTS idx_movements_hospital_item_created ON hospital_inventory_movements;
+-- DROP INDEX IF EXISTS idx_contacts_hospital_department_name ON hospital_operational_contacts;
+-- DROP INDEX IF EXISTS idx_contacts_email_notify ON hospital_operational_contacts;
+-- DROP INDEX IF EXISTS idx_groups_hospital_department_name ON hospital_operational_groups;
+-- DROP INDEX IF EXISTS idx_tasks_recommendation_created ON operational_tasks;
+-- DROP INDEX IF EXISTS idx_tasks_active_recommendation_created ON operational_tasks;
+-- DROP INDEX IF EXISTS idx_notifications_recommendation_sent ON operational_notifications;
+-- DROP INDEX IF EXISTS idx_recipients_notification_delivered ON operational_notification_recipients;
+-- DROP INDEX IF EXISTS idx_supply_recommendation_created ON supply_requests;
+-- DROP INDEX IF EXISTS idx_eval_doctor_status_created ON patient_evaluations;
+-- DROP INDEX IF EXISTS idx_eval_doctor_status_finalized ON patient_evaluations;
+-- DROP INDEX IF EXISTS idx_edd_evaluation_rank ON evaluation_differential_diagnoses;
+-- DROP INDEX IF EXISTS idx_ert_evaluation_sort ON evaluation_recommended_tests;
+-- DROP INDEX IF EXISTS idx_pef_evaluation_uploaded ON patient_evaluation_files;
+-- DROP INDEX IF EXISTS idx_diseases_fulltext_name_code ON diseases;

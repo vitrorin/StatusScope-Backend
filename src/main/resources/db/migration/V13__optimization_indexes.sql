@@ -1,5 +1,5 @@
 -- ==========================================================================
--- V9: MySQL optimization indexes used by backend endpoints.
+-- V13: MySQL optimization indexes used by backend endpoints.
 -- ==========================================================================
 -- These indexes match the filters/orderings used by dashboard, resources,
 -- recommendations, diagnosis context and movement-history endpoints.

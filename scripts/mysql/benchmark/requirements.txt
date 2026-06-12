@@ -1,0 +1,7 @@
+mysql-connector-python>=9.1.0
+pandas>=2.3.0
+numpy>=2.3.0
+matplotlib>=3.10.0
+seaborn>=0.13.2
+reportlab>=4.2.5
+Pillow>=11.0.0

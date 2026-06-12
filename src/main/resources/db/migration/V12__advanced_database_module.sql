@@ -1,5 +1,5 @@
 -- ============================================================================
--- V8: Advanced Database Module — Stored Procedures, Functions, Triggers
+-- V12: Advanced Database Module — Stored Procedures, Functions, Triggers
 -- ============================================================================
 -- Requisitos del Modulo 4:
 --   2 Stored Procedures: sp_create_supply_request_with_movement,

@@ -2,8 +2,7 @@
 -- Event Scheduler: ev_snapshot_daily_kpis
 -- ============================================================================
 -- Objetivo:         Materializar diariamente KPIs agregados de brotes
---                   epidemiológicos y recomendaciones operativas para acelerar
---                   la carga de los dashboards (Doctor y Admin).
+--                   epidemiologicos para acelerar dashboards.
 -- Proceso:          Calcula totales por estado/municipio y los almacena en
 --                   una tabla ligera de resumen.
 -- Frecuencia:       Diario a las 05:00 (America/Mexico_City)
@@ -11,9 +10,9 @@
 -- Tabla destino:    outbreak_daily_kpis (se crea si no existe)
 -- Dependencias:     MySQL Event Scheduler habilitado.
 -- Impacto esperado: Las consultas de dashboard pasan de recalcular agregados
---                   sobre outbreaks a leer snapshots diarios por ubicación.
+--                   sobre outbreaks a leer snapshots diarios por ubicacion.
 -- Rollback:         DROP TABLE outbreak_daily_kpis; los datos se regeneran
---                   en la siguiente ejecución.
+--                   en la siguiente ejecucion.
 -- ============================================================================
 
 CREATE TABLE IF NOT EXISTS outbreak_daily_kpis (
@@ -47,65 +46,66 @@ CREATE EVENT ev_snapshot_daily_kpis
     COMMENT 'Materializa KPIs diarios de brotes para dashboards'
     DO
 BEGIN
-    -- Recalcular solo el snapshot del día actual.
     DELETE FROM outbreak_daily_kpis WHERE snapshot_date = CURRENT_DATE;
 
-    -- KPIs por estado (scope = STATE)
     INSERT INTO outbreak_daily_kpis (
         snapshot_date, scope, state_id, state_name,
         total_cases, active_outbreaks, suspected, confirmed, top_disease
     )
-    SELECT
-        CURRENT_DATE,
-        'STATE',
-        s.id,
-        s.name,
-        COALESCE(SUM(o.case_count), 0),
-        COUNT(DISTINCT o.id),
-        COALESCE(SUM(CASE WHEN o.confirmation_status = 'SUSPECTED' THEN o.case_count ELSE 0 END), 0),
-        COALESCE(SUM(CASE WHEN o.confirmation_status = 'CONFIRMED' THEN o.case_count ELSE 0 END), 0),
-        (SELECT d2.name
-          FROM outbreaks o2
-          JOIN diseases d2 ON d2.id = o2.disease_id
-          WHERE o2.status = 'ACTIVE'
-            AND o2.scope = 'STATE'
-            AND o2.state_id = s.id
-          GROUP BY d2.id, d2.name
-          ORDER BY SUM(o2.case_count) DESC
-          LIMIT 1)
-    FROM states s
-    LEFT JOIN outbreaks o ON o.state_id = s.id AND o.status = 'ACTIVE' AND o.scope = 'STATE'
-    GROUP BY s.id, s.name;
+    SELECT CURRENT_DATE, 'STATE', a.state_id, a.state_name,
+           a.total_cases, a.active_outbreaks, a.suspected, a.confirmed, t.disease_name
+    FROM (
+        SELECT s.id AS state_id, s.name AS state_name,
+               COALESCE(SUM(o.case_count), 0) AS total_cases,
+               COUNT(DISTINCT o.id) AS active_outbreaks,
+               COALESCE(SUM(CASE WHEN o.confirmation_status = 'SUSPECTED' THEN o.case_count ELSE 0 END), 0) AS suspected,
+               COALESCE(SUM(CASE WHEN o.confirmation_status = 'CONFIRMED' THEN o.case_count ELSE 0 END), 0) AS confirmed
+        FROM states s
+        LEFT JOIN outbreaks o ON o.state_id = s.id AND o.status = 'ACTIVE' AND o.scope = 'STATE'
+        GROUP BY s.id, s.name
+    ) a
+    LEFT JOIN (
+        SELECT state_id, disease_name
+        FROM (
+            SELECT o.state_id, d.name AS disease_name,
+                   ROW_NUMBER() OVER (PARTITION BY o.state_id ORDER BY SUM(o.case_count) DESC) AS rn
+            FROM outbreaks o
+            JOIN diseases d ON d.id = o.disease_id
+            WHERE o.status = 'ACTIVE' AND o.scope = 'STATE'
+            GROUP BY o.state_id, d.id, d.name
+        ) ranked
+        WHERE rn = 1
+    ) t ON t.state_id = a.state_id;
 
-    -- KPIs por municipio (scope = MUNICIPALITY) solo para municipios con brotes activos.
     INSERT INTO outbreak_daily_kpis (
         snapshot_date, scope, state_id, state_name, municipality_id, municipality_name,
         total_cases, active_outbreaks, suspected, confirmed, top_disease
     )
-    SELECT
-        CURRENT_DATE,
-        'MUNICIPALITY',
-        st.id,
-        st.name,
-        m.id,
-        m.name,
-        COALESCE(SUM(o.case_count), 0),
-        COUNT(DISTINCT o.id),
-        COALESCE(SUM(CASE WHEN o.confirmation_status = 'SUSPECTED' THEN o.case_count ELSE 0 END), 0),
-        COALESCE(SUM(CASE WHEN o.confirmation_status = 'CONFIRMED' THEN o.case_count ELSE 0 END), 0),
-        (SELECT d2.name
-          FROM outbreaks o2
-          JOIN diseases d2 ON d2.id = o2.disease_id
-          WHERE o2.status = 'ACTIVE'
-            AND o2.scope = 'MUNICIPALITY'
-            AND o2.municipality_id = m.id
-          GROUP BY d2.id, d2.name
-          ORDER BY SUM(o2.case_count) DESC
-          LIMIT 1)
-    FROM municipalities m
-    JOIN states st ON st.id = m.state_id
-    JOIN outbreaks o ON o.municipality_id = m.id AND o.status = 'ACTIVE' AND o.scope = 'MUNICIPALITY'
-    GROUP BY st.id, st.name, m.id, m.name;
+    SELECT CURRENT_DATE, 'MUNICIPALITY', a.state_id, a.state_name, a.municipality_id, a.municipality_name,
+           a.total_cases, a.active_outbreaks, a.suspected, a.confirmed, t.disease_name
+    FROM (
+        SELECT st.id AS state_id, st.name AS state_name, m.id AS municipality_id, m.name AS municipality_name,
+               COALESCE(SUM(o.case_count), 0) AS total_cases,
+               COUNT(DISTINCT o.id) AS active_outbreaks,
+               COALESCE(SUM(CASE WHEN o.confirmation_status = 'SUSPECTED' THEN o.case_count ELSE 0 END), 0) AS suspected,
+               COALESCE(SUM(CASE WHEN o.confirmation_status = 'CONFIRMED' THEN o.case_count ELSE 0 END), 0) AS confirmed
+        FROM municipalities m
+        JOIN states st ON st.id = m.state_id
+        JOIN outbreaks o ON o.municipality_id = m.id AND o.status = 'ACTIVE' AND o.scope = 'MUNICIPALITY'
+        GROUP BY st.id, st.name, m.id, m.name
+    ) a
+    LEFT JOIN (
+        SELECT municipality_id, disease_name
+        FROM (
+            SELECT o.municipality_id, d.name AS disease_name,
+                   ROW_NUMBER() OVER (PARTITION BY o.municipality_id ORDER BY SUM(o.case_count) DESC) AS rn
+            FROM outbreaks o
+            JOIN diseases d ON d.id = o.disease_id
+            WHERE o.status = 'ACTIVE' AND o.scope = 'MUNICIPALITY'
+            GROUP BY o.municipality_id, d.id, d.name
+        ) ranked
+        WHERE rn = 1
+    ) t ON t.municipality_id = a.municipality_id;
 END //
 
 DELIMITER ;

@@ -4,18 +4,13 @@
 -- Objetivo:         Generar un resumen operativo consolidado por hospital,
 --                   calculando ocupacion de camas, estado de inventario critico
 --                   y cantidad de recomendaciones activas en una sola llamada.
--- Problema que resuelve: El dashboard admin necesita datos de multiples tablas
---                   (snapshots, inventario, recomendaciones) para cada hospital.
---                   Sin este SP, se emiten 3-4 queries separadas, causando
---                   latencia y posible inconsistencia por lecturas no atomicas.
+-- Fuente de verdad: Replica la firma y comportamiento de
+--                   V12__advanced_database_module.sql.
 -- Logica:
 --   1. Consultar el ultimo snapshot de recursos del hospital.
 --   2. Contar items de inventario en estado CRITICAL o LOW.
 --   3. Contar recomendaciones activas (status NOT IN COMPLETED, REJECTED).
 --   4. Insertar/actualizar resultado en tabla temporal de sesion.
--- Ejemplo de ejecucion:
---   CALL sp_generate_hospital_operational_summary('30000000-0000-0000-0000-000000000001');
---   SELECT * FROM hospital_operational_summary_result;
 -- Pruebas:
 --   1. Ejecutar con hospital_id valido -> devuelve resumen con datos.
 --   2. Ejecutar con hospital_id sin snapshots -> campos de snapshot en NULL.

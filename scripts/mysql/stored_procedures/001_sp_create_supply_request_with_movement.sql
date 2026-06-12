@@ -3,21 +3,12 @@
 -- ============================================================================
 -- Objetivo:         Crear una solicitud de suministro y el movimiento de
 --                   inventario correspondiente en una sola transaccion atomica.
--- Problema que resuelve: Evitar inconsistencias cuando se crea una solicitud
---                   de suministro pero el movimiento de inventario falla (o
---                   viceversa), dejando datos huerfanos.
+-- Fuente de verdad: Replica la firma y comportamiento de
+--                   V12__advanced_database_module.sql.
 -- Logica:
 --   1. Insertar supply_requests con status REQUESTED.
 --   2. Insertar hospital_inventory_movements con quantity_delta positivo.
 --   3. Si alguna operacion falla, rollback automatico por estar dentro del SP.
--- Ejemplo de ejecucion:
---   CALL sp_create_supply_request_with_movement(
---     UUID(), UUID(), UUID(), UUID(), UUID(),
---     '30000000-0000-0000-0000-000000000001',
---     '23000000-0000-0000-0000-000000000002',
---     'SUPPLY_ORDER', 500, 'units', 'Pedido urgente de mascarillas',
---     'RULE_ENGINE'
---   );
 -- Pruebas:
 --   1. Ejecutar con item_id valido -> crea solicitud + movimiento.
 --   2. Ejecutar con item_id inexistente -> falla por FK.
@@ -37,8 +28,14 @@ CREATE PROCEDURE sp_create_supply_request_with_movement(
     IN p_supply_type_label VARCHAR(255),
     IN p_quantity INT,
     IN p_unit VARCHAR(32),
-    IN p_notes TEXT,
-    IN p_created_by_mode VARCHAR(32)
+    IN p_destination VARCHAR(255),
+    IN p_suggested_supplier VARCHAR(255),
+    IN p_source_action_code VARCHAR(32),
+    IN p_priority VARCHAR(16),
+    IN p_requested_needed_by TIMESTAMP,
+    IN p_linked_recommendation_inventory_item_id VARCHAR(36),
+    IN p_requested_by_user_id VARCHAR(36),
+    IN p_notes TEXT
 )
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -51,12 +48,16 @@ BEGIN
 
     INSERT INTO supply_requests (
         id, recommendation_id, hospital_id, inventory_item_id,
-        supply_type_label, quantity, unit, status,
-        requested_by_user_id, created_at, updated_at
+        supply_type_label, quantity, unit, destination, suggested_supplier,
+        status, source_action_code, priority, requested_needed_by,
+        linked_recommendation_inventory_item_id, requested_by_user_id,
+        created_at, updated_at
     ) VALUES (
         p_request_id, p_recommendation_id, p_hospital_id, p_inventory_item_id,
-        p_supply_type_label, p_quantity, p_unit, 'REQUESTED',
-        NULL, NOW(), NOW()
+        p_supply_type_label, p_quantity, p_unit, p_destination, p_suggested_supplier,
+        'REQUESTED', p_source_action_code, p_priority, p_requested_needed_by,
+        p_linked_recommendation_inventory_item_id, p_requested_by_user_id,
+        NOW(), NOW()
     );
 
     INSERT INTO hospital_inventory_movements (
