@@ -24,8 +24,6 @@
 
 DROP PROCEDURE IF EXISTS sp_generate_hospital_operational_summary;
 
-DELIMITER //
-
 CREATE PROCEDURE sp_generate_hospital_operational_summary(
     IN p_hospital_id VARCHAR(36)
 )
@@ -87,6 +85,4 @@ BEGIN
     SELECT * FROM hospital_operational_summary_result;
 
     DROP TEMPORARY TABLE IF EXISTS hospital_operational_summary_result;
-END //
-
-DELIMITER ;
+END;

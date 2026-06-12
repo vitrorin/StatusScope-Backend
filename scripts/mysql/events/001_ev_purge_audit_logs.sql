@@ -21,8 +21,6 @@
 
 DROP EVENT IF EXISTS ev_purge_audit_logs;
 
-DELIMITER //
-
 CREATE EVENT ev_purge_audit_logs
     ON SCHEDULE
         EVERY 1 DAY
@@ -61,6 +59,4 @@ BEGIN
           WHERE him.related_supply_request_id = supply_requests.id
       )
     LIMIT 1000;
-END //
-
-DELIMITER ;
+END;

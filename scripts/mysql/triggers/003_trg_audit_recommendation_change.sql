@@ -20,8 +20,6 @@
 
 DROP TRIGGER IF EXISTS trg_audit_recommendation_change;
 
-DELIMITER //
-
 CREATE TRIGGER trg_audit_recommendation_change
 AFTER UPDATE ON operational_recommendations
 FOR EACH ROW
@@ -33,7 +31,7 @@ BEGIN
         ) VALUES (
             UUID(),
             NEW.id,
-            NEW.assigned_owner_user_id,
+            'SYSTEM_TRIGGER',
             'STATUS_CHANGE',
             NEW.status,
             JSON_OBJECT(
@@ -45,6 +43,4 @@ BEGIN
             NOW()
         );
     END IF;
-END //
-
-DELIMITER ;
+END;

@@ -20,8 +20,6 @@
 
 DROP FUNCTION IF EXISTS fn_bed_occupancy_pct;
 
-DELIMITER //
-
 CREATE FUNCTION fn_bed_occupancy_pct(p_hospital_id VARCHAR(36))
 RETURNS DECIMAL(5,2)
 DETERMINISTIC
@@ -42,6 +40,4 @@ BEGIN
     END IF;
 
     RETURN ROUND((v_total_beds - v_available_beds) * 100.0 / v_total_beds, 2);
-END //
-
-DELIMITER ;
+END;

@@ -16,11 +16,9 @@ CREATE TEMPORARY TABLE benchmark_results (
     duration_us   BIGINT
 ) ENGINE=Memory;
 
-DELIMITER //
-
-DROP PROCEDURE IF EXISTS sp_bench_recommendations_feed //
-DROP PROCEDURE IF EXISTS sp_bench_outbreaks_by_state //
-DROP PROCEDURE IF EXISTS sp_bench_latest_snapshot //
+DROP PROCEDURE IF EXISTS sp_bench_recommendations_feed;
+DROP PROCEDURE IF EXISTS sp_bench_outbreaks_by_state;
+DROP PROCEDURE IF EXISTS sp_bench_latest_snapshot;
 
 CREATE PROCEDURE sp_bench_recommendations_feed(IN iterations INT)
 BEGIN
@@ -46,7 +44,7 @@ BEGIN
                 TIMESTAMPDIFF(MICROSECOND, start_ts, end_ts));
         SET i = i + 1;
     END WHILE;
-END //
+END;
 
 CREATE PROCEDURE sp_bench_outbreaks_by_state(IN iterations INT)
 BEGIN
@@ -73,7 +71,7 @@ BEGIN
                 TIMESTAMPDIFF(MICROSECOND, start_ts, end_ts));
         SET i = i + 1;
     END WHILE;
-END //
+END;
 
 CREATE PROCEDURE sp_bench_latest_snapshot(IN iterations INT)
 BEGIN
@@ -99,9 +97,7 @@ BEGIN
                 TIMESTAMPDIFF(MICROSECOND, start_ts, end_ts));
         SET i = i + 1;
     END WHILE;
-END //
-
-DELIMITER ;
+END;
 
 -- CALL sp_bench_recommendations_feed(100);
 -- CALL sp_bench_outbreaks_by_state(100);

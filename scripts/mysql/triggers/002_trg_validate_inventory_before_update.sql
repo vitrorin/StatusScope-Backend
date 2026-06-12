@@ -20,8 +20,6 @@
 
 DROP TRIGGER IF EXISTS trg_validate_inventory_before_update;
 
-DELIMITER //
-
 CREATE TRIGGER trg_validate_inventory_before_update
 BEFORE UPDATE ON hospital_inventory_items
 FOR EACH ROW
@@ -33,6 +31,4 @@ BEGIN
     ELSE
         SET NEW.status = 'ADEQUATE';
     END IF;
-END //
-
-DELIMITER ;
+END;

@@ -38,8 +38,6 @@ CREATE TABLE IF NOT EXISTS outbreak_daily_kpis (
 
 DROP EVENT IF EXISTS ev_snapshot_daily_kpis;
 
-DELIMITER //
-
 CREATE EVENT ev_snapshot_daily_kpis
     ON SCHEDULE
         EVERY 1 DAY
@@ -106,6 +104,4 @@ BEGIN
     JOIN states st ON st.id = m.state_id
     JOIN outbreaks o ON o.municipality_id = m.id AND o.status = 'ACTIVE' AND o.scope = 'MUNICIPALITY'
     GROUP BY st.id, st.name, m.id, m.name;
-END //
-
-DELIMITER ;
+END;

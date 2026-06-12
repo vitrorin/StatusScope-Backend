@@ -17,8 +17,6 @@
 
 DROP EVENT IF EXISTS ev_rotate_snapshots;
 
-DELIMITER //
-
 CREATE EVENT ev_rotate_snapshots
     ON SCHEDULE
         EVERY 1 WEEK
@@ -31,6 +29,4 @@ BEGIN
     DELETE FROM hospital_resource_snapshots
     WHERE captured_at < NOW() - INTERVAL retention_days DAY
     LIMIT 500;
-END //
-
-DELIMITER ;
+END;

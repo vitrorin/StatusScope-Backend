@@ -12,13 +12,27 @@ import org.flywaydb.core.api.MigrationVersion;
 import org.jboss.logging.Logger;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 @ApplicationScoped
 public class DataMigrationRunner {
 
     private static final Logger LOG = Logger.getLogger(DataMigrationRunner.class);
+    private static final List<String> REQUIRED_MYSQL_ROUTINES = List.of(
+            "sp_create_supply_request_with_movement",
+            "sp_generate_hospital_operational_summary",
+            "fn_bed_occupancy_pct",
+            "fn_inventory_status"
+    );
+    private static final List<String> REQUIRED_MYSQL_TRIGGERS = List.of(
+            "trg_validate_inventory_before_insert",
+            "trg_validate_inventory_before_update",
+            "trg_audit_recommendation_change"
+    );
 
     @Inject
     Flyway flyway;
@@ -38,6 +52,7 @@ public class DataMigrationRunner {
             resetCatalogHistoryAfterSchemaRecreation();
         }
         flywayForCurrentDatabase().migrate();
+        validateAdvancedMysqlObjects();
         LOG.info("DataMigrationRunner: Flyway data migrations applied");
     }
 
@@ -101,6 +116,66 @@ public class DataMigrationRunner {
 
     private void clearFailedMigrationHistory(Statement statement) throws SQLException {
         statement.executeUpdate("delete from flyway_schema_history where success = false");
+    }
+
+    private void validateAdvancedMysqlObjects() {
+        if (!"mysql".equalsIgnoreCase(dbKind)) {
+            return;
+        }
+
+        try (Connection connection = dataSource.getConnection()) {
+            List<String> missing = new ArrayList<>();
+            for (String routineName : REQUIRED_MYSQL_ROUTINES) {
+                if (!routineExists(connection, routineName)) {
+                    missing.add("routine " + routineName);
+                }
+            }
+            for (String triggerName : REQUIRED_MYSQL_TRIGGERS) {
+                if (!triggerExists(connection, triggerName)) {
+                    missing.add("trigger " + triggerName);
+                }
+            }
+
+            if (!missing.isEmpty()) {
+                throw new IllegalStateException("Missing MySQL advanced database objects after Flyway migration: "
+                        + String.join(", ", missing)
+                        + ". Check migration V12__advanced_database_module.sql and flyway_schema_history.");
+            }
+
+            LOG.info("DataMigrationRunner: verified MySQL advanced database objects");
+        } catch (SQLException e) {
+            throw new IllegalStateException("Could not verify MySQL advanced database objects", e);
+        }
+    }
+
+    private boolean routineExists(Connection connection, String routineName) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement("""
+                select 1
+                from information_schema.routines
+                where routine_schema = database()
+                  and routine_name = ?
+                limit 1
+                """)) {
+            statement.setString(1, routineName);
+            try (var resultSet = statement.executeQuery()) {
+                return resultSet.next();
+            }
+        }
+    }
+
+    private boolean triggerExists(Connection connection, String triggerName) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement("""
+                select 1
+                from information_schema.triggers
+                where trigger_schema = database()
+                  and trigger_name = ?
+                limit 1
+                """)) {
+            statement.setString(1, triggerName);
+            try (var resultSet = statement.executeQuery()) {
+                return resultSet.next();
+            }
+        }
     }
 
     private boolean tableExists(Statement statement, String tableName) throws SQLException {

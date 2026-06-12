@@ -26,8 +26,6 @@
 
 DROP PROCEDURE IF EXISTS sp_create_supply_request_with_movement;
 
-DELIMITER //
-
 CREATE PROCEDURE sp_create_supply_request_with_movement(
     IN p_request_id VARCHAR(36),
     IN p_movement_id VARCHAR(36),
@@ -68,6 +66,4 @@ BEGIN
     );
 
     COMMIT;
-END //
-
-DELIMITER ;
+END;

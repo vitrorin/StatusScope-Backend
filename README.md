@@ -305,6 +305,24 @@ The database documentation covers:
 | `tools/ingesta-datos/README.md` | Epidemiological ingestion pipeline |
 | `scripts/mysql/faker/README-faker.md` | Synthetic data and ETL notes |
 
+For MySQL profiles, startup runs Flyway through `DataMigrationRunner` and then verifies that the advanced database objects from `V12__advanced_database_module.sql` exist. To inspect a local database manually:
+
+```sql
+SELECT version, description, success
+FROM flyway_schema_history
+WHERE version = '12';
+
+SELECT routine_type, routine_name
+FROM information_schema.routines
+WHERE routine_schema = DATABASE()
+ORDER BY routine_type, routine_name;
+
+SELECT trigger_name, event_manipulation, event_object_table
+FROM information_schema.triggers
+WHERE trigger_schema = DATABASE()
+ORDER BY trigger_name;
+```
+
 ## Integrations
 
 ### Firebase

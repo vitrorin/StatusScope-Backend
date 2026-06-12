@@ -8,9 +8,7 @@
 -- Entorno:          MySQL 8.0+, InnoDB, Cloud SQL for MySQL.
 -- ============================================================================
 
-DELIMITER //
-
-DROP PROCEDURE IF EXISTS add_index_if_missing //
+DROP PROCEDURE IF EXISTS add_index_if_missing;
 
 CREATE PROCEDURE add_index_if_missing(
     IN p_table_name VARCHAR(64),
@@ -30,9 +28,7 @@ BEGIN
         EXECUTE stmt;
         DEALLOCATE PREPARE stmt;
     END IF;
-END //
-
-DELIMITER ;
+END;
 
 -- ============================================================================
 -- 1. outbreaks — filtro por (status, scope) + ubicación geográfica

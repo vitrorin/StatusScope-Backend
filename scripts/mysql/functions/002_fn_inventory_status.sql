@@ -22,8 +22,6 @@
 
 DROP FUNCTION IF EXISTS fn_inventory_status;
 
-DELIMITER //
-
 CREATE FUNCTION fn_inventory_status(p_inventory_item_id VARCHAR(36))
 RETURNS VARCHAR(32)
 DETERMINISTIC
@@ -48,6 +46,4 @@ BEGIN
     ELSE
         RETURN 'ADEQUATE';
     END IF;
-END //
-
-DELIMITER ;
+END;

@@ -18,8 +18,6 @@
 
 DROP TRIGGER IF EXISTS trg_validate_inventory_before_insert;
 
-DELIMITER //
-
 CREATE TRIGGER trg_validate_inventory_before_insert
 BEFORE INSERT ON hospital_inventory_movements
 FOR EACH ROW
@@ -37,6 +35,4 @@ BEGIN
                 MYSQL_ERRNO = 1644;
         END IF;
     END IF;
-END //
-
-DELIMITER ;
+END;
