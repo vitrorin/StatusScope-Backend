@@ -1,5 +1,6 @@
 package com.itesm.application.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,7 @@ public class SystemDashboardSummaryDto {
 
     public static class SystemActivityPointDto {
         private String label;
+        private LocalDate date;
         private int value;
         private int adminValue;
         private int doctorValue;
@@ -80,6 +82,14 @@ public class SystemDashboardSummaryDto {
             this.value = value;
         }
 
+        public SystemActivityPointDto(String label, LocalDate date, int value, int adminValue, int doctorValue) {
+            this.label = label;
+            this.date = date;
+            this.value = value;
+            this.adminValue = adminValue;
+            this.doctorValue = doctorValue;
+        }
+
         public SystemActivityPointDto(String label, int value, int adminValue, int doctorValue) {
             this.label = label;
             this.value = value;
@@ -89,6 +99,8 @@ public class SystemDashboardSummaryDto {
 
         public String getLabel() { return label; }
         public void setLabel(String label) { this.label = label; }
+        public LocalDate getDate() { return date; }
+        public void setDate(LocalDate date) { this.date = date; }
         public int getValue() { return value; }
         public void setValue(int value) { this.value = value; }
         public int getAdminValue() { return adminValue; }

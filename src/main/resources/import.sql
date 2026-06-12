@@ -79,7 +79,8 @@ INSERT INTO privileges (id, code, description, created_at, updated_at) VALUES
 ('10000000-0000-0000-0000-000000000017', 'states.read',       'Read states',                CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000018', 'states.manage',     'Manage states',              CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000019', 'diagnosis.assist',  'Use the AI diagnosis assistant chat', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('10000000-0000-0000-0000-000000000020', 'admin.operations',  'Access hospital admin operational features', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+('10000000-0000-0000-0000-000000000020', 'admin.operations',  'Access hospital admin operational features', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('10000000-0000-0000-0000-000000000021', 'isSystemAdmin',     'Access system administrator features', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- SYSTEM_ADMIN: everything
 INSERT INTO role_privileges (role_id, privilege_id) VALUES
@@ -102,9 +103,9 @@ INSERT INTO role_privileges (role_id, privilege_id) VALUES
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000017'),
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000018'),
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000019');
--- admin.operations for SYSTEM_ADMIN
+-- isSystemAdmin for SYSTEM_ADMIN
 INSERT INTO role_privileges (role_id, privilege_id) VALUES
-('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000020');
+('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000021');
 
 -- HOSPITAL_ADMIN: hospital-scoped clinical + admin.
 INSERT INTO role_privileges (role_id, privilege_id) VALUES
