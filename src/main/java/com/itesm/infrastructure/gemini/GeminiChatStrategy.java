@@ -17,6 +17,7 @@ import org.jboss.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 @Named("gemini")
@@ -24,8 +25,8 @@ public class GeminiChatStrategy implements LlmChatStrategy {
 
     private static final Logger LOG = Logger.getLogger(GeminiChatStrategy.class);
 
-    @ConfigProperty(name = "gemini.api-key", defaultValue = "")
-    String apiKey;
+    @ConfigProperty(name = "gemini.api-key")
+    Optional<String> apiKey;
 
     @ConfigProperty(name = "gemini.model", defaultValue = "gemini-2.0-flash")
     String model;
@@ -38,8 +39,8 @@ public class GeminiChatStrategy implements LlmChatStrategy {
 
     @Override
     public String chat(List<AssistantChatMessage> messages) {
-        String key = apiKey.trim();
-        if (key == null || key.isBlank()) {
+        String key = apiKey.orElse("").trim();
+        if (key.isBlank()) {
             LOG.warn("Gemini API key is not configured");
             throw new OpenAiException("Gemini API key is not configured");
         }

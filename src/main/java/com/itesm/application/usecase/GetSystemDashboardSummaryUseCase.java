@@ -21,6 +21,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,11 +38,11 @@ public class GetSystemDashboardSummaryUseCase {
     @ConfigProperty(name = "statusscope.admin.recommendations.llm.enabled", defaultValue = "true")
     boolean llmEnabled;
 
-    @ConfigProperty(name = "openai.api-key", defaultValue = "")
-    String openAiApiKey;
+    @ConfigProperty(name = "openai.api-key")
+    Optional<String> openAiApiKey;
 
-    @ConfigProperty(name = "gemini.api-key", defaultValue = "")
-    String geminiApiKey;
+    @ConfigProperty(name = "gemini.api-key")
+    Optional<String> geminiApiKey;
 
     public SystemDashboardSummaryDto execute() {
         if (!authenticatedUserContext.getCurrentUser().isSystemAdmin()) {
@@ -52,7 +53,7 @@ public class GetSystemDashboardSummaryUseCase {
         List<User> users = userRepository.listAllDomain();
         long activeHospitals = hospitals.stream().filter(Hospital::isActive).count();
         long activeUsers = users.stream().filter(user -> user.getStatus() == UserStatus.ACTIVE).count();
-        boolean aiConfigured = llmEnabled && (!isBlank(openAiApiKey) || !isBlank(geminiApiKey));
+        boolean aiConfigured = llmEnabled && (!isBlank(openAiApiKey.orElse(null)) || !isBlank(geminiApiKey.orElse(null)));
 
         SystemDashboardSummaryDto dto = new SystemDashboardSummaryDto();
         dto.setGeneratedAt(LocalDateTime.now());
