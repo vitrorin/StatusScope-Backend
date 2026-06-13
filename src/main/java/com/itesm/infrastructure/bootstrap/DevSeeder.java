@@ -34,6 +34,7 @@ import org.jboss.logging.Logger;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -74,7 +75,8 @@ public class DevSeeder {
     boolean seedDiagnosisAssistantDemoData;
 
     @Transactional
-    void onStart(@Observes @Priority(20) StartupEvent ev) {
+    void onStart(@Observes @Priority(20) StartupEvent startupEvent) {
+        Objects.requireNonNull(startupEvent, "startupEvent");
         if (!devSeederEnabled && !"dev".equals(profile) && !"test".equals(profile)) return;
         if (devSeederEnabled || "dev".equals(profile)) {
             ensureFirebaseInitialized();

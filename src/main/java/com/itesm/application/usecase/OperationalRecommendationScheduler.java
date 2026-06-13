@@ -9,6 +9,8 @@ import jakarta.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 
+import java.util.Objects;
+
 @ApplicationScoped
 public class OperationalRecommendationScheduler {
 
@@ -22,7 +24,8 @@ public class OperationalRecommendationScheduler {
     @ConfigProperty(name = "statusscope.admin.recommendations.refresh-at-start", defaultValue = "false")
     boolean refreshAtStart;
 
-    void refreshAtStartup(@Observes @Priority(30) StartupEvent event) {
+    void refreshAtStartup(@Observes @Priority(30) StartupEvent startupEvent) {
+        Objects.requireNonNull(startupEvent, "startupEvent");
         if (!schedulerEnabled || !refreshAtStart) {
             return;
         }

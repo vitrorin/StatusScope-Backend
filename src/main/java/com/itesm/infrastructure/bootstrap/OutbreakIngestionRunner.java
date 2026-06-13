@@ -8,6 +8,8 @@ import jakarta.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 
+import java.util.Objects;
+
 @ApplicationScoped
 public class OutbreakIngestionRunner {
 
@@ -19,7 +21,8 @@ public class OutbreakIngestionRunner {
     @ConfigProperty(name = "outbreak.ingestion.import-at-start", defaultValue = "true")
     boolean importAtStart;
 
-    void onStart(@Observes @Priority(15) StartupEvent event) {
+    void onStart(@Observes @Priority(15) StartupEvent startupEvent) {
+        Objects.requireNonNull(startupEvent, "startupEvent");
         if (!importAtStart) {
             LOG.info("OutbreakIngestionRunner: startup outbreak CSV import disabled");
             return;

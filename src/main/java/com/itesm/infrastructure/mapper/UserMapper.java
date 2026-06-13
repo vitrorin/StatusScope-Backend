@@ -5,6 +5,7 @@ import com.itesm.infrastructure.persistence.entity.RoleEntity;
 import com.itesm.infrastructure.persistence.entity.UserEntity;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class UserMapper {
@@ -38,14 +39,15 @@ public final class UserMapper {
         entity.setStatus(user.getStatus());
         entity.setLastLoginAt(user.getLastLoginAt());
         entity.setLicenseNumber(user.getLicenseNumber());
-        entity.setRoles(new HashSet<>());
+        Set<RoleEntity> roles = new HashSet<>();
         if (user.getRoles() != null) {
             for (com.itesm.domain.models.Role role : user.getRoles()) {
                 RoleEntity re = new RoleEntity();
                 re.setId(role.getId());
-                entity.getRoles().add(re);
+                roles.add(re);
             }
         }
+        entity.setRoles(roles);
         return entity;
     }
 }

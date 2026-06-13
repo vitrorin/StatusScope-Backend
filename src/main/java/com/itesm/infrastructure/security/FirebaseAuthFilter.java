@@ -21,7 +21,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -48,12 +47,7 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
             return;
         }
 
-        String path = ctx.getUriInfo().getPath();
-        if (path.startsWith("/")) {
-            path = path.substring(1);
-        }
-        final String normalizedPath = path;
-        if (PUBLIC_PATH_PREFIXES.stream().anyMatch(normalizedPath::startsWith)) {
+        if (isPublicPath(normalizePath(ctx))) {
             return;
         }
 
@@ -105,5 +99,22 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
 
     private void abortUnauthorized(ContainerRequestContext ctx) {
         ctx.abortWith(Response.status(401).build());
+    }
+
+    private boolean isPublicPath(String normalizedPath) {
+        return PUBLIC_PATH_PREFIXES.stream()
+                .anyMatch(publicPath -> normalizedPath.equals(publicPath)
+                        || normalizedPath.startsWith(publicPath + "/"));
+    }
+
+    private String normalizePath(ContainerRequestContext ctx) {
+        String path = ctx.getUriInfo().getPath(false);
+        if (path == null || path.isBlank()) {
+            return "";
+        }
+        while (path.startsWith("/")) {
+            path = path.substring(1);
+        }
+        return path;
     }
 }

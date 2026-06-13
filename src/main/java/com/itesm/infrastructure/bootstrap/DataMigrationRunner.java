@@ -14,6 +14,7 @@ import org.jboss.logging.Logger;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
 
 @ApplicationScoped
 public class DataMigrationRunner {
@@ -32,7 +33,8 @@ public class DataMigrationRunner {
     @ConfigProperty(name = "quarkus.datasource.db-kind", defaultValue = "mysql")
     String dbKind;
 
-    void onStart(@Observes @Priority(10) StartupEvent ev) {
+    void onStart(@Observes @Priority(10) StartupEvent startupEvent) {
+        Objects.requireNonNull(startupEvent, "startupEvent");
         clearFailedMigrationHistoryIfPresent();
         if (isSchemaRecreatedOnStart()) {
             resetCatalogHistoryAfterSchemaRecreation();

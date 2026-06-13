@@ -83,7 +83,7 @@ class AdminOperationalResourceTest {
                     return llmRecommendationResponse(draftTitle);
                 });
 
-        User admin = userRepository.findByEmail(ADMIN_EMAIL).orElseGet(() -> {
+        userRepository.findByEmail(ADMIN_EMAIL).orElseGet(() -> {
             var adminRole = roleRepository.findByCode("HOSPITAL_ADMIN").orElseThrow();
             User newAdmin = new User();
             newAdmin.setId(UUID.randomUUID());
