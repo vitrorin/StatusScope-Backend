@@ -2,7 +2,9 @@ name: Deploy Dev
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, main]
+  pull_request:
+    branches: [develop, main]
 
 concurrency:
   group: backend-dev-deploy
@@ -42,6 +44,7 @@ jobs:
   deploy:
     name: Build & Deploy to Cloud Run
     needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     permissions:
       contents: read
