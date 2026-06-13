@@ -14,14 +14,11 @@ import org.jboss.logging.Logger;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Set;
 
 @ApplicationScoped
 public class DataMigrationRunner {
 
     private static final Logger LOG = Logger.getLogger(DataMigrationRunner.class);
-
-    private static final Set<String> ALLOWED_TABLES = Set.of("flyway_schema_history", "municipalities");
 
     @Inject
     Flyway flyway;
@@ -64,17 +61,17 @@ public class DataMigrationRunner {
              Statement statement = connection.createStatement()) {
             dropLegacyDiseaseCategoryTables(statement);
 
-            if (!tableExists(statement, "flyway_schema_history")) {
+            if (!tableExists(connection, "flyway_schema_history")) {
                 return;
             }
 
             clearFailedMigrationHistory(statement);
 
-            if (!tableExists(statement, "municipalities")) {
+            if (!tableExists(connection, "municipalities")) {
                 return;
             }
 
-            if (!isTableEmpty(statement, "municipalities")) {
+            if (!isMunicipalitiesTableEmpty(statement)) {
                 return;
             }
 
@@ -88,7 +85,7 @@ public class DataMigrationRunner {
     private void clearFailedMigrationHistoryIfPresent() {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
-            if (!tableExists(statement, "flyway_schema_history")) {
+            if (!tableExists(connection, "flyway_schema_history")) {
                 return;
             }
             clearFailedMigrationHistory(statement);
@@ -106,26 +103,16 @@ public class DataMigrationRunner {
         statement.executeUpdate("delete from flyway_schema_history where success = false");
     }
 
-    private boolean tableExists(Statement statement, String tableName) throws SQLException {
-        validateTableName(tableName);
-        try (var ignored = statement.executeQuery("select 1 from " + tableName + " where 1 = 0")) {
-            return true;
-        } catch (SQLException ignored) {
-            return false;
+    private boolean tableExists(Connection connection, String tableName) throws SQLException {
+        try (var rs = connection.getMetaData().getTables(null, null, tableName, new String[]{"TABLE"})) {
+            return rs.next();
         }
     }
 
-    private boolean isTableEmpty(Statement statement, String tableName) throws SQLException {
-        validateTableName(tableName);
-        try (var resultSet = statement.executeQuery("select count(*) from " + tableName)) {
+    private boolean isMunicipalitiesTableEmpty(Statement statement) throws SQLException {
+        try (var resultSet = statement.executeQuery("select count(*) from municipalities")) {
             resultSet.next();
             return resultSet.getLong(1) == 0;
-        }
-    }
-
-    private static void validateTableName(String tableName) {
-        if (!ALLOWED_TABLES.contains(tableName)) {
-            throw new IllegalArgumentException("Table name not in allowlist: " + tableName);
         }
     }
 }
