@@ -286,6 +286,7 @@ CREATE TABLE operational_recommendations (
     expected_impact           VARCHAR(512),
     urgency_window            VARCHAR(128),
     confidence_score          DECIMAL(5,2),
+    content_translations_json  TEXT,
     image_mode                VARCHAR(32),
     rationale_json            TEXT,
     recommended_actions_json  TEXT,
@@ -464,7 +465,8 @@ INSERT INTO privileges (id, code, description, created_at, updated_at) VALUES
 ('10000000-0000-0000-0000-000000000017', 'states.read', 'Read states', NOW(), NOW()),
 ('10000000-0000-0000-0000-000000000018', 'states.manage', 'Manage states', NOW(), NOW()),
 ('10000000-0000-0000-0000-000000000019', 'diagnosis.assist', 'Use the AI diagnosis assistant chat', NOW(), NOW()),
-('10000000-0000-0000-0000-000000000020', 'admin.operations', 'Access hospital admin operational features', NOW(), NOW());
+('10000000-0000-0000-0000-000000000020', 'admin.operations', 'Access hospital admin operational features', NOW(), NOW()),
+('10000000-0000-0000-0000-000000000021', 'isSystemAdmin', 'Access system administrator features', NOW(), NOW());
 
 INSERT INTO role_privileges (role_id, privilege_id) VALUES
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000001'),
@@ -486,7 +488,7 @@ INSERT INTO role_privileges (role_id, privilege_id) VALUES
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000017'),
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000018'),
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000019'),
-('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000020'),
+('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000021'),
 ('00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000001'),
 ('00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000002'),
 ('00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000003'),
@@ -522,9 +524,9 @@ INSERT INTO users (
 ) VALUES
 ('70000000-0000-0000-0000-000000000001', 'System Admin', 'admin@statusscope.local', b'1', 'seed-system-admin', NULL, 'ACTIVE', NULL, NULL, NULL, NOW(), NOW()),
 ('70000000-0000-0000-0000-000000000002', 'Admin HGZ-21', 'admin.hgz21@statusscope.local', b'1', 'seed-admin-hgz21', '30000000-0000-0000-0000-000000000001', 'ACTIVE', NULL, NULL, NULL, NOW(), NOW()),
-('70000000-0000-0000-0000-000000000003', 'Admin HRE-05', 'admin.hre05@statusscope.local', b'1', 'seed-admin-hre05', '30000000-0000-0000-0000-000000000002', 'ACTIVE', NULL, NULL, NULL, NOW(), NOW()),
+('70000000-0000-0000-0000-000000000003', 'Admin HRE-05', 'admin.hre05@statusscope.local', b'1', 'seed-admin-hre05', '30000000-0000-0000-0000-000000000002', 'ACTIVE', DATE_SUB(NOW(), INTERVAL 1 DAY), NULL, NULL, NOW(), NOW()),
 ('70000000-0000-0000-0000-000000000004', 'Dra. Ana Lopez', 'doctor1@statusscope.local', b'1', 'seed-doctor-1', '30000000-0000-0000-0000-000000000001', 'ACTIVE', NULL, NULL, '50000000-0000-0000-0000-000000000001', NOW(), NOW()),
-('70000000-0000-0000-0000-000000000005', 'Dr. Luis Perez', 'doctor2@statusscope.local', b'1', 'seed-doctor-2', '30000000-0000-0000-0000-000000000002', 'ACTIVE', NULL, NULL, '50000000-0000-0000-0000-000000000001', NOW(), NOW());
+('70000000-0000-0000-0000-000000000005', 'Dr. Luis Perez', 'doctor2@statusscope.local', b'1', 'seed-doctor-2', '30000000-0000-0000-0000-000000000002', 'ACTIVE', DATE_SUB(NOW(), INTERVAL 2 HOUR), NULL, '50000000-0000-0000-0000-000000000001', NOW(), NOW());
 
 INSERT INTO user_roles (user_id, role_id) VALUES
 ('70000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001'),
@@ -537,14 +539,14 @@ INSERT INTO outbreaks (
     id, disease_id, scope, municipality_id, state_id, case_count,
     confirmation_status, status, started_at, ended_at, created_at, updated_at
 ) VALUES
-('71000000-0000-0000-0000-000000000501', '60000000-0000-0000-0000-000000000004', 'MUNICIPALITY', '42000000-0000-0000-0000-000000001003', NULL, 12, 'CONFIRMED', 'ACTIVE', NOW() - INTERVAL 2 DAY, NULL, NOW(), NOW());
+('71000000-0000-0000-0000-000000000501', '60000000-0000-0000-0000-000000000004', 'MUNICIPALITY', '42000000-0000-0000-0000-000000001003', NULL, 72, 'CONFIRMED', 'ACTIVE', NOW() - INTERVAL 2 DAY, NULL, NOW(), NOW());
 
 INSERT INTO hospital_resource_snapshots (
     id, hospital_id, captured_at, total_beds, available_beds, icu_total_beds, icu_available_beds,
     isolation_rooms_total, isolation_rooms_available, oxygen_capacity_units, oxygen_available_units,
     doctors_on_shift, nurses_on_shift, specialists_on_shift, source, created_at
 ) VALUES
-('20000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', NOW(), 240, 60, 20, 5, 10, 3, 500, 150, 42, 130, 15, 'MANUAL', NOW());
+('20000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', NOW(), 240, 24, 20, 3, 10, 3, 500, 150, 42, 130, 15, 'MANUAL', NOW());
 
 INSERT INTO hospital_department_resources (
     id, hospital_id, department_code, department_name, level_label, total_beds, occupied_beds, status, notes, updated_at
@@ -576,33 +578,5 @@ INSERT INTO hospital_inventory_items (
 ('23000000-0000-0000-0000-000000000005', '30000000-0000-0000-0000-000000000001', 'ISO_GOWN', 'Isolation Gowns', 'PPE', 'Central Supply', 150, 1000, 'units', 200, 700, 'CRITICAL', NOW()),
 ('23000000-0000-0000-0000-000000000006', '30000000-0000-0000-0000-000000000001', 'ANTIVIRAL', 'Antiviral Medications', 'PHARMACEUTICAL', 'Pharmacy', 60, 300, 'doses', 50, 250, 'LOW', NOW());
 
-INSERT INTO operational_recommendations (
-    id, hospital_id, source_alert_id, source_outbreak_id, type, severity, status, category, title, description,
-    expected_impact, urgency_window, confidence_score, image_mode, rationale_json, recommended_actions_json,
-    affected_departments_json, affected_resources_json, model_provider, model_version, input_context_json,
-    created_by_mode, created_at, updated_at, resolved_at
-) VALUES
-('24000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', NULL, NULL, 'BED_CAPACITY', 'CRITICAL', 'NEW', 'BED_CAPACITY',
- 'ICU Capacity Critical - Activate Surge Protocol',
- 'ICU occupancy is at 75% with 5 beds remaining. Trending upward due to respiratory disease activity.',
- 'Prevent ICU overflow and ensure critical care availability', 'Immediately', 0.95, NULL,
- '["ICU occupancy trending 75% with active outbreak","Respiratory case referrals increasing 18% week over week"]',
- '["Activate ICU surge protocol","Convert step-down unit beds to monitored ICU capacity","Expedite eligible ICU discharges"]',
- '["ICU","Step-Down Unit"]', '["ICU Beds","Ventilators","ICU Nursing"]', NULL, NULL, NULL, 'RULE_ENGINE', NOW(), NOW(), NULL),
-('24000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000001', NULL, NULL, 'STAFFING', 'HIGH', 'ACCEPTED', 'STAFFING',
- 'Increase Emergency Physician Staffing',
- 'Doctor-to-bed ratio is below recommended threshold during high outbreak season.',
- 'Improve patient throughput during outbreak surge', 'Next staffing rotation', 0.85, NULL,
- '["Doctor-to-bed ratio is 1:57, below recommended 1:30","Multiple active outbreaks in catchment area"]',
- '["Activate 3 additional on-call physicians","Redirect from low-urgency departments"]',
- '["Emergency Department","ICU"]', '["Physician Staff","On-Call Roster"]', NULL, NULL, NULL, 'RULE_ENGINE', NOW(), NOW(), NULL),
-('24000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000001', NULL, NULL, 'ISOLATION', 'MEDIUM', 'NEW', 'ISOLATION',
- 'Review PPE Stock Levels',
- 'Current PPE inventory (N95 masks, isolation gowns) is below minimum threshold given active respiratory outbreak.',
- 'Maintain staff protection and infection control capability', 'Within 48 hours', 0.78, NULL,
- '["N95 mask stock at 500 units vs 200 critical threshold","Isolation gowns critically low at 150 units"]',
- '["Emergency procurement of 1500 N95 masks","Order 700 isolation gowns","Audit and restock PPE distribution"]',
- '["Emergency Department","Respiratory Ward","General Admission"]', '["N95 Masks","Isolation Gowns"]', NULL, NULL, NULL, 'RULE_ENGINE', NOW(), NOW(), NULL);
-
--- Optional reference tasks / notifications / supply requests can be added on top of the recommendation seed
--- above, but are intentionally left empty because the dev bootstrap does not create them by default.
+-- Operational recommendations are intentionally not seeded here. They are generated
+-- from live hospital signals by the recommendation refresh use case.

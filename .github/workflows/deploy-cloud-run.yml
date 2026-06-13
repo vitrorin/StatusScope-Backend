@@ -1,0 +1,79 @@
+name: Deploy backend to Cloud Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deployment environment"
+        required: true
+        default: "prod"
+      service:
+        description: "Cloud Run service name"
+        required: true
+        default: "statusscope-backend"
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+  REGION: ${{ vars.GCP_REGION }}
+  ARTIFACT_REGISTRY_REPOSITORY: ${{ vars.ARTIFACT_REGISTRY_REPOSITORY }}
+  IMAGE_NAME: statusscope-backend
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Run tests
+        run: |
+          chmod +x ./mvnw
+          ./mvnw test
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker auth
+        run: gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
+
+      - name: Build and push container image
+        run: |
+          IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY_REPOSITORY}/${IMAGE_NAME}:${GITHUB_SHA}"
+          ./mvnw package -DskipTests -Pcontainer-image \
+            -Dquarkus.container-image.build=true \
+            -Dquarkus.container-image.push=true \
+            -Dquarkus.container-image.registry="${REGION}-docker.pkg.dev" \
+            -Dquarkus.container-image.group="${PROJECT_ID}/${ARTIFACT_REGISTRY_REPOSITORY}" \
+            -Dquarkus.container-image.name="${IMAGE_NAME}" \
+            -Dquarkus.container-image.tag="${GITHUB_SHA}"
+          echo "IMAGE_URI=${IMAGE_URI}" >> "$GITHUB_ENV"
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy "${{ inputs.service }}" \
+            --image "${IMAGE_URI}" \
+            --region "${REGION}" \
+            --platform managed \
+            --allow-unauthenticated \
+            --add-cloudsql-instances "${{ vars.CLOUD_SQL_INSTANCE_CONNECTION_NAME }}" \
+            --set-env-vars "QUARKUS_PROFILE=prod,OUTBREAK_INGESTION_IMPORT_AT_START=true,ADMIN_RECOMMENDATIONS_SCHEDULER_ENABLED=false,QUARKUS_DATASOURCE_JDBC_URL=${{ vars.QUARKUS_DATASOURCE_JDBC_URL }},FIREBASE_SA_PATH=/secrets/firebase/firebase-service-account.json" \
+            --set-secrets "QUARKUS_DATASOURCE_USERNAME=${{ vars.DB_USERNAME_SECRET }}:latest,QUARKUS_DATASOURCE_PASSWORD=${{ vars.DB_PASSWORD_SECRET }}:latest,/secrets/firebase/firebase-service-account.json=${{ vars.FIREBASE_SA_SECRET }}:latest"

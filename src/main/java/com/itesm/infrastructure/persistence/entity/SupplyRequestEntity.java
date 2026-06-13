@@ -21,8 +21,8 @@ public class SupplyRequestEntity {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "recommendation_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recommendation_id")
     private OperationalRecommendationEntity recommendation;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

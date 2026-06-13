@@ -44,6 +44,7 @@ public class GetDiagnosisEvaluationUseCase {
                 left join fetch e.event ev
                 left join fetch ev.disease d
                 where e.doctor.id = :doctorId
+                  and e.status = 'IN_PROGRESS'
                 order by e.createdAt desc
                 """, PatientEvaluationEntity.class);
         query.setParameter("doctorId", currentUser.getUserId());

@@ -42,6 +42,34 @@ public class HospitalRepositoryImpl implements HospitalRepository, PanacheReposi
     }
 
     @Override
+    @Transactional
+    public Hospital update(Hospital hospital) {
+        HospitalEntity managed = findByIdOptional(hospital.getId()).orElseThrow();
+        managed.setCode(hospital.getCode());
+        managed.setName(hospital.getName());
+        managed.setAddress(hospital.getAddress());
+        managed.setPhone(hospital.getPhone());
+        managed.setInviteCode(hospital.getInviteCode());
+        managed.setActive(hospital.isActive());
+        managed.setPostalCode(hospital.getPostalCode());
+        managed.setBedCount(hospital.getBedCount());
+        managed.setDoctorCount(hospital.getDoctorCount());
+        managed.setNurseCount(hospital.getNurseCount());
+        managed.setLatitude(hospital.getLatitude());
+        managed.setLongitude(hospital.getLongitude());
+        managed.setUpdatedAt(LocalDateTime.now());
+        if (hospital.getMunicipalityId() != null) {
+            managed.setMunicipality(getEntityManager().getReference(MunicipalityEntity.class, hospital.getMunicipalityId()));
+        } else {
+            managed.setMunicipality(null);
+        }
+        persist(managed);
+        getEntityManager().flush();
+        getEntityManager().clear();
+        return findHospitalById(hospital.getId()).orElse(HospitalMapper.toDomain(managed));
+    }
+
+    @Override
     public List<Hospital> listAllDomain() {
         return listAll().stream().map(HospitalMapper::toDomain).collect(Collectors.toList());
     }

@@ -56,6 +56,12 @@ public class V3__seed_diseases_and_symptoms extends BaseJavaMigration {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("drop table if exists disease_category_links");
             statement.executeUpdate("drop table if exists disease_categories");
+            statement.executeUpdate("delete from alerts");
+            statement.executeUpdate("delete from outbreaks");
+            statement.executeUpdate("delete from diagnoses where event_id in (select id from events)");
+            statement.executeUpdate("update patient_evaluations set event_id = null");
+            statement.executeUpdate("delete from events");
+            statement.executeUpdate("delete from evaluation_differential_diagnoses");
             statement.executeUpdate("delete from disease_symptoms");
             statement.executeUpdate("delete from disease_specialties");
             statement.executeUpdate("delete from symptoms");

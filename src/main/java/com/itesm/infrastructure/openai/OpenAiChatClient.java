@@ -38,13 +38,14 @@ public class OpenAiChatClient implements LlmChatStrategy {
 
     @Override
     public String chat(List<AssistantChatMessage> messages) {
-        if (apiKey == null || apiKey.isBlank()) {
+        String key = apiKey.trim();
+        if (key == null || key.isBlank()) {
             LOG.warn("OpenAI API key is not configured — diagnosis assistant calls will fail");
             throw new OpenAiException("OpenAI API key is not configured");
         }
         try {
             ChatCompletionRequest request = new ChatCompletionRequest(model, toProviderMessages(messages), temperature);
-            ChatCompletionResponse response = httpClient.complete("Bearer " + apiKey, request);
+            ChatCompletionResponse response = httpClient.complete("Bearer " + key, request);
             if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
                 throw new OpenAiException("Empty response from OpenAI");
             }

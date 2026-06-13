@@ -32,6 +32,12 @@ public class ApiExceptionMapper implements ExceptionMapper<Throwable> {
                     .entity(new ApiError(404, "NOT_FOUND", exception.getMessage()))
                     .build();
         }
+        if (exception instanceof jakarta.ws.rs.NotFoundException) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .type(MediaType.APPLICATION_JSON)
+                    .entity(new ApiError(404, "NOT_FOUND", "Resource not found"))
+                    .build();
+        }
         if (exception instanceof InvalidInviteException) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .type(MediaType.APPLICATION_JSON)
@@ -82,4 +88,3 @@ public class ApiExceptionMapper implements ExceptionMapper<Throwable> {
                 .build();
     }
 }
-

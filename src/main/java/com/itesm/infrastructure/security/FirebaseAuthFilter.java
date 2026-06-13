@@ -14,12 +14,14 @@ import io.quarkus.arc.profile.UnlessBuildProfile;
 import jakarta.annotation.Priority;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Priorities;
+import jakarta.ws.rs.HttpMethod;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,6 +44,10 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext ctx) throws IOException {
+        if (HttpMethod.OPTIONS.equalsIgnoreCase(ctx.getMethod())) {
+            return;
+        }
+
         String path = ctx.getUriInfo().getPath();
         if (path.startsWith("/")) {
             path = path.substring(1);
@@ -53,17 +59,26 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
 
         String header = ctx.getHeaders().getFirst("Authorization");
         if (header == null || !header.startsWith("Bearer ")) {
-            ctx.abortWith(Response.status(401).build());
+            abortUnauthorized(ctx);
             return;
         }
 
         try {
-            FirebaseToken decoded = FirebaseAuth.getInstance()
-                    .verifyIdToken(header.substring("Bearer ".length()), true);
+            String token = header.substring("Bearer ".length()).strip();
+            if (token.isEmpty()) {
+                abortUnauthorized(ctx);
+                return;
+            }
+            FirebaseToken decoded = FirebaseAuth.getInstance().verifyIdToken(token, true);
+            String uid = decoded.getUid();
+            if (uid == null || uid.isBlank()) {
+                abortUnauthorized(ctx);
+                return;
+            }
 
-            User user = userRepository.findByExternalAuthId(decoded.getUid()).orElse(null);
+            User user = userRepository.findByExternalAuthId(uid).orElse(null);
             if (user == null || user.getStatus() != UserStatus.ACTIVE) {
-                ctx.abortWith(Response.status(401).build());
+                abortUnauthorized(ctx);
                 return;
             }
 
@@ -84,7 +99,11 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
                     privileges
             ));
         } catch (FirebaseAuthException e) {
-            ctx.abortWith(Response.status(401).build());
+            abortUnauthorized(ctx);
         }
+    }
+
+    private void abortUnauthorized(ContainerRequestContext ctx) {
+        ctx.abortWith(Response.status(401).build());
     }
 }
