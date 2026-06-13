@@ -49,8 +49,49 @@ public class OperationalDirectoryRepositoryImpl
     }
 
     @Override
+    public List<HospitalOperationalContact> findActiveEmailContactsByDepartment(UUID hospitalId, String departmentCode, boolean notifiableOnly) {
+        return em.createQuery("""
+                select c
+                from HospitalOperationalContactEntity c
+                where c.hospital.id = :hospitalId
+                  and c.departmentCode = :departmentCode
+                  and c.contactChannel = 'EMAIL'
+                  and c.contactValue is not null
+                  and upper(coalesce(c.availabilityStatus, 'ACTIVE')) <> 'INACTIVE'
+                  and (:notifiableOnly = false or c.notifiable = true)
+                order by c.displayName asc
+                """, HospitalOperationalContactEntity.class)
+                .setParameter("hospitalId", hospitalId)
+                .setParameter("departmentCode", departmentCode)
+                .setParameter("notifiableOnly", notifiableOnly)
+                .getResultList()
+                .stream().map(this::contactToDomain).collect(Collectors.toList());
+    }
+
+    @Override
     public Optional<HospitalOperationalContact> findContactById(UUID contactId) {
         return Optional.ofNullable(em.find(HospitalOperationalContactEntity.class, contactId)).map(this::contactToDomain);
+    }
+
+    @Override
+    @Transactional
+    public HospitalOperationalContact createContact(HospitalOperationalContact contact) {
+        HospitalOperationalContactEntity entity = new HospitalOperationalContactEntity();
+        entity.setId(contact.getId() != null ? contact.getId() : UUID.randomUUID());
+        entity.setHospital(em.getReference(HospitalEntity.class, contact.getHospitalId()));
+        copyContactFields(contact, entity);
+        entity.setUpdatedAt(LocalDateTime.now());
+        em.persist(entity);
+        return contactToDomain(entity);
+    }
+
+    @Override
+    @Transactional
+    public HospitalOperationalContact updateContact(HospitalOperationalContact contact) {
+        HospitalOperationalContactEntity entity = em.find(HospitalOperationalContactEntity.class, contact.getId());
+        copyContactFields(contact, entity);
+        entity.setUpdatedAt(LocalDateTime.now());
+        return contactToDomain(entity);
     }
 
     @Override
@@ -127,6 +168,17 @@ public class OperationalDirectoryRepositoryImpl
         return contact;
     }
 
+    private void copyContactFields(HospitalOperationalContact contact, HospitalOperationalContactEntity entity) {
+        entity.setDisplayName(contact.getDisplayName());
+        entity.setRoleLabel(contact.getRoleLabel());
+        entity.setDepartmentCode(contact.getDepartmentCode());
+        entity.setContactChannel(contact.getContactChannel());
+        entity.setContactValue(contact.getContactValue());
+        entity.setAvailabilityStatus(contact.getAvailabilityStatus());
+        entity.setAssignable(contact.isAssignable());
+        entity.setNotifiable(contact.isNotifiable());
+    }
+
     private HospitalOperationalGroup groupToDomain(HospitalOperationalGroupEntity entity) {
         HospitalOperationalGroup group = new HospitalOperationalGroup();
         group.setId(entity.getId());
@@ -134,6 +186,7 @@ public class OperationalDirectoryRepositoryImpl
         group.setGroupCode(entity.getGroupCode());
         group.setGroupName(entity.getGroupName());
         group.setGroupType(entity.getGroupType());
+        group.setDepartmentCode(entity.getDepartmentCode());
         group.setAssignable(entity.isAssignable());
         group.setNotifiable(entity.isNotifiable());
         group.setMemberCount(countGroupMembers(entity.getId()));

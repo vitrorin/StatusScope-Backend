@@ -8,6 +8,7 @@ import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.MigrationVersion;
 import org.jboss.logging.Logger;
 
 import java.sql.Connection;
@@ -28,12 +29,26 @@ public class DataMigrationRunner {
     @ConfigProperty(name = "quarkus.hibernate-orm.schema-management.strategy", defaultValue = "none")
     String schemaManagementStrategy;
 
+    @ConfigProperty(name = "quarkus.datasource.db-kind", defaultValue = "mysql")
+    String dbKind;
+
     void onStart(@Observes @Priority(10) StartupEvent ev) {
+        clearFailedMigrationHistoryIfPresent();
         if (isSchemaRecreatedOnStart()) {
             resetCatalogHistoryAfterSchemaRecreation();
         }
-        flyway.migrate();
+        flywayForCurrentDatabase().migrate();
         LOG.info("DataMigrationRunner: Flyway data migrations applied");
+    }
+
+    private Flyway flywayForCurrentDatabase() {
+        if (!"h2".equalsIgnoreCase(dbKind)) {
+            return flyway;
+        }
+        return Flyway.configure()
+                .configuration(flyway.getConfiguration())
+                .target(MigrationVersion.fromVersion("7"))
+                .load();
     }
 
     private boolean isSchemaRecreatedOnStart() {
@@ -64,6 +79,18 @@ public class DataMigrationRunner {
             LOG.info("DataMigrationRunner: reset catalog migration history after schema recreation");
         } catch (SQLException e) {
             throw new IllegalStateException("Could not prepare data migration history", e);
+        }
+    }
+
+    private void clearFailedMigrationHistoryIfPresent() {
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement()) {
+            if (!tableExists(statement, "flyway_schema_history")) {
+                return;
+            }
+            clearFailedMigrationHistory(statement);
+        } catch (SQLException e) {
+            throw new IllegalStateException("Could not repair failed data migration history", e);
         }
     }
 

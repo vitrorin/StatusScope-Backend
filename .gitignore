@@ -30,12 +30,21 @@ replay_pid*
 node_modules/
 
 # Build output
+<<<<<<< Updated upstream
 target/
 build/
-out/
+/out/
 .quarkus/
 .gradle/
 coverage/
+=======
+/target/
+/build/
+/out/
+/.quarkus/
+/.gradle/
+/coverage/
+>>>>>>> Stashed changes
 
 # Firebase credentials
 *-firebase-adminsdk-*.json

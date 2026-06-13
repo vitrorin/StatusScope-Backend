@@ -3,6 +3,7 @@ package com.itesm.application.dto;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class OperationalRecommendationDto {
     private String id;
@@ -18,6 +19,7 @@ public class OperationalRecommendationDto {
     private String expectedImpact;
     private String urgencyWindow;
     private BigDecimal confidenceScore;
+    private Map<String, LocalizedContentDto> translations;
     private String imageMode;
     private List<String> rationale;
     private List<String> recommendedActions;
@@ -69,6 +71,8 @@ public class OperationalRecommendationDto {
     public void setUrgencyWindow(String urgencyWindow) { this.urgencyWindow = urgencyWindow; }
     public BigDecimal getConfidenceScore() { return confidenceScore; }
     public void setConfidenceScore(BigDecimal confidenceScore) { this.confidenceScore = confidenceScore; }
+    public Map<String, LocalizedContentDto> getTranslations() { return translations; }
+    public void setTranslations(Map<String, LocalizedContentDto> translations) { this.translations = translations; }
     public String getImageMode() { return imageMode; }
     public void setImageMode(String imageMode) { this.imageMode = imageMode; }
     public List<String> getRationale() { return rationale; }
@@ -153,6 +157,28 @@ public class OperationalRecommendationDto {
         public void setDisabledReason(String disabledReason) { this.disabledReason = disabledReason; }
     }
 
+    public static class LocalizedContentDto {
+        private String title;
+        private String description;
+        private String expectedImpact;
+        private String urgencyWindow;
+        private List<String> rationale;
+        private List<String> recommendedActions;
+
+        public String getTitle() { return title; }
+        public void setTitle(String title) { this.title = title; }
+        public String getDescription() { return description; }
+        public void setDescription(String description) { this.description = description; }
+        public String getExpectedImpact() { return expectedImpact; }
+        public void setExpectedImpact(String expectedImpact) { this.expectedImpact = expectedImpact; }
+        public String getUrgencyWindow() { return urgencyWindow; }
+        public void setUrgencyWindow(String urgencyWindow) { this.urgencyWindow = urgencyWindow; }
+        public List<String> getRationale() { return rationale; }
+        public void setRationale(List<String> rationale) { this.rationale = rationale; }
+        public List<String> getRecommendedActions() { return recommendedActions; }
+        public void setRecommendedActions(List<String> recommendedActions) { this.recommendedActions = recommendedActions; }
+    }
+
     public static class RecommendationTargetDto {
         private String id;
         private String label;
@@ -207,12 +233,16 @@ public class OperationalRecommendationDto {
         private String id;
         private String audienceGroupId;
         private String audienceContactId;
+        private String audienceType;
+        private String audienceDepartmentCode;
         private String audienceLabel;
         private String message;
         private String status;
         private String deliveryChannel;
         private String deliveryStatusDetail;
         private String sourceActionCode;
+        private RecipientSummaryDto recipientSummary;
+        private List<NotificationRecipientDto> recipients;
         private LocalDateTime sentAt;
 
         public String getId() { return id; }
@@ -221,6 +251,10 @@ public class OperationalRecommendationDto {
         public void setAudienceGroupId(String audienceGroupId) { this.audienceGroupId = audienceGroupId; }
         public String getAudienceContactId() { return audienceContactId; }
         public void setAudienceContactId(String audienceContactId) { this.audienceContactId = audienceContactId; }
+        public String getAudienceType() { return audienceType; }
+        public void setAudienceType(String audienceType) { this.audienceType = audienceType; }
+        public String getAudienceDepartmentCode() { return audienceDepartmentCode; }
+        public void setAudienceDepartmentCode(String audienceDepartmentCode) { this.audienceDepartmentCode = audienceDepartmentCode; }
         public String getAudienceLabel() { return audienceLabel; }
         public void setAudienceLabel(String audienceLabel) { this.audienceLabel = audienceLabel; }
         public String getMessage() { return message; }
@@ -233,8 +267,50 @@ public class OperationalRecommendationDto {
         public void setDeliveryStatusDetail(String deliveryStatusDetail) { this.deliveryStatusDetail = deliveryStatusDetail; }
         public String getSourceActionCode() { return sourceActionCode; }
         public void setSourceActionCode(String sourceActionCode) { this.sourceActionCode = sourceActionCode; }
+        public RecipientSummaryDto getRecipientSummary() { return recipientSummary; }
+        public void setRecipientSummary(RecipientSummaryDto recipientSummary) { this.recipientSummary = recipientSummary; }
+        public List<NotificationRecipientDto> getRecipients() { return recipients; }
+        public void setRecipients(List<NotificationRecipientDto> recipients) { this.recipients = recipients; }
         public LocalDateTime getSentAt() { return sentAt; }
         public void setSentAt(LocalDateTime sentAt) { this.sentAt = sentAt; }
+    }
+
+    public static class RecipientSummaryDto {
+        private int total;
+        private int sent;
+        private int failed;
+
+        public int getTotal() { return total; }
+        public void setTotal(int total) { this.total = total; }
+        public int getSent() { return sent; }
+        public void setSent(int sent) { this.sent = sent; }
+        public int getFailed() { return failed; }
+        public void setFailed(int failed) { this.failed = failed; }
+    }
+
+    public static class NotificationRecipientDto {
+        private String id;
+        private String contactId;
+        private String recipientName;
+        private String recipientEmail;
+        private String status;
+        private String deliveryStatusDetail;
+        private LocalDateTime deliveredAt;
+
+        public String getId() { return id; }
+        public void setId(String id) { this.id = id; }
+        public String getContactId() { return contactId; }
+        public void setContactId(String contactId) { this.contactId = contactId; }
+        public String getRecipientName() { return recipientName; }
+        public void setRecipientName(String recipientName) { this.recipientName = recipientName; }
+        public String getRecipientEmail() { return recipientEmail; }
+        public void setRecipientEmail(String recipientEmail) { this.recipientEmail = recipientEmail; }
+        public String getStatus() { return status; }
+        public void setStatus(String status) { this.status = status; }
+        public String getDeliveryStatusDetail() { return deliveryStatusDetail; }
+        public void setDeliveryStatusDetail(String deliveryStatusDetail) { this.deliveryStatusDetail = deliveryStatusDetail; }
+        public LocalDateTime getDeliveredAt() { return deliveredAt; }
+        public void setDeliveredAt(LocalDateTime deliveredAt) { this.deliveredAt = deliveredAt; }
     }
 
     public static class SupplyRequestItemDto {

@@ -12,7 +12,9 @@ import org.jboss.logging.Logger;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @ApplicationScoped
 public class OperationalRecommendationNarrativeComposer {
@@ -57,12 +59,18 @@ public class OperationalRecommendationNarrativeComposer {
         JsonNode node = objectMapper.readTree(json);
 
         NarrativeResponse response = new NarrativeResponse();
-        response.title = text(node, "title");
-        response.description = text(node, "description");
-        response.expectedImpact = text(node, "expectedImpact");
-        response.urgencyWindow = text(node, "urgencyWindow");
-        response.rationale = strings(node.get("rationale"));
-        response.recommendedActions = strings(node.get("recommendedActions"));
+        JsonNode translations = node.get("translations");
+        if (translations != null && translations.isObject()) {
+            response.en = localized(translations.get("en"));
+            response.es = localized(translations.get("es"));
+        } else {
+            response.en = new LocalizedNarrative();
+            response.en.description = text(node, "description");
+            response.en.expectedImpact = text(node, "expectedImpact");
+            response.en.urgencyWindow = text(node, "urgencyWindow");
+            response.en.rationale = strings(node.get("rationale"));
+            response.en.recommendedActions = strings(node.get("recommendedActions"));
+        }
         return response;
     }
 
@@ -80,24 +88,96 @@ public class OperationalRecommendationNarrativeComposer {
     }
 
     private void applyNarrative(OperationalRecommendation recommendation, NarrativeResponse response) throws Exception {
-        if (response.title != null && !response.title.isBlank()) {
-            recommendation.setTitle(response.title.trim());
+        LocalizedNarrative en = response.en;
+        if (en == null) {
+            return;
         }
-        if (response.description != null && !response.description.isBlank()) {
-            recommendation.setDescription(response.description.trim());
+
+        if (isEpidemiologyRecommendation(recommendation) && en.title != null && !en.title.isBlank()) {
+            recommendation.setTitle(en.title.trim());
         }
-        if (response.expectedImpact != null && !response.expectedImpact.isBlank()) {
-            recommendation.setExpectedImpact(response.expectedImpact.trim());
+        if (en.description != null && !en.description.isBlank()) {
+            recommendation.setDescription(en.description.trim());
         }
-        if (response.urgencyWindow != null && !response.urgencyWindow.isBlank()) {
-            recommendation.setUrgencyWindow(response.urgencyWindow.trim());
+        if (en.expectedImpact != null && !en.expectedImpact.isBlank()) {
+            recommendation.setExpectedImpact(en.expectedImpact.trim());
         }
-        if (!response.rationale.isEmpty()) {
-            recommendation.setRationaleJson(objectMapper.writeValueAsString(response.rationale));
+        if (en.urgencyWindow != null && !en.urgencyWindow.isBlank()) {
+            recommendation.setUrgencyWindow(en.urgencyWindow.trim());
         }
-        if (!response.recommendedActions.isEmpty()) {
-            recommendation.setRecommendedActionsJson(objectMapper.writeValueAsString(response.recommendedActions));
+        if (!en.rationale.isEmpty()) {
+            recommendation.setRationaleJson(objectMapper.writeValueAsString(en.rationale));
         }
+        if (!en.recommendedActions.isEmpty()) {
+            recommendation.setRecommendedActionsJson(objectMapper.writeValueAsString(en.recommendedActions));
+        }
+
+        if (response.hasTranslations()) {
+            recommendation.setContentTranslationsJson(objectMapper.writeValueAsString(buildTranslations(recommendation, response)));
+        }
+    }
+
+    private LocalizedNarrative localized(JsonNode node) {
+        if (node == null || !node.isObject()) {
+            return null;
+        }
+        LocalizedNarrative localized = new LocalizedNarrative();
+        localized.title = text(node, "title");
+        localized.description = text(node, "description");
+        localized.expectedImpact = text(node, "expectedImpact");
+        localized.urgencyWindow = text(node, "urgencyWindow");
+        localized.rationale = strings(node.get("rationale"));
+        localized.recommendedActions = strings(node.get("recommendedActions"));
+        return localized;
+    }
+
+    private Map<String, Map<String, Object>> buildTranslations(
+            OperationalRecommendation recommendation,
+            NarrativeResponse response) {
+        Map<String, Map<String, Object>> translations = new LinkedHashMap<>();
+        translations.put("en", contentMap(
+                recommendation.getTitle(),
+                recommendation.getDescription(),
+                recommendation.getExpectedImpact(),
+                recommendation.getUrgencyWindow(),
+                response.en.rationale,
+                response.en.recommendedActions));
+        if (response.es != null) {
+            translations.put("es", contentMap(
+                    valueOrFallback(response.es.title, recommendation.getTitle()),
+                    valueOrFallback(response.es.description, recommendation.getDescription()),
+                    valueOrFallback(response.es.expectedImpact, recommendation.getExpectedImpact()),
+                    valueOrFallback(response.es.urgencyWindow, recommendation.getUrgencyWindow()),
+                    response.es.rationale.isEmpty() ? response.en.rationale : response.es.rationale,
+                    response.es.recommendedActions.isEmpty() ? response.en.recommendedActions : response.es.recommendedActions));
+        }
+        return translations;
+    }
+
+    private Map<String, Object> contentMap(
+            String title,
+            String description,
+            String expectedImpact,
+            String urgencyWindow,
+            List<String> rationale,
+            List<String> recommendedActions) {
+        Map<String, Object> content = new LinkedHashMap<>();
+        content.put("title", title);
+        content.put("description", description);
+        content.put("expectedImpact", expectedImpact);
+        content.put("urgencyWindow", urgencyWindow);
+        content.put("rationale", rationale);
+        content.put("recommendedActions", recommendedActions);
+        return content;
+    }
+
+    private String valueOrFallback(String value, String fallback) {
+        return value == null || value.isBlank() ? fallback : value.trim();
+    }
+
+    private boolean isEpidemiologyRecommendation(OperationalRecommendation recommendation) {
+        String type = recommendation.getType();
+        return type != null && type.toUpperCase().startsWith("EPIDEMIOLOGY");
     }
 
     private String text(JsonNode node, String field) {
@@ -122,6 +202,15 @@ public class OperationalRecommendationNarrativeComposer {
     }
 
     private static class NarrativeResponse {
+        private LocalizedNarrative en;
+        private LocalizedNarrative es;
+
+        private boolean hasTranslations() {
+            return es != null;
+        }
+    }
+
+    private static class LocalizedNarrative {
         private String title;
         private String description;
         private String expectedImpact;

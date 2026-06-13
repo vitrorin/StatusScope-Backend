@@ -32,6 +32,7 @@ import jakarta.transaction.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -57,6 +58,9 @@ public class AskDiagnosisAssistantUseCase {
 
     @Inject
     HospitalGeoContextService hospitalGeoContextService;
+
+    @Inject
+    TranslateDiagnosisAssistantMessagesUseCase translateMessagesUseCase;
 
     @Inject
     HistoricalCaseRetriever historicalCaseRetriever;
@@ -169,10 +173,23 @@ public class AskDiagnosisAssistantUseCase {
         String stateName = state != null ? state.getName() : null;
         AssistantContextDto contextUsed = new AssistantContextDto(stateName, outbreakSummaries);
 
-        AssistantResponseDto response = new AssistantResponseDto(displayedReply, contextUsed);
+        Map<String, String> replyByLanguage = buildReplyByLanguage(displayedReply);
+
+        AssistantResponseDto response = new AssistantResponseDto(displayedReply, replyByLanguage, contextUsed);
         response.setMessageId(assistantMessage != null ? assistantMessage.getId() : null);
         response.setSuggestions(persistedSuggestions);
         return response;
+    }
+
+    private Map<String, String> buildReplyByLanguage(String reply) {
+        if (translateMessagesUseCase == null) {
+            return Map.of();
+        }
+
+        return Map.of(
+                "en", translateMessagesUseCase.translate(reply, "en"),
+                "es", translateMessagesUseCase.translate(reply, "es")
+        );
     }
 
     private List<HistoricalCaseRetriever.HistoricalCase> retrieveHistorical(UUID hospitalId,

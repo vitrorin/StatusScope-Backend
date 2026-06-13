@@ -38,13 +38,14 @@ public class GeminiChatStrategy implements LlmChatStrategy {
 
     @Override
     public String chat(List<AssistantChatMessage> messages) {
-        if (apiKey == null || apiKey.isBlank()) {
+        String key = apiKey.trim();
+        if (key == null || key.isBlank()) {
             LOG.warn("Gemini API key is not configured");
             throw new OpenAiException("Gemini API key is not configured");
         }
         try {
             GeminiGenerateRequest request = buildRequest(messages);
-            GeminiGenerateResponse response = httpClient.generateContent(model, apiKey, request);
+            GeminiGenerateResponse response = httpClient.generateContent(model, key, request);
 
             if (response == null
                     || response.getCandidates() == null

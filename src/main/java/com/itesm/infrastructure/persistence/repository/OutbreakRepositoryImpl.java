@@ -60,6 +60,28 @@ public class OutbreakRepositoryImpl implements OutbreakRepository, PanacheReposi
     }
 
     @Override
+    public List<Outbreak> findActiveStateByStateId(UUID stateId) {
+        if (stateId == null) return List.of();
+        return getEntityManager()
+                .createQuery("""
+                        select distinct o
+                        from OutbreakEntity o
+                        join fetch o.disease d
+                        left join fetch d.symptoms
+                        join fetch o.state s
+                        where o.status = :status
+                          and o.scope = 'STATE'
+                          and s.id = :stateId
+                        """, OutbreakEntity.class)
+                .setParameter("status", "ACTIVE")
+                .setParameter("stateId", stateId)
+                .getResultList()
+                .stream()
+                .map(OutbreakMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Outbreak> findActiveByMunicipalityIds(List<UUID> municipalityIds) {
         return findActiveByMunicipalityIdsOrStateId(municipalityIds, null).stream()
                 .filter(outbreak -> "MUNICIPALITY".equals(outbreak.getScope()))

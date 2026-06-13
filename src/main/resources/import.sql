@@ -79,7 +79,8 @@ INSERT INTO privileges (id, code, description, created_at, updated_at) VALUES
 ('10000000-0000-0000-0000-000000000017', 'states.read',       'Read states',                CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000018', 'states.manage',     'Manage states',              CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10000000-0000-0000-0000-000000000019', 'diagnosis.assist',  'Use the AI diagnosis assistant chat', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('10000000-0000-0000-0000-000000000020', 'admin.operations',  'Access hospital admin operational features', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+('10000000-0000-0000-0000-000000000020', 'admin.operations',  'Access hospital admin operational features', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('10000000-0000-0000-0000-000000000021', 'isSystemAdmin',     'Access system administrator features', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- SYSTEM_ADMIN: everything
 INSERT INTO role_privileges (role_id, privilege_id) VALUES
@@ -102,9 +103,9 @@ INSERT INTO role_privileges (role_id, privilege_id) VALUES
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000017'),
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000018'),
 ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000019');
--- admin.operations for SYSTEM_ADMIN
+-- isSystemAdmin for SYSTEM_ADMIN
 INSERT INTO role_privileges (role_id, privilege_id) VALUES
-('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000020');
+('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000021');
 
 -- HOSPITAL_ADMIN: hospital-scoped clinical + admin.
 INSERT INTO role_privileges (role_id, privilege_id) VALUES
@@ -151,9 +152,13 @@ INSERT INTO hospitals (id, code, name, address, phone, invite_code, active, post
 -- OPERATIONAL MODULE SEED DATA (Hospital 1: HGZ-21, Monterrey)
 -- ============================================================
 
+-- active outbreak signal used by the operational recommendation engine
+INSERT INTO outbreaks (id, disease_id, scope, municipality_id, state_id, case_count, confirmation_status, status, started_at, ended_at, created_at, updated_at) VALUES
+('71000000-0000-0000-0000-000000000501', '60000000-0000-0000-0000-000000000004', 'MUNICIPALITY', '42000000-0000-0000-0000-000000001003', NULL, 72, 'CONFIRMED', 'ACTIVE', CURRENT_TIMESTAMP - 2, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
 -- hospital_resource_snapshots
 INSERT INTO hospital_resource_snapshots (id, hospital_id, total_beds, available_beds, icu_total_beds, icu_available_beds, isolation_rooms_total, isolation_rooms_available, oxygen_capacity_units, oxygen_available_units, doctors_on_shift, nurses_on_shift, specialists_on_shift, source, captured_at, created_at) VALUES
-('20000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', 240, 60, 20, 5, 10, 3, 500, 150, 42, 130, 15, 'MANUAL', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+('20000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', 240, 24, 20, 3, 10, 3, 500, 150, 42, 130, 15, 'MANUAL', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- hospital_department_resources
 INSERT INTO hospital_department_resources (id, hospital_id, department_code, department_name, level_label, total_beds, occupied_beds, status, notes, updated_at) VALUES
@@ -180,83 +185,6 @@ INSERT INTO hospital_inventory_items (id, hospital_id, item_code, item_name, cat
 ('23000000-0000-0000-0000-000000000004', '30000000-0000-0000-0000-000000000001', 'IV_FLUID',     'IV Saline Solution',     'PHARMACEUTICAL','Pharmacy',      300,  1000, 'bags',     100,  800,  'NORMAL',   CURRENT_TIMESTAMP),
 ('23000000-0000-0000-0000-000000000005', '30000000-0000-0000-0000-000000000001', 'ISO_GOWN',     'Isolation Gowns',        'PPE',          'Central Supply', 150,  1000, 'units',    200,  700,  'CRITICAL', CURRENT_TIMESTAMP),
 ('23000000-0000-0000-0000-000000000006', '30000000-0000-0000-0000-000000000001', 'ANTIVIRAL',    'Antiviral Medications',  'PHARMACEUTICAL','Pharmacy',      60,   300,  'doses',    50,   250,  'LOW',      CURRENT_TIMESTAMP);
-
--- operational_recommendations (3 example records for hospital 1)
-INSERT INTO operational_recommendations (id, hospital_id, source_alert_id, source_outbreak_id, type, severity, status, category, title, description, expected_impact, urgency_window, confidence_score, rationale_json, recommended_actions_json, affected_departments_json, affected_resources_json, created_by_mode, created_at, updated_at) VALUES
-('24000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', NULL, NULL, 'BED_CAPACITY', 'CRITICAL', 'NEW', 'BED_CAPACITY',
-  'ICU Capacity Critical - Activate Surge Protocol',
-  'ICU occupancy is at 75% with 5 beds remaining. Trending upward due to respiratory disease activity.',
-  'Prevent ICU overflow and ensure critical care availability',
-  'Immediately',
-  0.95,
-  '["ICU occupancy trending 75% with active outbreak","Respiratory case referrals increasing 18% week over week"]',
-  '["Activate ICU surge protocol","Convert step-down unit beds to monitored ICU capacity","Expedite eligible ICU discharges"]',
-  '["ICU","Step-Down Unit"]',
-  '["ICU Beds","Ventilators","ICU Nursing"]',
-  'RULE_ENGINE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('24000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000001', NULL, NULL, 'STAFFING', 'HIGH', 'ACCEPTED', 'STAFFING',
-  'Increase Emergency Physician Staffing',
-  'Doctor-to-bed ratio is below recommended threshold during high outbreak season.',
-  'Improve patient throughput during outbreak surge',
-  'Next staffing rotation',
-  0.85,
-  '["Doctor-to-bed ratio is 1:57, below recommended 1:30","Multiple active outbreaks in catchment area"]',
-  '["Activate 3 additional on-call physicians","Redirect from low-urgency departments"]',
-  '["Emergency Department","ICU"]',
-  '["Physician Staff","On-Call Roster"]',
-  'RULE_ENGINE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('24000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000001', NULL, NULL, 'ISOLATION', 'MEDIUM', 'NEW', 'ISOLATION',
-  'Review PPE Stock Levels',
-  'Current PPE inventory (N95 masks, isolation gowns) is below minimum threshold given active respiratory outbreak.',
-  'Maintain staff protection and infection control capability',
-  'Within 48 hours',
-  0.78,
-  '["N95 mask stock at 500 units vs 200 critical threshold","Isolation gowns critically low at 150 units"]',
-  '["Emergency procurement of 1500 N95 masks","Order 700 isolation gowns","Audit and restock PPE distribution"]',
-  '["Emergency Department","Respiratory Ward","General Admission"]',
-  '["N95 Masks","Isolation Gowns"]',
-  'RULE_ENGINE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
-UPDATE operational_recommendations
-SET primary_department_resource_id = '21000000-0000-0000-0000-000000000003',
-    primary_staffing_profile_id = '22000000-0000-0000-0000-000000000002',
-    primary_inventory_item_id = '23000000-0000-0000-0000-000000000002',
-    presentation_variant = 'alert',
-    primary_action_code = 'ASSIGN_TASK',
-    available_actions_json = '[{"code":"ASSIGN_TASK","label":"Assign task","style":"primary","enabled":true},{"code":"NOTIFY_STAFF","label":"Notify staff","style":"secondary","enabled":true},{"code":"ORDER_SUPPLIES","label":"Order supplies","style":"secondary","enabled":true}]',
-    allowed_status_transitions_json = '["ACCEPTED","ASSIGNED","REJECTED"]',
-    display_category_label = 'Bed Capacity',
-    display_severity_label = 'Critical',
-    display_status_label = 'New',
-    expires_at = CURRENT_TIMESTAMP
-WHERE id = '24000000-0000-0000-0000-000000000001';
-
-UPDATE operational_recommendations
-SET primary_department_resource_id = '21000000-0000-0000-0000-000000000001',
-    primary_staffing_profile_id = '22000000-0000-0000-0000-000000000001',
-    presentation_variant = 'urgent',
-    primary_action_code = 'ASSIGN_TASK',
-    available_actions_json = '[{"code":"ASSIGN_TASK","label":"Assign task","style":"primary","enabled":true},{"code":"NOTIFY_STAFF","label":"Notify staff","style":"secondary","enabled":true},{"code":"ORDER_SUPPLIES","label":"Order supplies","style":"secondary","enabled":false,"disabledReason":"No inventory item linked"}]',
-    allowed_status_transitions_json = '["ASSIGNED","COMPLETED","REJECTED"]',
-    display_category_label = 'Staffing',
-    display_severity_label = 'High',
-    display_status_label = 'Accepted',
-    expires_at = CURRENT_TIMESTAMP
-WHERE id = '24000000-0000-0000-0000-000000000002';
-
-UPDATE operational_recommendations
-SET primary_department_resource_id = '21000000-0000-0000-0000-000000000004',
-    primary_staffing_profile_id = '22000000-0000-0000-0000-000000000004',
-    primary_inventory_item_id = '23000000-0000-0000-0000-000000000005',
-    presentation_variant = 'standard',
-    primary_action_code = 'ORDER_SUPPLIES',
-    available_actions_json = '[{"code":"ASSIGN_TASK","label":"Assign task","style":"secondary","enabled":true},{"code":"NOTIFY_STAFF","label":"Notify staff","style":"secondary","enabled":true},{"code":"ORDER_SUPPLIES","label":"Order supplies","style":"primary","enabled":true}]',
-    allowed_status_transitions_json = '["ACCEPTED","ASSIGNED","REJECTED"]',
-    display_category_label = 'Isolation',
-    display_severity_label = 'Medium',
-    display_status_label = 'New',
-    expires_at = CURRENT_TIMESTAMP
-WHERE id = '24000000-0000-0000-0000-000000000003';
 
 -- hospital_operational_contacts
 INSERT INTO hospital_operational_contacts (id, hospital_id, user_id, display_name, role_label, department_code, contact_channel, contact_value, availability_status, is_assignable, is_notifiable, updated_at) VALUES

@@ -1,6 +1,7 @@
 package com.itesm.domain.models;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -74,7 +75,7 @@ public class User {
     public void setSpecialtyId(UUID specialtyId) { this.specialtyId = specialtyId; }
 
     public Set<Role> getRoles() {
-        return roles;
+        return Collections.unmodifiableSet(roles);
     }
 
     public void setRoles(Set<Role> roles) {

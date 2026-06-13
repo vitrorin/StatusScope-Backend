@@ -1,5 +1,7 @@
 package com.itesm.application.usecase;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itesm.application.dto.AdminDashboardSummaryDto;
 import com.itesm.application.dto.AdminDashboardSummaryDto.AdminDashboardAlertDto;
 import com.itesm.application.dto.AdminDashboardSummaryDto.AdminMapZoneDto;
@@ -25,6 +27,7 @@ import jakarta.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -38,6 +41,8 @@ public class GetAdminDashboardSummaryUseCase {
     @Inject HospitalGeoContextService hospitalGeoContextService;
     @Inject HospitalResourceRepository hospitalResourceRepository;
     @Inject OperationalRecommendationRepository recommendationRepository;
+    @Inject OperationalRecommendationDedupeService dedupeService;
+    @Inject ObjectMapper objectMapper;
 
     public AdminDashboardSummaryDto execute() {
         CurrentUser currentUser = authenticatedUserContext.getCurrentUser();
@@ -59,6 +64,8 @@ public class GetAdminDashboardSummaryUseCase {
         List<OperationalRecommendation> recommendations = recommendationRepository.findByHospitalId(hospitalId)
                 .stream()
                 .filter(r -> !List.of("COMPLETED", "REJECTED").contains(r.getStatus()))
+                .collect(Collectors.toList());
+        recommendations = dedupeService.collapseOpenDuplicates(recommendations).stream()
                 .limit(5)
                 .collect(Collectors.toList());
 
@@ -188,8 +195,20 @@ public class GetAdminDashboardSummaryUseCase {
                     action.setType(r.getType());
                     action.setSeverity(r.getSeverity());
                     action.setStatus(r.getStatus());
+                    action.setTranslations(parseStoredTranslations(r.getContentTranslationsJson()));
                     return action;
                 })
                 .collect(Collectors.toList());
+    }
+
+    private Map<String, com.itesm.application.dto.OperationalRecommendationDto.LocalizedContentDto> parseStoredTranslations(String rawJson) {
+        if (rawJson == null || rawJson.isBlank()) {
+            return Map.of();
+        }
+        try {
+            return objectMapper.readValue(rawJson, new TypeReference<Map<String, com.itesm.application.dto.OperationalRecommendationDto.LocalizedContentDto>>() {});
+        } catch (Exception ignored) {
+            return Map.of();
+        }
     }
 }

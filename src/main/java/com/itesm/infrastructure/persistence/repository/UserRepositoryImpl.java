@@ -82,6 +82,11 @@ public class UserRepositoryImpl implements UserRepository, PanacheRepositoryBase
         managed.setStatus(user.getStatus());
         managed.setLastLoginAt(user.getLastLoginAt());
         managed.setLicenseNumber(user.getLicenseNumber());
+        if (user.getHospitalId() != null) {
+            managed.setHospital(getEntityManager().getReference(HospitalEntity.class, user.getHospitalId()));
+        } else {
+            managed.setHospital(null);
+        }
         if (user.getSpecialtyId() != null) {
             managed.setSpecialty(getEntityManager().getReference(SpecialtyEntity.class, user.getSpecialtyId()));
         } else {
