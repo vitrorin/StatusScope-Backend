@@ -14,11 +14,14 @@ import org.jboss.logging.Logger;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Set;
 
 @ApplicationScoped
 public class DataMigrationRunner {
 
     private static final Logger LOG = Logger.getLogger(DataMigrationRunner.class);
+
+    private static final Set<String> ALLOWED_TABLES = Set.of("flyway_schema_history", "municipalities");
 
     @Inject
     Flyway flyway;
@@ -104,6 +107,7 @@ public class DataMigrationRunner {
     }
 
     private boolean tableExists(Statement statement, String tableName) throws SQLException {
+        validateTableName(tableName);
         try (var ignored = statement.executeQuery("select 1 from " + tableName + " where 1 = 0")) {
             return true;
         } catch (SQLException ignored) {
@@ -112,9 +116,16 @@ public class DataMigrationRunner {
     }
 
     private boolean isTableEmpty(Statement statement, String tableName) throws SQLException {
+        validateTableName(tableName);
         try (var resultSet = statement.executeQuery("select count(*) from " + tableName)) {
             resultSet.next();
             return resultSet.getLong(1) == 0;
+        }
+    }
+
+    private static void validateTableName(String tableName) {
+        if (!ALLOWED_TABLES.contains(tableName)) {
+            throw new IllegalArgumentException("Table name not in allowlist: " + tableName);
         }
     }
 }

@@ -34,6 +34,7 @@ import org.jboss.logging.Logger;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -65,6 +66,9 @@ public class DevSeeder {
 
     @ConfigProperty(name = "statusscope.dev-seeder.enabled", defaultValue = "false")
     boolean devSeederEnabled;
+
+    @ConfigProperty(name = "statusscope.dev-seeder.seed-password")
+    Optional<String> devSeedPassword;
 
     @ConfigProperty(name = "diagnosis.assistant.seed-demo-data", defaultValue = "false")
     boolean seedDiagnosisAssistantDemoData;
@@ -105,7 +109,8 @@ public class DevSeeder {
     private void seedUser(String email, String fullName, UUID hospitalId, String roleCode, Integer lastLoginDaysAgo) {
         String uid;
         try {
-            uid = firebaseUserService.createUser(email, "Password123!", fullName);
+            uid = firebaseUserService.createUser(email, devSeedPassword.orElseThrow(
+                    () -> new IllegalStateException("DEV_SEEDER_SEED_PASSWORD is required for dev seeding")), fullName);
         } catch (FirebaseAuthException e) {
             // Idempotent restart: Firebase user might already exist
             try {
