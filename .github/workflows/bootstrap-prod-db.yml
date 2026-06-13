@@ -1,0 +1,119 @@
+name: Bootstrap Prod DB schema (one-time)
+
+# ONE-TIME, MANUAL ONLY. Creates the database schema in the (empty) prod Cloud SQL
+# instance the first time, because the prod profile runs Hibernate with `validate`
+# (it will NOT create tables) and the Flyway migrations only seed data.
+#
+# It builds the image from the selected ref (default: main), deploys a THROWAWAY
+# Cloud Run service running Hibernate `update` (non-destructive: creates missing
+# tables, never drops), waits for it to become healthy (schema created + seeded),
+# then deletes the throwaway service. The real `statusscope-backend` service and its
+# `validate` strategy are never touched.
+#
+# Run this once before the first push to main. Safe to re-run (update is idempotent).
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to build the schema from (must match what prod deploys)"
+        required: true
+        default: "main"
+
+permissions:
+  contents: read
+
+env:
+  PROJECT_ID: statuscope
+  REGISTRY_REGION: us-central1
+  REGISTRY_REPO: statuscope
+  IMAGE_NAME: statusscope-backend
+  REGION: us-central1
+  BOOTSTRAP_SERVICE: statusscope-backend-bootstrap
+  RUNTIME_SERVICE_ACCOUNT: statuscope-run@statuscope.iam.gserviceaccount.com
+  CLOUD_SQL_INSTANCE: statuscope:us-central1:statusscope-prod
+  DB_USERNAME_SECRET: statusscope-backend-prod-db-username
+  DB_PASSWORD_SECRET: statusscope-backend-prod-db-password
+  CLOUD_SQL_JDBC_URL_SECRET: statusscope-backend-prod-cloudsql-jdbc-url
+  FIREBASE_SA_SECRET: statusscope-backend-firebase-service-account
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY_PROD }}
+
+      - name: Setup gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGISTRY_REGION }}-docker.pkg.dev
+
+      - name: Build and push Quarkus image
+        env:
+          QUARKUS_DATASOURCE_USERNAME: build
+          QUARKUS_DATASOURCE_PASSWORD: build
+          QUARKUS_DATASOURCE_JDBC_URL: "jdbc:mysql://google/build?cloudSqlInstance=${{ env.CLOUD_SQL_INSTANCE }}&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false"
+          QUARKUS_HTTP_CORS_ORIGINS: http://localhost:8080
+        run: |
+          ./mvnw -B -Pcontainer-image clean package -DskipTests \
+            -Dquarkus.container-image.build=true \
+            -Dquarkus.container-image.push=true \
+            -Dquarkus.container-image.registry=${{ env.REGISTRY_REGION }}-docker.pkg.dev \
+            -Dquarkus.container-image.group=${{ env.PROJECT_ID }}/${{ env.REGISTRY_REPO }} \
+            -Dquarkus.container-image.name=${{ env.IMAGE_NAME }} \
+            -Dquarkus.container-image.tag=bootstrap-${{ github.sha }}
+
+      - name: Deploy throwaway service with Hibernate update
+        run: |
+          gcloud run deploy ${{ env.BOOTSTRAP_SERVICE }} \
+            --image ${{ env.REGISTRY_REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REGISTRY_REPO }}/${{ env.IMAGE_NAME }}:bootstrap-${{ github.sha }} \
+            --region ${{ env.REGION }} \
+            --platform managed \
+            --allow-unauthenticated \
+            --port 8080 \
+            --min-instances 1 \
+            --max-instances 1 \
+            --memory 512Mi \
+            --service-account ${{ env.RUNTIME_SERVICE_ACCOUNT }} \
+            --add-cloudsql-instances ${{ env.CLOUD_SQL_INSTANCE }} \
+            --update-env-vars '^|^QUARKUS_PROFILE=prod|FIREBASE_SA_PATH=/secrets/firebase/firebase-service-account.json|OUTBREAK_INGESTION_IMPORT_AT_START=false|QUARKUS_HTTP_CORS_ORIGINS=http://localhost:8080|QUARKUS_HIBERNATE_ORM_SCHEMA_MANAGEMENT_STRATEGY=update' \
+            --update-secrets QUARKUS_DATASOURCE_USERNAME=${{ env.DB_USERNAME_SECRET }}:latest,QUARKUS_DATASOURCE_PASSWORD=${{ env.DB_PASSWORD_SECRET }}:latest,QUARKUS_DATASOURCE_JDBC_URL=${{ env.CLOUD_SQL_JDBC_URL_SECRET }}:latest,/secrets/firebase/firebase-service-account.json=${{ env.FIREBASE_SA_SECRET }}:latest \
+            --project ${{ env.PROJECT_ID }}
+
+      - name: Wait for schema creation (health check)
+        run: |
+          URL=$(gcloud run services describe ${{ env.BOOTSTRAP_SERVICE }} \
+            --region ${{ env.REGION }} --project ${{ env.PROJECT_ID }} \
+            --format='value(status.url)')
+          echo "Bootstrap service: $URL"
+          for i in $(seq 1 30); do
+            if curl --fail --silent "$URL/q/health"; then
+              echo "Schema created and app healthy."
+              exit 0
+            fi
+            echo "Attempt $i: not healthy yet, waiting..."
+            sleep 10
+          done
+          echo "Timed out waiting for bootstrap service health." >&2
+          exit 1
+
+      - name: Delete throwaway service
+        if: always()
+        run: |
+          gcloud run services delete ${{ env.BOOTSTRAP_SERVICE }} \
+            --region ${{ env.REGION }} --project ${{ env.PROJECT_ID }} --quiet || true
