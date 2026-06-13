@@ -167,6 +167,14 @@
                         <quarkus.datasource.username>sa</quarkus.datasource.username>
                         <quarkus.datasource.password></quarkus.datasource.password>
                         <quarkus.datasource.jdbc.url>jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1</quarkus.datasource.jdbc.url>
+                        <!--
+                          The dev seeder runs under the test profile and requires a seed
+                          password (it is env-only in real profiles so no secret is hardcoded
+                          for dev/prod). Provide a dummy one here so the @QuarkusTest app starts
+                          without depending on DEV_SEEDER_SEED_PASSWORD being set in CI. Same
+                          system-property precedence rationale as the datasource overrides above.
+                        -->
+                        <statusscope.dev-seeder.seed-password>test-seed-password</statusscope.dev-seeder.seed-password>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
