@@ -1,1554 +1,1557 @@
 scope,estado,disease_name,case_count,confirmation_status,status
-STATE,Aguascalientes,Acute otitis media,3576,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Acute otitis media,3738,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Brucellosis,5,CONFIRMED,ACTIVE
 STATE,Aguascalientes,COVID-19,36,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Chagas disease,2,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Chancroid,15,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Chickenpox,857,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Common cold,176684,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Conjunctivitis,7968,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Chancroid,16,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Chickenpox,889,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Common cold,185947,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Conjunctivitis,8293,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Cysticercosis,3,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Dengue Severe,10,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Dengue fever,534,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Erysipelas,33,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Genital herpes,70,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Dengue Severe,11,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Dengue fever,596,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Erysipelas,35,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Genital herpes,54,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Gonorrhea,34,CONFIRMED,ACTIVE
-STATE,Aguascalientes,HIV/AIDS,95,CONFIRMED,ACTIVE
-STATE,Aguascalientes,HPV,54,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Healthcare-associated infection,1859,CONFIRMED,ACTIVE
+STATE,Aguascalientes,HIV/AIDS,114,CONFIRMED,ACTIVE
+STATE,Aguascalientes,HPV,55,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Healthcare-associated infection,1922,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Hepatitis A,15,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Hepatitis B,4,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Hepatitis C,8,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Infectious gastroenteritis,82395,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Influenza,261,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Infectious gastroenteritis,85392,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Influenza,265,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Lymphogranuloma venereum,2,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Meningitis,7,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Mpox,2,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Mumps,103,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Myiasis,5,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Other viral hepatitis,20,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Parasitic disease,480,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Mpox,3,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Mumps,106,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Myiasis,6,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Other viral hepatitis,21,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Parasitic disease,507,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Paratyphoid fever,2,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Pinworm infection,3,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Pneumonia,1665,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Scabies,60,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Scarlet fever,50,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Strep throat,636,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Syphilis,268,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Pneumonia,1760,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Scabies,67,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Scarlet fever,55,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Strep throat,670,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Syphilis,276,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Taeniasis,3,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Trichomonas infection,62,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Trichomonas infection,66,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Tuberculosis,92,CONFIRMED,ACTIVE
 STATE,Aguascalientes,Typhoid fever,15,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Urethritis,40733,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Vaginal yeast infection,716,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Vaginitis,301,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Viral exanthem,428,CONFIRMED,ACTIVE
-STATE,Aguascalientes,Whooping cough,8,CONFIRMED,ACTIVE
-STATE,Baja California,Acute otitis media,9684,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Urethritis,42649,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Vaginal yeast infection,744,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Vaginitis,597,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Viral exanthem,434,CONFIRMED,ACTIVE
+STATE,Aguascalientes,Whooping cough,9,CONFIRMED,ACTIVE
+STATE,Baja California,Acute otitis media,10056,CONFIRMED,ACTIVE
 STATE,Baja California,Brucellosis,6,CONFIRMED,ACTIVE
 STATE,Baja California,COVID-19,23,CONFIRMED,ACTIVE
 STATE,Baja California,Chagas disease,6,CONFIRMED,ACTIVE
-STATE,Baja California,Chancroid,95,CONFIRMED,ACTIVE
-STATE,Baja California,Chickenpox,2117,CONFIRMED,ACTIVE
-STATE,Baja California,Common cold,271945,CONFIRMED,ACTIVE
-STATE,Baja California,Conjunctivitis,15347,CONFIRMED,ACTIVE
+STATE,Baja California,Chancroid,100,CONFIRMED,ACTIVE
+STATE,Baja California,Chickenpox,2199,CONFIRMED,ACTIVE
+STATE,Baja California,Common cold,286581,CONFIRMED,ACTIVE
+STATE,Baja California,Conjunctivitis,15964,CONFIRMED,ACTIVE
 STATE,Baja California,Conjunctivitis due to virus,4,CONFIRMED,ACTIVE
 STATE,Baja California,Cysticercosis,5,CONFIRMED,ACTIVE
-STATE,Baja California,Dengue fever,10,CONFIRMED,ACTIVE
-STATE,Baja California,Erysipelas,50,CONFIRMED,ACTIVE
-STATE,Baja California,Genital herpes,187,CONFIRMED,ACTIVE
-STATE,Baja California,Gonorrhea,70,CONFIRMED,ACTIVE
+STATE,Baja California,Dengue fever,11,CONFIRMED,ACTIVE
+STATE,Baja California,Erysipelas,52,CONFIRMED,ACTIVE
+STATE,Baja California,Genital herpes,199,CONFIRMED,ACTIVE
+STATE,Baja California,Gonorrhea,72,CONFIRMED,ACTIVE
 STATE,Baja California,HIV/AIDS,297,CONFIRMED,ACTIVE
-STATE,Baja California,HPV,257,CONFIRMED,ACTIVE
-STATE,Baja California,Healthcare-associated infection,2488,CONFIRMED,ACTIVE
-STATE,Baja California,Hepatitis A,32,CONFIRMED,ACTIVE
-STATE,Baja California,Hepatitis B,62,CONFIRMED,ACTIVE
-STATE,Baja California,Hepatitis C,1589,CONFIRMED,ACTIVE
-STATE,Baja California,Infectious gastroenteritis,74848,CONFIRMED,ACTIVE
-STATE,Baja California,Influenza,89,CONFIRMED,ACTIVE
+STATE,Baja California,HPV,267,CONFIRMED,ACTIVE
+STATE,Baja California,Healthcare-associated infection,2620,CONFIRMED,ACTIVE
+STATE,Baja California,Hepatitis A,34,CONFIRMED,ACTIVE
+STATE,Baja California,Hepatitis B,68,CONFIRMED,ACTIVE
+STATE,Baja California,Hepatitis C,1741,CONFIRMED,ACTIVE
+STATE,Baja California,Infectious gastroenteritis,156679,CONFIRMED,ACTIVE
+STATE,Baja California,Influenza,90,CONFIRMED,ACTIVE
 STATE,Baja California,Leprosy,2,CONFIRMED,ACTIVE
 STATE,Baja California,Leptospirosis,2,CONFIRMED,ACTIVE
 STATE,Baja California,Lymphogranuloma venereum,15,CONFIRMED,ACTIVE
-STATE,Baja California,Meningitis,60,CONFIRMED,ACTIVE
-STATE,Baja California,Mumps,387,CONFIRMED,ACTIVE
-STATE,Baja California,Myiasis,15,CONFIRMED,ACTIVE
-STATE,Baja California,Other viral hepatitis,61,CONFIRMED,ACTIVE
-STATE,Baja California,Parasitic disease,995,CONFIRMED,ACTIVE
-STATE,Baja California,Paratyphoid fever,374,CONFIRMED,ACTIVE
+STATE,Baja California,Meningitis,61,CONFIRMED,ACTIVE
+STATE,Baja California,Mpox,2,CONFIRMED,ACTIVE
+STATE,Baja California,Mumps,395,CONFIRMED,ACTIVE
+STATE,Baja California,Myiasis,16,CONFIRMED,ACTIVE
+STATE,Baja California,Other viral hepatitis,64,CONFIRMED,ACTIVE
+STATE,Baja California,Parasitic disease,1023,CONFIRMED,ACTIVE
+STATE,Baja California,Paratyphoid fever,390,CONFIRMED,ACTIVE
 STATE,Baja California,Pinto disease,1,CONFIRMED,ACTIVE
-STATE,Baja California,Pinworm infection,46,CONFIRMED,ACTIVE
-STATE,Baja California,Pneumonia,5905,CONFIRMED,ACTIVE
-STATE,Baja California,Rocky Mountain spotted fever,142,CONFIRMED,ACTIVE
-STATE,Baja California,Scabies,950,CONFIRMED,ACTIVE
+STATE,Baja California,Pinworm infection,49,CONFIRMED,ACTIVE
+STATE,Baja California,Pneumonia,6152,CONFIRMED,ACTIVE
+STATE,Baja California,Rocky Mountain spotted fever,145,CONFIRMED,ACTIVE
+STATE,Baja California,Scabies,981,CONFIRMED,ACTIVE
 STATE,Baja California,Scarlet fever,49,CONFIRMED,ACTIVE
-STATE,Baja California,Strep throat,1354,CONFIRMED,ACTIVE
-STATE,Baja California,Syphilis,1635,CONFIRMED,ACTIVE
+STATE,Baja California,Strep throat,1410,CONFIRMED,ACTIVE
+STATE,Baja California,Syphilis,1695,CONFIRMED,ACTIVE
 STATE,Baja California,Taeniasis,3,CONFIRMED,ACTIVE
 STATE,Baja California,Toxoplasmosis,1,CONFIRMED,ACTIVE
-STATE,Baja California,Trichomonas infection,934,CONFIRMED,ACTIVE
+STATE,Baja California,Trichomonas infection,629,CONFIRMED,ACTIVE
 STATE,Baja California,Tuberculosis,1952,CONFIRMED,ACTIVE
 STATE,Baja California,Typhoid fever,45,CONFIRMED,ACTIVE
-STATE,Baja California,Urethritis,64214,CONFIRMED,ACTIVE
-STATE,Baja California,Vaginal yeast infection,98,CONFIRMED,ACTIVE
-STATE,Baja California,Vaginitis,389,CONFIRMED,ACTIVE
-STATE,Baja California,Viral exanthem,678,CONFIRMED,ACTIVE
-STATE,Baja California,Whooping cough,49,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Acute otitis media,7572,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Brucellosis,15,CONFIRMED,ACTIVE
+STATE,Baja California,Urethritis,67223,CONFIRMED,ACTIVE
+STATE,Baja California,Vaginal yeast infection,239,CONFIRMED,ACTIVE
+STATE,Baja California,Vaginitis,866,CONFIRMED,ACTIVE
+STATE,Baja California,Viral exanthem,682,CONFIRMED,ACTIVE
+STATE,Baja California,Whooping cough,50,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Acute otitis media,7906,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Brucellosis,18,CONFIRMED,ACTIVE
 STATE,Baja California Sur,COVID-19,21,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Chagas disease,1,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Chancroid,7,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Chickenpox,297,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Common cold,114487,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Conjunctivitis,7608,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Chickenpox,307,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Common cold,120865,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Conjunctivitis,7941,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Conjunctivitis due to virus,1,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Cysticercosis,2,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Dengue Severe,26,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Dengue fever,510,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Dengue Severe,36,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Dengue fever,683,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Erysipelas,13,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Genital herpes,33,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Genital herpes,35,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Gonorrhea,35,CONFIRMED,ACTIVE
-STATE,Baja California Sur,HIV/AIDS,203,CONFIRMED,ACTIVE
-STATE,Baja California Sur,HPV,59,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Healthcare-associated infection,554,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Hepatitis A,74,CONFIRMED,ACTIVE
+STATE,Baja California Sur,HIV/AIDS,209,CONFIRMED,ACTIVE
+STATE,Baja California Sur,HPV,64,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Healthcare-associated infection,570,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Hepatitis A,75,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Hepatitis B,11,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Hepatitis C,110,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Infectious gastroenteritis,63693,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Influenza,97,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Hepatitis C,112,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Infectious gastroenteritis,67228,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Influenza,121,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Lymphogranuloma venereum,5,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Meningitis,5,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Mumps,58,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Mumps,60,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Myiasis,3,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Other viral hepatitis,34,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Parasitic disease,940,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Paratyphoid fever,2,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Other viral hepatitis,35,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Parasitic disease,969,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Paratyphoid fever,3,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Pinto disease,1,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Pinworm infection,33,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Pneumonia,971,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Rocky Mountain spotted fever,7,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Scabies,145,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Scarlet fever,12,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Strep throat,731,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Syphilis,479,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Pinworm infection,34,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Pneumonia,1000,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Rocky Mountain spotted fever,8,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Scabies,153,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Scarlet fever,13,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Strep throat,749,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Syphilis,508,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Toxoplasmosis,1,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Trichomonas infection,52,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Trichomonas infection,54,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Tuberculosis,187,CONFIRMED,ACTIVE
 STATE,Baja California Sur,Typhoid fever,12,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Urethritis,26631,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Vaginal yeast infection,846,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Vaginitis,831,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Viral exanthem,120,CONFIRMED,ACTIVE
-STATE,Baja California Sur,Whooping cough,34,CONFIRMED,ACTIVE
-STATE,Campeche,Acute otitis media,4414,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Urethritis,27976,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Vaginal yeast infection,870,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Vaginitis,985,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Viral exanthem,122,CONFIRMED,ACTIVE
+STATE,Baja California Sur,Whooping cough,40,CONFIRMED,ACTIVE
+STATE,Campeche,Acute otitis media,4639,CONFIRMED,ACTIVE
 STATE,Campeche,Brucellosis,1,CONFIRMED,ACTIVE
 STATE,Campeche,COVID-19,16,CONFIRMED,ACTIVE
 STATE,Campeche,Chagas disease,5,CONFIRMED,ACTIVE
 STATE,Campeche,Chancroid,1,CONFIRMED,ACTIVE
-STATE,Campeche,Chickenpox,593,CONFIRMED,ACTIVE
-STATE,Campeche,Common cold,140995,CONFIRMED,ACTIVE
-STATE,Campeche,Conjunctivitis,6205,CONFIRMED,ACTIVE
-STATE,Campeche,Dengue Severe,1,CONFIRMED,ACTIVE
-STATE,Campeche,Dengue fever,75,CONFIRMED,ACTIVE
+STATE,Campeche,Chickenpox,624,CONFIRMED,ACTIVE
+STATE,Campeche,Common cold,150037,CONFIRMED,ACTIVE
+STATE,Campeche,Conjunctivitis,6431,CONFIRMED,ACTIVE
+STATE,Campeche,Dengue Severe,2,CONFIRMED,ACTIVE
+STATE,Campeche,Dengue fever,83,CONFIRMED,ACTIVE
 STATE,Campeche,Erysipelas,136,CONFIRMED,ACTIVE
-STATE,Campeche,Genital herpes,48,CONFIRMED,ACTIVE
-STATE,Campeche,Gonorrhea,55,CONFIRMED,ACTIVE
-STATE,Campeche,HIV/AIDS,122,CONFIRMED,ACTIVE
-STATE,Campeche,HPV,64,CONFIRMED,ACTIVE
-STATE,Campeche,Healthcare-associated infection,640,CONFIRMED,ACTIVE
+STATE,Campeche,Genital herpes,52,CONFIRMED,ACTIVE
+STATE,Campeche,Gonorrhea,58,CONFIRMED,ACTIVE
+STATE,Campeche,HIV/AIDS,123,CONFIRMED,ACTIVE
+STATE,Campeche,HPV,65,CONFIRMED,ACTIVE
+STATE,Campeche,Healthcare-associated infection,664,CONFIRMED,ACTIVE
 STATE,Campeche,Hepatitis A,2,CONFIRMED,ACTIVE
 STATE,Campeche,Hepatitis B,21,CONFIRMED,ACTIVE
-STATE,Campeche,Hepatitis C,18,CONFIRMED,ACTIVE
-STATE,Campeche,Infectious gastroenteritis,32659,CONFIRMED,ACTIVE
-STATE,Campeche,Influenza,59,CONFIRMED,ACTIVE
+STATE,Campeche,Hepatitis C,21,CONFIRMED,ACTIVE
+STATE,Campeche,Infectious gastroenteritis,33514,CONFIRMED,ACTIVE
+STATE,Campeche,Influenza,63,CONFIRMED,ACTIVE
 STATE,Campeche,Leishmaniasis,65,CONFIRMED,ACTIVE
 STATE,Campeche,Leptospirosis,4,CONFIRMED,ACTIVE
 STATE,Campeche,Lymphogranuloma venereum,2,CONFIRMED,ACTIVE
-STATE,Campeche,Meningitis,7,CONFIRMED,ACTIVE
-STATE,Campeche,Mumps,45,CONFIRMED,ACTIVE
+STATE,Campeche,Meningitis,10,CONFIRMED,ACTIVE
+STATE,Campeche,Mumps,47,CONFIRMED,ACTIVE
 STATE,Campeche,Myiasis,12,CONFIRMED,ACTIVE
-STATE,Campeche,Other viral hepatitis,34,CONFIRMED,ACTIVE
-STATE,Campeche,Parasitic disease,535,CONFIRMED,ACTIVE
+STATE,Campeche,Other viral hepatitis,35,CONFIRMED,ACTIVE
+STATE,Campeche,Parasitic disease,554,CONFIRMED,ACTIVE
 STATE,Campeche,Paratyphoid fever,3,CONFIRMED,ACTIVE
 STATE,Campeche,Pinto disease,2,CONFIRMED,ACTIVE
-STATE,Campeche,Pinworm infection,178,CONFIRMED,ACTIVE
-STATE,Campeche,Pneumonia,648,CONFIRMED,ACTIVE
-STATE,Campeche,Scabies,558,CONFIRMED,ACTIVE
-STATE,Campeche,Scarlet fever,6,CONFIRMED,ACTIVE
-STATE,Campeche,Strep throat,152,CONFIRMED,ACTIVE
-STATE,Campeche,Syphilis,196,CONFIRMED,ACTIVE
+STATE,Campeche,Pinworm infection,179,CONFIRMED,ACTIVE
+STATE,Campeche,Pneumonia,689,CONFIRMED,ACTIVE
+STATE,Campeche,Scabies,579,CONFIRMED,ACTIVE
+STATE,Campeche,Scarlet fever,7,CONFIRMED,ACTIVE
+STATE,Campeche,Strep throat,156,CONFIRMED,ACTIVE
+STATE,Campeche,Syphilis,204,CONFIRMED,ACTIVE
 STATE,Campeche,Taeniasis,2,CONFIRMED,ACTIVE
-STATE,Campeche,Toxoplasmosis,16,CONFIRMED,ACTIVE
+STATE,Campeche,Toxoplasmosis,3,CONFIRMED,ACTIVE
 STATE,Campeche,Trichomonas infection,72,CONFIRMED,ACTIVE
-STATE,Campeche,Tuberculosis,197,CONFIRMED,ACTIVE
-STATE,Campeche,Typhoid fever,1,CONFIRMED,ACTIVE
-STATE,Campeche,Urethritis,26222,CONFIRMED,ACTIVE
-STATE,Campeche,Vaginal yeast infection,794,CONFIRMED,ACTIVE
-STATE,Campeche,Vaginitis,553,CONFIRMED,ACTIVE
-STATE,Campeche,Viral exanthem,79,CONFIRMED,ACTIVE
+STATE,Campeche,Tuberculosis,205,CONFIRMED,ACTIVE
+STATE,Campeche,Typhoid fever,3,CONFIRMED,ACTIVE
+STATE,Campeche,Urethritis,27441,CONFIRMED,ACTIVE
+STATE,Campeche,Vaginal yeast infection,845,CONFIRMED,ACTIVE
+STATE,Campeche,Vaginitis,735,CONFIRMED,ACTIVE
+STATE,Campeche,Viral exanthem,80,CONFIRMED,ACTIVE
 STATE,Campeche,Whooping cough,13,CONFIRMED,ACTIVE
-STATE,Chiapas,Acute otitis media,17123,CONFIRMED,ACTIVE
-STATE,Chiapas,Brucellosis,20,CONFIRMED,ACTIVE
+STATE,Chiapas,Acute otitis media,17695,CONFIRMED,ACTIVE
+STATE,Chiapas,Brucellosis,22,CONFIRMED,ACTIVE
 STATE,Chiapas,COVID-19,34,CONFIRMED,ACTIVE
-STATE,Chiapas,Chagas disease,33,CONFIRMED,ACTIVE
+STATE,Chiapas,Chagas disease,36,CONFIRMED,ACTIVE
 STATE,Chiapas,Chancroid,43,CONFIRMED,ACTIVE
-STATE,Chiapas,Chickenpox,1104,CONFIRMED,ACTIVE
+STATE,Chiapas,Chickenpox,1134,CONFIRMED,ACTIVE
 STATE,Chiapas,Chikungunya,9,CONFIRMED,ACTIVE
-STATE,Chiapas,Common cold,426002,CONFIRMED,ACTIVE
-STATE,Chiapas,Conjunctivitis,16682,CONFIRMED,ACTIVE
+STATE,Chiapas,Common cold,445872,CONFIRMED,ACTIVE
+STATE,Chiapas,Conjunctivitis,17171,CONFIRMED,ACTIVE
 STATE,Chiapas,Conjunctivitis due to virus,4,CONFIRMED,ACTIVE
-STATE,Chiapas,Cysticercosis,17,CONFIRMED,ACTIVE
-STATE,Chiapas,Dengue Severe,15,CONFIRMED,ACTIVE
-STATE,Chiapas,Dengue fever,509,CONFIRMED,ACTIVE
-STATE,Chiapas,Erysipelas,139,CONFIRMED,ACTIVE
-STATE,Chiapas,Genital herpes,172,CONFIRMED,ACTIVE
-STATE,Chiapas,Gonorrhea,440,CONFIRMED,ACTIVE
-STATE,Chiapas,HIV/AIDS,518,CONFIRMED,ACTIVE
-STATE,Chiapas,HPV,360,CONFIRMED,ACTIVE
-STATE,Chiapas,Healthcare-associated infection,1815,CONFIRMED,ACTIVE
-STATE,Chiapas,Hepatitis A,133,CONFIRMED,ACTIVE
-STATE,Chiapas,Hepatitis B,26,CONFIRMED,ACTIVE
-STATE,Chiapas,Hepatitis C,53,CONFIRMED,ACTIVE
-STATE,Chiapas,Infectious gastroenteritis,368823,CONFIRMED,ACTIVE
-STATE,Chiapas,Influenza,126,CONFIRMED,ACTIVE
-STATE,Chiapas,Leishmaniasis,6,CONFIRMED,ACTIVE
+STATE,Chiapas,Cysticercosis,19,CONFIRMED,ACTIVE
+STATE,Chiapas,Dengue Severe,17,CONFIRMED,ACTIVE
+STATE,Chiapas,Dengue fever,585,CONFIRMED,ACTIVE
+STATE,Chiapas,Erysipelas,144,CONFIRMED,ACTIVE
+STATE,Chiapas,Genital herpes,176,CONFIRMED,ACTIVE
+STATE,Chiapas,Gonorrhea,453,CONFIRMED,ACTIVE
+STATE,Chiapas,HIV/AIDS,580,CONFIRMED,ACTIVE
+STATE,Chiapas,HPV,365,CONFIRMED,ACTIVE
+STATE,Chiapas,Healthcare-associated infection,1892,CONFIRMED,ACTIVE
+STATE,Chiapas,Hepatitis A,147,CONFIRMED,ACTIVE
+STATE,Chiapas,Hepatitis B,30,CONFIRMED,ACTIVE
+STATE,Chiapas,Hepatitis C,55,CONFIRMED,ACTIVE
+STATE,Chiapas,Infectious gastroenteritis,380905,CONFIRMED,ACTIVE
+STATE,Chiapas,Influenza,148,CONFIRMED,ACTIVE
+STATE,Chiapas,Leishmaniasis,8,CONFIRMED,ACTIVE
 STATE,Chiapas,Leprosy,6,CONFIRMED,ACTIVE
-STATE,Chiapas,Leptospirosis,19,CONFIRMED,ACTIVE
-STATE,Chiapas,Lymphogranuloma venereum,12,CONFIRMED,ACTIVE
-STATE,Chiapas,Malaria,189,CONFIRMED,ACTIVE
-STATE,Chiapas,Meningitis,23,CONFIRMED,ACTIVE
-STATE,Chiapas,Mumps,176,CONFIRMED,ACTIVE
-STATE,Chiapas,Myiasis,87,CONFIRMED,ACTIVE
-STATE,Chiapas,Other viral hepatitis,63,CONFIRMED,ACTIVE
-STATE,Chiapas,Parasitic disease,11126,CONFIRMED,ACTIVE
-STATE,Chiapas,Paratyphoid fever,625,CONFIRMED,ACTIVE
+STATE,Chiapas,Leptospirosis,20,CONFIRMED,ACTIVE
+STATE,Chiapas,Lymphogranuloma venereum,13,CONFIRMED,ACTIVE
+STATE,Chiapas,Malaria,190,CONFIRMED,ACTIVE
+STATE,Chiapas,Meningitis,28,CONFIRMED,ACTIVE
+STATE,Chiapas,Mumps,177,CONFIRMED,ACTIVE
+STATE,Chiapas,Myiasis,91,CONFIRMED,ACTIVE
+STATE,Chiapas,Other viral hepatitis,64,CONFIRMED,ACTIVE
+STATE,Chiapas,Parasitic disease,11460,CONFIRMED,ACTIVE
+STATE,Chiapas,Paratyphoid fever,638,CONFIRMED,ACTIVE
 STATE,Chiapas,Pinto disease,4,CONFIRMED,ACTIVE
-STATE,Chiapas,Pinworm infection,509,CONFIRMED,ACTIVE
-STATE,Chiapas,Pneumonia,3389,CONFIRMED,ACTIVE
+STATE,Chiapas,Pinworm infection,521,CONFIRMED,ACTIVE
+STATE,Chiapas,Pneumonia,3617,CONFIRMED,ACTIVE
 STATE,Chiapas,Rocky Mountain spotted fever,1,CONFIRMED,ACTIVE
-STATE,Chiapas,Scabies,2817,CONFIRMED,ACTIVE
-STATE,Chiapas,Scarlet fever,28,CONFIRMED,ACTIVE
-STATE,Chiapas,Strep throat,13798,CONFIRMED,ACTIVE
-STATE,Chiapas,Syphilis,385,CONFIRMED,ACTIVE
-STATE,Chiapas,Taeniasis,7,CONFIRMED,ACTIVE
+STATE,Chiapas,Scabies,2923,CONFIRMED,ACTIVE
+STATE,Chiapas,Scarlet fever,30,CONFIRMED,ACTIVE
+STATE,Chiapas,Strep throat,14245,CONFIRMED,ACTIVE
+STATE,Chiapas,Syphilis,390,CONFIRMED,ACTIVE
+STATE,Chiapas,Taeniasis,8,CONFIRMED,ACTIVE
 STATE,Chiapas,Tetanus,3,CONFIRMED,ACTIVE
 STATE,Chiapas,Toxoplasmosis,13,CONFIRMED,ACTIVE
 STATE,Chiapas,Trichinosis,4,CONFIRMED,ACTIVE
-STATE,Chiapas,Trichomonas infection,605,CONFIRMED,ACTIVE
-STATE,Chiapas,Tuberculosis,1486,CONFIRMED,ACTIVE
-STATE,Chiapas,Typhoid fever,302,CONFIRMED,ACTIVE
-STATE,Chiapas,Urethritis,954,CONFIRMED,ACTIVE
-STATE,Chiapas,Vaginal yeast infection,5093,CONFIRMED,ACTIVE
-STATE,Chiapas,Vaginitis,734,CONFIRMED,ACTIVE
-STATE,Chiapas,Viral exanthem,442,CONFIRMED,ACTIVE
+STATE,Chiapas,Trichomonas infection,617,CONFIRMED,ACTIVE
+STATE,Chiapas,Tuberculosis,1549,CONFIRMED,ACTIVE
+STATE,Chiapas,Typhoid fever,311,CONFIRMED,ACTIVE
+STATE,Chiapas,Urethritis,116576,CONFIRMED,ACTIVE
+STATE,Chiapas,Vaginal yeast infection,5225,CONFIRMED,ACTIVE
+STATE,Chiapas,Vaginitis,337,CONFIRMED,ACTIVE
+STATE,Chiapas,Viral exanthem,461,CONFIRMED,ACTIVE
 STATE,Chiapas,Whooping cough,84,CONFIRMED,ACTIVE
-STATE,Chihuahua,Acute otitis media,15730,CONFIRMED,ACTIVE
-STATE,Chihuahua,Brucellosis,6,CONFIRMED,ACTIVE
-STATE,Chihuahua,COVID-19,43,CONFIRMED,ACTIVE
+STATE,Chihuahua,Acute otitis media,16718,CONFIRMED,ACTIVE
+STATE,Chihuahua,Brucellosis,7,CONFIRMED,ACTIVE
+STATE,Chihuahua,COVID-19,47,CONFIRMED,ACTIVE
 STATE,Chihuahua,Chagas disease,3,CONFIRMED,ACTIVE
-STATE,Chihuahua,Chancroid,22,CONFIRMED,ACTIVE
-STATE,Chihuahua,Chickenpox,1506,CONFIRMED,ACTIVE
-STATE,Chihuahua,Common cold,339174,CONFIRMED,ACTIVE
-STATE,Chihuahua,Conjunctivitis,21907,CONFIRMED,ACTIVE
+STATE,Chihuahua,Chancroid,29,CONFIRMED,ACTIVE
+STATE,Chihuahua,Chickenpox,1552,CONFIRMED,ACTIVE
+STATE,Chihuahua,Common cold,357582,CONFIRMED,ACTIVE
+STATE,Chihuahua,Conjunctivitis,22879,CONFIRMED,ACTIVE
 STATE,Chihuahua,Cysticercosis,7,CONFIRMED,ACTIVE
-STATE,Chihuahua,Dengue fever,25,CONFIRMED,ACTIVE
-STATE,Chihuahua,Erysipelas,35,CONFIRMED,ACTIVE
-STATE,Chihuahua,Genital herpes,233,CONFIRMED,ACTIVE
-STATE,Chihuahua,Gonorrhea,166,CONFIRMED,ACTIVE
-STATE,Chihuahua,HIV/AIDS,665,CONFIRMED,ACTIVE
-STATE,Chihuahua,HPV,516,CONFIRMED,ACTIVE
-STATE,Chihuahua,Healthcare-associated infection,1496,CONFIRMED,ACTIVE
-STATE,Chihuahua,Hepatitis A,48,CONFIRMED,ACTIVE
+STATE,Chihuahua,Dengue fever,43,CONFIRMED,ACTIVE
+STATE,Chihuahua,Erysipelas,36,CONFIRMED,ACTIVE
+STATE,Chihuahua,Genital herpes,256,CONFIRMED,ACTIVE
+STATE,Chihuahua,Gonorrhea,174,CONFIRMED,ACTIVE
+STATE,Chihuahua,HIV/AIDS,691,CONFIRMED,ACTIVE
+STATE,Chihuahua,HPV,517,CONFIRMED,ACTIVE
+STATE,Chihuahua,Healthcare-associated infection,1538,CONFIRMED,ACTIVE
+STATE,Chihuahua,Hepatitis A,52,CONFIRMED,ACTIVE
 STATE,Chihuahua,Hepatitis B,5,CONFIRMED,ACTIVE
-STATE,Chihuahua,Hepatitis C,298,CONFIRMED,ACTIVE
-STATE,Chihuahua,Infectious gastroenteritis,216057,CONFIRMED,ACTIVE
+STATE,Chihuahua,Hepatitis C,326,CONFIRMED,ACTIVE
+STATE,Chihuahua,Infectious gastroenteritis,225006,CONFIRMED,ACTIVE
 STATE,Chihuahua,Influenza,65,CONFIRMED,ACTIVE
 STATE,Chihuahua,Lymphogranuloma venereum,8,CONFIRMED,ACTIVE
-STATE,Chihuahua,Meningitis,57,CONFIRMED,ACTIVE
+STATE,Chihuahua,Meningitis,61,CONFIRMED,ACTIVE
 STATE,Chihuahua,Mpox,1,CONFIRMED,ACTIVE
-STATE,Chihuahua,Mumps,155,CONFIRMED,ACTIVE
+STATE,Chihuahua,Mumps,169,CONFIRMED,ACTIVE
 STATE,Chihuahua,Myiasis,3,CONFIRMED,ACTIVE
-STATE,Chihuahua,Other viral hepatitis,66,CONFIRMED,ACTIVE
-STATE,Chihuahua,Parasitic disease,529,CONFIRMED,ACTIVE
-STATE,Chihuahua,Paratyphoid fever,43,CONFIRMED,ACTIVE
+STATE,Chihuahua,Other viral hepatitis,72,CONFIRMED,ACTIVE
+STATE,Chihuahua,Parasitic disease,557,CONFIRMED,ACTIVE
+STATE,Chihuahua,Paratyphoid fever,46,CONFIRMED,ACTIVE
 STATE,Chihuahua,Pinto disease,3,CONFIRMED,ACTIVE
-STATE,Chihuahua,Pinworm infection,43,CONFIRMED,ACTIVE
-STATE,Chihuahua,Pneumonia,9098,CONFIRMED,ACTIVE
-STATE,Chihuahua,Rocky Mountain spotted fever,152,CONFIRMED,ACTIVE
-STATE,Chihuahua,Scabies,250,CONFIRMED,ACTIVE
-STATE,Chihuahua,Scarlet fever,47,CONFIRMED,ACTIVE
-STATE,Chihuahua,Strep throat,9042,CONFIRMED,ACTIVE
-STATE,Chihuahua,Syphilis,886,CONFIRMED,ACTIVE
-STATE,Chihuahua,Taeniasis,9,CONFIRMED,ACTIVE
+STATE,Chihuahua,Pinworm infection,44,CONFIRMED,ACTIVE
+STATE,Chihuahua,Pneumonia,9583,CONFIRMED,ACTIVE
+STATE,Chihuahua,Rocky Mountain spotted fever,155,CONFIRMED,ACTIVE
+STATE,Chihuahua,Scabies,254,CONFIRMED,ACTIVE
+STATE,Chihuahua,Scarlet fever,50,CONFIRMED,ACTIVE
+STATE,Chihuahua,Strep throat,9546,CONFIRMED,ACTIVE
+STATE,Chihuahua,Syphilis,899,CONFIRMED,ACTIVE
+STATE,Chihuahua,Taeniasis,13,CONFIRMED,ACTIVE
 STATE,Chihuahua,Toxoplasmosis,2,CONFIRMED,ACTIVE
-STATE,Chihuahua,Trichomonas infection,355,CONFIRMED,ACTIVE
+STATE,Chihuahua,Trichomonas infection,371,CONFIRMED,ACTIVE
 STATE,Chihuahua,Tuberculosis,708,CONFIRMED,ACTIVE
-STATE,Chihuahua,Typhoid fever,94,CONFIRMED,ACTIVE
-STATE,Chihuahua,Urethritis,93963,CONFIRMED,ACTIVE
-STATE,Chihuahua,Vaginal yeast infection,3102,CONFIRMED,ACTIVE
-STATE,Chihuahua,Vaginitis,518,CONFIRMED,ACTIVE
-STATE,Chihuahua,Viral exanthem,546,CONFIRMED,ACTIVE
-STATE,Chihuahua,Whooping cough,199,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Acute otitis media,29344,CONFIRMED,ACTIVE
+STATE,Chihuahua,Typhoid fever,103,CONFIRMED,ACTIVE
+STATE,Chihuahua,Urethritis,98017,CONFIRMED,ACTIVE
+STATE,Chihuahua,Vaginal yeast infection,3262,CONFIRMED,ACTIVE
+STATE,Chihuahua,Vaginitis,107,CONFIRMED,ACTIVE
+STATE,Chihuahua,Viral exanthem,553,CONFIRMED,ACTIVE
+STATE,Chihuahua,Whooping cough,203,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Acute otitis media,30980,CONFIRMED,ACTIVE
 STATE,Ciudad de México,Brucellosis,54,CONFIRMED,ACTIVE
-STATE,Ciudad de México,COVID-19,815,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Chancroid,16,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Chickenpox,3482,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Common cold,1248022,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Conjunctivitis,74409,CONFIRMED,ACTIVE
+STATE,Ciudad de México,COVID-19,830,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Chancroid,18,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Chickenpox,3659,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Common cold,312081,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Conjunctivitis,77898,CONFIRMED,ACTIVE
 STATE,Ciudad de México,Conjunctivitis due to virus,20,CONFIRMED,ACTIVE
 STATE,Ciudad de México,Cysticercosis,1,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Erysipelas,201,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Genital herpes,770,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Gonorrhea,476,CONFIRMED,ACTIVE
-STATE,Ciudad de México,HIV/AIDS,1143,CONFIRMED,ACTIVE
-STATE,Ciudad de México,HPV,5384,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Healthcare-associated infection,15358,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Hepatitis A,330,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Hepatitis B,68,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Hepatitis C,513,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Infectious gastroenteritis,629127,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Influenza,1127,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Erysipelas,208,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Genital herpes,681,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Gonorrhea,10127,CONFIRMED,ACTIVE
+STATE,Ciudad de México,HIV/AIDS,1183,CONFIRMED,ACTIVE
+STATE,Ciudad de México,HPV,5630,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Healthcare-associated infection,16435,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Hepatitis A,350,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Hepatitis B,76,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Hepatitis C,576,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Infectious gastroenteritis,655383,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Influenza,1229,CONFIRMED,ACTIVE
 STATE,Ciudad de México,Leishmaniasis,2,CONFIRMED,ACTIVE
 STATE,Ciudad de México,Leprosy,1,CONFIRMED,ACTIVE
 STATE,Ciudad de México,Leptospirosis,24,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Lymphogranuloma venereum,158,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Meningitis,157,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Mpox,33,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Mumps,234,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Myiasis,18,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Other viral hepatitis,121,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Parasitic disease,2419,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Lymphogranuloma venereum,167,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Meningitis,170,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Mpox,36,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Mumps,236,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Myiasis,19,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Other viral hepatitis,129,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Parasitic disease,2496,CONFIRMED,ACTIVE
 STATE,Ciudad de México,Paratyphoid fever,9,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Pinto disease,39,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Pinworm infection,88,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Pneumonia,20073,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Scabies,402,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Scarlet fever,153,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Strep throat,7238,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Syphilis,122,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Toxoplasmosis,4,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Pinto disease,43,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Pinworm infection,96,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Pneumonia,21392,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Scabies,414,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Scarlet fever,161,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Strep throat,7552,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Syphilis,222,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Toxoplasmosis,5,CONFIRMED,ACTIVE
 STATE,Ciudad de México,Trichinosis,3,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Trichomonas infection,401,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Trichomonas infection,43,CONFIRMED,ACTIVE
 STATE,Ciudad de México,Tuberculosis,643,CONFIRMED,ACTIVE
 STATE,Ciudad de México,Typhoid fever,15,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Urethritis,271846,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Vaginal yeast infection,5771,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Vaginitis,566,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Viral exanthem,1643,CONFIRMED,ACTIVE
-STATE,Ciudad de México,Whooping cough,78,CONFIRMED,ACTIVE
-STATE,Coahuila,Acute otitis media,9124,CONFIRMED,ACTIVE
-STATE,Coahuila,Brucellosis,36,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Urethritis,284590,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Vaginal yeast infection,452,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Vaginitis,786,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Viral exanthem,1661,CONFIRMED,ACTIVE
+STATE,Ciudad de México,Whooping cough,84,CONFIRMED,ACTIVE
+STATE,Coahuila,Acute otitis media,9540,CONFIRMED,ACTIVE
+STATE,Coahuila,Brucellosis,39,CONFIRMED,ACTIVE
 STATE,Coahuila,COVID-19,33,CONFIRMED,ACTIVE
 STATE,Coahuila,Chagas disease,3,CONFIRMED,ACTIVE
-STATE,Coahuila,Chancroid,13,CONFIRMED,ACTIVE
-STATE,Coahuila,Chickenpox,1533,CONFIRMED,ACTIVE
-STATE,Coahuila,Common cold,290024,CONFIRMED,ACTIVE
-STATE,Coahuila,Conjunctivitis,15131,CONFIRMED,ACTIVE
-STATE,Coahuila,Conjunctivitis due to virus,1,CONFIRMED,ACTIVE
+STATE,Coahuila,Chancroid,15,CONFIRMED,ACTIVE
+STATE,Coahuila,Chickenpox,1572,CONFIRMED,ACTIVE
+STATE,Coahuila,Common cold,307047,CONFIRMED,ACTIVE
+STATE,Coahuila,Conjunctivitis,15761,CONFIRMED,ACTIVE
 STATE,Coahuila,Cysticercosis,2,CONFIRMED,ACTIVE
 STATE,Coahuila,Dengue Severe,1,CONFIRMED,ACTIVE
-STATE,Coahuila,Dengue fever,62,CONFIRMED,ACTIVE
-STATE,Coahuila,Erysipelas,82,CONFIRMED,ACTIVE
-STATE,Coahuila,Genital herpes,104,CONFIRMED,ACTIVE
-STATE,Coahuila,Gonorrhea,150,CONFIRMED,ACTIVE
-STATE,Coahuila,HIV/AIDS,437,CONFIRMED,ACTIVE
-STATE,Coahuila,HPV,118,CONFIRMED,ACTIVE
-STATE,Coahuila,Healthcare-associated infection,2322,CONFIRMED,ACTIVE
+STATE,Coahuila,Dengue fever,74,CONFIRMED,ACTIVE
+STATE,Coahuila,Erysipelas,86,CONFIRMED,ACTIVE
+STATE,Coahuila,Genital herpes,108,CONFIRMED,ACTIVE
+STATE,Coahuila,Gonorrhea,154,CONFIRMED,ACTIVE
+STATE,Coahuila,HIV/AIDS,457,CONFIRMED,ACTIVE
+STATE,Coahuila,HPV,124,CONFIRMED,ACTIVE
+STATE,Coahuila,Healthcare-associated infection,2477,CONFIRMED,ACTIVE
 STATE,Coahuila,Hepatitis A,42,CONFIRMED,ACTIVE
-STATE,Coahuila,Hepatitis B,9,CONFIRMED,ACTIVE
-STATE,Coahuila,Hepatitis C,301,CONFIRMED,ACTIVE
-STATE,Coahuila,Infectious gastroenteritis,195308,CONFIRMED,ACTIVE
-STATE,Coahuila,Influenza,195,CONFIRMED,ACTIVE
+STATE,Coahuila,Hepatitis B,10,CONFIRMED,ACTIVE
+STATE,Coahuila,Hepatitis C,318,CONFIRMED,ACTIVE
+STATE,Coahuila,Infectious gastroenteritis,203393,CONFIRMED,ACTIVE
+STATE,Coahuila,Influenza,197,CONFIRMED,ACTIVE
 STATE,Coahuila,Leptospirosis,3,CONFIRMED,ACTIVE
 STATE,Coahuila,Lymphogranuloma venereum,5,CONFIRMED,ACTIVE
-STATE,Coahuila,Meningitis,14,CONFIRMED,ACTIVE
-STATE,Coahuila,Mumps,170,CONFIRMED,ACTIVE
+STATE,Coahuila,Meningitis,15,CONFIRMED,ACTIVE
+STATE,Coahuila,Mpox,1,CONFIRMED,ACTIVE
+STATE,Coahuila,Mumps,179,CONFIRMED,ACTIVE
 STATE,Coahuila,Myiasis,9,CONFIRMED,ACTIVE
 STATE,Coahuila,Other viral hepatitis,41,CONFIRMED,ACTIVE
-STATE,Coahuila,Parasitic disease,315,CONFIRMED,ACTIVE
-STATE,Coahuila,Paratyphoid fever,41,CONFIRMED,ACTIVE
-STATE,Coahuila,Pinworm infection,6,CONFIRMED,ACTIVE
-STATE,Coahuila,Pneumonia,3009,CONFIRMED,ACTIVE
-STATE,Coahuila,Rocky Mountain spotted fever,74,CONFIRMED,ACTIVE
-STATE,Coahuila,Scabies,392,CONFIRMED,ACTIVE
-STATE,Coahuila,Scarlet fever,44,CONFIRMED,ACTIVE
-STATE,Coahuila,Strep throat,11844,CONFIRMED,ACTIVE
-STATE,Coahuila,Syphilis,1042,CONFIRMED,ACTIVE
+STATE,Coahuila,Parasitic disease,344,CONFIRMED,ACTIVE
+STATE,Coahuila,Paratyphoid fever,43,CONFIRMED,ACTIVE
+STATE,Coahuila,Pinworm infection,8,CONFIRMED,ACTIVE
+STATE,Coahuila,Pneumonia,3156,CONFIRMED,ACTIVE
+STATE,Coahuila,Rocky Mountain spotted fever,75,CONFIRMED,ACTIVE
+STATE,Coahuila,Scabies,408,CONFIRMED,ACTIVE
+STATE,Coahuila,Scarlet fever,47,CONFIRMED,ACTIVE
+STATE,Coahuila,Strep throat,12253,CONFIRMED,ACTIVE
+STATE,Coahuila,Syphilis,1142,CONFIRMED,ACTIVE
 STATE,Coahuila,Toxoplasmosis,1,CONFIRMED,ACTIVE
-STATE,Coahuila,Trichomonas infection,505,CONFIRMED,ACTIVE
+STATE,Coahuila,Trichomonas infection,527,CONFIRMED,ACTIVE
 STATE,Coahuila,Tuberculosis,537,CONFIRMED,ACTIVE
-STATE,Coahuila,Typhoid fever,269,CONFIRMED,ACTIVE
-STATE,Coahuila,Urethritis,184,CONFIRMED,ACTIVE
-STATE,Coahuila,Vaginal yeast infection,1255,CONFIRMED,ACTIVE
-STATE,Coahuila,Vaginitis,636,CONFIRMED,ACTIVE
+STATE,Coahuila,Typhoid fever,274,CONFIRMED,ACTIVE
+STATE,Coahuila,Urethritis,71667,CONFIRMED,ACTIVE
+STATE,Coahuila,Vaginal yeast infection,1314,CONFIRMED,ACTIVE
+STATE,Coahuila,Vaginitis,115,CONFIRMED,ACTIVE
 STATE,Coahuila,Viral exanthem,453,CONFIRMED,ACTIVE
-STATE,Coahuila,Whooping cough,64,CONFIRMED,ACTIVE
-STATE,Colima,Acute otitis media,5209,CONFIRMED,ACTIVE
-STATE,Colima,Brucellosis,19,CONFIRMED,ACTIVE
-STATE,Colima,COVID-19,16,CONFIRMED,ACTIVE
+STATE,Coahuila,Whooping cough,65,CONFIRMED,ACTIVE
+STATE,Colima,Acute otitis media,5424,CONFIRMED,ACTIVE
+STATE,Colima,Brucellosis,20,CONFIRMED,ACTIVE
+STATE,Colima,COVID-19,18,CONFIRMED,ACTIVE
 STATE,Colima,Chagas disease,3,CONFIRMED,ACTIVE
 STATE,Colima,Chancroid,3,CONFIRMED,ACTIVE
-STATE,Colima,Chickenpox,325,CONFIRMED,ACTIVE
-STATE,Colima,Common cold,91306,CONFIRMED,ACTIVE
-STATE,Colima,Conjunctivitis,4324,CONFIRMED,ACTIVE
+STATE,Colima,Chickenpox,342,CONFIRMED,ACTIVE
+STATE,Colima,Common cold,97489,CONFIRMED,ACTIVE
+STATE,Colima,Conjunctivitis,4495,CONFIRMED,ACTIVE
 STATE,Colima,Conjunctivitis due to virus,9,CONFIRMED,ACTIVE
 STATE,Colima,Cysticercosis,5,CONFIRMED,ACTIVE
 STATE,Colima,Dengue Severe,1,CONFIRMED,ACTIVE
-STATE,Colima,Dengue fever,3,CONFIRMED,ACTIVE
-STATE,Colima,Erysipelas,95,CONFIRMED,ACTIVE
-STATE,Colima,Genital herpes,72,CONFIRMED,ACTIVE
-STATE,Colima,Gonorrhea,34,CONFIRMED,ACTIVE
-STATE,Colima,HIV/AIDS,156,CONFIRMED,ACTIVE
-STATE,Colima,HPV,70,CONFIRMED,ACTIVE
-STATE,Colima,Healthcare-associated infection,904,CONFIRMED,ACTIVE
-STATE,Colima,Hepatitis A,11,CONFIRMED,ACTIVE
+STATE,Colima,Dengue fever,4,CONFIRMED,ACTIVE
+STATE,Colima,Erysipelas,99,CONFIRMED,ACTIVE
+STATE,Colima,Genital herpes,74,CONFIRMED,ACTIVE
+STATE,Colima,Gonorrhea,36,CONFIRMED,ACTIVE
+STATE,Colima,HIV/AIDS,158,CONFIRMED,ACTIVE
+STATE,Colima,HPV,71,CONFIRMED,ACTIVE
+STATE,Colima,Healthcare-associated infection,936,CONFIRMED,ACTIVE
+STATE,Colima,Hepatitis A,13,CONFIRMED,ACTIVE
 STATE,Colima,Hepatitis B,3,CONFIRMED,ACTIVE
-STATE,Colima,Hepatitis C,39,CONFIRMED,ACTIVE
-STATE,Colima,Infectious gastroenteritis,42621,CONFIRMED,ACTIVE
-STATE,Colima,Influenza,67,CONFIRMED,ACTIVE
-STATE,Colima,Leprosy,5,CONFIRMED,ACTIVE
+STATE,Colima,Hepatitis C,40,CONFIRMED,ACTIVE
+STATE,Colima,Infectious gastroenteritis,44397,CONFIRMED,ACTIVE
+STATE,Colima,Influenza,93,CONFIRMED,ACTIVE
+STATE,Colima,Leprosy,6,CONFIRMED,ACTIVE
 STATE,Colima,Leptospirosis,3,CONFIRMED,ACTIVE
 STATE,Colima,Lymphogranuloma venereum,3,CONFIRMED,ACTIVE
-STATE,Colima,Meningitis,16,CONFIRMED,ACTIVE
+STATE,Colima,Meningitis,17,CONFIRMED,ACTIVE
 STATE,Colima,Mumps,11,CONFIRMED,ACTIVE
-STATE,Colima,Myiasis,20,CONFIRMED,ACTIVE
-STATE,Colima,Other viral hepatitis,10,CONFIRMED,ACTIVE
-STATE,Colima,Parasitic disease,1208,CONFIRMED,ACTIVE
+STATE,Colima,Myiasis,22,CONFIRMED,ACTIVE
+STATE,Colima,Other viral hepatitis,22,CONFIRMED,ACTIVE
+STATE,Colima,Parasitic disease,1267,CONFIRMED,ACTIVE
 STATE,Colima,Paratyphoid fever,8,CONFIRMED,ACTIVE
-STATE,Colima,Pinworm infection,147,CONFIRMED,ACTIVE
-STATE,Colima,Pneumonia,803,CONFIRMED,ACTIVE
-STATE,Colima,Scabies,392,CONFIRMED,ACTIVE
+STATE,Colima,Pinworm infection,148,CONFIRMED,ACTIVE
+STATE,Colima,Pneumonia,843,CONFIRMED,ACTIVE
+STATE,Colima,Scabies,411,CONFIRMED,ACTIVE
 STATE,Colima,Scarlet fever,4,CONFIRMED,ACTIVE
-STATE,Colima,Strep throat,2271,CONFIRMED,ACTIVE
-STATE,Colima,Syphilis,519,CONFIRMED,ACTIVE
+STATE,Colima,Strep throat,2398,CONFIRMED,ACTIVE
+STATE,Colima,Syphilis,566,CONFIRMED,ACTIVE
 STATE,Colima,Taeniasis,2,CONFIRMED,ACTIVE
 STATE,Colima,Tetanus,1,CONFIRMED,ACTIVE
-STATE,Colima,Trichomonas infection,73,CONFIRMED,ACTIVE
+STATE,Colima,Trichomonas infection,78,CONFIRMED,ACTIVE
 STATE,Colima,Tuberculosis,202,CONFIRMED,ACTIVE
-STATE,Colima,Typhoid fever,6,CONFIRMED,ACTIVE
-STATE,Colima,Urethritis,20146,CONFIRMED,ACTIVE
-STATE,Colima,Vaginal yeast infection,399,CONFIRMED,ACTIVE
-STATE,Colima,Vaginitis,136,CONFIRMED,ACTIVE
-STATE,Colima,Viral exanthem,296,CONFIRMED,ACTIVE
+STATE,Colima,Typhoid fever,10,CONFIRMED,ACTIVE
+STATE,Colima,Urethritis,21005,CONFIRMED,ACTIVE
+STATE,Colima,Vaginal yeast infection,420,CONFIRMED,ACTIVE
+STATE,Colima,Vaginitis,262,CONFIRMED,ACTIVE
+STATE,Colima,Viral exanthem,297,CONFIRMED,ACTIVE
 STATE,Colima,Whooping cough,14,CONFIRMED,ACTIVE
-STATE,Durango,Acute otitis media,6559,CONFIRMED,ACTIVE
+STATE,Durango,Acute otitis media,6924,CONFIRMED,ACTIVE
 STATE,Durango,Brucellosis,16,CONFIRMED,ACTIVE
-STATE,Durango,COVID-19,17,CONFIRMED,ACTIVE
+STATE,Durango,COVID-19,18,CONFIRMED,ACTIVE
 STATE,Durango,Chancroid,2,CONFIRMED,ACTIVE
-STATE,Durango,Chickenpox,700,CONFIRMED,ACTIVE
-STATE,Durango,Common cold,181146,CONFIRMED,ACTIVE
-STATE,Durango,Conjunctivitis,8759,CONFIRMED,ACTIVE
-STATE,Durango,Dengue fever,11,CONFIRMED,ACTIVE
+STATE,Durango,Chickenpox,731,CONFIRMED,ACTIVE
+STATE,Durango,Common cold,193417,CONFIRMED,ACTIVE
+STATE,Durango,Conjunctivitis,9144,CONFIRMED,ACTIVE
+STATE,Durango,Dengue fever,12,CONFIRMED,ACTIVE
 STATE,Durango,Erysipelas,6,CONFIRMED,ACTIVE
 STATE,Durango,Genital herpes,35,CONFIRMED,ACTIVE
-STATE,Durango,Gonorrhea,17,CONFIRMED,ACTIVE
-STATE,Durango,HIV/AIDS,56,CONFIRMED,ACTIVE
-STATE,Durango,HPV,45,CONFIRMED,ACTIVE
-STATE,Durango,Healthcare-associated infection,281,CONFIRMED,ACTIVE
-STATE,Durango,Hepatitis A,44,CONFIRMED,ACTIVE
+STATE,Durango,Gonorrhea,22,CONFIRMED,ACTIVE
+STATE,Durango,HIV/AIDS,83,CONFIRMED,ACTIVE
+STATE,Durango,HPV,46,CONFIRMED,ACTIVE
+STATE,Durango,Healthcare-associated infection,298,CONFIRMED,ACTIVE
+STATE,Durango,Hepatitis A,49,CONFIRMED,ACTIVE
 STATE,Durango,Hepatitis B,5,CONFIRMED,ACTIVE
-STATE,Durango,Hepatitis C,62,CONFIRMED,ACTIVE
-STATE,Durango,Infectious gastroenteritis,106243,CONFIRMED,ACTIVE
+STATE,Durango,Hepatitis C,64,CONFIRMED,ACTIVE
+STATE,Durango,Infectious gastroenteritis,110428,CONFIRMED,ACTIVE
 STATE,Durango,Influenza,57,CONFIRMED,ACTIVE
 STATE,Durango,Lymphogranuloma venereum,1,CONFIRMED,ACTIVE
 STATE,Durango,Meningitis,6,CONFIRMED,ACTIVE
-STATE,Durango,Mumps,32,CONFIRMED,ACTIVE
+STATE,Durango,Mumps,33,CONFIRMED,ACTIVE
 STATE,Durango,Myiasis,3,CONFIRMED,ACTIVE
 STATE,Durango,Other viral hepatitis,13,CONFIRMED,ACTIVE
-STATE,Durango,Parasitic disease,273,CONFIRMED,ACTIVE
-STATE,Durango,Paratyphoid fever,2,CONFIRMED,ACTIVE
-STATE,Durango,Pinworm infection,46,CONFIRMED,ACTIVE
-STATE,Durango,Pneumonia,1609,CONFIRMED,ACTIVE
-STATE,Durango,Rocky Mountain spotted fever,7,CONFIRMED,ACTIVE
-STATE,Durango,Scabies,60,CONFIRMED,ACTIVE
-STATE,Durango,Scarlet fever,9,CONFIRMED,ACTIVE
-STATE,Durango,Strep throat,18,CONFIRMED,ACTIVE
-STATE,Durango,Syphilis,157,CONFIRMED,ACTIVE
+STATE,Durango,Parasitic disease,282,CONFIRMED,ACTIVE
+STATE,Durango,Paratyphoid fever,3,CONFIRMED,ACTIVE
+STATE,Durango,Pinworm infection,49,CONFIRMED,ACTIVE
+STATE,Durango,Pneumonia,1709,CONFIRMED,ACTIVE
+STATE,Durango,Rocky Mountain spotted fever,8,CONFIRMED,ACTIVE
+STATE,Durango,Scabies,68,CONFIRMED,ACTIVE
+STATE,Durango,Scarlet fever,10,CONFIRMED,ACTIVE
+STATE,Durango,Strep throat,27,CONFIRMED,ACTIVE
+STATE,Durango,Syphilis,162,CONFIRMED,ACTIVE
 STATE,Durango,Taeniasis,1,CONFIRMED,ACTIVE
-STATE,Durango,Trichomonas infection,327,CONFIRMED,ACTIVE
+STATE,Durango,Toxoplasmosis,1,CONFIRMED,ACTIVE
+STATE,Durango,Trichomonas infection,338,CONFIRMED,ACTIVE
 STATE,Durango,Tuberculosis,216,CONFIRMED,ACTIVE
 STATE,Durango,Typhoid fever,2,CONFIRMED,ACTIVE
-STATE,Durango,Urethritis,42490,CONFIRMED,ACTIVE
-STATE,Durango,Vaginal yeast infection,1215,CONFIRMED,ACTIVE
-STATE,Durango,Vaginitis,18,CONFIRMED,ACTIVE
-STATE,Durango,Viral exanthem,1116,CONFIRMED,ACTIVE
+STATE,Durango,Urethritis,44345,CONFIRMED,ACTIVE
+STATE,Durango,Vaginal yeast infection,1276,CONFIRMED,ACTIVE
+STATE,Durango,Vaginitis,359,CONFIRMED,ACTIVE
+STATE,Durango,Viral exanthem,1124,CONFIRMED,ACTIVE
 STATE,Durango,Whooping cough,9,CONFIRMED,ACTIVE
-STATE,Guanajuato,Acute otitis media,21189,CONFIRMED,ACTIVE
-STATE,Guanajuato,Brucellosis,57,CONFIRMED,ACTIVE
+STATE,Guanajuato,Acute otitis media,22202,CONFIRMED,ACTIVE
+STATE,Guanajuato,Brucellosis,59,CONFIRMED,ACTIVE
 STATE,Guanajuato,COVID-19,70,CONFIRMED,ACTIVE
-STATE,Guanajuato,Chagas disease,21,CONFIRMED,ACTIVE
-STATE,Guanajuato,Chancroid,8,CONFIRMED,ACTIVE
-STATE,Guanajuato,Chickenpox,2083,CONFIRMED,ACTIVE
-STATE,Guanajuato,Common cold,552513,CONFIRMED,ACTIVE
-STATE,Guanajuato,Conjunctivitis,25153,CONFIRMED,ACTIVE
+STATE,Guanajuato,Chagas disease,22,CONFIRMED,ACTIVE
+STATE,Guanajuato,Chancroid,9,CONFIRMED,ACTIVE
+STATE,Guanajuato,Chickenpox,2190,CONFIRMED,ACTIVE
+STATE,Guanajuato,Common cold,579070,CONFIRMED,ACTIVE
+STATE,Guanajuato,Conjunctivitis,26586,CONFIRMED,ACTIVE
 STATE,Guanajuato,Conjunctivitis due to virus,8,CONFIRMED,ACTIVE
 STATE,Guanajuato,Cysticercosis,4,CONFIRMED,ACTIVE
-STATE,Guanajuato,Dengue Severe,11,CONFIRMED,ACTIVE
-STATE,Guanajuato,Dengue fever,224,CONFIRMED,ACTIVE
-STATE,Guanajuato,Erysipelas,26,CONFIRMED,ACTIVE
-STATE,Guanajuato,Genital herpes,95,CONFIRMED,ACTIVE
-STATE,Guanajuato,Gonorrhea,104,CONFIRMED,ACTIVE
-STATE,Guanajuato,HIV/AIDS,604,CONFIRMED,ACTIVE
-STATE,Guanajuato,HPV,1393,CONFIRMED,ACTIVE
-STATE,Guanajuato,Healthcare-associated infection,6222,CONFIRMED,ACTIVE
-STATE,Guanajuato,Hepatitis A,29,CONFIRMED,ACTIVE
-STATE,Guanajuato,Hepatitis B,11,CONFIRMED,ACTIVE
-STATE,Guanajuato,Hepatitis C,87,CONFIRMED,ACTIVE
-STATE,Guanajuato,Infectious gastroenteritis,273310,CONFIRMED,ACTIVE
+STATE,Guanajuato,Dengue Severe,13,CONFIRMED,ACTIVE
+STATE,Guanajuato,Dengue fever,239,CONFIRMED,ACTIVE
+STATE,Guanajuato,Erysipelas,27,CONFIRMED,ACTIVE
+STATE,Guanajuato,Genital herpes,106,CONFIRMED,ACTIVE
+STATE,Guanajuato,Gonorrhea,107,CONFIRMED,ACTIVE
+STATE,Guanajuato,HIV/AIDS,625,CONFIRMED,ACTIVE
+STATE,Guanajuato,HPV,1451,CONFIRMED,ACTIVE
+STATE,Guanajuato,Healthcare-associated infection,6533,CONFIRMED,ACTIVE
+STATE,Guanajuato,Hepatitis A,31,CONFIRMED,ACTIVE
+STATE,Guanajuato,Hepatitis B,13,CONFIRMED,ACTIVE
+STATE,Guanajuato,Hepatitis C,91,CONFIRMED,ACTIVE
+STATE,Guanajuato,Infectious gastroenteritis,282844,CONFIRMED,ACTIVE
 STATE,Guanajuato,Influenza,251,CONFIRMED,ACTIVE
 STATE,Guanajuato,Leprosy,3,CONFIRMED,ACTIVE
 STATE,Guanajuato,Leptospirosis,2,CONFIRMED,ACTIVE
-STATE,Guanajuato,Meningitis,8,CONFIRMED,ACTIVE
+STATE,Guanajuato,Meningitis,10,CONFIRMED,ACTIVE
 STATE,Guanajuato,Mpox,1,CONFIRMED,ACTIVE
-STATE,Guanajuato,Mumps,61,CONFIRMED,ACTIVE
-STATE,Guanajuato,Myiasis,29,CONFIRMED,ACTIVE
+STATE,Guanajuato,Mumps,63,CONFIRMED,ACTIVE
+STATE,Guanajuato,Myiasis,31,CONFIRMED,ACTIVE
 STATE,Guanajuato,Other viral hepatitis,26,CONFIRMED,ACTIVE
-STATE,Guanajuato,Parasitic disease,516,CONFIRMED,ACTIVE
-STATE,Guanajuato,Paratyphoid fever,14,CONFIRMED,ACTIVE
-STATE,Guanajuato,Pinto disease,2,CONFIRMED,ACTIVE
-STATE,Guanajuato,Pinworm infection,28,CONFIRMED,ACTIVE
-STATE,Guanajuato,Pneumonia,5959,CONFIRMED,ACTIVE
+STATE,Guanajuato,Parasitic disease,526,CONFIRMED,ACTIVE
+STATE,Guanajuato,Paratyphoid fever,15,CONFIRMED,ACTIVE
+STATE,Guanajuato,Pinto disease,3,CONFIRMED,ACTIVE
+STATE,Guanajuato,Pinworm infection,29,CONFIRMED,ACTIVE
+STATE,Guanajuato,Pneumonia,6266,CONFIRMED,ACTIVE
 STATE,Guanajuato,Rocky Mountain spotted fever,1,CONFIRMED,ACTIVE
-STATE,Guanajuato,Scabies,100,CONFIRMED,ACTIVE
-STATE,Guanajuato,Scarlet fever,43,CONFIRMED,ACTIVE
-STATE,Guanajuato,Strep throat,3222,CONFIRMED,ACTIVE
-STATE,Guanajuato,Syphilis,953,CONFIRMED,ACTIVE
+STATE,Guanajuato,Scabies,101,CONFIRMED,ACTIVE
+STATE,Guanajuato,Scarlet fever,45,CONFIRMED,ACTIVE
+STATE,Guanajuato,Strep throat,3411,CONFIRMED,ACTIVE
+STATE,Guanajuato,Syphilis,1010,CONFIRMED,ACTIVE
 STATE,Guanajuato,Taeniasis,2,CONFIRMED,ACTIVE
 STATE,Guanajuato,Tetanus,2,CONFIRMED,ACTIVE
 STATE,Guanajuato,Toxoplasmosis,1,CONFIRMED,ACTIVE
 STATE,Guanajuato,Trachoma,2,CONFIRMED,ACTIVE
-STATE,Guanajuato,Trichomonas infection,322,CONFIRMED,ACTIVE
-STATE,Guanajuato,Tuberculosis,405,CONFIRMED,ACTIVE
-STATE,Guanajuato,Typhoid fever,74,CONFIRMED,ACTIVE
-STATE,Guanajuato,Urethritis,138505,CONFIRMED,ACTIVE
-STATE,Guanajuato,Vaginal yeast infection,3450,CONFIRMED,ACTIVE
-STATE,Guanajuato,Vaginitis,956,CONFIRMED,ACTIVE
-STATE,Guanajuato,Viral exanthem,486,CONFIRMED,ACTIVE
-STATE,Guanajuato,Whooping cough,167,CONFIRMED,ACTIVE
-STATE,Guerrero,Acute otitis media,17696,CONFIRMED,ACTIVE
+STATE,Guanajuato,Trichomonas infection,345,CONFIRMED,ACTIVE
+STATE,Guanajuato,Tuberculosis,422,CONFIRMED,ACTIVE
+STATE,Guanajuato,Typhoid fever,77,CONFIRMED,ACTIVE
+STATE,Guanajuato,Urethritis,144972,CONFIRMED,ACTIVE
+STATE,Guanajuato,Vaginal yeast infection,3613,CONFIRMED,ACTIVE
+STATE,Guanajuato,Vaginitis,75,CONFIRMED,ACTIVE
+STATE,Guanajuato,Viral exanthem,495,CONFIRMED,ACTIVE
+STATE,Guanajuato,Whooping cough,173,CONFIRMED,ACTIVE
+STATE,Guerrero,Acute otitis media,18736,CONFIRMED,ACTIVE
 STATE,Guerrero,Brucellosis,21,CONFIRMED,ACTIVE
-STATE,Guerrero,COVID-19,26,CONFIRMED,ACTIVE
+STATE,Guerrero,COVID-19,27,CONFIRMED,ACTIVE
 STATE,Guerrero,Chagas disease,7,CONFIRMED,ACTIVE
 STATE,Guerrero,Chancroid,14,CONFIRMED,ACTIVE
-STATE,Guerrero,Chickenpox,987,CONFIRMED,ACTIVE
-STATE,Guerrero,Common cold,365171,CONFIRMED,ACTIVE
-STATE,Guerrero,Conjunctivitis,16586,CONFIRMED,ACTIVE
+STATE,Guerrero,Chickenpox,1031,CONFIRMED,ACTIVE
+STATE,Guerrero,Common cold,387668,CONFIRMED,ACTIVE
+STATE,Guerrero,Conjunctivitis,17205,CONFIRMED,ACTIVE
 STATE,Guerrero,Conjunctivitis due to virus,5,CONFIRMED,ACTIVE
 STATE,Guerrero,Cysticercosis,4,CONFIRMED,ACTIVE
-STATE,Guerrero,Dengue fever,36,CONFIRMED,ACTIVE
-STATE,Guerrero,Erysipelas,176,CONFIRMED,ACTIVE
-STATE,Guerrero,Genital herpes,134,CONFIRMED,ACTIVE
-STATE,Guerrero,Gonorrhea,197,CONFIRMED,ACTIVE
-STATE,Guerrero,HIV/AIDS,357,CONFIRMED,ACTIVE
-STATE,Guerrero,HPV,82,CONFIRMED,ACTIVE
-STATE,Guerrero,Healthcare-associated infection,1572,CONFIRMED,ACTIVE
-STATE,Guerrero,Hepatitis A,110,CONFIRMED,ACTIVE
-STATE,Guerrero,Hepatitis B,16,CONFIRMED,ACTIVE
-STATE,Guerrero,Hepatitis C,79,CONFIRMED,ACTIVE
-STATE,Guerrero,Infectious gastroenteritis,178209,CONFIRMED,ACTIVE
-STATE,Guerrero,Influenza,127,CONFIRMED,ACTIVE
+STATE,Guerrero,Dengue fever,38,CONFIRMED,ACTIVE
+STATE,Guerrero,Erysipelas,185,CONFIRMED,ACTIVE
+STATE,Guerrero,Genital herpes,138,CONFIRMED,ACTIVE
+STATE,Guerrero,Gonorrhea,210,CONFIRMED,ACTIVE
+STATE,Guerrero,HIV/AIDS,363,CONFIRMED,ACTIVE
+STATE,Guerrero,HPV,88,CONFIRMED,ACTIVE
+STATE,Guerrero,Healthcare-associated infection,1629,CONFIRMED,ACTIVE
+STATE,Guerrero,Hepatitis A,111,CONFIRMED,ACTIVE
+STATE,Guerrero,Hepatitis B,17,CONFIRMED,ACTIVE
+STATE,Guerrero,Hepatitis C,81,CONFIRMED,ACTIVE
+STATE,Guerrero,Infectious gastroenteritis,184076,CONFIRMED,ACTIVE
+STATE,Guerrero,Influenza,143,CONFIRMED,ACTIVE
 STATE,Guerrero,Leishmaniasis,1,CONFIRMED,ACTIVE
 STATE,Guerrero,Leprosy,8,CONFIRMED,ACTIVE
 STATE,Guerrero,Leptospirosis,15,CONFIRMED,ACTIVE
 STATE,Guerrero,Lymphogranuloma venereum,4,CONFIRMED,ACTIVE
 STATE,Guerrero,Meningitis,24,CONFIRMED,ACTIVE
-STATE,Guerrero,Mumps,60,CONFIRMED,ACTIVE
-STATE,Guerrero,Myiasis,57,CONFIRMED,ACTIVE
+STATE,Guerrero,Mumps,62,CONFIRMED,ACTIVE
+STATE,Guerrero,Myiasis,58,CONFIRMED,ACTIVE
 STATE,Guerrero,Other viral hepatitis,36,CONFIRMED,ACTIVE
-STATE,Guerrero,Parasitic disease,8441,CONFIRMED,ACTIVE
-STATE,Guerrero,Paratyphoid fever,78,CONFIRMED,ACTIVE
+STATE,Guerrero,Parasitic disease,8815,CONFIRMED,ACTIVE
+STATE,Guerrero,Paratyphoid fever,82,CONFIRMED,ACTIVE
 STATE,Guerrero,Pinto disease,2,CONFIRMED,ACTIVE
-STATE,Guerrero,Pinworm infection,1437,CONFIRMED,ACTIVE
-STATE,Guerrero,Pneumonia,2306,CONFIRMED,ACTIVE
+STATE,Guerrero,Pinworm infection,1542,CONFIRMED,ACTIVE
+STATE,Guerrero,Pneumonia,2483,CONFIRMED,ACTIVE
 STATE,Guerrero,Rocky Mountain spotted fever,2,CONFIRMED,ACTIVE
-STATE,Guerrero,Scabies,1404,CONFIRMED,ACTIVE
-STATE,Guerrero,Scarlet fever,28,CONFIRMED,ACTIVE
-STATE,Guerrero,Strep throat,26329,CONFIRMED,ACTIVE
-STATE,Guerrero,Syphilis,252,CONFIRMED,ACTIVE
-STATE,Guerrero,Taeniasis,21,CONFIRMED,ACTIVE
+STATE,Guerrero,Scabies,1462,CONFIRMED,ACTIVE
+STATE,Guerrero,Scarlet fever,30,CONFIRMED,ACTIVE
+STATE,Guerrero,Strep throat,27954,CONFIRMED,ACTIVE
+STATE,Guerrero,Syphilis,259,CONFIRMED,ACTIVE
+STATE,Guerrero,Taeniasis,22,CONFIRMED,ACTIVE
 STATE,Guerrero,Tetanus,4,CONFIRMED,ACTIVE
 STATE,Guerrero,Toxoplasmosis,3,CONFIRMED,ACTIVE
-STATE,Guerrero,Trichomonas infection,443,CONFIRMED,ACTIVE
+STATE,Guerrero,Trichomonas infection,467,CONFIRMED,ACTIVE
 STATE,Guerrero,Tuberculosis,915,CONFIRMED,ACTIVE
-STATE,Guerrero,Typhoid fever,219,CONFIRMED,ACTIVE
-STATE,Guerrero,Urethritis,81328,CONFIRMED,ACTIVE
-STATE,Guerrero,Vaginal yeast infection,4465,CONFIRMED,ACTIVE
-STATE,Guerrero,Vaginitis,558,CONFIRMED,ACTIVE
-STATE,Guerrero,Viral exanthem,333,CONFIRMED,ACTIVE
+STATE,Guerrero,Typhoid fever,228,CONFIRMED,ACTIVE
+STATE,Guerrero,Urethritis,84867,CONFIRMED,ACTIVE
+STATE,Guerrero,Vaginal yeast infection,4628,CONFIRMED,ACTIVE
+STATE,Guerrero,Vaginitis,315,CONFIRMED,ACTIVE
+STATE,Guerrero,Viral exanthem,336,CONFIRMED,ACTIVE
 STATE,Guerrero,Whooping cough,23,CONFIRMED,ACTIVE
-STATE,Hidalgo,Acute otitis media,14707,CONFIRMED,ACTIVE
-STATE,Hidalgo,Brucellosis,2,CONFIRMED,ACTIVE
-STATE,Hidalgo,COVID-19,202,CONFIRMED,ACTIVE
-STATE,Hidalgo,Chagas disease,35,CONFIRMED,ACTIVE
-STATE,Hidalgo,Chancroid,5,CONFIRMED,ACTIVE
-STATE,Hidalgo,Chickenpox,1258,CONFIRMED,ACTIVE
-STATE,Hidalgo,Common cold,394478,CONFIRMED,ACTIVE
-STATE,Hidalgo,Conjunctivitis,19600,CONFIRMED,ACTIVE
+STATE,Hidalgo,Acute otitis media,15288,CONFIRMED,ACTIVE
+STATE,Hidalgo,Brucellosis,3,CONFIRMED,ACTIVE
+STATE,Hidalgo,COVID-19,208,CONFIRMED,ACTIVE
+STATE,Hidalgo,Chagas disease,38,CONFIRMED,ACTIVE
+STATE,Hidalgo,Chancroid,6,CONFIRMED,ACTIVE
+STATE,Hidalgo,Chickenpox,1326,CONFIRMED,ACTIVE
+STATE,Hidalgo,Common cold,414396,CONFIRMED,ACTIVE
+STATE,Hidalgo,Conjunctivitis,20316,CONFIRMED,ACTIVE
 STATE,Hidalgo,Cysticercosis,2,CONFIRMED,ACTIVE
-STATE,Hidalgo,Dengue fever,52,CONFIRMED,ACTIVE
-STATE,Hidalgo,Erysipelas,48,CONFIRMED,ACTIVE
-STATE,Hidalgo,Genital herpes,71,CONFIRMED,ACTIVE
-STATE,Hidalgo,Gonorrhea,31,CONFIRMED,ACTIVE
-STATE,Hidalgo,HIV/AIDS,356,CONFIRMED,ACTIVE
-STATE,Hidalgo,HPV,757,CONFIRMED,ACTIVE
-STATE,Hidalgo,Healthcare-associated infection,1189,CONFIRMED,ACTIVE
-STATE,Hidalgo,Hepatitis A,65,CONFIRMED,ACTIVE
+STATE,Hidalgo,Dengue fever,61,CONFIRMED,ACTIVE
+STATE,Hidalgo,Erysipelas,53,CONFIRMED,ACTIVE
+STATE,Hidalgo,Genital herpes,80,CONFIRMED,ACTIVE
+STATE,Hidalgo,Gonorrhea,33,CONFIRMED,ACTIVE
+STATE,Hidalgo,HIV/AIDS,368,CONFIRMED,ACTIVE
+STATE,Hidalgo,HPV,779,CONFIRMED,ACTIVE
+STATE,Hidalgo,Healthcare-associated infection,1272,CONFIRMED,ACTIVE
+STATE,Hidalgo,Hepatitis A,69,CONFIRMED,ACTIVE
 STATE,Hidalgo,Hepatitis B,8,CONFIRMED,ACTIVE
-STATE,Hidalgo,Hepatitis C,34,CONFIRMED,ACTIVE
-STATE,Hidalgo,Infectious gastroenteritis,116221,CONFIRMED,ACTIVE
-STATE,Hidalgo,Influenza,336,CONFIRMED,ACTIVE
+STATE,Hidalgo,Hepatitis C,38,CONFIRMED,ACTIVE
+STATE,Hidalgo,Infectious gastroenteritis,119957,CONFIRMED,ACTIVE
+STATE,Hidalgo,Influenza,363,CONFIRMED,ACTIVE
 STATE,Hidalgo,Leptospirosis,3,CONFIRMED,ACTIVE
-STATE,Hidalgo,Lymphogranuloma venereum,3,CONFIRMED,ACTIVE
-STATE,Hidalgo,Meningitis,14,CONFIRMED,ACTIVE
+STATE,Hidalgo,Lymphogranuloma venereum,4,CONFIRMED,ACTIVE
+STATE,Hidalgo,Meningitis,15,CONFIRMED,ACTIVE
 STATE,Hidalgo,Mumps,43,CONFIRMED,ACTIVE
-STATE,Hidalgo,Myiasis,22,CONFIRMED,ACTIVE
-STATE,Hidalgo,Other viral hepatitis,7,CONFIRMED,ACTIVE
-STATE,Hidalgo,Parasitic disease,958,CONFIRMED,ACTIVE
+STATE,Hidalgo,Myiasis,23,CONFIRMED,ACTIVE
+STATE,Hidalgo,Other viral hepatitis,8,CONFIRMED,ACTIVE
+STATE,Hidalgo,Parasitic disease,997,CONFIRMED,ACTIVE
 STATE,Hidalgo,Paratyphoid fever,6,CONFIRMED,ACTIVE
-STATE,Hidalgo,Pinworm infection,85,CONFIRMED,ACTIVE
-STATE,Hidalgo,Pneumonia,2058,CONFIRMED,ACTIVE
-STATE,Hidalgo,Scabies,366,CONFIRMED,ACTIVE
-STATE,Hidalgo,Scarlet fever,45,CONFIRMED,ACTIVE
-STATE,Hidalgo,Strep throat,537,CONFIRMED,ACTIVE
-STATE,Hidalgo,Syphilis,144,CONFIRMED,ACTIVE
+STATE,Hidalgo,Pinworm infection,87,CONFIRMED,ACTIVE
+STATE,Hidalgo,Pneumonia,2149,CONFIRMED,ACTIVE
+STATE,Hidalgo,Scabies,397,CONFIRMED,ACTIVE
+STATE,Hidalgo,Scarlet fever,46,CONFIRMED,ACTIVE
+STATE,Hidalgo,Strep throat,546,CONFIRMED,ACTIVE
+STATE,Hidalgo,Syphilis,145,CONFIRMED,ACTIVE
 STATE,Hidalgo,Toxoplasmosis,1,CONFIRMED,ACTIVE
-STATE,Hidalgo,Trichomonas infection,252,CONFIRMED,ACTIVE
+STATE,Hidalgo,Trichomonas infection,258,CONFIRMED,ACTIVE
 STATE,Hidalgo,Tuberculosis,199,CONFIRMED,ACTIVE
 STATE,Hidalgo,Typhoid fever,9,CONFIRMED,ACTIVE
-STATE,Hidalgo,Urethritis,67285,CONFIRMED,ACTIVE
-STATE,Hidalgo,Vaginal yeast infection,2134,CONFIRMED,ACTIVE
-STATE,Hidalgo,Vaginitis,559,CONFIRMED,ACTIVE
-STATE,Hidalgo,Viral exanthem,244,CONFIRMED,ACTIVE
+STATE,Hidalgo,Urethritis,70023,CONFIRMED,ACTIVE
+STATE,Hidalgo,Vaginal yeast infection,2234,CONFIRMED,ACTIVE
+STATE,Hidalgo,Vaginitis,284,CONFIRMED,ACTIVE
+STATE,Hidalgo,Viral exanthem,245,CONFIRMED,ACTIVE
 STATE,Hidalgo,Whooping cough,21,CONFIRMED,ACTIVE
-STATE,Jalisco,Acute otitis media,28019,CONFIRMED,ACTIVE
-STATE,Jalisco,Brucellosis,295,CONFIRMED,ACTIVE
-STATE,Jalisco,COVID-19,107,CONFIRMED,ACTIVE
+STATE,Jalisco,Acute otitis media,29571,CONFIRMED,ACTIVE
+STATE,Jalisco,Brucellosis,301,CONFIRMED,ACTIVE
+STATE,Jalisco,COVID-19,110,CONFIRMED,ACTIVE
 STATE,Jalisco,Chagas disease,26,CONFIRMED,ACTIVE
-STATE,Jalisco,Chancroid,44,CONFIRMED,ACTIVE
-STATE,Jalisco,Chickenpox,3652,CONFIRMED,ACTIVE
-STATE,Jalisco,Common cold,607920,CONFIRMED,ACTIVE
-STATE,Jalisco,Conjunctivitis,27721,CONFIRMED,ACTIVE
+STATE,Jalisco,Chancroid,45,CONFIRMED,ACTIVE
+STATE,Jalisco,Chickenpox,3790,CONFIRMED,ACTIVE
+STATE,Jalisco,Common cold,641887,CONFIRMED,ACTIVE
+STATE,Jalisco,Conjunctivitis,28869,CONFIRMED,ACTIVE
 STATE,Jalisco,Conjunctivitis due to virus,2,CONFIRMED,ACTIVE
 STATE,Jalisco,Cysticercosis,9,CONFIRMED,ACTIVE
 STATE,Jalisco,Dengue Severe,18,CONFIRMED,ACTIVE
-STATE,Jalisco,Dengue fever,246,CONFIRMED,ACTIVE
-STATE,Jalisco,Erysipelas,200,CONFIRMED,ACTIVE
-STATE,Jalisco,Genital herpes,270,CONFIRMED,ACTIVE
-STATE,Jalisco,Gonorrhea,145,CONFIRMED,ACTIVE
-STATE,Jalisco,HIV/AIDS,725,CONFIRMED,ACTIVE
-STATE,Jalisco,HPV,2040,CONFIRMED,ACTIVE
-STATE,Jalisco,Healthcare-associated infection,10420,CONFIRMED,ACTIVE
-STATE,Jalisco,Hepatitis A,63,CONFIRMED,ACTIVE
-STATE,Jalisco,Hepatitis B,40,CONFIRMED,ACTIVE
-STATE,Jalisco,Hepatitis C,503,CONFIRMED,ACTIVE
-STATE,Jalisco,Infectious gastroenteritis,372705,CONFIRMED,ACTIVE
-STATE,Jalisco,Influenza,222,CONFIRMED,ACTIVE
+STATE,Jalisco,Dengue fever,267,CONFIRMED,ACTIVE
+STATE,Jalisco,Erysipelas,210,CONFIRMED,ACTIVE
+STATE,Jalisco,Genital herpes,291,CONFIRMED,ACTIVE
+STATE,Jalisco,Gonorrhea,158,CONFIRMED,ACTIVE
+STATE,Jalisco,HIV/AIDS,752,CONFIRMED,ACTIVE
+STATE,Jalisco,HPV,2114,CONFIRMED,ACTIVE
+STATE,Jalisco,Healthcare-associated infection,10859,CONFIRMED,ACTIVE
+STATE,Jalisco,Hepatitis A,65,CONFIRMED,ACTIVE
+STATE,Jalisco,Hepatitis B,44,CONFIRMED,ACTIVE
+STATE,Jalisco,Hepatitis C,523,CONFIRMED,ACTIVE
+STATE,Jalisco,Infectious gastroenteritis,384885,CONFIRMED,ACTIVE
+STATE,Jalisco,Influenza,239,CONFIRMED,ACTIVE
 STATE,Jalisco,Leishmaniasis,2,CONFIRMED,ACTIVE
 STATE,Jalisco,Leprosy,4,CONFIRMED,ACTIVE
-STATE,Jalisco,Leptospirosis,72,CONFIRMED,ACTIVE
-STATE,Jalisco,Lymphogranuloma venereum,14,CONFIRMED,ACTIVE
-STATE,Jalisco,Meningitis,75,CONFIRMED,ACTIVE
+STATE,Jalisco,Leptospirosis,73,CONFIRMED,ACTIVE
+STATE,Jalisco,Lymphogranuloma venereum,15,CONFIRMED,ACTIVE
+STATE,Jalisco,Meningitis,77,CONFIRMED,ACTIVE
 STATE,Jalisco,Mpox,3,CONFIRMED,ACTIVE
-STATE,Jalisco,Mumps,268,CONFIRMED,ACTIVE
-STATE,Jalisco,Myiasis,22,CONFIRMED,ACTIVE
-STATE,Jalisco,Other viral hepatitis,106,CONFIRMED,ACTIVE
-STATE,Jalisco,Parasitic disease,4152,CONFIRMED,ACTIVE
-STATE,Jalisco,Paratyphoid fever,198,CONFIRMED,ACTIVE
+STATE,Jalisco,Mumps,271,CONFIRMED,ACTIVE
+STATE,Jalisco,Myiasis,23,CONFIRMED,ACTIVE
+STATE,Jalisco,Other viral hepatitis,107,CONFIRMED,ACTIVE
+STATE,Jalisco,Parasitic disease,4315,CONFIRMED,ACTIVE
+STATE,Jalisco,Paratyphoid fever,199,CONFIRMED,ACTIVE
 STATE,Jalisco,Pinto disease,2,CONFIRMED,ACTIVE
-STATE,Jalisco,Pinworm infection,446,CONFIRMED,ACTIVE
-STATE,Jalisco,Pneumonia,12871,CONFIRMED,ACTIVE
+STATE,Jalisco,Pinworm infection,471,CONFIRMED,ACTIVE
+STATE,Jalisco,Pneumonia,13626,CONFIRMED,ACTIVE
 STATE,Jalisco,Rocky Mountain spotted fever,4,CONFIRMED,ACTIVE
-STATE,Jalisco,Scabies,735,CONFIRMED,ACTIVE
-STATE,Jalisco,Scarlet fever,104,CONFIRMED,ACTIVE
-STATE,Jalisco,Strep throat,13722,CONFIRMED,ACTIVE
-STATE,Jalisco,Syphilis,2193,CONFIRMED,ACTIVE
+STATE,Jalisco,Scabies,767,CONFIRMED,ACTIVE
+STATE,Jalisco,Scarlet fever,109,CONFIRMED,ACTIVE
+STATE,Jalisco,Strep throat,14466,CONFIRMED,ACTIVE
+STATE,Jalisco,Syphilis,2249,CONFIRMED,ACTIVE
 STATE,Jalisco,Taeniasis,7,CONFIRMED,ACTIVE
 STATE,Jalisco,Tetanus,1,CONFIRMED,ACTIVE
 STATE,Jalisco,Toxoplasmosis,6,CONFIRMED,ACTIVE
 STATE,Jalisco,Trichinosis,4,CONFIRMED,ACTIVE
-STATE,Jalisco,Trichomonas infection,300,CONFIRMED,ACTIVE
-STATE,Jalisco,Tuberculosis,1230,CONFIRMED,ACTIVE
-STATE,Jalisco,Typhoid fever,79,CONFIRMED,ACTIVE
-STATE,Jalisco,Urethritis,155464,CONFIRMED,ACTIVE
-STATE,Jalisco,Vaginal yeast infection,4287,CONFIRMED,ACTIVE
-STATE,Jalisco,Vaginitis,53,CONFIRMED,ACTIVE
-STATE,Jalisco,Viral exanthem,5554,CONFIRMED,ACTIVE
-STATE,Jalisco,Whooping cough,80,CONFIRMED,ACTIVE
-STATE,Michoacán,Acute otitis media,13444,CONFIRMED,ACTIVE
-STATE,Michoacán,Brucellosis,199,CONFIRMED,ACTIVE
-STATE,Michoacán,COVID-19,82,CONFIRMED,ACTIVE
-STATE,Michoacán,Chagas disease,22,CONFIRMED,ACTIVE
+STATE,Jalisco,Trichomonas infection,319,CONFIRMED,ACTIVE
+STATE,Jalisco,Tuberculosis,1263,CONFIRMED,ACTIVE
+STATE,Jalisco,Typhoid fever,84,CONFIRMED,ACTIVE
+STATE,Jalisco,Urethritis,162148,CONFIRMED,ACTIVE
+STATE,Jalisco,Vaginal yeast infection,4483,CONFIRMED,ACTIVE
+STATE,Jalisco,Vaginitis,840,CONFIRMED,ACTIVE
+STATE,Jalisco,Viral exanthem,5578,CONFIRMED,ACTIVE
+STATE,Jalisco,Whooping cough,89,CONFIRMED,ACTIVE
+STATE,Michoacán,Acute otitis media,14175,CONFIRMED,ACTIVE
+STATE,Michoacán,Brucellosis,202,CONFIRMED,ACTIVE
+STATE,Michoacán,COVID-19,98,CONFIRMED,ACTIVE
+STATE,Michoacán,Chagas disease,23,CONFIRMED,ACTIVE
 STATE,Michoacán,Chancroid,7,CONFIRMED,ACTIVE
-STATE,Michoacán,Chickenpox,1155,CONFIRMED,ACTIVE
-STATE,Michoacán,Common cold,395608,CONFIRMED,ACTIVE
-STATE,Michoacán,Conjunctivitis,18527,CONFIRMED,ACTIVE
+STATE,Michoacán,Chickenpox,1210,CONFIRMED,ACTIVE
+STATE,Michoacán,Common cold,417451,CONFIRMED,ACTIVE
+STATE,Michoacán,Conjunctivitis,19225,CONFIRMED,ACTIVE
 STATE,Michoacán,Conjunctivitis due to virus,8,CONFIRMED,ACTIVE
 STATE,Michoacán,Cysticercosis,1,CONFIRMED,ACTIVE
 STATE,Michoacán,Dengue Severe,14,CONFIRMED,ACTIVE
-STATE,Michoacán,Dengue fever,243,CONFIRMED,ACTIVE
+STATE,Michoacán,Dengue fever,255,CONFIRMED,ACTIVE
 STATE,Michoacán,Erysipelas,38,CONFIRMED,ACTIVE
-STATE,Michoacán,Genital herpes,142,CONFIRMED,ACTIVE
-STATE,Michoacán,Gonorrhea,33,CONFIRMED,ACTIVE
-STATE,Michoacán,HIV/AIDS,389,CONFIRMED,ACTIVE
-STATE,Michoacán,HPV,690,CONFIRMED,ACTIVE
-STATE,Michoacán,Healthcare-associated infection,3281,CONFIRMED,ACTIVE
-STATE,Michoacán,Hepatitis A,67,CONFIRMED,ACTIVE
-STATE,Michoacán,Hepatitis B,31,CONFIRMED,ACTIVE
-STATE,Michoacán,Hepatitis C,131,CONFIRMED,ACTIVE
-STATE,Michoacán,Infectious gastroenteritis,213456,CONFIRMED,ACTIVE
-STATE,Michoacán,Influenza,77,CONFIRMED,ACTIVE
+STATE,Michoacán,Genital herpes,144,CONFIRMED,ACTIVE
+STATE,Michoacán,Gonorrhea,34,CONFIRMED,ACTIVE
+STATE,Michoacán,HIV/AIDS,423,CONFIRMED,ACTIVE
+STATE,Michoacán,HPV,697,CONFIRMED,ACTIVE
+STATE,Michoacán,Healthcare-associated infection,3493,CONFIRMED,ACTIVE
+STATE,Michoacán,Hepatitis A,68,CONFIRMED,ACTIVE
+STATE,Michoacán,Hepatitis B,27,CONFIRMED,ACTIVE
+STATE,Michoacán,Hepatitis C,133,CONFIRMED,ACTIVE
+STATE,Michoacán,Infectious gastroenteritis,222032,CONFIRMED,ACTIVE
+STATE,Michoacán,Influenza,229,CONFIRMED,ACTIVE
 STATE,Michoacán,Leishmaniasis,1,CONFIRMED,ACTIVE
 STATE,Michoacán,Leprosy,5,CONFIRMED,ACTIVE
 STATE,Michoacán,Leptospirosis,3,CONFIRMED,ACTIVE
 STATE,Michoacán,Lymphogranuloma venereum,6,CONFIRMED,ACTIVE
-STATE,Michoacán,Meningitis,23,CONFIRMED,ACTIVE
-STATE,Michoacán,Mumps,120,CONFIRMED,ACTIVE
-STATE,Michoacán,Myiasis,10,CONFIRMED,ACTIVE
-STATE,Michoacán,Other viral hepatitis,14,CONFIRMED,ACTIVE
-STATE,Michoacán,Parasitic disease,2759,CONFIRMED,ACTIVE
-STATE,Michoacán,Paratyphoid fever,398,CONFIRMED,ACTIVE
+STATE,Michoacán,Meningitis,31,CONFIRMED,ACTIVE
+STATE,Michoacán,Mumps,123,CONFIRMED,ACTIVE
+STATE,Michoacán,Myiasis,12,CONFIRMED,ACTIVE
+STATE,Michoacán,Other viral hepatitis,13,CONFIRMED,ACTIVE
+STATE,Michoacán,Parasitic disease,2888,CONFIRMED,ACTIVE
+STATE,Michoacán,Paratyphoid fever,402,CONFIRMED,ACTIVE
 STATE,Michoacán,Pinto disease,2,CONFIRMED,ACTIVE
-STATE,Michoacán,Pinworm infection,181,CONFIRMED,ACTIVE
-STATE,Michoacán,Pneumonia,2560,CONFIRMED,ACTIVE
+STATE,Michoacán,Pinworm infection,183,CONFIRMED,ACTIVE
+STATE,Michoacán,Pneumonia,2752,CONFIRMED,ACTIVE
 STATE,Michoacán,Rocky Mountain spotted fever,3,CONFIRMED,ACTIVE
-STATE,Michoacán,Scabies,451,CONFIRMED,ACTIVE
-STATE,Michoacán,Scarlet fever,21,CONFIRMED,ACTIVE
-STATE,Michoacán,Strep throat,5442,CONFIRMED,ACTIVE
-STATE,Michoacán,Syphilis,547,CONFIRMED,ACTIVE
+STATE,Michoacán,Scabies,466,CONFIRMED,ACTIVE
+STATE,Michoacán,Scarlet fever,25,CONFIRMED,ACTIVE
+STATE,Michoacán,Strep throat,5725,CONFIRMED,ACTIVE
+STATE,Michoacán,Syphilis,560,CONFIRMED,ACTIVE
 STATE,Michoacán,Taeniasis,11,CONFIRMED,ACTIVE
 STATE,Michoacán,Tetanus,1,CONFIRMED,ACTIVE
 STATE,Michoacán,Toxoplasmosis,5,CONFIRMED,ACTIVE
-STATE,Michoacán,Trichomonas infection,461,CONFIRMED,ACTIVE
-STATE,Michoacán,Tuberculosis,257,CONFIRMED,ACTIVE
-STATE,Michoacán,Typhoid fever,480,CONFIRMED,ACTIVE
-STATE,Michoacán,Urethritis,511,CONFIRMED,ACTIVE
-STATE,Michoacán,Vaginal yeast infection,3555,CONFIRMED,ACTIVE
-STATE,Michoacán,Vaginitis,677,CONFIRMED,ACTIVE
-STATE,Michoacán,Viral exanthem,669,CONFIRMED,ACTIVE
+STATE,Michoacán,Trichomonas infection,479,CONFIRMED,ACTIVE
+STATE,Michoacán,Tuberculosis,274,CONFIRMED,ACTIVE
+STATE,Michoacán,Typhoid fever,488,CONFIRMED,ACTIVE
+STATE,Michoacán,Urethritis,86620,CONFIRMED,ACTIVE
+STATE,Michoacán,Vaginal yeast infection,3692,CONFIRMED,ACTIVE
+STATE,Michoacán,Vaginitis,537,CONFIRMED,ACTIVE
+STATE,Michoacán,Viral exanthem,673,CONFIRMED,ACTIVE
 STATE,Michoacán,Whooping cough,28,CONFIRMED,ACTIVE
-STATE,Morelos,Acute otitis media,7879,CONFIRMED,ACTIVE
+STATE,Morelos,Acute otitis media,8230,CONFIRMED,ACTIVE
 STATE,Morelos,Brucellosis,7,CONFIRMED,ACTIVE
 STATE,Morelos,COVID-19,85,CONFIRMED,ACTIVE
-STATE,Morelos,Chagas disease,22,CONFIRMED,ACTIVE
+STATE,Morelos,Chagas disease,24,CONFIRMED,ACTIVE
 STATE,Morelos,Chancroid,20,CONFIRMED,ACTIVE
-STATE,Morelos,Chickenpox,553,CONFIRMED,ACTIVE
-STATE,Morelos,Common cold,224903,CONFIRMED,ACTIVE
-STATE,Morelos,Conjunctivitis,11449,CONFIRMED,ACTIVE
+STATE,Morelos,Chickenpox,570,CONFIRMED,ACTIVE
+STATE,Morelos,Common cold,237537,CONFIRMED,ACTIVE
+STATE,Morelos,Conjunctivitis,11989,CONFIRMED,ACTIVE
 STATE,Morelos,Conjunctivitis due to virus,2,CONFIRMED,ACTIVE
 STATE,Morelos,Cysticercosis,13,CONFIRMED,ACTIVE
 STATE,Morelos,Dengue Severe,1,CONFIRMED,ACTIVE
-STATE,Morelos,Dengue fever,42,CONFIRMED,ACTIVE
+STATE,Morelos,Dengue fever,49,CONFIRMED,ACTIVE
 STATE,Morelos,Erysipelas,18,CONFIRMED,ACTIVE
-STATE,Morelos,Genital herpes,208,CONFIRMED,ACTIVE
-STATE,Morelos,Gonorrhea,138,CONFIRMED,ACTIVE
-STATE,Morelos,HIV/AIDS,188,CONFIRMED,ACTIVE
-STATE,Morelos,HPV,198,CONFIRMED,ACTIVE
-STATE,Morelos,Healthcare-associated infection,1744,CONFIRMED,ACTIVE
-STATE,Morelos,Hepatitis A,116,CONFIRMED,ACTIVE
+STATE,Morelos,Genital herpes,224,CONFIRMED,ACTIVE
+STATE,Morelos,Gonorrhea,152,CONFIRMED,ACTIVE
+STATE,Morelos,HIV/AIDS,191,CONFIRMED,ACTIVE
+STATE,Morelos,HPV,202,CONFIRMED,ACTIVE
+STATE,Morelos,Healthcare-associated infection,1803,CONFIRMED,ACTIVE
+STATE,Morelos,Hepatitis A,123,CONFIRMED,ACTIVE
 STATE,Morelos,Hepatitis B,5,CONFIRMED,ACTIVE
-STATE,Morelos,Hepatitis C,206,CONFIRMED,ACTIVE
-STATE,Morelos,Infectious gastroenteritis,73127,CONFIRMED,ACTIVE
-STATE,Morelos,Influenza,160,CONFIRMED,ACTIVE
+STATE,Morelos,Hepatitis C,210,CONFIRMED,ACTIVE
+STATE,Morelos,Infectious gastroenteritis,151322,CONFIRMED,ACTIVE
+STATE,Morelos,Influenza,165,CONFIRMED,ACTIVE
 STATE,Morelos,Leprosy,1,CONFIRMED,ACTIVE
-STATE,Morelos,Leptospirosis,8,CONFIRMED,ACTIVE
+STATE,Morelos,Leptospirosis,9,CONFIRMED,ACTIVE
 STATE,Morelos,Lymphogranuloma venereum,4,CONFIRMED,ACTIVE
-STATE,Morelos,Meningitis,13,CONFIRMED,ACTIVE
+STATE,Morelos,Meningitis,14,CONFIRMED,ACTIVE
 STATE,Morelos,Mpox,1,CONFIRMED,ACTIVE
 STATE,Morelos,Mumps,23,CONFIRMED,ACTIVE
-STATE,Morelos,Myiasis,13,CONFIRMED,ACTIVE
-STATE,Morelos,Other viral hepatitis,27,CONFIRMED,ACTIVE
-STATE,Morelos,Parasitic disease,1377,CONFIRMED,ACTIVE
-STATE,Morelos,Paratyphoid fever,9,CONFIRMED,ACTIVE
-STATE,Morelos,Pinworm infection,34,CONFIRMED,ACTIVE
-STATE,Morelos,Pneumonia,1162,CONFIRMED,ACTIVE
-STATE,Morelos,Scabies,115,CONFIRMED,ACTIVE
+STATE,Morelos,Myiasis,15,CONFIRMED,ACTIVE
+STATE,Morelos,Other viral hepatitis,28,CONFIRMED,ACTIVE
+STATE,Morelos,Parasitic disease,1413,CONFIRMED,ACTIVE
+STATE,Morelos,Paratyphoid fever,14,CONFIRMED,ACTIVE
+STATE,Morelos,Pinworm infection,46,CONFIRMED,ACTIVE
+STATE,Morelos,Pneumonia,1233,CONFIRMED,ACTIVE
+STATE,Morelos,Scabies,119,CONFIRMED,ACTIVE
 STATE,Morelos,Scarlet fever,35,CONFIRMED,ACTIVE
-STATE,Morelos,Strep throat,3626,CONFIRMED,ACTIVE
-STATE,Morelos,Syphilis,136,CONFIRMED,ACTIVE
+STATE,Morelos,Strep throat,3802,CONFIRMED,ACTIVE
+STATE,Morelos,Syphilis,146,CONFIRMED,ACTIVE
 STATE,Morelos,Taeniasis,5,CONFIRMED,ACTIVE
 STATE,Morelos,Tetanus,3,CONFIRMED,ACTIVE
 STATE,Morelos,Toxoplasmosis,11,CONFIRMED,ACTIVE
 STATE,Morelos,Trichinosis,1,CONFIRMED,ACTIVE
-STATE,Morelos,Trichomonas infection,199,CONFIRMED,ACTIVE
-STATE,Morelos,Tuberculosis,208,CONFIRMED,ACTIVE
+STATE,Morelos,Trichomonas infection,206,CONFIRMED,ACTIVE
+STATE,Morelos,Tuberculosis,218,CONFIRMED,ACTIVE
 STATE,Morelos,Typhoid fever,14,CONFIRMED,ACTIVE
-STATE,Morelos,Urethritis,62219,CONFIRMED,ACTIVE
-STATE,Morelos,Vaginal yeast infection,1751,CONFIRMED,ACTIVE
-STATE,Morelos,Vaginitis,595,CONFIRMED,ACTIVE
-STATE,Morelos,Viral exanthem,344,CONFIRMED,ACTIVE
+STATE,Morelos,Urethritis,64986,CONFIRMED,ACTIVE
+STATE,Morelos,Vaginal yeast infection,1831,CONFIRMED,ACTIVE
+STATE,Morelos,Vaginitis,93,CONFIRMED,ACTIVE
+STATE,Morelos,Viral exanthem,351,CONFIRMED,ACTIVE
 STATE,Morelos,Whooping cough,7,CONFIRMED,ACTIVE
-STATE,México,Acute otitis media,21170,CONFIRMED,ACTIVE
+STATE,México,Acute otitis media,21876,CONFIRMED,ACTIVE
 STATE,México,Brucellosis,11,CONFIRMED,ACTIVE
-STATE,México,COVID-19,260,CONFIRMED,ACTIVE
+STATE,México,COVID-19,284,CONFIRMED,ACTIVE
 STATE,México,Chagas disease,12,CONFIRMED,ACTIVE
-STATE,México,Chancroid,23,CONFIRMED,ACTIVE
-STATE,México,Chickenpox,5601,CONFIRMED,ACTIVE
-STATE,México,Common cold,948235,CONFIRMED,ACTIVE
-STATE,México,Conjunctivitis,54082,CONFIRMED,ACTIVE
+STATE,México,Chancroid,25,CONFIRMED,ACTIVE
+STATE,México,Chickenpox,5884,CONFIRMED,ACTIVE
+STATE,México,Common cold,332305,CONFIRMED,ACTIVE
+STATE,México,Conjunctivitis,56378,CONFIRMED,ACTIVE
 STATE,México,Conjunctivitis due to virus,1,CONFIRMED,ACTIVE
-STATE,México,Cysticercosis,4,CONFIRMED,ACTIVE
-STATE,México,Dengue fever,144,CONFIRMED,ACTIVE
-STATE,México,Erysipelas,145,CONFIRMED,ACTIVE
-STATE,México,Genital herpes,152,CONFIRMED,ACTIVE
-STATE,México,Gonorrhea,219,CONFIRMED,ACTIVE
-STATE,México,HIV/AIDS,2041,CONFIRMED,ACTIVE
-STATE,México,HPV,2449,CONFIRMED,ACTIVE
-STATE,México,Healthcare-associated infection,7356,CONFIRMED,ACTIVE
-STATE,México,Hepatitis A,188,CONFIRMED,ACTIVE
-STATE,México,Hepatitis B,36,CONFIRMED,ACTIVE
-STATE,México,Hepatitis C,227,CONFIRMED,ACTIVE
-STATE,México,Infectious gastroenteritis,330455,CONFIRMED,ACTIVE
-STATE,México,Influenza,447,CONFIRMED,ACTIVE
+STATE,México,Cysticercosis,5,CONFIRMED,ACTIVE
+STATE,México,Dengue fever,159,CONFIRMED,ACTIVE
+STATE,México,Erysipelas,151,CONFIRMED,ACTIVE
+STATE,México,Genital herpes,159,CONFIRMED,ACTIVE
+STATE,México,Gonorrhea,227,CONFIRMED,ACTIVE
+STATE,México,HIV/AIDS,2136,CONFIRMED,ACTIVE
+STATE,México,HPV,2546,CONFIRMED,ACTIVE
+STATE,México,Healthcare-associated infection,7743,CONFIRMED,ACTIVE
+STATE,México,Hepatitis A,201,CONFIRMED,ACTIVE
+STATE,México,Hepatitis B,37,CONFIRMED,ACTIVE
+STATE,México,Hepatitis C,239,CONFIRMED,ACTIVE
+STATE,México,Infectious gastroenteritis,341534,CONFIRMED,ACTIVE
+STATE,México,Influenza,483,CONFIRMED,ACTIVE
 STATE,México,Leishmaniasis,1,CONFIRMED,ACTIVE
 STATE,México,Leptospirosis,2,CONFIRMED,ACTIVE
-STATE,México,Lymphogranuloma venereum,7,CONFIRMED,ACTIVE
-STATE,México,Meningitis,18,CONFIRMED,ACTIVE
+STATE,México,Lymphogranuloma venereum,9,CONFIRMED,ACTIVE
+STATE,México,Meningitis,19,CONFIRMED,ACTIVE
 STATE,México,Mpox,2,CONFIRMED,ACTIVE
-STATE,México,Mumps,240,CONFIRMED,ACTIVE
+STATE,México,Mumps,247,CONFIRMED,ACTIVE
 STATE,México,Myiasis,13,CONFIRMED,ACTIVE
-STATE,México,Other viral hepatitis,267,CONFIRMED,ACTIVE
-STATE,México,Parasitic disease,3629,CONFIRMED,ACTIVE
+STATE,México,Other viral hepatitis,270,CONFIRMED,ACTIVE
+STATE,México,Parasitic disease,3952,CONFIRMED,ACTIVE
 STATE,México,Paratyphoid fever,8,CONFIRMED,ACTIVE
 STATE,México,Pinto disease,4,CONFIRMED,ACTIVE
-STATE,México,Pinworm infection,564,CONFIRMED,ACTIVE
-STATE,México,Pneumonia,7855,CONFIRMED,ACTIVE
-STATE,México,Scabies,369,CONFIRMED,ACTIVE
-STATE,México,Scarlet fever,375,CONFIRMED,ACTIVE
-STATE,México,Strep throat,12505,CONFIRMED,ACTIVE
-STATE,México,Syphilis,621,CONFIRMED,ACTIVE
+STATE,México,Pinworm infection,5432,CONFIRMED,ACTIVE
+STATE,México,Pneumonia,8582,CONFIRMED,ACTIVE
+STATE,México,Scabies,386,CONFIRMED,ACTIVE
+STATE,México,Scarlet fever,381,CONFIRMED,ACTIVE
+STATE,México,Strep throat,12926,CONFIRMED,ACTIVE
+STATE,México,Syphilis,649,CONFIRMED,ACTIVE
 STATE,México,Taeniasis,1,CONFIRMED,ACTIVE
 STATE,México,Toxoplasmosis,4,CONFIRMED,ACTIVE
-STATE,México,Trichomonas infection,37,CONFIRMED,ACTIVE
-STATE,México,Tuberculosis,749,CONFIRMED,ACTIVE
-STATE,México,Typhoid fever,105,CONFIRMED,ACTIVE
-STATE,México,Urethritis,276582,CONFIRMED,ACTIVE
-STATE,México,Vaginal yeast infection,418,CONFIRMED,ACTIVE
-STATE,México,Vaginitis,245,CONFIRMED,ACTIVE
-STATE,México,Viral exanthem,1368,CONFIRMED,ACTIVE
+STATE,México,Trichomonas infection,758,CONFIRMED,ACTIVE
+STATE,México,Tuberculosis,763,CONFIRMED,ACTIVE
+STATE,México,Typhoid fever,108,CONFIRMED,ACTIVE
+STATE,México,Urethritis,287610,CONFIRMED,ACTIVE
+STATE,México,Vaginal yeast infection,7543,CONFIRMED,ACTIVE
+STATE,México,Vaginitis,948,CONFIRMED,ACTIVE
+STATE,México,Viral exanthem,1376,CONFIRMED,ACTIVE
 STATE,México,Whooping cough,54,CONFIRMED,ACTIVE
-STATE,Nayarit,Acute otitis media,13352,CONFIRMED,ACTIVE
+STATE,Nayarit,Acute otitis media,14034,CONFIRMED,ACTIVE
 STATE,Nayarit,Brucellosis,7,CONFIRMED,ACTIVE
-STATE,Nayarit,COVID-19,16,CONFIRMED,ACTIVE
+STATE,Nayarit,COVID-19,20,CONFIRMED,ACTIVE
 STATE,Nayarit,Chagas disease,10,CONFIRMED,ACTIVE
-STATE,Nayarit,Chancroid,28,CONFIRMED,ACTIVE
-STATE,Nayarit,Chickenpox,560,CONFIRMED,ACTIVE
-STATE,Nayarit,Common cold,181885,CONFIRMED,ACTIVE
-STATE,Nayarit,Conjunctivitis,9601,CONFIRMED,ACTIVE
+STATE,Nayarit,Chancroid,29,CONFIRMED,ACTIVE
+STATE,Nayarit,Chickenpox,579,CONFIRMED,ACTIVE
+STATE,Nayarit,Common cold,192852,CONFIRMED,ACTIVE
+STATE,Nayarit,Conjunctivitis,9943,CONFIRMED,ACTIVE
 STATE,Nayarit,Dengue Severe,20,CONFIRMED,ACTIVE
-STATE,Nayarit,Dengue fever,232,CONFIRMED,ACTIVE
+STATE,Nayarit,Dengue fever,271,CONFIRMED,ACTIVE
 STATE,Nayarit,Erysipelas,9,CONFIRMED,ACTIVE
-STATE,Nayarit,Genital herpes,133,CONFIRMED,ACTIVE
-STATE,Nayarit,Gonorrhea,188,CONFIRMED,ACTIVE
-STATE,Nayarit,HIV/AIDS,231,CONFIRMED,ACTIVE
-STATE,Nayarit,HPV,35,CONFIRMED,ACTIVE
-STATE,Nayarit,Healthcare-associated infection,926,CONFIRMED,ACTIVE
-STATE,Nayarit,Hepatitis A,46,CONFIRMED,ACTIVE
+STATE,Nayarit,Genital herpes,146,CONFIRMED,ACTIVE
+STATE,Nayarit,Gonorrhea,197,CONFIRMED,ACTIVE
+STATE,Nayarit,HIV/AIDS,234,CONFIRMED,ACTIVE
+STATE,Nayarit,HPV,39,CONFIRMED,ACTIVE
+STATE,Nayarit,Healthcare-associated infection,978,CONFIRMED,ACTIVE
+STATE,Nayarit,Hepatitis A,47,CONFIRMED,ACTIVE
 STATE,Nayarit,Hepatitis B,7,CONFIRMED,ACTIVE
 STATE,Nayarit,Hepatitis C,56,CONFIRMED,ACTIVE
-STATE,Nayarit,Infectious gastroenteritis,109956,CONFIRMED,ACTIVE
-STATE,Nayarit,Influenza,147,CONFIRMED,ACTIVE
-STATE,Nayarit,Leishmaniasis,2,CONFIRMED,ACTIVE
+STATE,Nayarit,Infectious gastroenteritis,113916,CONFIRMED,ACTIVE
+STATE,Nayarit,Influenza,179,CONFIRMED,ACTIVE
+STATE,Nayarit,Leishmaniasis,3,CONFIRMED,ACTIVE
 STATE,Nayarit,Leprosy,2,CONFIRMED,ACTIVE
-STATE,Nayarit,Lymphogranuloma venereum,9,CONFIRMED,ACTIVE
+STATE,Nayarit,Lymphogranuloma venereum,13,CONFIRMED,ACTIVE
 STATE,Nayarit,Mumps,26,CONFIRMED,ACTIVE
-STATE,Nayarit,Myiasis,14,CONFIRMED,ACTIVE
-STATE,Nayarit,Other viral hepatitis,44,CONFIRMED,ACTIVE
-STATE,Nayarit,Parasitic disease,2028,CONFIRMED,ACTIVE
+STATE,Nayarit,Myiasis,18,CONFIRMED,ACTIVE
+STATE,Nayarit,Other viral hepatitis,45,CONFIRMED,ACTIVE
+STATE,Nayarit,Parasitic disease,2146,CONFIRMED,ACTIVE
 STATE,Nayarit,Paratyphoid fever,14,CONFIRMED,ACTIVE
-STATE,Nayarit,Pinworm infection,386,CONFIRMED,ACTIVE
-STATE,Nayarit,Pneumonia,739,CONFIRMED,ACTIVE
-STATE,Nayarit,Scabies,952,CONFIRMED,ACTIVE
+STATE,Nayarit,Pinworm infection,405,CONFIRMED,ACTIVE
+STATE,Nayarit,Pneumonia,771,CONFIRMED,ACTIVE
+STATE,Nayarit,Scabies,986,CONFIRMED,ACTIVE
 STATE,Nayarit,Scarlet fever,1,CONFIRMED,ACTIVE
-STATE,Nayarit,Syphilis,439,CONFIRMED,ACTIVE
-STATE,Nayarit,Trichomonas infection,216,CONFIRMED,ACTIVE
-STATE,Nayarit,Tuberculosis,421,CONFIRMED,ACTIVE
+STATE,Nayarit,Syphilis,454,CONFIRMED,ACTIVE
+STATE,Nayarit,Trichomonas infection,227,CONFIRMED,ACTIVE
+STATE,Nayarit,Tuberculosis,427,CONFIRMED,ACTIVE
 STATE,Nayarit,Typhoid fever,2,CONFIRMED,ACTIVE
-STATE,Nayarit,Urethritis,39741,CONFIRMED,ACTIVE
-STATE,Nayarit,Vaginal yeast infection,1743,CONFIRMED,ACTIVE
-STATE,Nayarit,Vaginitis,988,CONFIRMED,ACTIVE
+STATE,Nayarit,Urethritis,41482,CONFIRMED,ACTIVE
+STATE,Nayarit,Vaginal yeast infection,1823,CONFIRMED,ACTIVE
+STATE,Nayarit,Vaginitis,225,CONFIRMED,ACTIVE
 STATE,Nayarit,Viral exanthem,268,CONFIRMED,ACTIVE
 STATE,Nayarit,Whooping cough,6,CONFIRMED,ACTIVE
-STATE,Nuevo León,Acute otitis media,18904,CONFIRMED,ACTIVE
-STATE,Nuevo León,Brucellosis,27,CONFIRMED,ACTIVE
-STATE,Nuevo León,COVID-19,189,CONFIRMED,ACTIVE
+STATE,Nuevo León,Acute otitis media,19668,CONFIRMED,ACTIVE
+STATE,Nuevo León,Brucellosis,31,CONFIRMED,ACTIVE
+STATE,Nuevo León,COVID-19,191,CONFIRMED,ACTIVE
 STATE,Nuevo León,Chagas disease,7,CONFIRMED,ACTIVE
-STATE,Nuevo León,Chancroid,54,CONFIRMED,ACTIVE
-STATE,Nuevo León,Chickenpox,414,CONFIRMED,ACTIVE
-STATE,Nuevo León,Common cold,448657,CONFIRMED,ACTIVE
-STATE,Nuevo León,Conjunctivitis,21166,CONFIRMED,ACTIVE
-STATE,Nuevo León,Conjunctivitis due to virus,3,CONFIRMED,ACTIVE
+STATE,Nuevo León,Chancroid,58,CONFIRMED,ACTIVE
+STATE,Nuevo León,Chickenpox,483,CONFIRMED,ACTIVE
+STATE,Nuevo León,Common cold,476197,CONFIRMED,ACTIVE
+STATE,Nuevo León,Conjunctivitis,22041,CONFIRMED,ACTIVE
+STATE,Nuevo León,Conjunctivitis due to virus,4,CONFIRMED,ACTIVE
 STATE,Nuevo León,Cysticercosis,7,CONFIRMED,ACTIVE
-STATE,Nuevo León,Dengue Severe,2,CONFIRMED,ACTIVE
-STATE,Nuevo León,Dengue fever,32,CONFIRMED,ACTIVE
-STATE,Nuevo León,Erysipelas,1144,CONFIRMED,ACTIVE
-STATE,Nuevo León,Genital herpes,269,CONFIRMED,ACTIVE
-STATE,Nuevo León,Gonorrhea,205,CONFIRMED,ACTIVE
-STATE,Nuevo León,HIV/AIDS,399,CONFIRMED,ACTIVE
-STATE,Nuevo León,HPV,527,CONFIRMED,ACTIVE
-STATE,Nuevo León,Healthcare-associated infection,3905,CONFIRMED,ACTIVE
+STATE,Nuevo León,Dengue Severe,4,CONFIRMED,ACTIVE
+STATE,Nuevo León,Dengue fever,34,CONFIRMED,ACTIVE
+STATE,Nuevo León,Erysipelas,1187,CONFIRMED,ACTIVE
+STATE,Nuevo León,Genital herpes,280,CONFIRMED,ACTIVE
+STATE,Nuevo León,Gonorrhea,211,CONFIRMED,ACTIVE
+STATE,Nuevo León,HIV/AIDS,416,CONFIRMED,ACTIVE
+STATE,Nuevo León,HPV,551,CONFIRMED,ACTIVE
+STATE,Nuevo León,Healthcare-associated infection,4048,CONFIRMED,ACTIVE
 STATE,Nuevo León,Hepatitis A,30,CONFIRMED,ACTIVE
 STATE,Nuevo León,Hepatitis B,16,CONFIRMED,ACTIVE
-STATE,Nuevo León,Hepatitis C,94,CONFIRMED,ACTIVE
-STATE,Nuevo León,Infectious gastroenteritis,117983,CONFIRMED,ACTIVE
-STATE,Nuevo León,Influenza,706,CONFIRMED,ACTIVE
+STATE,Nuevo León,Hepatitis C,99,CONFIRMED,ACTIVE
+STATE,Nuevo León,Infectious gastroenteritis,122810,CONFIRMED,ACTIVE
+STATE,Nuevo León,Influenza,742,CONFIRMED,ACTIVE
 STATE,Nuevo León,Leprosy,4,CONFIRMED,ACTIVE
 STATE,Nuevo León,Leptospirosis,2,CONFIRMED,ACTIVE
-STATE,Nuevo León,Lymphogranuloma venereum,65,CONFIRMED,ACTIVE
+STATE,Nuevo León,Lymphogranuloma venereum,68,CONFIRMED,ACTIVE
 STATE,Nuevo León,Meningitis,9,CONFIRMED,ACTIVE
-STATE,Nuevo León,Mpox,4,CONFIRMED,ACTIVE
-STATE,Nuevo León,Mumps,478,CONFIRMED,ACTIVE
+STATE,Nuevo León,Mpox,15,CONFIRMED,ACTIVE
+STATE,Nuevo León,Mumps,490,CONFIRMED,ACTIVE
 STATE,Nuevo León,Myiasis,20,CONFIRMED,ACTIVE
-STATE,Nuevo León,Other viral hepatitis,75,CONFIRMED,ACTIVE
-STATE,Nuevo León,Parasitic disease,960,CONFIRMED,ACTIVE
-STATE,Nuevo León,Paratyphoid fever,19,CONFIRMED,ACTIVE
-STATE,Nuevo León,Pinworm infection,220,CONFIRMED,ACTIVE
-STATE,Nuevo León,Pneumonia,6161,CONFIRMED,ACTIVE
-STATE,Nuevo León,Rocky Mountain spotted fever,46,CONFIRMED,ACTIVE
-STATE,Nuevo León,Scabies,1620,CONFIRMED,ACTIVE
+STATE,Nuevo León,Other viral hepatitis,78,CONFIRMED,ACTIVE
+STATE,Nuevo León,Parasitic disease,1004,CONFIRMED,ACTIVE
+STATE,Nuevo León,Paratyphoid fever,20,CONFIRMED,ACTIVE
+STATE,Nuevo León,Pinto disease,1,CONFIRMED,ACTIVE
+STATE,Nuevo León,Pinworm infection,235,CONFIRMED,ACTIVE
+STATE,Nuevo León,Pneumonia,6433,CONFIRMED,ACTIVE
+STATE,Nuevo León,Rocky Mountain spotted fever,54,CONFIRMED,ACTIVE
+STATE,Nuevo León,Scabies,1669,CONFIRMED,ACTIVE
 STATE,Nuevo León,Scarlet fever,67,CONFIRMED,ACTIVE
-STATE,Nuevo León,Strep throat,1374,CONFIRMED,ACTIVE
-STATE,Nuevo León,Syphilis,1212,CONFIRMED,ACTIVE
+STATE,Nuevo León,Strep throat,1544,CONFIRMED,ACTIVE
+STATE,Nuevo León,Syphilis,1274,CONFIRMED,ACTIVE
 STATE,Nuevo León,Taeniasis,1,CONFIRMED,ACTIVE
 STATE,Nuevo León,Tetanus,1,CONFIRMED,ACTIVE
-STATE,Nuevo León,Trichomonas infection,407,CONFIRMED,ACTIVE
-STATE,Nuevo León,Tuberculosis,1723,CONFIRMED,ACTIVE
-STATE,Nuevo León,Typhoid fever,43,CONFIRMED,ACTIVE
-STATE,Nuevo León,Urethritis,92077,CONFIRMED,ACTIVE
-STATE,Nuevo León,Vaginal yeast infection,2824,CONFIRMED,ACTIVE
-STATE,Nuevo León,Vaginitis,223,CONFIRMED,ACTIVE
-STATE,Nuevo León,Viral exanthem,1169,CONFIRMED,ACTIVE
+STATE,Nuevo León,Trichomonas infection,422,CONFIRMED,ACTIVE
+STATE,Nuevo León,Tuberculosis,1785,CONFIRMED,ACTIVE
+STATE,Nuevo León,Typhoid fever,44,CONFIRMED,ACTIVE
+STATE,Nuevo León,Urethritis,96051,CONFIRMED,ACTIVE
+STATE,Nuevo León,Vaginal yeast infection,2941,CONFIRMED,ACTIVE
+STATE,Nuevo León,Vaginitis,755,CONFIRMED,ACTIVE
+STATE,Nuevo León,Viral exanthem,1176,CONFIRMED,ACTIVE
 STATE,Nuevo León,Whooping cough,78,CONFIRMED,ACTIVE
-STATE,Oaxaca,Acute otitis media,24323,CONFIRMED,ACTIVE
-STATE,Oaxaca,Brucellosis,52,CONFIRMED,ACTIVE
-STATE,Oaxaca,COVID-19,46,CONFIRMED,ACTIVE
-STATE,Oaxaca,Chagas disease,49,CONFIRMED,ACTIVE
-STATE,Oaxaca,Chancroid,7,CONFIRMED,ACTIVE
-STATE,Oaxaca,Chickenpox,1160,CONFIRMED,ACTIVE
-STATE,Oaxaca,Common cold,450142,CONFIRMED,ACTIVE
-STATE,Oaxaca,Conjunctivitis,24275,CONFIRMED,ACTIVE
+STATE,Oaxaca,Acute otitis media,25572,CONFIRMED,ACTIVE
+STATE,Oaxaca,Brucellosis,54,CONFIRMED,ACTIVE
+STATE,Oaxaca,COVID-19,47,CONFIRMED,ACTIVE
+STATE,Oaxaca,Chagas disease,54,CONFIRMED,ACTIVE
+STATE,Oaxaca,Chancroid,8,CONFIRMED,ACTIVE
+STATE,Oaxaca,Chickenpox,1217,CONFIRMED,ACTIVE
+STATE,Oaxaca,Common cold,477209,CONFIRMED,ACTIVE
+STATE,Oaxaca,Conjunctivitis,25325,CONFIRMED,ACTIVE
 STATE,Oaxaca,Conjunctivitis due to virus,3,CONFIRMED,ACTIVE
 STATE,Oaxaca,Cysticercosis,5,CONFIRMED,ACTIVE
-STATE,Oaxaca,Dengue Severe,8,CONFIRMED,ACTIVE
-STATE,Oaxaca,Dengue fever,72,CONFIRMED,ACTIVE
-STATE,Oaxaca,Erysipelas,235,CONFIRMED,ACTIVE
-STATE,Oaxaca,Genital herpes,177,CONFIRMED,ACTIVE
-STATE,Oaxaca,Gonorrhea,198,CONFIRMED,ACTIVE
-STATE,Oaxaca,HIV/AIDS,656,CONFIRMED,ACTIVE
-STATE,Oaxaca,HPV,245,CONFIRMED,ACTIVE
-STATE,Oaxaca,Healthcare-associated infection,2448,CONFIRMED,ACTIVE
-STATE,Oaxaca,Hepatitis A,46,CONFIRMED,ACTIVE
+STATE,Oaxaca,Dengue Severe,9,CONFIRMED,ACTIVE
+STATE,Oaxaca,Dengue fever,75,CONFIRMED,ACTIVE
+STATE,Oaxaca,Erysipelas,255,CONFIRMED,ACTIVE
+STATE,Oaxaca,Genital herpes,251,CONFIRMED,ACTIVE
+STATE,Oaxaca,Gonorrhea,202,CONFIRMED,ACTIVE
+STATE,Oaxaca,HIV/AIDS,681,CONFIRMED,ACTIVE
+STATE,Oaxaca,HPV,254,CONFIRMED,ACTIVE
+STATE,Oaxaca,Healthcare-associated infection,2531,CONFIRMED,ACTIVE
+STATE,Oaxaca,Hepatitis A,47,CONFIRMED,ACTIVE
 STATE,Oaxaca,Hepatitis B,36,CONFIRMED,ACTIVE
 STATE,Oaxaca,Hepatitis C,90,CONFIRMED,ACTIVE
-STATE,Oaxaca,Infectious gastroenteritis,307066,CONFIRMED,ACTIVE
-STATE,Oaxaca,Influenza,196,CONFIRMED,ACTIVE
+STATE,Oaxaca,Infectious gastroenteritis,319480,CONFIRMED,ACTIVE
+STATE,Oaxaca,Influenza,205,CONFIRMED,ACTIVE
 STATE,Oaxaca,Leishmaniasis,2,CONFIRMED,ACTIVE
 STATE,Oaxaca,Leprosy,2,CONFIRMED,ACTIVE
-STATE,Oaxaca,Leptospirosis,20,CONFIRMED,ACTIVE
+STATE,Oaxaca,Leptospirosis,21,CONFIRMED,ACTIVE
 STATE,Oaxaca,Lymphogranuloma venereum,11,CONFIRMED,ACTIVE
 STATE,Oaxaca,Meningitis,21,CONFIRMED,ACTIVE
-STATE,Oaxaca,Mumps,79,CONFIRMED,ACTIVE
-STATE,Oaxaca,Myiasis,68,CONFIRMED,ACTIVE
-STATE,Oaxaca,Other viral hepatitis,38,CONFIRMED,ACTIVE
-STATE,Oaxaca,Parasitic disease,3848,CONFIRMED,ACTIVE
-STATE,Oaxaca,Paratyphoid fever,96,CONFIRMED,ACTIVE
+STATE,Oaxaca,Mumps,81,CONFIRMED,ACTIVE
+STATE,Oaxaca,Myiasis,74,CONFIRMED,ACTIVE
+STATE,Oaxaca,Other viral hepatitis,40,CONFIRMED,ACTIVE
+STATE,Oaxaca,Parasitic disease,4008,CONFIRMED,ACTIVE
+STATE,Oaxaca,Paratyphoid fever,97,CONFIRMED,ACTIVE
 STATE,Oaxaca,Pinto disease,2,CONFIRMED,ACTIVE
-STATE,Oaxaca,Pinworm infection,617,CONFIRMED,ACTIVE
-STATE,Oaxaca,Pneumonia,2640,CONFIRMED,ACTIVE
-STATE,Oaxaca,Scabies,587,CONFIRMED,ACTIVE
-STATE,Oaxaca,Scarlet fever,25,CONFIRMED,ACTIVE
-STATE,Oaxaca,Strep throat,14946,CONFIRMED,ACTIVE
-STATE,Oaxaca,Syphilis,362,CONFIRMED,ACTIVE
+STATE,Oaxaca,Pinworm infection,646,CONFIRMED,ACTIVE
+STATE,Oaxaca,Pneumonia,2813,CONFIRMED,ACTIVE
+STATE,Oaxaca,Scabies,624,CONFIRMED,ACTIVE
+STATE,Oaxaca,Scarlet fever,27,CONFIRMED,ACTIVE
+STATE,Oaxaca,Strep throat,15847,CONFIRMED,ACTIVE
+STATE,Oaxaca,Syphilis,380,CONFIRMED,ACTIVE
 STATE,Oaxaca,Taeniasis,23,CONFIRMED,ACTIVE
 STATE,Oaxaca,Tetanus,1,CONFIRMED,ACTIVE
-STATE,Oaxaca,Toxoplasmosis,2,CONFIRMED,ACTIVE
-STATE,Oaxaca,Trichomonas infection,515,CONFIRMED,ACTIVE
+STATE,Oaxaca,Toxoplasmosis,3,CONFIRMED,ACTIVE
+STATE,Oaxaca,Trichomonas infection,534,CONFIRMED,ACTIVE
 STATE,Oaxaca,Tuberculosis,623,CONFIRMED,ACTIVE
-STATE,Oaxaca,Typhoid fever,87,CONFIRMED,ACTIVE
-STATE,Oaxaca,Urethritis,84186,CONFIRMED,ACTIVE
-STATE,Oaxaca,Vaginal yeast infection,4409,CONFIRMED,ACTIVE
-STATE,Oaxaca,Vaginitis,602,CONFIRMED,ACTIVE
-STATE,Oaxaca,Viral exanthem,209,CONFIRMED,ACTIVE
-STATE,Oaxaca,Whooping cough,27,CONFIRMED,ACTIVE
-STATE,Puebla,Acute otitis media,17904,CONFIRMED,ACTIVE
-STATE,Puebla,Brucellosis,154,CONFIRMED,ACTIVE
-STATE,Puebla,COVID-19,228,CONFIRMED,ACTIVE
-STATE,Puebla,Chagas disease,49,CONFIRMED,ACTIVE
+STATE,Oaxaca,Typhoid fever,92,CONFIRMED,ACTIVE
+STATE,Oaxaca,Urethritis,88124,CONFIRMED,ACTIVE
+STATE,Oaxaca,Vaginal yeast infection,4604,CONFIRMED,ACTIVE
+STATE,Oaxaca,Vaginitis,496,CONFIRMED,ACTIVE
+STATE,Oaxaca,Viral exanthem,211,CONFIRMED,ACTIVE
+STATE,Oaxaca,Whooping cough,28,CONFIRMED,ACTIVE
+STATE,Puebla,Acute otitis media,18790,CONFIRMED,ACTIVE
+STATE,Puebla,Brucellosis,162,CONFIRMED,ACTIVE
+STATE,Puebla,COVID-19,231,CONFIRMED,ACTIVE
+STATE,Puebla,Chagas disease,48,CONFIRMED,ACTIVE
 STATE,Puebla,Chancroid,11,CONFIRMED,ACTIVE
-STATE,Puebla,Chickenpox,866,CONFIRMED,ACTIVE
-STATE,Puebla,Common cold,347,CONFIRMED,ACTIVE
-STATE,Puebla,Conjunctivitis,28496,CONFIRMED,ACTIVE
+STATE,Puebla,Chickenpox,900,CONFIRMED,ACTIVE
+STATE,Puebla,Common cold,890,CONFIRMED,ACTIVE
+STATE,Puebla,Conjunctivitis,29573,CONFIRMED,ACTIVE
 STATE,Puebla,Conjunctivitis due to virus,1,CONFIRMED,ACTIVE
 STATE,Puebla,Cysticercosis,5,CONFIRMED,ACTIVE
 STATE,Puebla,Dengue Severe,4,CONFIRMED,ACTIVE
 STATE,Puebla,Dengue fever,80,CONFIRMED,ACTIVE
-STATE,Puebla,Erysipelas,155,CONFIRMED,ACTIVE
-STATE,Puebla,Genital herpes,87,CONFIRMED,ACTIVE
-STATE,Puebla,Gonorrhea,127,CONFIRMED,ACTIVE
+STATE,Puebla,Erysipelas,164,CONFIRMED,ACTIVE
+STATE,Puebla,Genital herpes,91,CONFIRMED,ACTIVE
+STATE,Puebla,Gonorrhea,129,CONFIRMED,ACTIVE
 STATE,Puebla,HIV/AIDS,480,CONFIRMED,ACTIVE
-STATE,Puebla,HPV,213,CONFIRMED,ACTIVE
-STATE,Puebla,Healthcare-associated infection,3502,CONFIRMED,ACTIVE
-STATE,Puebla,Hepatitis A,53,CONFIRMED,ACTIVE
-STATE,Puebla,Hepatitis B,14,CONFIRMED,ACTIVE
-STATE,Puebla,Hepatitis C,103,CONFIRMED,ACTIVE
-STATE,Puebla,Infectious gastroenteritis,435517,CONFIRMED,ACTIVE
-STATE,Puebla,Influenza,590,CONFIRMED,ACTIVE
+STATE,Puebla,HPV,229,CONFIRMED,ACTIVE
+STATE,Puebla,Healthcare-associated infection,3655,CONFIRMED,ACTIVE
+STATE,Puebla,Hepatitis A,57,CONFIRMED,ACTIVE
+STATE,Puebla,Hepatitis B,15,CONFIRMED,ACTIVE
+STATE,Puebla,Hepatitis C,112,CONFIRMED,ACTIVE
+STATE,Puebla,Infectious gastroenteritis,452952,CONFIRMED,ACTIVE
+STATE,Puebla,Influenza,649,CONFIRMED,ACTIVE
 STATE,Puebla,Leprosy,4,CONFIRMED,ACTIVE
 STATE,Puebla,Leptospirosis,3,CONFIRMED,ACTIVE
 STATE,Puebla,Lymphogranuloma venereum,10,CONFIRMED,ACTIVE
 STATE,Puebla,Meningitis,3,CONFIRMED,ACTIVE
 STATE,Puebla,Mpox,3,CONFIRMED,ACTIVE
-STATE,Puebla,Mumps,73,CONFIRMED,ACTIVE
-STATE,Puebla,Myiasis,81,CONFIRMED,ACTIVE
-STATE,Puebla,Other viral hepatitis,18,CONFIRMED,ACTIVE
-STATE,Puebla,Parasitic disease,1205,CONFIRMED,ACTIVE
-STATE,Puebla,Paratyphoid fever,9,CONFIRMED,ACTIVE
+STATE,Puebla,Mumps,76,CONFIRMED,ACTIVE
+STATE,Puebla,Myiasis,84,CONFIRMED,ACTIVE
+STATE,Puebla,Other viral hepatitis,19,CONFIRMED,ACTIVE
+STATE,Puebla,Parasitic disease,1266,CONFIRMED,ACTIVE
+STATE,Puebla,Paratyphoid fever,10,CONFIRMED,ACTIVE
 STATE,Puebla,Pinto disease,1,CONFIRMED,ACTIVE
-STATE,Puebla,Pinworm infection,134,CONFIRMED,ACTIVE
-STATE,Puebla,Pneumonia,3652,CONFIRMED,ACTIVE
-STATE,Puebla,Scabies,288,CONFIRMED,ACTIVE
+STATE,Puebla,Pinworm infection,139,CONFIRMED,ACTIVE
+STATE,Puebla,Pneumonia,3837,CONFIRMED,ACTIVE
+STATE,Puebla,Scabies,309,CONFIRMED,ACTIVE
 STATE,Puebla,Scarlet fever,39,CONFIRMED,ACTIVE
-STATE,Puebla,Strep throat,686,CONFIRMED,ACTIVE
-STATE,Puebla,Syphilis,361,CONFIRMED,ACTIVE
+STATE,Puebla,Strep throat,720,CONFIRMED,ACTIVE
+STATE,Puebla,Syphilis,393,CONFIRMED,ACTIVE
 STATE,Puebla,Taeniasis,14,CONFIRMED,ACTIVE
-STATE,Puebla,Toxoplasmosis,4,CONFIRMED,ACTIVE
+STATE,Puebla,Toxoplasmosis,5,CONFIRMED,ACTIVE
 STATE,Puebla,Trichinosis,2,CONFIRMED,ACTIVE
-STATE,Puebla,Trichomonas infection,1002,CONFIRMED,ACTIVE
+STATE,Puebla,Trichomonas infection,1031,CONFIRMED,ACTIVE
 STATE,Puebla,Tuberculosis,494,CONFIRMED,ACTIVE
 STATE,Puebla,Typhoid fever,32,CONFIRMED,ACTIVE
-STATE,Puebla,Urethritis,134067,CONFIRMED,ACTIVE
-STATE,Puebla,Vaginal yeast infection,4154,CONFIRMED,ACTIVE
-STATE,Puebla,Vaginitis,123,CONFIRMED,ACTIVE
-STATE,Puebla,Viral exanthem,566,CONFIRMED,ACTIVE
+STATE,Puebla,Urethritis,139709,CONFIRMED,ACTIVE
+STATE,Puebla,Vaginal yeast infection,4314,CONFIRMED,ACTIVE
+STATE,Puebla,Vaginitis,616,CONFIRMED,ACTIVE
+STATE,Puebla,Viral exanthem,568,CONFIRMED,ACTIVE
 STATE,Puebla,Whooping cough,7,CONFIRMED,ACTIVE
-STATE,Querétaro,Acute otitis media,8258,CONFIRMED,ACTIVE
+STATE,Querétaro,Acute otitis media,8624,CONFIRMED,ACTIVE
 STATE,Querétaro,Brucellosis,5,CONFIRMED,ACTIVE
 STATE,Querétaro,COVID-19,51,CONFIRMED,ACTIVE
 STATE,Querétaro,Chagas disease,7,CONFIRMED,ACTIVE
 STATE,Querétaro,Chancroid,4,CONFIRMED,ACTIVE
-STATE,Querétaro,Chickenpox,1047,CONFIRMED,ACTIVE
-STATE,Querétaro,Common cold,288677,CONFIRMED,ACTIVE
-STATE,Querétaro,Conjunctivitis,18417,CONFIRMED,ACTIVE
+STATE,Querétaro,Chickenpox,1104,CONFIRMED,ACTIVE
+STATE,Querétaro,Common cold,293511,CONFIRMED,ACTIVE
+STATE,Querétaro,Conjunctivitis,18520,CONFIRMED,ACTIVE
 STATE,Querétaro,Cysticercosis,1,CONFIRMED,ACTIVE
 STATE,Querétaro,Dengue Severe,1,CONFIRMED,ACTIVE
 STATE,Querétaro,Dengue fever,1,CONFIRMED,ACTIVE
-STATE,Querétaro,Erysipelas,37,CONFIRMED,ACTIVE
-STATE,Querétaro,Genital herpes,49,CONFIRMED,ACTIVE
-STATE,Querétaro,Gonorrhea,11,CONFIRMED,ACTIVE
-STATE,Querétaro,HIV/AIDS,373,CONFIRMED,ACTIVE
-STATE,Querétaro,HPV,77,CONFIRMED,ACTIVE
-STATE,Querétaro,Healthcare-associated infection,1223,CONFIRMED,ACTIVE
-STATE,Querétaro,Hepatitis A,20,CONFIRMED,ACTIVE
+STATE,Querétaro,Erysipelas,38,CONFIRMED,ACTIVE
+STATE,Querétaro,Genital herpes,50,CONFIRMED,ACTIVE
+STATE,Querétaro,Gonorrhea,16,CONFIRMED,ACTIVE
+STATE,Querétaro,HIV/AIDS,395,CONFIRMED,ACTIVE
+STATE,Querétaro,HPV,81,CONFIRMED,ACTIVE
+STATE,Querétaro,Healthcare-associated infection,1307,CONFIRMED,ACTIVE
+STATE,Querétaro,Hepatitis A,23,CONFIRMED,ACTIVE
 STATE,Querétaro,Hepatitis B,11,CONFIRMED,ACTIVE
-STATE,Querétaro,Hepatitis C,84,CONFIRMED,ACTIVE
-STATE,Querétaro,Infectious gastroenteritis,165751,CONFIRMED,ACTIVE
-STATE,Querétaro,Influenza,97,CONFIRMED,ACTIVE
+STATE,Querétaro,Hepatitis C,92,CONFIRMED,ACTIVE
+STATE,Querétaro,Infectious gastroenteritis,169203,CONFIRMED,ACTIVE
+STATE,Querétaro,Influenza,98,CONFIRMED,ACTIVE
 STATE,Querétaro,Leptospirosis,3,CONFIRMED,ACTIVE
 STATE,Querétaro,Lymphogranuloma venereum,4,CONFIRMED,ACTIVE
-STATE,Querétaro,Meningitis,8,CONFIRMED,ACTIVE
-STATE,Querétaro,Mumps,84,CONFIRMED,ACTIVE
-STATE,Querétaro,Myiasis,22,CONFIRMED,ACTIVE
+STATE,Querétaro,Meningitis,10,CONFIRMED,ACTIVE
+STATE,Querétaro,Mumps,92,CONFIRMED,ACTIVE
+STATE,Querétaro,Myiasis,23,CONFIRMED,ACTIVE
 STATE,Querétaro,Other viral hepatitis,1,CONFIRMED,ACTIVE
-STATE,Querétaro,Parasitic disease,93,CONFIRMED,ACTIVE
+STATE,Querétaro,Parasitic disease,87,CONFIRMED,ACTIVE
 STATE,Querétaro,Paratyphoid fever,3,CONFIRMED,ACTIVE
-STATE,Querétaro,Pinworm infection,9,CONFIRMED,ACTIVE
-STATE,Querétaro,Pneumonia,1788,CONFIRMED,ACTIVE
+STATE,Querétaro,Pinworm infection,8,CONFIRMED,ACTIVE
+STATE,Querétaro,Pneumonia,2002,CONFIRMED,ACTIVE
 STATE,Querétaro,Rocky Mountain spotted fever,2,CONFIRMED,ACTIVE
 STATE,Querétaro,Scabies,87,CONFIRMED,ACTIVE
-STATE,Querétaro,Scarlet fever,20,CONFIRMED,ACTIVE
-STATE,Querétaro,Strep throat,145,CONFIRMED,ACTIVE
-STATE,Querétaro,Syphilis,272,CONFIRMED,ACTIVE
-STATE,Querétaro,Trichomonas infection,93,CONFIRMED,ACTIVE
-STATE,Querétaro,Tuberculosis,243,CONFIRMED,ACTIVE
+STATE,Querétaro,Scarlet fever,27,CONFIRMED,ACTIVE
+STATE,Querétaro,Strep throat,152,CONFIRMED,ACTIVE
+STATE,Querétaro,Syphilis,281,CONFIRMED,ACTIVE
+STATE,Querétaro,Trichomonas infection,95,CONFIRMED,ACTIVE
+STATE,Querétaro,Tuberculosis,246,CONFIRMED,ACTIVE
 STATE,Querétaro,Typhoid fever,3,CONFIRMED,ACTIVE
-STATE,Querétaro,Urethritis,75494,CONFIRMED,ACTIVE
-STATE,Querétaro,Vaginal yeast infection,1311,CONFIRMED,ACTIVE
-STATE,Querétaro,Vaginitis,896,CONFIRMED,ACTIVE
-STATE,Querétaro,Viral exanthem,329,CONFIRMED,ACTIVE
+STATE,Querétaro,Urethritis,78082,CONFIRMED,ACTIVE
+STATE,Querétaro,Vaginal yeast infection,1365,CONFIRMED,ACTIVE
+STATE,Querétaro,Vaginitis,217,CONFIRMED,ACTIVE
+STATE,Querétaro,Viral exanthem,334,CONFIRMED,ACTIVE
 STATE,Querétaro,Whooping cough,53,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Acute otitis media,10316,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Brucellosis,23,CONFIRMED,ACTIVE
-STATE,Quintana Roo,COVID-19,47,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Acute otitis media,10842,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Brucellosis,26,CONFIRMED,ACTIVE
+STATE,Quintana Roo,COVID-19,48,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Chagas disease,13,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Chancroid,9,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Chickenpox,1265,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Chancroid,10,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Chickenpox,1318,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Chikungunya,6,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Common cold,236980,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Conjunctivitis,13632,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Common cold,249847,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Conjunctivitis,14185,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Cysticercosis,21,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Dengue Severe,12,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Dengue fever,558,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Erysipelas,175,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Genital herpes,170,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Gonorrhea,120,CONFIRMED,ACTIVE
-STATE,Quintana Roo,HIV/AIDS,944,CONFIRMED,ACTIVE
-STATE,Quintana Roo,HPV,206,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Healthcare-associated infection,2050,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Hepatitis A,54,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Hepatitis B,41,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Hepatitis C,163,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Infectious gastroenteritis,169846,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Influenza,143,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Leishmaniasis,344,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Dengue Severe,13,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Dengue fever,694,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Erysipelas,183,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Genital herpes,181,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Gonorrhea,125,CONFIRMED,ACTIVE
+STATE,Quintana Roo,HIV/AIDS,963,CONFIRMED,ACTIVE
+STATE,Quintana Roo,HPV,208,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Healthcare-associated infection,2100,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Hepatitis A,62,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Hepatitis B,43,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Hepatitis C,165,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Infectious gastroenteritis,177011,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Influenza,158,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Leishmaniasis,347,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Leprosy,6,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Leptospirosis,16,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Lymphogranuloma venereum,2,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Meningitis,26,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Meningitis,28,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Mpox,13,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Mumps,132,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Myiasis,24,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Mumps,115,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Myiasis,25,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Other viral hepatitis,5,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Parasitic disease,2404,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Paratyphoid fever,23,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Parasitic disease,2603,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Paratyphoid fever,24,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Pinto disease,3,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Pinworm infection,481,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Pneumonia,943,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Scabies,1340,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Pinworm infection,516,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Pneumonia,1024,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Scabies,1407,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Scarlet fever,13,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Strep throat,2063,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Syphilis,470,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Strep throat,2302,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Syphilis,496,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Taeniasis,1,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Toxoplasmosis,7,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Trichinosis,3,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Trichomonas infection,228,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Trichinosis,4,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Trichomonas infection,242,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Tuberculosis,447,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Typhoid fever,8,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Urethritis,73789,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Vaginal yeast infection,1549,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Vaginitis,921,CONFIRMED,ACTIVE
-STATE,Quintana Roo,Viral exanthem,735,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Urethritis,73803,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Vaginal yeast infection,1667,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Vaginitis,364,CONFIRMED,ACTIVE
+STATE,Quintana Roo,Viral exanthem,749,CONFIRMED,ACTIVE
 STATE,Quintana Roo,Whooping cough,29,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Acute otitis media,14940,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Brucellosis,21,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,COVID-19,94,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Acute otitis media,9623,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Brucellosis,23,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,COVID-19,97,CONFIRMED,ACTIVE
 STATE,San Luis Potosí,Chagas disease,15,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Chancroid,14,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Chickenpox,1377,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Common cold,297008,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Conjunctivitis,13135,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Chancroid,15,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Chickenpox,1430,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Common cold,312373,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Conjunctivitis,13591,CONFIRMED,ACTIVE
 STATE,San Luis Potosí,Cysticercosis,7,CONFIRMED,ACTIVE
 STATE,San Luis Potosí,Dengue Severe,3,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Dengue fever,47,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Erysipelas,78,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Genital herpes,83,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Dengue fever,49,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Erysipelas,83,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Genital herpes,87,CONFIRMED,ACTIVE
 STATE,San Luis Potosí,Gonorrhea,33,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,HIV/AIDS,344,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,HPV,236,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Healthcare-associated infection,2608,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,HIV/AIDS,367,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,HPV,246,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Healthcare-associated infection,2729,CONFIRMED,ACTIVE
 STATE,San Luis Potosí,Hepatitis A,34,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Hepatitis B,6,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Hepatitis C,23,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Infectious gastroenteritis,136916,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Influenza,238,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Leptospirosis,1,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Hepatitis B,7,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Hepatitis C,24,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Infectious gastroenteritis,141759,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Influenza,249,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Leptospirosis,2,CONFIRMED,ACTIVE
 STATE,San Luis Potosí,Lymphogranuloma venereum,4,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Meningitis,7,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Mumps,106,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Myiasis,53,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Other viral hepatitis,22,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Parasitic disease,1468,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Meningitis,8,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Mumps,112,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Myiasis,54,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Other viral hepatitis,23,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Parasitic disease,1521,CONFIRMED,ACTIVE
 STATE,San Luis Potosí,Paratyphoid fever,9,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Pinworm infection,93,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Pneumonia,3396,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Scabies,436,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Scarlet fever,24,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Strep throat,623,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Syphilis,531,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Pinworm infection,99,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Pneumonia,3565,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Scabies,450,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Scarlet fever,26,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Strep throat,642,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Syphilis,552,CONFIRMED,ACTIVE
 STATE,San Luis Potosí,Taeniasis,18,CONFIRMED,ACTIVE
 STATE,San Luis Potosí,Tetanus,1,CONFIRMED,ACTIVE
 STATE,San Luis Potosí,Toxoplasmosis,2,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Trichomonas infection,284,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Tuberculosis,369,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Typhoid fever,105,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Urethritis,61480,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Vaginal yeast infection,2292,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Vaginitis,980,CONFIRMED,ACTIVE
-STATE,San Luis Potosí,Viral exanthem,145,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Trichomonas infection,304,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Tuberculosis,550,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Typhoid fever,106,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Urethritis,64168,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Vaginal yeast infection,2395,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Vaginitis,441,CONFIRMED,ACTIVE
+STATE,San Luis Potosí,Viral exanthem,146,CONFIRMED,ACTIVE
 STATE,San Luis Potosí,Whooping cough,57,CONFIRMED,ACTIVE
-STATE,Sinaloa,Acute otitis media,9231,CONFIRMED,ACTIVE
-STATE,Sinaloa,Brucellosis,55,CONFIRMED,ACTIVE
+STATE,Sinaloa,Acute otitis media,9713,CONFIRMED,ACTIVE
+STATE,Sinaloa,Brucellosis,56,CONFIRMED,ACTIVE
 STATE,Sinaloa,COVID-19,79,CONFIRMED,ACTIVE
 STATE,Sinaloa,Chagas disease,6,CONFIRMED,ACTIVE
 STATE,Sinaloa,Chancroid,14,CONFIRMED,ACTIVE
-STATE,Sinaloa,Chickenpox,1086,CONFIRMED,ACTIVE
-STATE,Sinaloa,Common cold,319666,CONFIRMED,ACTIVE
-STATE,Sinaloa,Conjunctivitis,15946,CONFIRMED,ACTIVE
+STATE,Sinaloa,Chickenpox,1133,CONFIRMED,ACTIVE
+STATE,Sinaloa,Common cold,338743,CONFIRMED,ACTIVE
+STATE,Sinaloa,Conjunctivitis,16607,CONFIRMED,ACTIVE
 STATE,Sinaloa,Conjunctivitis due to virus,5,CONFIRMED,ACTIVE
-STATE,Sinaloa,Cysticercosis,10,CONFIRMED,ACTIVE
-STATE,Sinaloa,Dengue Severe,41,CONFIRMED,ACTIVE
-STATE,Sinaloa,Dengue fever,760,CONFIRMED,ACTIVE
-STATE,Sinaloa,Erysipelas,66,CONFIRMED,ACTIVE
-STATE,Sinaloa,Genital herpes,102,CONFIRMED,ACTIVE
-STATE,Sinaloa,Gonorrhea,61,CONFIRMED,ACTIVE
-STATE,Sinaloa,HIV/AIDS,383,CONFIRMED,ACTIVE
-STATE,Sinaloa,HPV,366,CONFIRMED,ACTIVE
-STATE,Sinaloa,Healthcare-associated infection,1137,CONFIRMED,ACTIVE
-STATE,Sinaloa,Hepatitis A,67,CONFIRMED,ACTIVE
-STATE,Sinaloa,Hepatitis B,39,CONFIRMED,ACTIVE
-STATE,Sinaloa,Hepatitis C,255,CONFIRMED,ACTIVE
-STATE,Sinaloa,Infectious gastroenteritis,128159,CONFIRMED,ACTIVE
-STATE,Sinaloa,Influenza,195,CONFIRMED,ACTIVE
+STATE,Sinaloa,Cysticercosis,11,CONFIRMED,ACTIVE
+STATE,Sinaloa,Dengue Severe,50,CONFIRMED,ACTIVE
+STATE,Sinaloa,Dengue fever,822,CONFIRMED,ACTIVE
+STATE,Sinaloa,Erysipelas,68,CONFIRMED,ACTIVE
+STATE,Sinaloa,Genital herpes,107,CONFIRMED,ACTIVE
+STATE,Sinaloa,Gonorrhea,63,CONFIRMED,ACTIVE
+STATE,Sinaloa,HIV/AIDS,406,CONFIRMED,ACTIVE
+STATE,Sinaloa,HPV,380,CONFIRMED,ACTIVE
+STATE,Sinaloa,Healthcare-associated infection,1170,CONFIRMED,ACTIVE
+STATE,Sinaloa,Hepatitis A,71,CONFIRMED,ACTIVE
+STATE,Sinaloa,Hepatitis B,41,CONFIRMED,ACTIVE
+STATE,Sinaloa,Hepatitis C,280,CONFIRMED,ACTIVE
+STATE,Sinaloa,Infectious gastroenteritis,133015,CONFIRMED,ACTIVE
+STATE,Sinaloa,Influenza,223,CONFIRMED,ACTIVE
 STATE,Sinaloa,Leishmaniasis,1,CONFIRMED,ACTIVE
 STATE,Sinaloa,Leprosy,5,CONFIRMED,ACTIVE
-STATE,Sinaloa,Leptospirosis,89,CONFIRMED,ACTIVE
+STATE,Sinaloa,Leptospirosis,96,CONFIRMED,ACTIVE
 STATE,Sinaloa,Lymphogranuloma venereum,1,CONFIRMED,ACTIVE
-STATE,Sinaloa,Meningitis,56,CONFIRMED,ACTIVE
-STATE,Sinaloa,Mumps,149,CONFIRMED,ACTIVE
-STATE,Sinaloa,Myiasis,6,CONFIRMED,ACTIVE
-STATE,Sinaloa,Other viral hepatitis,69,CONFIRMED,ACTIVE
-STATE,Sinaloa,Parasitic disease,6303,CONFIRMED,ACTIVE
-STATE,Sinaloa,Paratyphoid fever,215,CONFIRMED,ACTIVE
+STATE,Sinaloa,Meningitis,64,CONFIRMED,ACTIVE
+STATE,Sinaloa,Mumps,155,CONFIRMED,ACTIVE
+STATE,Sinaloa,Myiasis,13,CONFIRMED,ACTIVE
+STATE,Sinaloa,Other viral hepatitis,72,CONFIRMED,ACTIVE
+STATE,Sinaloa,Parasitic disease,6571,CONFIRMED,ACTIVE
+STATE,Sinaloa,Paratyphoid fever,225,CONFIRMED,ACTIVE
 STATE,Sinaloa,Pinto disease,1,CONFIRMED,ACTIVE
-STATE,Sinaloa,Pinworm infection,338,CONFIRMED,ACTIVE
-STATE,Sinaloa,Pneumonia,4237,CONFIRMED,ACTIVE
-STATE,Sinaloa,Rocky Mountain spotted fever,38,CONFIRMED,ACTIVE
-STATE,Sinaloa,Scabies,972,CONFIRMED,ACTIVE
-STATE,Sinaloa,Scarlet fever,37,CONFIRMED,ACTIVE
-STATE,Sinaloa,Strep throat,1367,CONFIRMED,ACTIVE
-STATE,Sinaloa,Syphilis,798,CONFIRMED,ACTIVE
+STATE,Sinaloa,Pinworm infection,349,CONFIRMED,ACTIVE
+STATE,Sinaloa,Pneumonia,4497,CONFIRMED,ACTIVE
+STATE,Sinaloa,Rocky Mountain spotted fever,40,CONFIRMED,ACTIVE
+STATE,Sinaloa,Scabies,1018,CONFIRMED,ACTIVE
+STATE,Sinaloa,Scarlet fever,42,CONFIRMED,ACTIVE
+STATE,Sinaloa,Strep throat,1449,CONFIRMED,ACTIVE
+STATE,Sinaloa,Syphilis,819,CONFIRMED,ACTIVE
 STATE,Sinaloa,Taeniasis,2,CONFIRMED,ACTIVE
 STATE,Sinaloa,Toxoplasmosis,6,CONFIRMED,ACTIVE
-STATE,Sinaloa,Trichomonas infection,163,CONFIRMED,ACTIVE
-STATE,Sinaloa,Tuberculosis,1158,CONFIRMED,ACTIVE
-STATE,Sinaloa,Typhoid fever,409,CONFIRMED,ACTIVE
-STATE,Sinaloa,Urethritis,69384,CONFIRMED,ACTIVE
-STATE,Sinaloa,Vaginal yeast infection,2028,CONFIRMED,ACTIVE
-STATE,Sinaloa,Vaginitis,609,CONFIRMED,ACTIVE
-STATE,Sinaloa,Viral exanthem,596,CONFIRMED,ACTIVE
-STATE,Sinaloa,Whooping cough,17,CONFIRMED,ACTIVE
-STATE,Sonora,Acute otitis media,8453,CONFIRMED,ACTIVE
+STATE,Sinaloa,Trichomonas infection,171,CONFIRMED,ACTIVE
+STATE,Sinaloa,Tuberculosis,1172,CONFIRMED,ACTIVE
+STATE,Sinaloa,Typhoid fever,426,CONFIRMED,ACTIVE
+STATE,Sinaloa,Urethritis,72697,CONFIRMED,ACTIVE
+STATE,Sinaloa,Vaginal yeast infection,2114,CONFIRMED,ACTIVE
+STATE,Sinaloa,Vaginitis,933,CONFIRMED,ACTIVE
+STATE,Sinaloa,Viral exanthem,599,CONFIRMED,ACTIVE
+STATE,Sinaloa,Whooping cough,18,CONFIRMED,ACTIVE
+STATE,Sonora,Acute otitis media,8785,CONFIRMED,ACTIVE
 STATE,Sonora,Brucellosis,5,CONFIRMED,ACTIVE
 STATE,Sonora,COVID-19,54,CONFIRMED,ACTIVE
 STATE,Sonora,Chagas disease,1,CONFIRMED,ACTIVE
-STATE,Sonora,Chancroid,29,CONFIRMED,ACTIVE
-STATE,Sonora,Chickenpox,725,CONFIRMED,ACTIVE
-STATE,Sonora,Common cold,280849,CONFIRMED,ACTIVE
-STATE,Sonora,Conjunctivitis,14414,CONFIRMED,ACTIVE
+STATE,Sonora,Chancroid,30,CONFIRMED,ACTIVE
+STATE,Sonora,Chickenpox,758,CONFIRMED,ACTIVE
+STATE,Sonora,Common cold,296863,CONFIRMED,ACTIVE
+STATE,Sonora,Conjunctivitis,15072,CONFIRMED,ACTIVE
 STATE,Sonora,Conjunctivitis due to virus,1,CONFIRMED,ACTIVE
-STATE,Sonora,Dengue Severe,46,CONFIRMED,ACTIVE
-STATE,Sonora,Dengue fever,2267,CONFIRMED,ACTIVE
-STATE,Sonora,Erysipelas,38,CONFIRMED,ACTIVE
-STATE,Sonora,Genital herpes,161,CONFIRMED,ACTIVE
-STATE,Sonora,Gonorrhea,101,CONFIRMED,ACTIVE
+STATE,Sonora,Dengue Severe,54,CONFIRMED,ACTIVE
+STATE,Sonora,Dengue fever,2613,CONFIRMED,ACTIVE
+STATE,Sonora,Erysipelas,42,CONFIRMED,ACTIVE
+STATE,Sonora,Genital herpes,168,CONFIRMED,ACTIVE
+STATE,Sonora,Gonorrhea,108,CONFIRMED,ACTIVE
 STATE,Sonora,HIV/AIDS,192,CONFIRMED,ACTIVE
-STATE,Sonora,HPV,116,CONFIRMED,ACTIVE
-STATE,Sonora,Healthcare-associated infection,3006,CONFIRMED,ACTIVE
-STATE,Sonora,Hepatitis A,246,CONFIRMED,ACTIVE
-STATE,Sonora,Hepatitis B,14,CONFIRMED,ACTIVE
-STATE,Sonora,Hepatitis C,194,CONFIRMED,ACTIVE
-STATE,Sonora,Infectious gastroenteritis,161673,CONFIRMED,ACTIVE
-STATE,Sonora,Influenza,96,CONFIRMED,ACTIVE
+STATE,Sonora,HPV,123,CONFIRMED,ACTIVE
+STATE,Sonora,Healthcare-associated infection,3119,CONFIRMED,ACTIVE
+STATE,Sonora,Hepatitis A,253,CONFIRMED,ACTIVE
+STATE,Sonora,Hepatitis B,16,CONFIRMED,ACTIVE
+STATE,Sonora,Hepatitis C,201,CONFIRMED,ACTIVE
+STATE,Sonora,Infectious gastroenteritis,168770,CONFIRMED,ACTIVE
+STATE,Sonora,Influenza,101,CONFIRMED,ACTIVE
 STATE,Sonora,Leprosy,1,CONFIRMED,ACTIVE
 STATE,Sonora,Leptospirosis,9,CONFIRMED,ACTIVE
 STATE,Sonora,Lymphogranuloma venereum,11,CONFIRMED,ACTIVE
 STATE,Sonora,Meningitis,23,CONFIRMED,ACTIVE
 STATE,Sonora,Mpox,2,CONFIRMED,ACTIVE
-STATE,Sonora,Mumps,142,CONFIRMED,ACTIVE
+STATE,Sonora,Mumps,150,CONFIRMED,ACTIVE
 STATE,Sonora,Myiasis,5,CONFIRMED,ACTIVE
-STATE,Sonora,Other viral hepatitis,88,CONFIRMED,ACTIVE
-STATE,Sonora,Parasitic disease,2027,CONFIRMED,ACTIVE
-STATE,Sonora,Paratyphoid fever,27,CONFIRMED,ACTIVE
+STATE,Sonora,Other viral hepatitis,89,CONFIRMED,ACTIVE
+STATE,Sonora,Parasitic disease,2129,CONFIRMED,ACTIVE
+STATE,Sonora,Paratyphoid fever,28,CONFIRMED,ACTIVE
 STATE,Sonora,Pinto disease,1,CONFIRMED,ACTIVE
-STATE,Sonora,Pinworm infection,379,CONFIRMED,ACTIVE
-STATE,Sonora,Pneumonia,4932,CONFIRMED,ACTIVE
-STATE,Sonora,Rocky Mountain spotted fever,147,CONFIRMED,ACTIVE
-STATE,Sonora,Scabies,928,CONFIRMED,ACTIVE
-STATE,Sonora,Scarlet fever,47,CONFIRMED,ACTIVE
-STATE,Sonora,Strep throat,7533,CONFIRMED,ACTIVE
-STATE,Sonora,Syphilis,516,CONFIRMED,ACTIVE
+STATE,Sonora,Pinworm infection,388,CONFIRMED,ACTIVE
+STATE,Sonora,Pneumonia,5168,CONFIRMED,ACTIVE
+STATE,Sonora,Rocky Mountain spotted fever,151,CONFIRMED,ACTIVE
+STATE,Sonora,Scabies,958,CONFIRMED,ACTIVE
+STATE,Sonora,Scarlet fever,48,CONFIRMED,ACTIVE
+STATE,Sonora,Strep throat,7940,CONFIRMED,ACTIVE
+STATE,Sonora,Syphilis,533,CONFIRMED,ACTIVE
 STATE,Sonora,Taeniasis,3,CONFIRMED,ACTIVE
 STATE,Sonora,Toxoplasmosis,1,CONFIRMED,ACTIVE
 STATE,Sonora,Trichinosis,1,CONFIRMED,ACTIVE
 STATE,Sonora,Trichomonas infection,26,CONFIRMED,ACTIVE
 STATE,Sonora,Tuberculosis,943,CONFIRMED,ACTIVE
-STATE,Sonora,Typhoid fever,46,CONFIRMED,ACTIVE
-STATE,Sonora,Urethritis,65936,CONFIRMED,ACTIVE
-STATE,Sonora,Vaginal yeast infection,68,CONFIRMED,ACTIVE
-STATE,Sonora,Vaginitis,762,CONFIRMED,ACTIVE
+STATE,Sonora,Typhoid fever,48,CONFIRMED,ACTIVE
+STATE,Sonora,Urethritis,69008,CONFIRMED,ACTIVE
+STATE,Sonora,Vaginal yeast infection,69,CONFIRMED,ACTIVE
+STATE,Sonora,Vaginitis,69,CONFIRMED,ACTIVE
 STATE,Sonora,Viral exanthem,848,CONFIRMED,ACTIVE
 STATE,Sonora,Whooping cough,48,CONFIRMED,ACTIVE
-STATE,Tabasco,Acute otitis media,13402,CONFIRMED,ACTIVE
+STATE,Tabasco,Acute otitis media,14072,CONFIRMED,ACTIVE
 STATE,Tabasco,Brucellosis,1,CONFIRMED,ACTIVE
-STATE,Tabasco,COVID-19,52,CONFIRMED,ACTIVE
+STATE,Tabasco,COVID-19,54,CONFIRMED,ACTIVE
 STATE,Tabasco,Chagas disease,13,CONFIRMED,ACTIVE
 STATE,Tabasco,Chancroid,11,CONFIRMED,ACTIVE
-STATE,Tabasco,Chickenpox,1130,CONFIRMED,ACTIVE
-STATE,Tabasco,Common cold,370970,CONFIRMED,ACTIVE
-STATE,Tabasco,Conjunctivitis,14381,CONFIRMED,ACTIVE
+STATE,Tabasco,Chickenpox,1191,CONFIRMED,ACTIVE
+STATE,Tabasco,Common cold,392974,CONFIRMED,ACTIVE
+STATE,Tabasco,Conjunctivitis,14986,CONFIRMED,ACTIVE
 STATE,Tabasco,Cysticercosis,1,CONFIRMED,ACTIVE
-STATE,Tabasco,Dengue Severe,15,CONFIRMED,ACTIVE
-STATE,Tabasco,Dengue fever,808,CONFIRMED,ACTIVE
-STATE,Tabasco,Erysipelas,601,CONFIRMED,ACTIVE
-STATE,Tabasco,Genital herpes,102,CONFIRMED,ACTIVE
-STATE,Tabasco,Gonorrhea,139,CONFIRMED,ACTIVE
-STATE,Tabasco,HIV/AIDS,332,CONFIRMED,ACTIVE
-STATE,Tabasco,HPV,60,CONFIRMED,ACTIVE
-STATE,Tabasco,Healthcare-associated infection,1443,CONFIRMED,ACTIVE
-STATE,Tabasco,Hepatitis A,69,CONFIRMED,ACTIVE
-STATE,Tabasco,Hepatitis B,7,CONFIRMED,ACTIVE
-STATE,Tabasco,Hepatitis C,70,CONFIRMED,ACTIVE
-STATE,Tabasco,Infectious gastroenteritis,181305,CONFIRMED,ACTIVE
-STATE,Tabasco,Influenza,199,CONFIRMED,ACTIVE
-STATE,Tabasco,Leishmaniasis,125,CONFIRMED,ACTIVE
-STATE,Tabasco,Leptospirosis,20,CONFIRMED,ACTIVE
-STATE,Tabasco,Meningitis,27,CONFIRMED,ACTIVE
+STATE,Tabasco,Dengue Severe,16,CONFIRMED,ACTIVE
+STATE,Tabasco,Dengue fever,870,CONFIRMED,ACTIVE
+STATE,Tabasco,Erysipelas,633,CONFIRMED,ACTIVE
+STATE,Tabasco,Genital herpes,208,CONFIRMED,ACTIVE
+STATE,Tabasco,Gonorrhea,145,CONFIRMED,ACTIVE
+STATE,Tabasco,HIV/AIDS,348,CONFIRMED,ACTIVE
+STATE,Tabasco,HPV,61,CONFIRMED,ACTIVE
+STATE,Tabasco,Healthcare-associated infection,1485,CONFIRMED,ACTIVE
+STATE,Tabasco,Hepatitis A,72,CONFIRMED,ACTIVE
+STATE,Tabasco,Hepatitis B,8,CONFIRMED,ACTIVE
+STATE,Tabasco,Hepatitis C,73,CONFIRMED,ACTIVE
+STATE,Tabasco,Infectious gastroenteritis,189397,CONFIRMED,ACTIVE
+STATE,Tabasco,Influenza,213,CONFIRMED,ACTIVE
+STATE,Tabasco,Leishmaniasis,126,CONFIRMED,ACTIVE
+STATE,Tabasco,Leptospirosis,21,CONFIRMED,ACTIVE
+STATE,Tabasco,Meningitis,28,CONFIRMED,ACTIVE
 STATE,Tabasco,Mumps,118,CONFIRMED,ACTIVE
 STATE,Tabasco,Myiasis,14,CONFIRMED,ACTIVE
 STATE,Tabasco,Other viral hepatitis,7,CONFIRMED,ACTIVE
-STATE,Tabasco,Parasitic disease,17244,CONFIRMED,ACTIVE
-STATE,Tabasco,Paratyphoid fever,149,CONFIRMED,ACTIVE
-STATE,Tabasco,Pinworm infection,207,CONFIRMED,ACTIVE
-STATE,Tabasco,Pneumonia,1989,CONFIRMED,ACTIVE
+STATE,Tabasco,Parasitic disease,17974,CONFIRMED,ACTIVE
+STATE,Tabasco,Paratyphoid fever,157,CONFIRMED,ACTIVE
+STATE,Tabasco,Pinworm infection,220,CONFIRMED,ACTIVE
+STATE,Tabasco,Pneumonia,2055,CONFIRMED,ACTIVE
 STATE,Tabasco,Rocky Mountain spotted fever,1,CONFIRMED,ACTIVE
-STATE,Tabasco,Scabies,1292,CONFIRMED,ACTIVE
+STATE,Tabasco,Scabies,1325,CONFIRMED,ACTIVE
 STATE,Tabasco,Scarlet fever,2,CONFIRMED,ACTIVE
-STATE,Tabasco,Strep throat,5464,CONFIRMED,ACTIVE
-STATE,Tabasco,Syphilis,114,CONFIRMED,ACTIVE
+STATE,Tabasco,Strep throat,5770,CONFIRMED,ACTIVE
+STATE,Tabasco,Syphilis,122,CONFIRMED,ACTIVE
 STATE,Tabasco,Tetanus,2,CONFIRMED,ACTIVE
 STATE,Tabasco,Toxoplasmosis,1,CONFIRMED,ACTIVE
-STATE,Tabasco,Trichomonas infection,233,CONFIRMED,ACTIVE
-STATE,Tabasco,Tuberculosis,686,CONFIRMED,ACTIVE
-STATE,Tabasco,Typhoid fever,264,CONFIRMED,ACTIVE
-STATE,Tabasco,Urethritis,99491,CONFIRMED,ACTIVE
-STATE,Tabasco,Vaginal yeast infection,3406,CONFIRMED,ACTIVE
-STATE,Tabasco,Vaginitis,57,CONFIRMED,ACTIVE
-STATE,Tabasco,Viral exanthem,608,CONFIRMED,ACTIVE
+STATE,Tabasco,Trichomonas infection,210,CONFIRMED,ACTIVE
+STATE,Tabasco,Tuberculosis,716,CONFIRMED,ACTIVE
+STATE,Tabasco,Typhoid fever,278,CONFIRMED,ACTIVE
+STATE,Tabasco,Urethritis,103955,CONFIRMED,ACTIVE
+STATE,Tabasco,Vaginal yeast infection,3472,CONFIRMED,ACTIVE
+STATE,Tabasco,Vaginitis,94,CONFIRMED,ACTIVE
+STATE,Tabasco,Viral exanthem,610,CONFIRMED,ACTIVE
 STATE,Tabasco,Whooping cough,10,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Acute otitis media,43245,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Brucellosis,24,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Acute otitis media,45071,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Brucellosis,25,CONFIRMED,ACTIVE
 STATE,Tamaulipas,COVID-19,46,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Chagas disease,33,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Chancroid,22,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Chickenpox,1908,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Common cold,471256,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Conjunctivitis,30635,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Chagas disease,35,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Chancroid,24,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Chickenpox,1994,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Common cold,498084,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Conjunctivitis,31856,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Conjunctivitis due to virus,26,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Cysticercosis,9,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Dengue Severe,2,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Dengue fever,60,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Erysipelas,829,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Genital herpes,346,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Gonorrhea,295,CONFIRMED,ACTIVE
-STATE,Tamaulipas,HIV/AIDS,292,CONFIRMED,ACTIVE
-STATE,Tamaulipas,HPV,429,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Healthcare-associated infection,2941,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Hepatitis A,57,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Erysipelas,865,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Genital herpes,361,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Gonorrhea,326,CONFIRMED,ACTIVE
+STATE,Tamaulipas,HIV/AIDS,299,CONFIRMED,ACTIVE
+STATE,Tamaulipas,HPV,445,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Healthcare-associated infection,3091,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Hepatitis A,58,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Hepatitis B,37,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Hepatitis C,163,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Infectious gastroenteritis,287436,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Influenza,66,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Hepatitis C,171,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Infectious gastroenteritis,298713,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Influenza,70,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Leprosy,2,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Lymphogranuloma venereum,8,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Meningitis,72,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Mumps,242,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Lymphogranuloma venereum,9,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Meningitis,74,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Mumps,245,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Myiasis,10,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Other viral hepatitis,52,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Parasitic disease,2831,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Paratyphoid fever,103,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Other viral hepatitis,54,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Parasitic disease,2956,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Paratyphoid fever,108,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Pinto disease,5,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Pinworm infection,296,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Pneumonia,4202,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Pinworm infection,300,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Pneumonia,4398,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Rocky Mountain spotted fever,5,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Scabies,1451,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Scarlet fever,22,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Strep throat,32849,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Syphilis,1534,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Scabies,1513,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Scarlet fever,24,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Strep throat,37873,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Syphilis,1587,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Taeniasis,6,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Tetanus,1,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Toxoplasmosis,2,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Trichomonas infection,604,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Trichomonas infection,641,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Tuberculosis,1163,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Typhoid fever,535,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Urethritis,114891,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Vaginal yeast infection,5992,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Vaginitis,307,CONFIRMED,ACTIVE
-STATE,Tamaulipas,Viral exanthem,157,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Typhoid fever,555,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Urethritis,119950,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Vaginal yeast infection,6344,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Vaginitis,920,CONFIRMED,ACTIVE
+STATE,Tamaulipas,Viral exanthem,161,CONFIRMED,ACTIVE
 STATE,Tamaulipas,Whooping cough,17,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Acute otitis media,7721,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Brucellosis,8,CONFIRMED,ACTIVE
-STATE,Tlaxcala,COVID-19,79,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Acute otitis media,8030,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Brucellosis,10,CONFIRMED,ACTIVE
+STATE,Tlaxcala,COVID-19,83,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Chagas disease,5,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Chancroid,8,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Chickenpox,250,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Common cold,257462,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Conjunctivitis,10790,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Chickenpox,260,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Common cold,270356,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Conjunctivitis,11269,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Conjunctivitis due to virus,8,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Cysticercosis,3,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Erysipelas,27,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Genital herpes,90,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Gonorrhea,122,CONFIRMED,ACTIVE
-STATE,Tlaxcala,HIV/AIDS,121,CONFIRMED,ACTIVE
-STATE,Tlaxcala,HPV,295,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Healthcare-associated infection,976,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Erysipelas,28,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Genital herpes,61,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Gonorrhea,124,CONFIRMED,ACTIVE
+STATE,Tlaxcala,HIV/AIDS,123,CONFIRMED,ACTIVE
+STATE,Tlaxcala,HPV,300,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Healthcare-associated infection,1028,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Hepatitis A,14,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Hepatitis B,6,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Hepatitis C,17,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Infectious gastroenteritis,145459,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Influenza,169,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Hepatitis C,20,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Infectious gastroenteritis,150182,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Influenza,182,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Leptospirosis,1,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Lymphogranuloma venereum,4,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Meningitis,32,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Meningitis,40,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Mumps,40,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Myiasis,3,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Other viral hepatitis,20,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Parasitic disease,377,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Parasitic disease,395,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Paratyphoid fever,14,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Pinto disease,1,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Pinworm infection,112,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Pneumonia,1155,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Scabies,103,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Pinworm infection,114,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Pneumonia,1209,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Scabies,105,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Scarlet fever,23,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Strep throat,2575,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Syphilis,88,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Trichomonas infection,214,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Strep throat,2719,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Syphilis,93,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Trichomonas infection,221,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Tuberculosis,47,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Typhoid fever,170,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Urethritis,376,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Vaginal yeast infection,1055,CONFIRMED,ACTIVE
-STATE,Tlaxcala,Vaginitis,345,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Typhoid fever,175,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Urethritis,856,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Vaginal yeast infection,1091,CONFIRMED,ACTIVE
+STATE,Tlaxcala,Vaginitis,890,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Viral exanthem,209,CONFIRMED,ACTIVE
 STATE,Tlaxcala,Whooping cough,5,CONFIRMED,ACTIVE
-STATE,Veracruz,Acute otitis media,24344,CONFIRMED,ACTIVE
-STATE,Veracruz,Brucellosis,64,CONFIRMED,ACTIVE
-STATE,Veracruz,COVID-19,23,CONFIRMED,ACTIVE
-STATE,Veracruz,Chagas disease,73,CONFIRMED,ACTIVE
-STATE,Veracruz,Chancroid,17,CONFIRMED,ACTIVE
-STATE,Veracruz,Chickenpox,2795,CONFIRMED,ACTIVE
-STATE,Veracruz,Common cold,626144,CONFIRMED,ACTIVE
-STATE,Veracruz,Conjunctivitis,36022,CONFIRMED,ACTIVE
-STATE,Veracruz,Conjunctivitis due to virus,13,CONFIRMED,ACTIVE
+STATE,Veracruz,Acute otitis media,25462,CONFIRMED,ACTIVE
+STATE,Veracruz,Brucellosis,65,CONFIRMED,ACTIVE
+STATE,Veracruz,COVID-19,26,CONFIRMED,ACTIVE
+STATE,Veracruz,Chagas disease,76,CONFIRMED,ACTIVE
+STATE,Veracruz,Chancroid,18,CONFIRMED,ACTIVE
+STATE,Veracruz,Chickenpox,2956,CONFIRMED,ACTIVE
+STATE,Veracruz,Common cold,661568,CONFIRMED,ACTIVE
+STATE,Veracruz,Conjunctivitis,37424,CONFIRMED,ACTIVE
+STATE,Veracruz,Conjunctivitis due to virus,14,CONFIRMED,ACTIVE
 STATE,Veracruz,Cysticercosis,11,CONFIRMED,ACTIVE
-STATE,Veracruz,Dengue Severe,38,CONFIRMED,ACTIVE
-STATE,Veracruz,Dengue fever,1397,CONFIRMED,ACTIVE
-STATE,Veracruz,Erysipelas,1582,CONFIRMED,ACTIVE
-STATE,Veracruz,Genital herpes,261,CONFIRMED,ACTIVE
-STATE,Veracruz,Gonorrhea,246,CONFIRMED,ACTIVE
-STATE,Veracruz,HIV/AIDS,1246,CONFIRMED,ACTIVE
-STATE,Veracruz,HPV,358,CONFIRMED,ACTIVE
-STATE,Veracruz,Healthcare-associated infection,5416,CONFIRMED,ACTIVE
-STATE,Veracruz,Hepatitis A,96,CONFIRMED,ACTIVE
-STATE,Veracruz,Hepatitis B,36,CONFIRMED,ACTIVE
-STATE,Veracruz,Hepatitis C,112,CONFIRMED,ACTIVE
-STATE,Veracruz,Infectious gastroenteritis,362052,CONFIRMED,ACTIVE
-STATE,Veracruz,Influenza,206,CONFIRMED,ACTIVE
+STATE,Veracruz,Dengue Severe,40,CONFIRMED,ACTIVE
+STATE,Veracruz,Dengue fever,1474,CONFIRMED,ACTIVE
+STATE,Veracruz,Erysipelas,1647,CONFIRMED,ACTIVE
+STATE,Veracruz,Genital herpes,277,CONFIRMED,ACTIVE
+STATE,Veracruz,Gonorrhea,261,CONFIRMED,ACTIVE
+STATE,Veracruz,HIV/AIDS,1316,CONFIRMED,ACTIVE
+STATE,Veracruz,HPV,373,CONFIRMED,ACTIVE
+STATE,Veracruz,Healthcare-associated infection,5662,CONFIRMED,ACTIVE
+STATE,Veracruz,Hepatitis A,100,CONFIRMED,ACTIVE
+STATE,Veracruz,Hepatitis B,37,CONFIRMED,ACTIVE
+STATE,Veracruz,Hepatitis C,117,CONFIRMED,ACTIVE
+STATE,Veracruz,Infectious gastroenteritis,374683,CONFIRMED,ACTIVE
+STATE,Veracruz,Influenza,227,CONFIRMED,ACTIVE
 STATE,Veracruz,Leishmaniasis,4,CONFIRMED,ACTIVE
-STATE,Veracruz,Leptospirosis,128,CONFIRMED,ACTIVE
+STATE,Veracruz,Leptospirosis,133,CONFIRMED,ACTIVE
 STATE,Veracruz,Lymphogranuloma venereum,10,CONFIRMED,ACTIVE
-STATE,Veracruz,Meningitis,8,CONFIRMED,ACTIVE
-STATE,Veracruz,Mumps,132,CONFIRMED,ACTIVE
-STATE,Veracruz,Myiasis,140,CONFIRMED,ACTIVE
-STATE,Veracruz,Other viral hepatitis,36,CONFIRMED,ACTIVE
-STATE,Veracruz,Parasitic disease,9960,CONFIRMED,ACTIVE
-STATE,Veracruz,Paratyphoid fever,267,CONFIRMED,ACTIVE
-STATE,Veracruz,Pinto disease,12,CONFIRMED,ACTIVE
-STATE,Veracruz,Pinworm infection,363,CONFIRMED,ACTIVE
-STATE,Veracruz,Pneumonia,4629,CONFIRMED,ACTIVE
-STATE,Veracruz,Rocky Mountain spotted fever,3,CONFIRMED,ACTIVE
-STATE,Veracruz,Scabies,2106,CONFIRMED,ACTIVE
-STATE,Veracruz,Scarlet fever,20,CONFIRMED,ACTIVE
-STATE,Veracruz,Strep throat,16950,CONFIRMED,ACTIVE
-STATE,Veracruz,Syphilis,496,CONFIRMED,ACTIVE
+STATE,Veracruz,Meningitis,9,CONFIRMED,ACTIVE
+STATE,Veracruz,Mumps,139,CONFIRMED,ACTIVE
+STATE,Veracruz,Myiasis,144,CONFIRMED,ACTIVE
+STATE,Veracruz,Other viral hepatitis,37,CONFIRMED,ACTIVE
+STATE,Veracruz,Parasitic disease,10499,CONFIRMED,ACTIVE
+STATE,Veracruz,Paratyphoid fever,279,CONFIRMED,ACTIVE
+STATE,Veracruz,Pinto disease,16,CONFIRMED,ACTIVE
+STATE,Veracruz,Pinworm infection,378,CONFIRMED,ACTIVE
+STATE,Veracruz,Pneumonia,4866,CONFIRMED,ACTIVE
+STATE,Veracruz,Rocky Mountain spotted fever,4,CONFIRMED,ACTIVE
+STATE,Veracruz,Scabies,2223,CONFIRMED,ACTIVE
+STATE,Veracruz,Scarlet fever,22,CONFIRMED,ACTIVE
+STATE,Veracruz,Strep throat,17572,CONFIRMED,ACTIVE
+STATE,Veracruz,Syphilis,538,CONFIRMED,ACTIVE
 STATE,Veracruz,Taeniasis,6,CONFIRMED,ACTIVE
 STATE,Veracruz,Tetanus,4,CONFIRMED,ACTIVE
 STATE,Veracruz,Toxoplasmosis,12,CONFIRMED,ACTIVE
-STATE,Veracruz,Trichomonas infection,1202,CONFIRMED,ACTIVE
-STATE,Veracruz,Tuberculosis,1911,CONFIRMED,ACTIVE
-STATE,Veracruz,Typhoid fever,665,CONFIRMED,ACTIVE
-STATE,Veracruz,Urethritis,178203,CONFIRMED,ACTIVE
-STATE,Veracruz,Vaginal yeast infection,9678,CONFIRMED,ACTIVE
-STATE,Veracruz,Vaginitis,918,CONFIRMED,ACTIVE
-STATE,Veracruz,Viral exanthem,632,CONFIRMED,ACTIVE
+STATE,Veracruz,Trichomonas infection,1228,CONFIRMED,ACTIVE
+STATE,Veracruz,Tuberculosis,1963,CONFIRMED,ACTIVE
+STATE,Veracruz,Typhoid fever,780,CONFIRMED,ACTIVE
+STATE,Veracruz,Urethritis,186158,CONFIRMED,ACTIVE
+STATE,Veracruz,Vaginal yeast infection,10063,CONFIRMED,ACTIVE
+STATE,Veracruz,Vaginitis,706,CONFIRMED,ACTIVE
+STATE,Veracruz,Viral exanthem,647,CONFIRMED,ACTIVE
 STATE,Veracruz,Whooping cough,34,CONFIRMED,ACTIVE
-STATE,Yucatán,Acute otitis media,3966,CONFIRMED,ACTIVE
+STATE,Yucatán,Acute otitis media,4193,CONFIRMED,ACTIVE
 STATE,Yucatán,Brucellosis,9,CONFIRMED,ACTIVE
-STATE,Yucatán,COVID-19,82,CONFIRMED,ACTIVE
-STATE,Yucatán,Chagas disease,48,CONFIRMED,ACTIVE
+STATE,Yucatán,COVID-19,83,CONFIRMED,ACTIVE
+STATE,Yucatán,Chagas disease,53,CONFIRMED,ACTIVE
 STATE,Yucatán,Chancroid,6,CONFIRMED,ACTIVE
-STATE,Yucatán,Chickenpox,1387,CONFIRMED,ACTIVE
-STATE,Yucatán,Common cold,243915,CONFIRMED,ACTIVE
-STATE,Yucatán,Conjunctivitis,11879,CONFIRMED,ACTIVE
+STATE,Yucatán,Chickenpox,1450,CONFIRMED,ACTIVE
+STATE,Yucatán,Common cold,259280,CONFIRMED,ACTIVE
+STATE,Yucatán,Conjunctivitis,12377,CONFIRMED,ACTIVE
 STATE,Yucatán,Conjunctivitis due to virus,1,CONFIRMED,ACTIVE
 STATE,Yucatán,Dengue Severe,1,CONFIRMED,ACTIVE
-STATE,Yucatán,Dengue fever,110,CONFIRMED,ACTIVE
-STATE,Yucatán,Erysipelas,195,CONFIRMED,ACTIVE
-STATE,Yucatán,Genital herpes,52,CONFIRMED,ACTIVE
-STATE,Yucatán,Gonorrhea,69,CONFIRMED,ACTIVE
-STATE,Yucatán,HIV/AIDS,563,CONFIRMED,ACTIVE
+STATE,Yucatán,Dengue fever,137,CONFIRMED,ACTIVE
+STATE,Yucatán,Erysipelas,206,CONFIRMED,ACTIVE
+STATE,Yucatán,Genital herpes,53,CONFIRMED,ACTIVE
+STATE,Yucatán,Gonorrhea,73,CONFIRMED,ACTIVE
+STATE,Yucatán,HIV/AIDS,611,CONFIRMED,ACTIVE
 STATE,Yucatán,HPV,62,CONFIRMED,ACTIVE
-STATE,Yucatán,Healthcare-associated infection,2315,CONFIRMED,ACTIVE
-STATE,Yucatán,Hepatitis A,110,CONFIRMED,ACTIVE
-STATE,Yucatán,Hepatitis B,55,CONFIRMED,ACTIVE
-STATE,Yucatán,Hepatitis C,104,CONFIRMED,ACTIVE
-STATE,Yucatán,Infectious gastroenteritis,127993,CONFIRMED,ACTIVE
-STATE,Yucatán,Influenza,451,CONFIRMED,ACTIVE
-STATE,Yucatán,Leishmaniasis,33,CONFIRMED,ACTIVE
+STATE,Yucatán,Healthcare-associated infection,2440,CONFIRMED,ACTIVE
+STATE,Yucatán,Hepatitis A,113,CONFIRMED,ACTIVE
+STATE,Yucatán,Hepatitis B,60,CONFIRMED,ACTIVE
+STATE,Yucatán,Hepatitis C,110,CONFIRMED,ACTIVE
+STATE,Yucatán,Infectious gastroenteritis,133258,CONFIRMED,ACTIVE
+STATE,Yucatán,Influenza,472,CONFIRMED,ACTIVE
+STATE,Yucatán,Leishmaniasis,34,CONFIRMED,ACTIVE
 STATE,Yucatán,Leprosy,1,CONFIRMED,ACTIVE
 STATE,Yucatán,Leptospirosis,19,CONFIRMED,ACTIVE
-STATE,Yucatán,Lymphogranuloma venereum,3,CONFIRMED,ACTIVE
-STATE,Yucatán,Meningitis,9,CONFIRMED,ACTIVE
+STATE,Yucatán,Lymphogranuloma venereum,4,CONFIRMED,ACTIVE
+STATE,Yucatán,Meningitis,10,CONFIRMED,ACTIVE
 STATE,Yucatán,Mpox,24,CONFIRMED,ACTIVE
-STATE,Yucatán,Mumps,86,CONFIRMED,ACTIVE
-STATE,Yucatán,Myiasis,62,CONFIRMED,ACTIVE
+STATE,Yucatán,Mumps,87,CONFIRMED,ACTIVE
+STATE,Yucatán,Myiasis,66,CONFIRMED,ACTIVE
 STATE,Yucatán,Other viral hepatitis,6,CONFIRMED,ACTIVE
-STATE,Yucatán,Parasitic disease,3605,CONFIRMED,ACTIVE
-STATE,Yucatán,Paratyphoid fever,29,CONFIRMED,ACTIVE
-STATE,Yucatán,Pinworm infection,726,CONFIRMED,ACTIVE
-STATE,Yucatán,Pneumonia,1747,CONFIRMED,ACTIVE
-STATE,Yucatán,Rocky Mountain spotted fever,4,CONFIRMED,ACTIVE
-STATE,Yucatán,Scabies,923,CONFIRMED,ACTIVE
+STATE,Yucatán,Parasitic disease,3788,CONFIRMED,ACTIVE
+STATE,Yucatán,Paratyphoid fever,31,CONFIRMED,ACTIVE
+STATE,Yucatán,Pinworm infection,755,CONFIRMED,ACTIVE
+STATE,Yucatán,Pneumonia,1863,CONFIRMED,ACTIVE
+STATE,Yucatán,Rocky Mountain spotted fever,5,CONFIRMED,ACTIVE
+STATE,Yucatán,Scabies,974,CONFIRMED,ACTIVE
 STATE,Yucatán,Scarlet fever,9,CONFIRMED,ACTIVE
-STATE,Yucatán,Strep throat,596,CONFIRMED,ACTIVE
-STATE,Yucatán,Syphilis,563,CONFIRMED,ACTIVE
+STATE,Yucatán,Strep throat,616,CONFIRMED,ACTIVE
+STATE,Yucatán,Syphilis,594,CONFIRMED,ACTIVE
 STATE,Yucatán,Taeniasis,40,CONFIRMED,ACTIVE
 STATE,Yucatán,Tetanus,1,CONFIRMED,ACTIVE
 STATE,Yucatán,Toxoplasmosis,6,CONFIRMED,ACTIVE
-STATE,Yucatán,Trichomonas infection,77,CONFIRMED,ACTIVE
+STATE,Yucatán,Trichomonas infection,79,CONFIRMED,ACTIVE
 STATE,Yucatán,Tuberculosis,260,CONFIRMED,ACTIVE
 STATE,Yucatán,Typhoid fever,6,CONFIRMED,ACTIVE
-STATE,Yucatán,Urethritis,51871,CONFIRMED,ACTIVE
-STATE,Yucatán,Vaginal yeast infection,1300,CONFIRMED,ACTIVE
-STATE,Yucatán,Vaginitis,125,CONFIRMED,ACTIVE
-STATE,Yucatán,Viral exanthem,264,CONFIRMED,ACTIVE
-STATE,Yucatán,Whooping cough,30,CONFIRMED,ACTIVE
-STATE,Zacatecas,Acute otitis media,22124,CONFIRMED,ACTIVE
+STATE,Yucatán,Urethritis,555,CONFIRMED,ACTIVE
+STATE,Yucatán,Vaginal yeast infection,1366,CONFIRMED,ACTIVE
+STATE,Yucatán,Vaginitis,569,CONFIRMED,ACTIVE
+STATE,Yucatán,Viral exanthem,266,CONFIRMED,ACTIVE
+STATE,Yucatán,Whooping cough,33,CONFIRMED,ACTIVE
+STATE,Zacatecas,Acute otitis media,23144,CONFIRMED,ACTIVE
 STATE,Zacatecas,Brucellosis,15,CONFIRMED,ACTIVE
-STATE,Zacatecas,COVID-19,78,CONFIRMED,ACTIVE
+STATE,Zacatecas,COVID-19,82,CONFIRMED,ACTIVE
 STATE,Zacatecas,Chagas disease,6,CONFIRMED,ACTIVE
 STATE,Zacatecas,Chancroid,13,CONFIRMED,ACTIVE
-STATE,Zacatecas,Chickenpox,569,CONFIRMED,ACTIVE
-STATE,Zacatecas,Common cold,420802,CONFIRMED,ACTIVE
-STATE,Zacatecas,Conjunctivitis,15979,CONFIRMED,ACTIVE
-STATE,Zacatecas,Dengue fever,15,CONFIRMED,ACTIVE
+STATE,Zacatecas,Chickenpox,590,CONFIRMED,ACTIVE
+STATE,Zacatecas,Common cold,441628,CONFIRMED,ACTIVE
+STATE,Zacatecas,Conjunctivitis,16561,CONFIRMED,ACTIVE
+STATE,Zacatecas,Dengue fever,21,CONFIRMED,ACTIVE
 STATE,Zacatecas,Erysipelas,2,CONFIRMED,ACTIVE
-STATE,Zacatecas,Genital herpes,75,CONFIRMED,ACTIVE
-STATE,Zacatecas,Gonorrhea,125,CONFIRMED,ACTIVE
+STATE,Zacatecas,Genital herpes,77,CONFIRMED,ACTIVE
+STATE,Zacatecas,Gonorrhea,128,CONFIRMED,ACTIVE
 STATE,Zacatecas,HIV/AIDS,112,CONFIRMED,ACTIVE
-STATE,Zacatecas,HPV,80,CONFIRMED,ACTIVE
-STATE,Zacatecas,Healthcare-associated infection,1516,CONFIRMED,ACTIVE
+STATE,Zacatecas,HPV,99,CONFIRMED,ACTIVE
+STATE,Zacatecas,Healthcare-associated infection,1576,CONFIRMED,ACTIVE
 STATE,Zacatecas,Hepatitis A,15,CONFIRMED,ACTIVE
 STATE,Zacatecas,Hepatitis B,1,CONFIRMED,ACTIVE
 STATE,Zacatecas,Hepatitis C,18,CONFIRMED,ACTIVE
-STATE,Zacatecas,Infectious gastroenteritis,186777,CONFIRMED,ACTIVE
-STATE,Zacatecas,Influenza,353,CONFIRMED,ACTIVE
+STATE,Zacatecas,Infectious gastroenteritis,193370,CONFIRMED,ACTIVE
+STATE,Zacatecas,Influenza,355,CONFIRMED,ACTIVE
 STATE,Zacatecas,Lymphogranuloma venereum,7,CONFIRMED,ACTIVE
 STATE,Zacatecas,Meningitis,17,CONFIRMED,ACTIVE
-STATE,Zacatecas,Mumps,44,CONFIRMED,ACTIVE
+STATE,Zacatecas,Mumps,46,CONFIRMED,ACTIVE
 STATE,Zacatecas,Myiasis,12,CONFIRMED,ACTIVE
-STATE,Zacatecas,Other viral hepatitis,1,CONFIRMED,ACTIVE
-STATE,Zacatecas,Parasitic disease,172,CONFIRMED,ACTIVE
+STATE,Zacatecas,Other viral hepatitis,4,CONFIRMED,ACTIVE
+STATE,Zacatecas,Parasitic disease,178,CONFIRMED,ACTIVE
 STATE,Zacatecas,Paratyphoid fever,100,CONFIRMED,ACTIVE
 STATE,Zacatecas,Pinworm infection,21,CONFIRMED,ACTIVE
-STATE,Zacatecas,Pneumonia,2968,CONFIRMED,ACTIVE
-STATE,Zacatecas,Scabies,84,CONFIRMED,ACTIVE
-STATE,Zacatecas,Scarlet fever,24,CONFIRMED,ACTIVE
-STATE,Zacatecas,Strep throat,3628,CONFIRMED,ACTIVE
-STATE,Zacatecas,Syphilis,130,CONFIRMED,ACTIVE
+STATE,Zacatecas,Pneumonia,3082,CONFIRMED,ACTIVE
+STATE,Zacatecas,Scabies,95,CONFIRMED,ACTIVE
+STATE,Zacatecas,Scarlet fever,25,CONFIRMED,ACTIVE
+STATE,Zacatecas,Strep throat,3787,CONFIRMED,ACTIVE
+STATE,Zacatecas,Syphilis,134,CONFIRMED,ACTIVE
 STATE,Zacatecas,Taeniasis,3,CONFIRMED,ACTIVE
-STATE,Zacatecas,Trichomonas infection,222,CONFIRMED,ACTIVE
+STATE,Zacatecas,Trichomonas infection,226,CONFIRMED,ACTIVE
 STATE,Zacatecas,Tuberculosis,128,CONFIRMED,ACTIVE
-STATE,Zacatecas,Typhoid fever,772,CONFIRMED,ACTIVE
-STATE,Zacatecas,Urethritis,72105,CONFIRMED,ACTIVE
-STATE,Zacatecas,Vaginal yeast infection,2306,CONFIRMED,ACTIVE
-STATE,Zacatecas,Vaginitis,338,CONFIRMED,ACTIVE
-STATE,Zacatecas,Viral exanthem,610,CONFIRMED,ACTIVE
+STATE,Zacatecas,Typhoid fever,821,CONFIRMED,ACTIVE
+STATE,Zacatecas,Urethritis,75200,CONFIRMED,ACTIVE
+STATE,Zacatecas,Vaginal yeast infection,2419,CONFIRMED,ACTIVE
+STATE,Zacatecas,Vaginitis,943,CONFIRMED,ACTIVE
+STATE,Zacatecas,Viral exanthem,613,CONFIRMED,ACTIVE
 STATE,Zacatecas,Whooping cough,29,CONFIRMED,ACTIVE
